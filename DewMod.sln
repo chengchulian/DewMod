@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DewDifficultyCustomizeMod", "DewDifficultyCustomizeMod\DewDifficultyCustomizeMod.csproj", "{4FB55843-CE67-4BF2-88F0-DE5B2DE8CEA7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DewAttackSpeedUpperTurnHurt", "DewAttackSpeedUpperTurnHurt\DewAttackSpeedUpperTurnHurt.csproj", "{31FBFB7A-0C26-4C18-B391-FF51BE545D72}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DewMoreVision", "DewMoreVision\DewMoreVision.csproj", "{740E7335-4D31-483B-8224-F71580A1561E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DewDeathPenalty", "DewDeathPenalty\DewDeathPenalty.csproj", "{280736F4-206B-44A2-992B-8548CD070847}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4FB55843-CE67-4BF2-88F0-DE5B2DE8CEA7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4FB55843-CE67-4BF2-88F0-DE5B2DE8CEA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4FB55843-CE67-4BF2-88F0-DE5B2DE8CEA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4FB55843-CE67-4BF2-88F0-DE5B2DE8CEA7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31FBFB7A-0C26-4C18-B391-FF51BE545D72}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31FBFB7A-0C26-4C18-B391-FF51BE545D72}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31FBFB7A-0C26-4C18-B391-FF51BE545D72}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31FBFB7A-0C26-4C18-B391-FF51BE545D72}.Release|Any CPU.Build.0 = Release|Any CPU
+		{740E7335-4D31-483B-8224-F71580A1561E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{740E7335-4D31-483B-8224-F71580A1561E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{740E7335-4D31-483B-8224-F71580A1561E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{740E7335-4D31-483B-8224-F71580A1561E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{280736F4-206B-44A2-992B-8548CD070847}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{280736F4-206B-44A2-992B-8548CD070847}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{280736F4-206B-44A2-992B-8548CD070847}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{280736F4-206B-44A2-992B-8548CD070847}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
