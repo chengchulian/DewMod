@@ -39,6 +39,7 @@ public class Se_HeroKnockedOut_Patch
         
     }
 
+    [HarmonyPrefix]
     [HarmonyPatch("CheckAndAddHeroSoul")]
     public static bool CheckAndAddHeroSoul_Prefix(Se_HeroKnockedOut __instance)
     {
