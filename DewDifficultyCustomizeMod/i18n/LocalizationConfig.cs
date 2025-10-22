@@ -17,6 +17,7 @@ namespace DewDifficultyCustomizeMod.i18n
                 ["save_config"] = "💾 保存配置",
                 ["reset_config"] = "🔄 重置配置",
                 ["section_general"] = "🎮 通用设置",
+                ["section_shield"] = "🎮 护盾设置",
                 ["section_enemy"] = "👾 敌人设置",
                 ["section_boss"] = "👹 Boss 设置",
                 ["section_skillslot"] = "🔮 技能与精华槽",
@@ -92,10 +93,14 @@ namespace DewDifficultyCustomizeMod.i18n
                 ["label_enable_damage_ranking"] = "开启每关发送伤害排行榜",
                 
                 ["label_disable_deja_vu"] = "禁用既视感",
-                
-                
-                
-                
+
+                ["label_max_shield_multiplier"] = "最大护盾量百分比",
+                ["label_shield_cool_down_sceonds"] = "护盾冷却时间（秒）",
+                ["label_igore_shield_cool_down_from_others"] = "队友护盾不占用护盾冷却",
+
+
+
+
             },
             ["en-US"] = new()
             {
@@ -103,6 +108,7 @@ namespace DewDifficultyCustomizeMod.i18n
                 ["save_config"] = "💾 Save Config",
                 ["reset_config"] = "🔄 Reset Config",
                 ["section_general"] = "🎮 General Settings",
+                ["section_shield"] = "🎮 Shield Settings",
                 ["section_enemy"] = "👾 Enemy Settings",
                 ["section_boss"] = "👹 Boss Settings",
                 ["section_skillslot"] = "🔮 Skill & Gem Slots",
@@ -180,6 +186,10 @@ namespace DewDifficultyCustomizeMod.i18n
                 ["label_enable_damage_ranking"] = "Enable Damage Ranking",
                 
                 ["label_disable_deja_vu"] = "Disable DejaVu",
+
+                ["label_max_shield_multiplier"] = "Max Shield Multiplier",
+                ["label_shield_cool_down_sceonds"] = "Shield Cool Down (seconds)",
+                ["label_igore_shield_cool_down_from_others"] = "Igore Shield Cool Down From Others",
 
 
             }

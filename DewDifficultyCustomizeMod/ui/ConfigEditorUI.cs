@@ -16,6 +16,7 @@ namespace DewDifficultyCustomizeMod.ui
         };
 
         private static bool _showGeneralSettings = true;
+        private static bool _showShieldSettings = true;
         private static bool _showEnemySettings = true;
         private static bool _showBossSettings = true;
         private static bool _showSkillSettings = true;
@@ -54,6 +55,15 @@ namespace DewDifficultyCustomizeMod.ui
                 ConfigFieldDrawer.DrawIntField(LocalizationConfig.Get("label_num_of_nodes"), ref _config.numOfNodes);
                 ConfigFieldDrawer.DrawIntField(LocalizationConfig.Get("label_num_of_merchants"),
                     ref _config.numOfMerchants);
+            }
+
+            GUILayout.Space(10);
+            _showShieldSettings = GUILayout.Toggle(_showShieldSettings, LocalizationConfig.Get("section_shield"), FoldoutStyle, GUILayout.Height(25f));
+            if (_showShieldSettings)
+            {
+                _config.igoreShieldCoolDownFromOthers = GUILayout.Toggle(_config.igoreShieldCoolDownFromOthers, LocalizationConfig.Get("label_igore_shield_cool_down_from_others"));
+                ConfigFieldDrawer.DrawFloatField(LocalizationConfig.Get("label_shield_cool_down_sceonds"), ref _config.shieldCoolDownSeconds);
+                ConfigFieldDrawer.DrawPercentageField(LocalizationConfig.Get("label_max_shield_multiplier"), ref _config.maxShieldMultiplier);
             }
 
             GUILayout.Space(10);
