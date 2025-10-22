@@ -62,6 +62,9 @@ public class AttrCustomizeConfig
         numOfMerchants = -1,
         enableAllSkillEdit = false,
         disableDejaVu = false,
+        maxShieldMultiplier = -1f,
+        shieldCoolDownSeconds = -1f,
+        igoreShieldCoolDownFromOthers = false,
     };
 
     /**
@@ -340,6 +343,21 @@ public class AttrCustomizeConfig
  * 既视感
  */
     public bool disableDejaVu;
+
+    /**
+* 最大护盾比例
+*/
+    public float maxShieldMultiplier;
+
+    /**
+* 护盾获取冷却时间
+*/
+    public float shieldCoolDownSeconds;
+
+    /**
+* 忽略队友护盾冷却
+*/
+    public bool igoreShieldCoolDownFromOthers;
 
     public void Reset()
     {

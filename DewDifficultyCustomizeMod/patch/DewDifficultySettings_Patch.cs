@@ -1,7 +1,8 @@
-﻿using System.Reflection;
-using DewDifficultyCustomizeMod.config;
+﻿using DewDifficultyCustomizeMod.config;
 using DewDifficultyCustomizeMod.util;
 using HarmonyLib;
+using System;
+using System.Reflection;
 
 namespace DewDifficultyCustomizeMod.patch;
 
@@ -96,6 +97,36 @@ public static class DewDifficultySettings_Patch
                         NetworkedManagerBase<GameManager>.instance.difficulty.healRawMultiplier *
                         AttrCustomizeResources.Config.healRawMultiplier);
                 }, 100);
+            DateTime shieldTimeStamp = DateTime.Now;
+            entity.takenShieldProcessor.Add(delegate (ref HealData data, Actor actor, Entity target)
+            {
+                MethodInfo method = typeof(Actor).GetMethod("GetPlayer", BindingFlags.Instance | BindingFlags.NonPublic);
+                DewPlayer dewPlayer = (DewPlayer)method.Invoke(entity, null);
+                DewPlayer dewPlayer2 = (DewPlayer)method.Invoke(actor, null);
+                if ((double)AttrCustomizeResources.Config.shieldCoolDownSeconds > 0.0 && (float)(DateTime.Now - shieldTimeStamp).Seconds < AttrCustomizeResources.Config.shieldCoolDownSeconds)
+                {
+                    if ((!AttrCustomizeResources.Config.igoreShieldCoolDownFromOthers || dewPlayer == dewPlayer2) && (double)data.currentAmount > 0.0)
+                    {
+                        data.ApplyReduction(1f);
+                    }
+                }
+                else
+                {
+                    if ((double)AttrCustomizeResources.Config.maxShieldMultiplier > 0.0)
+                    {
+                        Hero hero = (Hero)entity;
+                        float num = hero.Status.maxHealth * AttrCustomizeResources.Config.maxShieldMultiplier - hero.Status.currentShield;
+                        if (data.currentAmount > num)
+                        {
+                            data.ApplyReduction((data.currentAmount - num) / data.currentAmount);
+                        }
+                    }
+                    if ((double)data.currentAmount > 0.0)
+                    {
+                        shieldTimeStamp = DateTime.Now;
+                    }
+                }
+            }, 100);
         }
 
         // 跳过原始方法
