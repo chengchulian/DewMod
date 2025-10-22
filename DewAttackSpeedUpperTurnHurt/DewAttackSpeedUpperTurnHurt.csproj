@@ -41,679 +41,679 @@
     </ItemGroup>
     <ItemGroup>
       <Reference Include="0Harmony">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\0Harmony.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\0Harmony.dll</HintPath>
       </Reference>
       <Reference Include="AllIn1SpriteShaderAssembly">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\AllIn1SpriteShaderAssembly.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\AllIn1SpriteShaderAssembly.dll</HintPath>
       </Reference>
       <Reference Include="AmazingAssets.TerrainToMesh">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\AmazingAssets.TerrainToMesh.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\AmazingAssets.TerrainToMesh.dll</HintPath>
       </Reference>
       <Reference Include="Assembly-CSharp">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\Assembly-CSharp.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\Assembly-CSharp.dll</HintPath>
       </Reference>
       <Reference Include="Autodesk.Fbx">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\Autodesk.Fbx.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\Autodesk.Fbx.dll</HintPath>
       </Reference>
       <Reference Include="Autodesk.Fbx.BuildTestAssets">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\Autodesk.Fbx.BuildTestAssets.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\Autodesk.Fbx.BuildTestAssets.dll</HintPath>
       </Reference>
       <Reference Include="BouncyCastle.Crypto">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\BouncyCastle.Crypto.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\BouncyCastle.Crypto.dll</HintPath>
       </Reference>
       <Reference Include="Cinemachine">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\Cinemachine.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\Cinemachine.dll</HintPath>
       </Reference>
       <Reference Include="ClassLibrary1">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\ClassLibrary1.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\ClassLibrary1.dll</HintPath>
       </Reference>
       <Reference Include="Coffee.SoftMaskForUGUI">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\Coffee.SoftMaskForUGUI.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\Coffee.SoftMaskForUGUI.dll</HintPath>
       </Reference>
       <Reference Include="Coffee.SoftMaskForUGUI.R">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\Coffee.SoftMaskForUGUI.R.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\Coffee.SoftMaskForUGUI.R.dll</HintPath>
       </Reference>
       <Reference Include="Coffee.UIParticle">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\Coffee.UIParticle.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\Coffee.UIParticle.dll</HintPath>
       </Reference>
       <Reference Include="com.rlabrecque.steamworks.net">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\com.rlabrecque.steamworks.net.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\com.rlabrecque.steamworks.net.dll</HintPath>
       </Reference>
       <Reference Include="DemiLib">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\DemiLib.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\DemiLib.dll</HintPath>
       </Reference>
       <Reference Include="Dew.Contents">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\Dew.Contents.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\Dew.Contents.dll</HintPath>
       </Reference>
       <Reference Include="Dew.Core">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\Dew.Core.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\Dew.Core.dll</HintPath>
       </Reference>
       <Reference Include="Dew.External">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\Dew.External.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\Dew.External.dll</HintPath>
       </Reference>
       <Reference Include="Dew.UI">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\Dew.UI.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\Dew.UI.dll</HintPath>
       </Reference>
       <Reference Include="DOTween">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\DOTween.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\DOTween.dll</HintPath>
       </Reference>
       <Reference Include="DOTweenPro">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\DOTweenPro.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\DOTweenPro.dll</HintPath>
       </Reference>
       <Reference Include="DTT.AreaOfEffectRegions.Demo">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\DTT.AreaOfEffectRegions.Demo.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\DTT.AreaOfEffectRegions.Demo.dll</HintPath>
       </Reference>
       <Reference Include="DTT.AreaOfEffectRegions.Runtime">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\DTT.AreaOfEffectRegions.Runtime.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\DTT.AreaOfEffectRegions.Runtime.dll</HintPath>
       </Reference>
       <Reference Include="DTT.EditorUtilities.Demo">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\DTT.EditorUtilities.Demo.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\DTT.EditorUtilities.Demo.dll</HintPath>
       </Reference>
       <Reference Include="DTT.PublishingTools.Runtime">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\DTT.PublishingTools.Runtime.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\DTT.PublishingTools.Runtime.dll</HintPath>
       </Reference>
       <Reference Include="DTT.RuntimeUtilities.Demo">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\DTT.RuntimeUtilities.Demo.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\DTT.RuntimeUtilities.Demo.dll</HintPath>
       </Reference>
       <Reference Include="DTT.RuntimeUtilities.Runtime">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\DTT.RuntimeUtilities.Runtime.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\DTT.RuntimeUtilities.Runtime.dll</HintPath>
       </Reference>
       <Reference Include="ExternalAttributes.Core">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\ExternalAttributes.Core.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\ExternalAttributes.Core.dll</HintPath>
       </Reference>
       <Reference Include="Febucci.Attributes.Runtime">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\Febucci.Attributes.Runtime.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\Febucci.Attributes.Runtime.dll</HintPath>
       </Reference>
       <Reference Include="Febucci.TextAnimator.Demo.Runtime">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\Febucci.TextAnimator.Demo.Runtime.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\Febucci.TextAnimator.Demo.Runtime.dll</HintPath>
       </Reference>
       <Reference Include="Febucci.TextAnimator.Runtime">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\Febucci.TextAnimator.Runtime.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\Febucci.TextAnimator.Runtime.dll</HintPath>
       </Reference>
       <Reference Include="Febucci.TextAnimator.TMP.Runtime">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\Febucci.TextAnimator.TMP.Runtime.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\Febucci.TextAnimator.TMP.Runtime.dll</HintPath>
       </Reference>
       <Reference Include="FizzySteamworks">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\FizzySteamworks.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\FizzySteamworks.dll</HintPath>
       </Reference>
       <Reference Include="FlatKit.Runtime">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\FlatKit.Runtime.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\FlatKit.Runtime.dll</HintPath>
       </Reference>
       <Reference Include="inc8877.GraphicsConfigurator">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\inc8877.GraphicsConfigurator.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\inc8877.GraphicsConfigurator.dll</HintPath>
       </Reference>
       <Reference Include="JBooth.MicroSplat.Core">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\JBooth.MicroSplat.Core.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\JBooth.MicroSplat.Core.dll</HintPath>
       </Reference>
       <Reference Include="kcp2k">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\kcp2k.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\kcp2k.dll</HintPath>
       </Reference>
       <Reference Include="MagicaClothV2">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\MagicaClothV2.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\MagicaClothV2.dll</HintPath>
       </Reference>
       <Reference Include="Microsoft.CodeAnalysis">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\Microsoft.CodeAnalysis.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\Microsoft.CodeAnalysis.dll</HintPath>
       </Reference>
       <Reference Include="MiddlewareTransport">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\MiddlewareTransport.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\MiddlewareTransport.dll</HintPath>
       </Reference>
       <Reference Include="Mirror">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\Mirror.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\Mirror.dll</HintPath>
       </Reference>
       <Reference Include="Mirror.Authenticators">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\Mirror.Authenticators.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\Mirror.Authenticators.dll</HintPath>
       </Reference>
       <Reference Include="Mirror.Components">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\Mirror.Components.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\Mirror.Components.dll</HintPath>
       </Reference>
       <Reference Include="Mirror.Transports">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\Mirror.Transports.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\Mirror.Transports.dll</HintPath>
       </Reference>
       <Reference Include="Mono.Security">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\Mono.Security.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\Mono.Security.dll</HintPath>
       </Reference>
       <Reference Include="mscorlib">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\mscorlib.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\mscorlib.dll</HintPath>
       </Reference>
       <Reference Include="MultiplexTransport">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\MultiplexTransport.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\MultiplexTransport.dll</HintPath>
       </Reference>
       <Reference Include="NavMeshComponents">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\NavMeshComponents.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\NavMeshComponents.dll</HintPath>
       </Reference>
       <Reference Include="NCalc">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\NCalc.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\NCalc.dll</HintPath>
       </Reference>
       <Reference Include="netstandard">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\netstandard.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\netstandard.dll</HintPath>
       </Reference>
       <Reference Include="Newtonsoft.Json">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\Newtonsoft.Json.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\Newtonsoft.Json.dll</HintPath>
       </Reference>
       <Reference Include="RuntimeInspector.Runtime">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\RuntimeInspector.Runtime.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\RuntimeInspector.Runtime.dll</HintPath>
       </Reference>
       <Reference Include="sc.posteffects.runtime">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\sc.posteffects.runtime.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\sc.posteffects.runtime.dll</HintPath>
       </Reference>
       <Reference Include="SimpleWebTransport">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\SimpleWebTransport.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\SimpleWebTransport.dll</HintPath>
       </Reference>
       <Reference Include="SingularityGroup.HotReload.Runtime">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\SingularityGroup.HotReload.Runtime.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\SingularityGroup.HotReload.Runtime.dll</HintPath>
       </Reference>
       <Reference Include="SingularityGroup.HotReload.Runtime.Public">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\SingularityGroup.HotReload.Runtime.Public.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\SingularityGroup.HotReload.Runtime.Public.dll</HintPath>
       </Reference>
       <Reference Include="Sirenix.OdinInspector.Attributes">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\Sirenix.OdinInspector.Attributes.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\Sirenix.OdinInspector.Attributes.dll</HintPath>
       </Reference>
       <Reference Include="Sirenix.OdinInspector.CompatibilityLayer">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\Sirenix.OdinInspector.CompatibilityLayer.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\Sirenix.OdinInspector.CompatibilityLayer.dll</HintPath>
       </Reference>
       <Reference Include="Sirenix.OdinInspector.Modules.Unity.Addressables">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\Sirenix.OdinInspector.Modules.Unity.Addressables.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\Sirenix.OdinInspector.Modules.Unity.Addressables.dll</HintPath>
       </Reference>
       <Reference Include="Sirenix.Serialization">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\Sirenix.Serialization.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\Sirenix.Serialization.dll</HintPath>
       </Reference>
       <Reference Include="Sirenix.Serialization.Config">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\Sirenix.Serialization.Config.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\Sirenix.Serialization.Config.dll</HintPath>
       </Reference>
       <Reference Include="Sirenix.Utilities">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\Sirenix.Utilities.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\Sirenix.Utilities.dll</HintPath>
       </Reference>
       <Reference Include="System">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\System.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\System.dll</HintPath>
       </Reference>
       <Reference Include="System.Buffers">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\System.Buffers.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\System.Buffers.dll</HintPath>
       </Reference>
       <Reference Include="System.Collections.Immutable">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\System.Collections.Immutable.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\System.Collections.Immutable.dll</HintPath>
       </Reference>
       <Reference Include="System.ComponentModel.Composition">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\System.ComponentModel.Composition.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\System.ComponentModel.Composition.dll</HintPath>
       </Reference>
       <Reference Include="System.Configuration">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\System.Configuration.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\System.Configuration.dll</HintPath>
       </Reference>
       <Reference Include="System.Core">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\System.Core.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\System.Core.dll</HintPath>
       </Reference>
       <Reference Include="System.Data">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\System.Data.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\System.Data.dll</HintPath>
       </Reference>
       <Reference Include="System.Data.DataSetExtensions">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\System.Data.DataSetExtensions.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\System.Data.DataSetExtensions.dll</HintPath>
       </Reference>
       <Reference Include="System.Drawing">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\System.Drawing.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\System.Drawing.dll</HintPath>
       </Reference>
       <Reference Include="System.EnterpriseServices">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\System.EnterpriseServices.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\System.EnterpriseServices.dll</HintPath>
       </Reference>
       <Reference Include="System.IO.Compression">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\System.IO.Compression.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\System.IO.Compression.dll</HintPath>
       </Reference>
       <Reference Include="System.IO.Compression.FileSystem">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\System.IO.Compression.FileSystem.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\System.IO.Compression.FileSystem.dll</HintPath>
       </Reference>
       <Reference Include="System.IO.Hashing">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\System.IO.Hashing.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\System.IO.Hashing.dll</HintPath>
       </Reference>
       <Reference Include="System.Memory">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\System.Memory.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\System.Memory.dll</HintPath>
       </Reference>
       <Reference Include="System.Net.Http">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\System.Net.Http.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\System.Net.Http.dll</HintPath>
       </Reference>
       <Reference Include="System.Numerics">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\System.Numerics.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\System.Numerics.dll</HintPath>
       </Reference>
       <Reference Include="System.Reflection.Metadata">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\System.Reflection.Metadata.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\System.Reflection.Metadata.dll</HintPath>
       </Reference>
       <Reference Include="System.Runtime">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\System.Runtime.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\System.Runtime.dll</HintPath>
       </Reference>
       <Reference Include="System.Runtime.CompilerServices.Unsafe">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
       </Reference>
       <Reference Include="System.Runtime.Serialization">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\System.Runtime.Serialization.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\System.Runtime.Serialization.dll</HintPath>
       </Reference>
       <Reference Include="System.Security">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\System.Security.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\System.Security.dll</HintPath>
       </Reference>
       <Reference Include="System.ServiceModel.Internals">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\System.ServiceModel.Internals.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\System.ServiceModel.Internals.dll</HintPath>
       </Reference>
       <Reference Include="System.Text.Encoding.CodePages">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\System.Text.Encoding.CodePages.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\System.Text.Encoding.CodePages.dll</HintPath>
       </Reference>
       <Reference Include="System.Threading.Tasks.Extensions">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\System.Threading.Tasks.Extensions.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\System.Threading.Tasks.Extensions.dll</HintPath>
       </Reference>
       <Reference Include="System.Transactions">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\System.Transactions.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\System.Transactions.dll</HintPath>
       </Reference>
       <Reference Include="System.Xml">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\System.Xml.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\System.Xml.dll</HintPath>
       </Reference>
       <Reference Include="System.Xml.Linq">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\System.Xml.Linq.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\System.Xml.Linq.dll</HintPath>
       </Reference>
       <Reference Include="Telepathy">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\Telepathy.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\Telepathy.dll</HintPath>
       </Reference>
       <Reference Include="UniTask">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\UniTask.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\UniTask.dll</HintPath>
       </Reference>
       <Reference Include="UniTask.Addressables">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\UniTask.Addressables.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\UniTask.Addressables.dll</HintPath>
       </Reference>
       <Reference Include="UniTask.DOTween">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\UniTask.DOTween.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\UniTask.DOTween.dll</HintPath>
       </Reference>
       <Reference Include="UniTask.Linq">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\UniTask.Linq.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\UniTask.Linq.dll</HintPath>
       </Reference>
       <Reference Include="UniTask.TextMeshPro">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\UniTask.TextMeshPro.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\UniTask.TextMeshPro.dll</HintPath>
       </Reference>
       <Reference Include="unity-websocket-sharp">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\unity-websocket-sharp.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\unity-websocket-sharp.dll</HintPath>
       </Reference>
       <Reference Include="Unity.Addressables">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\Unity.Addressables.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\Unity.Addressables.dll</HintPath>
       </Reference>
       <Reference Include="Unity.AI.Navigation">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\Unity.AI.Navigation.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\Unity.AI.Navigation.dll</HintPath>
       </Reference>
       <Reference Include="Unity.Burst">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\Unity.Burst.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\Unity.Burst.dll</HintPath>
       </Reference>
       <Reference Include="Unity.Burst.Unsafe">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\Unity.Burst.Unsafe.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\Unity.Burst.Unsafe.dll</HintPath>
       </Reference>
       <Reference Include="Unity.Collections">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\Unity.Collections.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\Unity.Collections.dll</HintPath>
       </Reference>
       <Reference Include="Unity.Collections.LowLevel.ILSupport">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\Unity.Collections.LowLevel.ILSupport.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\Unity.Collections.LowLevel.ILSupport.dll</HintPath>
       </Reference>
       <Reference Include="Unity.Formats.Fbx.Runtime">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\Unity.Formats.Fbx.Runtime.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\Unity.Formats.Fbx.Runtime.dll</HintPath>
       </Reference>
       <Reference Include="Unity.InputSystem">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\Unity.InputSystem.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\Unity.InputSystem.dll</HintPath>
       </Reference>
       <Reference Include="Unity.InputSystem.ForUI">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\Unity.InputSystem.ForUI.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\Unity.InputSystem.ForUI.dll</HintPath>
       </Reference>
       <Reference Include="Unity.Mathematics">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\Unity.Mathematics.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\Unity.Mathematics.dll</HintPath>
       </Reference>
       <Reference Include="Unity.MemoryProfiler">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\Unity.MemoryProfiler.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\Unity.MemoryProfiler.dll</HintPath>
       </Reference>
       <Reference Include="Unity.Multiplayer.Center.Common">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\Unity.Multiplayer.Center.Common.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\Unity.Multiplayer.Center.Common.dll</HintPath>
       </Reference>
       <Reference Include="Unity.Profiling.Core">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\Unity.Profiling.Core.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\Unity.Profiling.Core.dll</HintPath>
       </Reference>
       <Reference Include="Unity.Recorder">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\Unity.Recorder.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\Unity.Recorder.dll</HintPath>
       </Reference>
       <Reference Include="Unity.Recorder.Base">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\Unity.Recorder.Base.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\Unity.Recorder.Base.dll</HintPath>
       </Reference>
       <Reference Include="Unity.Rendering.LightTransport.Runtime">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\Unity.Rendering.LightTransport.Runtime.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\Unity.Rendering.LightTransport.Runtime.dll</HintPath>
       </Reference>
       <Reference Include="Unity.RenderPipeline.Universal.ShaderLibrary">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\Unity.RenderPipeline.Universal.ShaderLibrary.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\Unity.RenderPipeline.Universal.ShaderLibrary.dll</HintPath>
       </Reference>
       <Reference Include="Unity.RenderPipelines.Core.Runtime">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\Unity.RenderPipelines.Core.Runtime.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\Unity.RenderPipelines.Core.Runtime.dll</HintPath>
       </Reference>
       <Reference Include="Unity.RenderPipelines.Core.Runtime.Shared">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\Unity.RenderPipelines.Core.Runtime.Shared.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\Unity.RenderPipelines.Core.Runtime.Shared.dll</HintPath>
       </Reference>
       <Reference Include="Unity.RenderPipelines.Core.ShaderLibrary">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\Unity.RenderPipelines.Core.ShaderLibrary.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\Unity.RenderPipelines.Core.ShaderLibrary.dll</HintPath>
       </Reference>
       <Reference Include="Unity.RenderPipelines.GPUDriven.Runtime">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\Unity.RenderPipelines.GPUDriven.Runtime.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\Unity.RenderPipelines.GPUDriven.Runtime.dll</HintPath>
       </Reference>
       <Reference Include="Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll</HintPath>
       </Reference>
       <Reference Include="Unity.RenderPipelines.Universal.2D.Runtime">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\Unity.RenderPipelines.Universal.2D.Runtime.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\Unity.RenderPipelines.Universal.2D.Runtime.dll</HintPath>
       </Reference>
       <Reference Include="Unity.RenderPipelines.Universal.Config.Runtime">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\Unity.RenderPipelines.Universal.Config.Runtime.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\Unity.RenderPipelines.Universal.Config.Runtime.dll</HintPath>
       </Reference>
       <Reference Include="Unity.RenderPipelines.Universal.Runtime">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\Unity.RenderPipelines.Universal.Runtime.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\Unity.RenderPipelines.Universal.Runtime.dll</HintPath>
       </Reference>
       <Reference Include="Unity.RenderPipelines.Universal.Shaders">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\Unity.RenderPipelines.Universal.Shaders.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\Unity.RenderPipelines.Universal.Shaders.dll</HintPath>
       </Reference>
       <Reference Include="Unity.ResourceManager">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\Unity.ResourceManager.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\Unity.ResourceManager.dll</HintPath>
       </Reference>
       <Reference Include="Unity.ScriptableBuildPipeline">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\Unity.ScriptableBuildPipeline.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\Unity.ScriptableBuildPipeline.dll</HintPath>
       </Reference>
       <Reference Include="Unity.Services.Analytics">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\Unity.Services.Analytics.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\Unity.Services.Analytics.dll</HintPath>
       </Reference>
       <Reference Include="Unity.Services.Authentication">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\Unity.Services.Authentication.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\Unity.Services.Authentication.dll</HintPath>
       </Reference>
       <Reference Include="Unity.Services.Authentication.PlayerAccounts">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\Unity.Services.Authentication.PlayerAccounts.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\Unity.Services.Authentication.PlayerAccounts.dll</HintPath>
       </Reference>
       <Reference Include="Unity.Services.Core">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\Unity.Services.Core.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\Unity.Services.Core.dll</HintPath>
       </Reference>
       <Reference Include="Unity.Services.Core.Analytics">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\Unity.Services.Core.Analytics.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\Unity.Services.Core.Analytics.dll</HintPath>
       </Reference>
       <Reference Include="Unity.Services.Core.Components">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\Unity.Services.Core.Components.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\Unity.Services.Core.Components.dll</HintPath>
       </Reference>
       <Reference Include="Unity.Services.Core.Configuration">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\Unity.Services.Core.Configuration.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\Unity.Services.Core.Configuration.dll</HintPath>
       </Reference>
       <Reference Include="Unity.Services.Core.Device">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\Unity.Services.Core.Device.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\Unity.Services.Core.Device.dll</HintPath>
       </Reference>
       <Reference Include="Unity.Services.Core.Environments">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\Unity.Services.Core.Environments.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\Unity.Services.Core.Environments.dll</HintPath>
       </Reference>
       <Reference Include="Unity.Services.Core.Environments.Internal">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\Unity.Services.Core.Environments.Internal.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\Unity.Services.Core.Environments.Internal.dll</HintPath>
       </Reference>
       <Reference Include="Unity.Services.Core.Internal">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\Unity.Services.Core.Internal.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\Unity.Services.Core.Internal.dll</HintPath>
       </Reference>
       <Reference Include="Unity.Services.Core.Networking">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\Unity.Services.Core.Networking.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\Unity.Services.Core.Networking.dll</HintPath>
       </Reference>
       <Reference Include="Unity.Services.Core.Registration">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\Unity.Services.Core.Registration.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\Unity.Services.Core.Registration.dll</HintPath>
       </Reference>
       <Reference Include="Unity.Services.Core.Scheduler">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\Unity.Services.Core.Scheduler.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\Unity.Services.Core.Scheduler.dll</HintPath>
       </Reference>
       <Reference Include="Unity.Services.Core.Telemetry">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\Unity.Services.Core.Telemetry.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\Unity.Services.Core.Telemetry.dll</HintPath>
       </Reference>
       <Reference Include="Unity.Services.Core.Threading">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\Unity.Services.Core.Threading.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\Unity.Services.Core.Threading.dll</HintPath>
       </Reference>
       <Reference Include="Unity.Services.Lobbies">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\Unity.Services.Lobbies.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\Unity.Services.Lobbies.dll</HintPath>
       </Reference>
       <Reference Include="Unity.Services.Wire.Internal">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\Unity.Services.Wire.Internal.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\Unity.Services.Wire.Internal.dll</HintPath>
       </Reference>
       <Reference Include="Unity.TerrainTools">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\Unity.TerrainTools.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\Unity.TerrainTools.dll</HintPath>
       </Reference>
       <Reference Include="Unity.TextMeshPro">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\Unity.TextMeshPro.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\Unity.TextMeshPro.dll</HintPath>
       </Reference>
       <Reference Include="Unity.Timeline">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\Unity.Timeline.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\Unity.Timeline.dll</HintPath>
       </Reference>
       <Reference Include="Unity.VisualEffectGraph.Runtime">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\Unity.VisualEffectGraph.Runtime.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\Unity.VisualEffectGraph.Runtime.dll</HintPath>
       </Reference>
       <Reference Include="UnityEngine">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\UnityEngine.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\UnityEngine.dll</HintPath>
       </Reference>
       <Reference Include="UnityEngine.AccessibilityModule">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\UnityEngine.AccessibilityModule.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\UnityEngine.AccessibilityModule.dll</HintPath>
       </Reference>
       <Reference Include="UnityEngine.AIModule">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\UnityEngine.AIModule.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\UnityEngine.AIModule.dll</HintPath>
       </Reference>
       <Reference Include="UnityEngine.AMDModule">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\UnityEngine.AMDModule.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\UnityEngine.AMDModule.dll</HintPath>
       </Reference>
       <Reference Include="UnityEngine.AndroidJNIModule">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\UnityEngine.AndroidJNIModule.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\UnityEngine.AndroidJNIModule.dll</HintPath>
       </Reference>
       <Reference Include="UnityEngine.AnimationModule">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\UnityEngine.AnimationModule.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\UnityEngine.AnimationModule.dll</HintPath>
       </Reference>
       <Reference Include="UnityEngine.ARModule">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\UnityEngine.ARModule.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\UnityEngine.ARModule.dll</HintPath>
       </Reference>
       <Reference Include="UnityEngine.AssetBundleModule">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\UnityEngine.AssetBundleModule.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\UnityEngine.AssetBundleModule.dll</HintPath>
       </Reference>
       <Reference Include="UnityEngine.AudioModule">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\UnityEngine.AudioModule.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\UnityEngine.AudioModule.dll</HintPath>
       </Reference>
       <Reference Include="UnityEngine.ClothModule">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\UnityEngine.ClothModule.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\UnityEngine.ClothModule.dll</HintPath>
       </Reference>
       <Reference Include="UnityEngine.ClusterInputModule">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\UnityEngine.ClusterInputModule.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\UnityEngine.ClusterInputModule.dll</HintPath>
       </Reference>
       <Reference Include="UnityEngine.ClusterRendererModule">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\UnityEngine.ClusterRendererModule.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\UnityEngine.ClusterRendererModule.dll</HintPath>
       </Reference>
       <Reference Include="UnityEngine.ContentLoadModule">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\UnityEngine.ContentLoadModule.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\UnityEngine.ContentLoadModule.dll</HintPath>
       </Reference>
       <Reference Include="UnityEngine.CoreModule">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
       </Reference>
       <Reference Include="UnityEngine.CrashReportingModule">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\UnityEngine.CrashReportingModule.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\UnityEngine.CrashReportingModule.dll</HintPath>
       </Reference>
       <Reference Include="UnityEngine.DirectorModule">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\UnityEngine.DirectorModule.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\UnityEngine.DirectorModule.dll</HintPath>
       </Reference>
       <Reference Include="UnityEngine.DSPGraphModule">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\UnityEngine.DSPGraphModule.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\UnityEngine.DSPGraphModule.dll</HintPath>
       </Reference>
       <Reference Include="UnityEngine.GameCenterModule">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\UnityEngine.GameCenterModule.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\UnityEngine.GameCenterModule.dll</HintPath>
       </Reference>
       <Reference Include="UnityEngine.GIModule">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\UnityEngine.GIModule.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\UnityEngine.GIModule.dll</HintPath>
       </Reference>
       <Reference Include="UnityEngine.GraphicsStateCollectionSerializerModule">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\UnityEngine.GraphicsStateCollectionSerializerModule.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\UnityEngine.GraphicsStateCollectionSerializerModule.dll</HintPath>
       </Reference>
       <Reference Include="UnityEngine.GridModule">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\UnityEngine.GridModule.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\UnityEngine.GridModule.dll</HintPath>
       </Reference>
       <Reference Include="UnityEngine.HierarchyCoreModule">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\UnityEngine.HierarchyCoreModule.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\UnityEngine.HierarchyCoreModule.dll</HintPath>
       </Reference>
       <Reference Include="UnityEngine.HotReloadModule">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\UnityEngine.HotReloadModule.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\UnityEngine.HotReloadModule.dll</HintPath>
       </Reference>
       <Reference Include="UnityEngine.ImageConversionModule">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\UnityEngine.ImageConversionModule.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\UnityEngine.ImageConversionModule.dll</HintPath>
       </Reference>
       <Reference Include="UnityEngine.IMGUIModule">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\UnityEngine.IMGUIModule.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\UnityEngine.IMGUIModule.dll</HintPath>
       </Reference>
       <Reference Include="UnityEngine.InputForUIModule">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\UnityEngine.InputForUIModule.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\UnityEngine.InputForUIModule.dll</HintPath>
       </Reference>
       <Reference Include="UnityEngine.InputLegacyModule">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\UnityEngine.InputLegacyModule.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\UnityEngine.InputLegacyModule.dll</HintPath>
       </Reference>
       <Reference Include="UnityEngine.InputModule">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\UnityEngine.InputModule.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\UnityEngine.InputModule.dll</HintPath>
       </Reference>
       <Reference Include="UnityEngine.JSONSerializeModule">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\UnityEngine.JSONSerializeModule.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\UnityEngine.JSONSerializeModule.dll</HintPath>
       </Reference>
       <Reference Include="UnityEngine.LocalizationModule">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\UnityEngine.LocalizationModule.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\UnityEngine.LocalizationModule.dll</HintPath>
       </Reference>
       <Reference Include="UnityEngine.MarshallingModule">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\UnityEngine.MarshallingModule.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\UnityEngine.MarshallingModule.dll</HintPath>
       </Reference>
       <Reference Include="UnityEngine.MultiplayerModule">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\UnityEngine.MultiplayerModule.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\UnityEngine.MultiplayerModule.dll</HintPath>
       </Reference>
       <Reference Include="UnityEngine.NVIDIAModule">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\UnityEngine.NVIDIAModule.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\UnityEngine.NVIDIAModule.dll</HintPath>
       </Reference>
       <Reference Include="UnityEngine.ParticleSystemModule">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\UnityEngine.ParticleSystemModule.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\UnityEngine.ParticleSystemModule.dll</HintPath>
       </Reference>
       <Reference Include="UnityEngine.PerformanceReportingModule">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\UnityEngine.PerformanceReportingModule.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\UnityEngine.PerformanceReportingModule.dll</HintPath>
       </Reference>
       <Reference Include="UnityEngine.Physics2DModule">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\UnityEngine.Physics2DModule.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\UnityEngine.Physics2DModule.dll</HintPath>
       </Reference>
       <Reference Include="UnityEngine.PhysicsModule">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\UnityEngine.PhysicsModule.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\UnityEngine.PhysicsModule.dll</HintPath>
       </Reference>
       <Reference Include="UnityEngine.PropertiesModule">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\UnityEngine.PropertiesModule.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\UnityEngine.PropertiesModule.dll</HintPath>
       </Reference>
       <Reference Include="UnityEngine.RuntimeInitializeOnLoadManagerInitializerModule">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\UnityEngine.RuntimeInitializeOnLoadManagerInitializerModule.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\UnityEngine.RuntimeInitializeOnLoadManagerInitializerModule.dll</HintPath>
       </Reference>
       <Reference Include="UnityEngine.ScreenCaptureModule">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\UnityEngine.ScreenCaptureModule.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\UnityEngine.ScreenCaptureModule.dll</HintPath>
       </Reference>
       <Reference Include="UnityEngine.ShaderVariantAnalyticsModule">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\UnityEngine.ShaderVariantAnalyticsModule.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\UnityEngine.ShaderVariantAnalyticsModule.dll</HintPath>
       </Reference>
       <Reference Include="UnityEngine.SharedInternalsModule">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\UnityEngine.SharedInternalsModule.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\UnityEngine.SharedInternalsModule.dll</HintPath>
       </Reference>
       <Reference Include="UnityEngine.SpatialTracking">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\UnityEngine.SpatialTracking.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\UnityEngine.SpatialTracking.dll</HintPath>
       </Reference>
       <Reference Include="UnityEngine.SpriteMaskModule">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\UnityEngine.SpriteMaskModule.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\UnityEngine.SpriteMaskModule.dll</HintPath>
       </Reference>
       <Reference Include="UnityEngine.SpriteShapeModule">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\UnityEngine.SpriteShapeModule.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\UnityEngine.SpriteShapeModule.dll</HintPath>
       </Reference>
       <Reference Include="UnityEngine.StreamingModule">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\UnityEngine.StreamingModule.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\UnityEngine.StreamingModule.dll</HintPath>
       </Reference>
       <Reference Include="UnityEngine.SubstanceModule">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\UnityEngine.SubstanceModule.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\UnityEngine.SubstanceModule.dll</HintPath>
       </Reference>
       <Reference Include="UnityEngine.SubsystemsModule">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\UnityEngine.SubsystemsModule.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\UnityEngine.SubsystemsModule.dll</HintPath>
       </Reference>
       <Reference Include="UnityEngine.TerrainModule">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\UnityEngine.TerrainModule.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\UnityEngine.TerrainModule.dll</HintPath>
       </Reference>
       <Reference Include="UnityEngine.TerrainPhysicsModule">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\UnityEngine.TerrainPhysicsModule.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\UnityEngine.TerrainPhysicsModule.dll</HintPath>
       </Reference>
       <Reference Include="UnityEngine.TextCoreFontEngineModule">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\UnityEngine.TextCoreFontEngineModule.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\UnityEngine.TextCoreFontEngineModule.dll</HintPath>
       </Reference>
       <Reference Include="UnityEngine.TextCoreTextEngineModule">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\UnityEngine.TextCoreTextEngineModule.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\UnityEngine.TextCoreTextEngineModule.dll</HintPath>
       </Reference>
       <Reference Include="UnityEngine.TextRenderingModule">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\UnityEngine.TextRenderingModule.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\UnityEngine.TextRenderingModule.dll</HintPath>
       </Reference>
       <Reference Include="UnityEngine.TilemapModule">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\UnityEngine.TilemapModule.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\UnityEngine.TilemapModule.dll</HintPath>
       </Reference>
       <Reference Include="UnityEngine.TLSModule">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\UnityEngine.TLSModule.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\UnityEngine.TLSModule.dll</HintPath>
       </Reference>
       <Reference Include="UnityEngine.UI">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\UnityEngine.UI.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\UnityEngine.UI.dll</HintPath>
       </Reference>
       <Reference Include="UnityEngine.UIElementsModule">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\UnityEngine.UIElementsModule.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\UnityEngine.UIElementsModule.dll</HintPath>
       </Reference>
       <Reference Include="UnityEngine.UIModule">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\UnityEngine.UIModule.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\UnityEngine.UIModule.dll</HintPath>
       </Reference>
       <Reference Include="UnityEngine.UmbraModule">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\UnityEngine.UmbraModule.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\UnityEngine.UmbraModule.dll</HintPath>
       </Reference>
       <Reference Include="UnityEngine.UnityAnalyticsCommonModule">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\UnityEngine.UnityAnalyticsCommonModule.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\UnityEngine.UnityAnalyticsCommonModule.dll</HintPath>
       </Reference>
       <Reference Include="UnityEngine.UnityAnalyticsModule">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\UnityEngine.UnityAnalyticsModule.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\UnityEngine.UnityAnalyticsModule.dll</HintPath>
       </Reference>
       <Reference Include="UnityEngine.UnityConnectModule">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\UnityEngine.UnityConnectModule.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\UnityEngine.UnityConnectModule.dll</HintPath>
       </Reference>
       <Reference Include="UnityEngine.UnityCurlModule">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\UnityEngine.UnityCurlModule.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\UnityEngine.UnityCurlModule.dll</HintPath>
       </Reference>
       <Reference Include="UnityEngine.UnityTestProtocolModule">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\UnityEngine.UnityTestProtocolModule.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\UnityEngine.UnityTestProtocolModule.dll</HintPath>
       </Reference>
       <Reference Include="UnityEngine.UnityWebRequestAssetBundleModule">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\UnityEngine.UnityWebRequestAssetBundleModule.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\UnityEngine.UnityWebRequestAssetBundleModule.dll</HintPath>
       </Reference>
       <Reference Include="UnityEngine.UnityWebRequestAudioModule">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\UnityEngine.UnityWebRequestAudioModule.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\UnityEngine.UnityWebRequestAudioModule.dll</HintPath>
       </Reference>
       <Reference Include="UnityEngine.UnityWebRequestModule">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\UnityEngine.UnityWebRequestModule.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\UnityEngine.UnityWebRequestModule.dll</HintPath>
       </Reference>
       <Reference Include="UnityEngine.UnityWebRequestTextureModule">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\UnityEngine.UnityWebRequestTextureModule.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\UnityEngine.UnityWebRequestTextureModule.dll</HintPath>
       </Reference>
       <Reference Include="UnityEngine.UnityWebRequestWWWModule">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\UnityEngine.UnityWebRequestWWWModule.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\UnityEngine.UnityWebRequestWWWModule.dll</HintPath>
       </Reference>
       <Reference Include="UnityEngine.VehiclesModule">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\UnityEngine.VehiclesModule.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\UnityEngine.VehiclesModule.dll</HintPath>
       </Reference>
       <Reference Include="UnityEngine.VFXModule">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\UnityEngine.VFXModule.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\UnityEngine.VFXModule.dll</HintPath>
       </Reference>
       <Reference Include="UnityEngine.VideoModule">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\UnityEngine.VideoModule.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\UnityEngine.VideoModule.dll</HintPath>
       </Reference>
       <Reference Include="UnityEngine.VirtualTexturingModule">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\UnityEngine.VirtualTexturingModule.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\UnityEngine.VirtualTexturingModule.dll</HintPath>
       </Reference>
       <Reference Include="UnityEngine.VRModule">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\UnityEngine.VRModule.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\UnityEngine.VRModule.dll</HintPath>
       </Reference>
       <Reference Include="UnityEngine.WindModule">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\UnityEngine.WindModule.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\UnityEngine.WindModule.dll</HintPath>
       </Reference>
       <Reference Include="UnityEngine.XR.LegacyInputHelpers">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\UnityEngine.XR.LegacyInputHelpers.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\UnityEngine.XR.LegacyInputHelpers.dll</HintPath>
       </Reference>
       <Reference Include="UnityEngine.XRModule">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\UnityEngine.XRModule.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\UnityEngine.XRModule.dll</HintPath>
       </Reference>
       <Reference Include="UnityUIExtensions">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\UnityUIExtensions.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\UnityUIExtensions.dll</HintPath>
       </Reference>
       <Reference Include="websocket-sharp">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\websocket-sharp.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\websocket-sharp.dll</HintPath>
       </Reference>
       <Reference Include="XNode">
-        <HintPath>..\..\..\AppData\Steam\steamapps\common\Shape of Dreams\Shape of Dreams_Data\Managed\XNode.dll</HintPath>
+        <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\XNode.dll</HintPath>
       </Reference>
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
