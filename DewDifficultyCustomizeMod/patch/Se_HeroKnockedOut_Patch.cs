@@ -38,7 +38,8 @@ public class Se_HeroKnockedOut_Patch
         __instance.victim.Status.SetHealth(0.01f);
         
     }
-    
+
+    [HarmonyPrefix]
     [HarmonyPatch("CheckAndAddHeroSoul")]
     public static bool CheckAndAddHeroSoul_Prefix(Se_HeroKnockedOut __instance)
     {
