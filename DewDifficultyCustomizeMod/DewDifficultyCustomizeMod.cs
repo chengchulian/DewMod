@@ -20,7 +20,7 @@ public class DewDifficultyCustomizeMod : ModBehaviour
     {
         harmony.PatchAll();
         uiStateController = gameObject.AddComponent<UIStateController>();
-        Debug.Log($"[{mod.metadata.id}] 已加载: {mod.metadata.name} by {mod.metadata.author}");
+        Debug.Log($"[{mod.metadata.name} v{mod.metadata.modVer}] 已加载 by {mod.metadata.author}");
     }
 
     private void OnDestroy()
@@ -38,6 +38,6 @@ public class DewDifficultyCustomizeMod : ModBehaviour
         
 
         
-        Debug.Log($"[{mod.metadata.id}] 已卸载");
+        Debug.Log($"[{mod.metadata.name} v{mod.metadata.modVer}] 已卸载");
     }
 }
