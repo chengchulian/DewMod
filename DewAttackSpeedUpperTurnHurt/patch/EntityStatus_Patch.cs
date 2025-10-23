@@ -1,6 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using HarmonyLib;
+using Mirror;
+using System.Collections.Generic;
 using System.Runtime.CompilerServices;
-using HarmonyLib;
 using UnityEngine;
 
 namespace DewAttackSpeedUpperTurnHurt.patch;
@@ -19,8 +20,8 @@ public static class EntityStatus_Patch
     public static void get_attackSpeedMultiplier_Postfix(EntityStatus __instance, ref float __result)
     {
         if (__instance.entity is not Hero hero) return;
-        
-        if (!__instance.isServer)
+
+        if (!NetworkServer.active)
         {
             return;
         }
