@@ -1,0 +1,9 @@
+{
+  "id": "com.chengchulian.DewMod.DewAnyWhereOpenModManager",
+  "name": "快捷键打开Mod管理器",
+  "author": "chengchulian",
+  "modVer": "1.0",
+  "assemblies": [
+    "bin/*.dll"
+  ]
+}
