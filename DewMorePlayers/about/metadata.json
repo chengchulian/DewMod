@@ -1,0 +1,9 @@
+{
+  "id": "com.chengchulian.DewMod.DewMorePlayers",
+  "name": "更多的玩家人数",
+  "author": "chengchulian",
+  "modVer": "1.0.0",
+  "assemblies": [
+    "obj/Release/*.dll"
+  ]
+}
