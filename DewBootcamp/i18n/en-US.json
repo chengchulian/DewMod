@@ -1,0 +1,6 @@
+{
+  "LabelText.SpawnToCreepKey": "Spawn to enemy RedGiant key",
+  "Description.SpawnToCreepKey": "Press ctrl + this key",
+  "LabelText.SpawnToLocalLey": "Spawn to friend RedGiant key",
+  "Description.SpawnToLocalLey": "Press ctrl + this key"
+}

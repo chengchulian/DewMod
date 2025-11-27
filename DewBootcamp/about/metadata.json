@@ -1,0 +1,9 @@
+{
+  "id": "com.chengchulian.DewMod.DewBootcamp",
+  "name": "训练营",
+  "author": "chengchulian",
+  "modVer": "1.1.0",
+  "assemblies": [
+    "bin/*.dll"
+  ]
+}

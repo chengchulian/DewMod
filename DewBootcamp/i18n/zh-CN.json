@@ -1,0 +1,6 @@
+{
+    "LabelText.SpawnToCreepKey": "生成敌方红色巨人快捷键",
+    "Description.SpawnToCreepKey": "按下Ctrl + 此键",
+    "LabelText.SpawnToLocalLey": "生成我方红色巨人快捷键",
+    "Description.SpawnToLocalLey": "按下Ctrl + 此键"
+}

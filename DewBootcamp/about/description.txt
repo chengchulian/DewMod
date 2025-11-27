@@ -1,0 +1,7 @@
+你可以使用快捷键生成红色巨人单位,方便测试dps及build
+
+你可以在此MOD目录下的i18n文件夹内添加你所在地区的本地化翻译json文件
+
+You can use shortcut keys to generate red giant units for easy testing of DPS and build
+
+You can add your local translation files in the 'i18n' folder under this mod directory.
