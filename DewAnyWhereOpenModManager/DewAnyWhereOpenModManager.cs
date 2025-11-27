@@ -13,7 +13,7 @@ public class DewAnyWhereOpenModManager : ModBehaviour
     private void Start()
     {
         Instance = this;
-        LocalizationSource.Init();
+        LocalizationSource.Init(this);
     }
     private void Update()
     {

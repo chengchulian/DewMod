@@ -16,13 +16,11 @@ namespace DewAnyWhereOpenModManager.config
             return DewSave.profileMain.language;
         }
 
-        /// <summary>
-        /// 初始化：从 MOD 文件夹加载 i18n JSON 文件
-        /// </summary>
-        public static void Init()
-        {
-            string modPath = DewAnyWhereOpenModManager.Instance.mod.path;
 
+        public static void Init(ModBehaviour modBehaviour)
+        {
+            string modPath = modBehaviour.mod.path;
+            
             string i18nPath = Path.Combine(modPath, "i18n");
 
             if (!Directory.Exists(i18nPath))

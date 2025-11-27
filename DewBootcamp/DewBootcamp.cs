@@ -15,7 +15,7 @@ public class DewBootcamp : ModBehaviour
     }
     private void Start()
     {
-        LocalizationSource.Init();
+        LocalizationSource.Init(this);
         Debug.Log($"[{mod.metadata.id}] 已加载: {mod.metadata.name} by {mod.metadata.author}");
     }
 

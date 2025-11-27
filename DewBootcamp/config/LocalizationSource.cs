@@ -19,9 +19,10 @@ namespace DewBootcamp.config
         /// <summary>
         /// 初始化：从 MOD 文件夹加载 i18n JSON 文件
         /// </summary>
-        public static void Init()
+        /// <param name="modBehaviour"></param>
+        public static void Init(ModBehaviour modBehaviour)
         {
-            string modPath = DewBootcamp.Instance.mod.path;
+            string modPath = modBehaviour.mod.path;
 
             string i18nPath = Path.Combine(modPath, "i18n");
 
