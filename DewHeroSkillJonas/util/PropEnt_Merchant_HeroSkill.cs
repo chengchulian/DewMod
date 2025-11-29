@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using DewHeroSkillJonas.patch;
+using Mirror;
 using UnityEngine;
 
 namespace DewHeroSkillJonas.util;
@@ -58,8 +59,13 @@ public static class PropEnt_Merchant_HeroSkill
     public static Dictionary<HeroSkillLocation, List<string>> SkillsByType => _skillsByTypeLazy.Value;
 
     
-    public static void ZoneManagerOnStartClient()
+    public static void ZoneManagerOnStart()
     {
+        if (!NetworkServer.active)
+        {
+            return;
+        }
+        
         ZoneManager.instance.ClientEvent_OnRoomLoaded += _ =>
         {
             if (!DewHeroSkillJonas.Instance.Config.Enable)

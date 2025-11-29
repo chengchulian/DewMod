@@ -24,7 +24,7 @@ namespace DewHeroSkillJonas
             harmony.PatchAll();
             Debug.Log($"[{mod.metadata.id}] 已加载: {mod.metadata.name} by {mod.metadata.author}");
 
-            CallOnNetworkedManager<ZoneManager>(PropEnt_Merchant_HeroSkill.ZoneManagerOnStartClient);
+            CallOnNetworkedManager<ZoneManager>(PropEnt_Merchant_HeroSkill.ZoneManagerOnStart);
         }
 
 
