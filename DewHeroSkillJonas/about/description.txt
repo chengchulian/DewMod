@@ -1,0 +1,7 @@
+特别的礼物房间，将有一个额外的商人出售英雄技能
+
+你可以在此MOD目录下的i18n文件夹内添加你所在地区的本地化翻译json文件
+
+A special gift room will have an additional merchant selling hero skills
+
+You can add your local translation files in the 'i18n' folder under this mod directory.
