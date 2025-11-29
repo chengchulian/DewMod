@@ -1,0 +1,4 @@
+为Mod配置界面添加List支持,如果它正常工作,你应该能在此mod的配置界面看到TestValueList 和 TestInputList
+
+
+Add List support to the Mod configuration interface. If it works properly, you should be able to see TestValueList and TestInputList in this mod's configuration interface
