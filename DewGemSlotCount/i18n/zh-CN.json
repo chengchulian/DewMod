@@ -1,0 +1,9 @@
+{
+  "LabelText.SkillQGemCount": "Q技能宝石槽数量",
+  "LabelText.SkillWGemCount": "W技能宝石槽数量",
+  "LabelText.SkillEGemCount": "E技能宝石槽数量",
+  "LabelText.SkillRGemCount": "R技能宝石槽数量",
+  "LabelText.SkillIdentityGemCount": "身份技能宝石槽数量",
+  "LabelText.SkillMovementGemCount": "移动技能宝石槽数量",
+  "LabelText.OptimizeUI": "优化技能界面布局"
+}

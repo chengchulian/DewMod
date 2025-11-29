@@ -1,0 +1,9 @@
+{
+  "LabelText.SkillQGemCount": "Q 스킬 보석 수",
+  "LabelText.SkillWGemCount": "W 스킬 보석 수",
+  "LabelText.SkillEGemCount": "E 스킬 보석 수",
+  "LabelText.SkillRGemCount": "R 스킬 보석 수",
+  "LabelText.SkillIdentityGemCount": "아이덴티티 보석 수",
+  "LabelText.SkillMovementGemCount": "이동 스킬 보석 수",
+  "LabelText.OptimizeUI": "UI 최적화"
+}
