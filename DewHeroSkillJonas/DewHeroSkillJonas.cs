@@ -1,7 +1,4 @@
-using System.Linq;
-using DewGemSlotCount.config;
 using DewHeroSkillJonas.config;
-using DewHeroSkillJonas.patch;
 using DewHeroSkillJonas.util;
 using UnityEngine;
 

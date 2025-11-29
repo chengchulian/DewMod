@@ -4,7 +4,7 @@ using System.IO;
 using TMPro;
 using UnityEngine;
 
-namespace DewGemSlotCount.config
+namespace DewHeroSkillJonas.config
 {
     public static class LocalizationSource
     {

@@ -4,6 +4,7 @@ using System.Linq;
 using DewHeroSkillJonas.patch;
 using Mirror;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace DewHeroSkillJonas.util;
 
@@ -58,14 +59,14 @@ public static class PropEnt_Merchant_HeroSkill
 
     public static Dictionary<HeroSkillLocation, List<string>> SkillsByType => _skillsByTypeLazy.Value;
 
-    
+
     public static void ZoneManagerOnStart()
     {
         if (!NetworkServer.active)
         {
             return;
         }
-        
+
         ZoneManager.instance.ClientEvent_OnRoomLoaded += _ =>
         {
             if (!DewHeroSkillJonas.Instance.Config.Enable)
@@ -105,20 +106,19 @@ public static class PropEnt_Merchant_HeroSkill
                 });
         };
     }
+
     public static void OnPopulateMerchandises(DewPlayer player, PropEnt_Merchant_Jonas jonas)
     {
         MerchandiseData[] baseSkills = GetBaseSkills(jonas);
-        
+
         MerchandiseData[] baseGems = GetBaseSkills(jonas);
 
 
-        
-        
         MerchandiseData[] arr = new MerchandiseData[jonas.skillTypeCount + jonas.gemTypeCount];
         Array.Copy(baseSkills, 0, arr, 0, baseSkills.Length);
         Array.Copy(baseGems, 0, arr, baseSkills.Length, baseGems.Length);
 
-        
+
         // MerchandiseData[] arr = new MerchandiseData[jonas.skillTypeCount + jonas.gemTypeCount + player.shopAddedItems * 2];
 
         // Array.Copy(baseSkills, 0, arr, 0, baseSkills.Length);
@@ -174,15 +174,15 @@ public static class PropEnt_Merchant_HeroSkill
         {
             baseSkills[i] = GetSkill(jonas);
         }
+
         Debug.Log("GetBaseSkills end");
         return baseSkills;
-
     }
 
     private static MerchandiseData GetSkill(PropEnt_Merchant_Jonas jonas)
     {
         Debug.Log("GetSkill");
-        
+
         HeroSkillLocation skillType = SelectSkillType();
         SelectSkillAndLevel(skillType, out var skill, out var skillLevel);
         Debug.Log("GetSkill end");
@@ -192,7 +192,7 @@ public static class PropEnt_Merchant_HeroSkill
             itemName = skill.GetType().Name,
             level = skillLevel,
             count = Mathf.Max(1,
-                Mathf.RoundToInt(UnityEngine.Random.Range(jonas.skillQuantity.x, jonas.skillQuantity.y)))
+                Mathf.RoundToInt(Random.Range(jonas.skillQuantity.x, jonas.skillQuantity.y)))
         };
     }
 
@@ -205,7 +205,7 @@ public static class PropEnt_Merchant_HeroSkill
         }
 
         List<string> pool = SkillsByType[skillType.Value];
-        skill = DewResources.GetByShortTypeName<SkillTrigger>(pool[UnityEngine.Random.Range(0, pool.Count)]);
+        skill = DewResources.GetByShortTypeName<SkillTrigger>(pool[Random.Range(0, pool.Count)]);
         level = SelectSkillLevel(skillType.Value);
         Debug.Log("SelectSkillAndLevel end");
     }
@@ -228,7 +228,7 @@ public static class PropEnt_Merchant_HeroSkill
         float max = lootManager.skillLevelMaxByZoneIndex.Get(rarity)
             .Evaluate(NetworkedManagerBase<ZoneManager>.instance.currentZoneIndex);
         return Mathf.Clamp(
-            Mathf.RoundToInt(Mathf.Lerp(a, max, lootManager.skillLevelRandomCurve.Evaluate(UnityEngine.Random.value))),
+            Mathf.RoundToInt(Mathf.Lerp(a, max, lootManager.skillLevelRandomCurve.Evaluate(Random.value))),
             1, 100);
     }
 
@@ -242,7 +242,7 @@ public static class PropEnt_Merchant_HeroSkill
 
     public static HeroSkillLocation SelectSkillType(PerRarityData<float> chances)
     {
-        float val = UnityEngine.Random.value;
+        float val = Random.value;
         HeroSkillLocation location = HeroSkillLocation.Q;
         if (val < chances.legendary)
         {
@@ -262,7 +262,7 @@ public static class PropEnt_Merchant_HeroSkill
 
     public static void Test()
     {
-        foreach (var keyValuePair in PropEnt_Merchant_HeroSkill.SkillsByType)
+        foreach (var keyValuePair in SkillsByType)
         {
             Debug.Log(keyValuePair.Key + " " + keyValuePair.Value.Count);
         }

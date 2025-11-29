@@ -1,5 +1,4 @@
-﻿using DewGemSlotCount.config;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 namespace DewHeroSkillJonas.config;
