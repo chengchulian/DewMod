@@ -46,6 +46,7 @@
         <Compile Include="util\PropEnt_Merchant_HeroSkill.cs" />
         <Compile Include="patch\PropEnt_Merchant_Base_Patch.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
+        <Compile Include="util\Test.cs" />
     </ItemGroup>
     <ItemGroup>
         <Reference Include="0Harmony">

@@ -259,12 +259,5 @@ public static class PropEnt_Merchant_HeroSkill
 
         return location;
     }
-
-    public static void Test()
-    {
-        foreach (var keyValuePair in SkillsByType)
-        {
-            Debug.Log(keyValuePair.Key + " " + keyValuePair.Value.Count);
-        }
-    }
+    
 }
