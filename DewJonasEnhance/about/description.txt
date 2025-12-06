@@ -1,0 +1,13 @@
+商人乔纳斯无敌
+重新进入商店刷新所有商品
+调整乔纳斯商店数量列数
+调整初始白金硬币数量
+
+你可以在此MOD目录下的i18n文件夹内添加你所在地区的本地化翻译json文件
+
+Businessman Jonas is invincible
+Re enter the Jonas and refresh all products
+Adjust the quantity column of Jonas stores
+Adjust the initial quantity of platinum coins
+
+You can add your local translation files in the 'i18n' folder under this mod directory.
