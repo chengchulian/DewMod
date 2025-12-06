@@ -4,6 +4,6 @@
   "author": "chengchulian",
   "modVer": "1.0",
   "assemblies": [
-    "bin/*.dll"
+    "obj/Release/*.dll"
   ]
 }
