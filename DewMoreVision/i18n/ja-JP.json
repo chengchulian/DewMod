@@ -1,0 +1,6 @@
+{
+  "LabelText.ZoomSteps": "ズームステップ数",
+  "Description.ZoomSteps": "最大視野から最小視野までのスクロール回数。この値を変更してビューのズームをより滑らかにできます。20程度を推奨します",
+  "LabelText.ZoomMultiple": "ズーム倍率",
+  "Description.ZoomMultiple": "最大視野がデフォルトの何倍かを示し、2を超えることは推奨しません"
+}

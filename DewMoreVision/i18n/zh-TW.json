@@ -1,0 +1,6 @@
+{
+  "LabelText.ZoomSteps": "縮放步驟",
+  "Description.ZoomSteps": "滑鼠從最大視野到最小視野所需的滾動次數，您可以修改這個值來讓視角縮放變得更平滑，建議20左右",
+  "LabelText.ZoomMultiple": "縮放倍數",
+  "Description.ZoomMultiple": "最大視野時是預設的多少倍，不建議超過2"
+}

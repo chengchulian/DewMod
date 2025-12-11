@@ -1,0 +1,6 @@
+{
+  "LabelText.ZoomSteps": "Kroki Powiększenia",
+  "Description.ZoomSteps": "Liczba kroków przewijania od maksymalnego do minimalnego pola widzenia. Możesz zmodyfikować tę wartość, aby powiększenie było płynniejsze, zalecane około 20",
+  "LabelText.ZoomMultiple": "Wielokrotność Powiększenia",
+  "Description.ZoomMultiple": "Ile razy maksymalne pole widzenia jest większe niż domyślne, nie zaleca się przekraczać 2"
+}

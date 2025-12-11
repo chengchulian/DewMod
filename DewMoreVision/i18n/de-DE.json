@@ -1,0 +1,6 @@
+{
+  "LabelText.ZoomSteps": "Zoomschritte",
+  "Description.ZoomSteps": "Anzahl der Scrollvorgänge vom maximalen zum minimalen Sichtfeld. Ändern Sie diesen Wert, um einen flüssigeren Zoom zu erhalten, empfohlen etwa 20",
+  "LabelText.ZoomMultiple": "Zoomfaktor",
+  "Description.ZoomMultiple": "Wie vielfach das maximale Sichtfeld im Vergleich zum Standard ist, wird nicht empfohlen über 2 zu gehen"
+}

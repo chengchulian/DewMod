@@ -703,9 +703,30 @@
         </Reference>
     </ItemGroup>
     <ItemGroup>
+        <Compile Include="config\LocalizationSource.cs" />
+        <Compile Include="config\PluginConfig.cs" />
         <Compile Include="DewMoreVision.cs" />
         <Compile Include="patch\CameraManager_Patch.cs" />
         <Compile Include="Properties\AssemblyInfo.cs"/>
+    </ItemGroup>
+    <ItemGroup>
+      <Content Include="about\icon.png" />
+      <Content Include="about\preview.png" />
+      <Content Include="about\description.txt" />
+      <Content Include="about\metadata.json" />
+      <Content Include="i18n\de-DE.json" />
+      <Content Include="i18n\en-US.json" />
+      <Content Include="i18n\es-MX.json" />
+      <Content Include="i18n\fr-FR.json" />
+      <Content Include="i18n\it-IT.json" />
+      <Content Include="i18n\ja-JP.json" />
+      <Content Include="i18n\ko-KR.json" />
+      <Content Include="i18n\pl-PL.json" />
+      <Content Include="i18n\pt-BR.json" />
+      <Content Include="i18n\ru-RU.json" />
+      <Content Include="i18n\tr-TR.json" />
+      <Content Include="i18n\zh-CN.json" />
+      <Content Include="i18n\zh-TW.json" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
     <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

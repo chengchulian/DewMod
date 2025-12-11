@@ -1,0 +1,6 @@
+{
+  "LabelText.ZoomSteps": "Étapes de Zoom",
+  "Description.ZoomSteps": "Nombre de défilements de la vue maximale à la vue minimale. Vous pouvez modifier cette valeur pour rendre le zoom plus fluide, recommandé environ 20",
+  "LabelText.ZoomMultiple": "Multiple de Zoom",
+  "Description.ZoomMultiple": "Combien de fois la vue maximale est par rapport à la valeur par défaut, il n'est pas recommandé de dépasser 2"
+}

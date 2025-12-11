@@ -1,0 +1,6 @@
+{
+  "LabelText.ZoomSteps": "줌 단계",
+  "Description.ZoomSteps": "최대 시야에서 최소 시야까지의 스크롤 횟수입니다. 이 값을 수정하여 뷰 줌을 더 부드럽게 만들 수 있으며, 약 20을 권장합니다",
+  "LabelText.ZoomMultiple": "줌 배수",
+  "Description.ZoomMultiple": "최대 시야가 기본값의 몇 배인지 나타내며, 2를 초과하는 것은 권장하지 않습니다"
+}

@@ -1,0 +1,6 @@
+{
+  "LabelText.ZoomSteps": "Passaggi Zoom",
+  "Description.ZoomSteps": "Numero di scorrimenti dal campo visivo massimo al minimo. Puoi modificare questo valore per rendere lo zoom più fluido, consigliato circa 20",
+  "LabelText.ZoomMultiple": "Multiplo dello Zoom",
+  "Description.ZoomMultiple": "Quante volte il campo visivo massimo è rispetto al valore predefinito, non è consigliato superare 2"
+}

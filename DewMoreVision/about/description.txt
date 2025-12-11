@@ -1,0 +1,16 @@
+无限视距MOD为您带来更广阔的视野体验，突破原有游戏视野限制，让您能够更清楚地观察远处景象。
+
+主要功能：
+- 扩大摄像机视野范围，可自定义缩放倍数
+- 可调节缩放级别步长
+
+
+你可以在此MOD目录下的i18n文件夹内添加你所在地区的本地化翻译json文件
+
+The MoreVision MOD brings you a broader visual experience, breaking through the original game's visual limitations and allowing you to observe distant scenes more clearly.
+
+Main functions:
+-Expand the camera's field of view and customize the zoom factor
+-Adjustable zoom level step size
+
+You can add your local translation files in the 'i18n' folder under this mod directory.

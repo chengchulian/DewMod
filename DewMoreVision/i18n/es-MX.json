@@ -1,0 +1,6 @@
+{
+  "LabelText.ZoomSteps": "Pasos de Zoom",
+  "Description.ZoomSteps": "Número de pasos de desplazamiento desde la vista máxima hasta la mínima. Puedes modificar este valor para hacer el zoom más suave, recomendado alrededor de 20",
+  "LabelText.ZoomMultiple": "Múltiplo de Zoom",
+  "Description.ZoomMultiple": "Cuántas veces es el campo de visión máximo comparado con el predeterminado, no se recomienda exceder 2"
+}

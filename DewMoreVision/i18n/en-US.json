@@ -1,0 +1,6 @@
+{
+  "LabelText.ZoomSteps": "Zoom Steps",
+  "Description.ZoomSteps": "Number of scroll steps from maximum to minimum field of view. You can modify this value to make view zoom smoother, recommended around 20",
+  "LabelText.ZoomMultiple": "Zoom Multiple",
+  "Description.ZoomMultiple": "How many times the maximum field of view is compared to default, not recommended to exceed 2"
+}

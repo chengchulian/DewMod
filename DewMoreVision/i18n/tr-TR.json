@@ -1,0 +1,6 @@
+{
+  "LabelText.ZoomSteps": "Yakınlaştırma Adımları",
+  "Description.ZoomSteps": "Maksimum görüş alanından minimum görüş alanına kaydırmak için gereken adım sayısı. Görünüm yakınlaştırmasını daha düzgün hale getirmek için bu değeri değiştirebilirsiniz, yaklaşık 20 önerilir",
+  "LabelText.ZoomMultiple": "Yakınlaştırma Kat Sayısı",
+  "Description.ZoomMultiple": "Maksimum görüş alanının varsayılana göre kaç katı olduğu, 2'yi aşmaması önerilir"
+}
