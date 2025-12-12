@@ -1,24 +1,24 @@
-﻿using HarmonyLib;
+﻿using System.Runtime.CompilerServices;
+using HarmonyLib;
 using Mirror;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 
-namespace DewAttackSpeedUpperTurnHurt.patch;
+namespace DewAttackSpeedConvertDamage.patch;
 
 [HarmonyPatch(typeof(EntityStatus))]
 public static class EntityStatus_Patch
 {
-    private const float MAX_ATTACK_SPEED = 5f; // 攻速上限（倍数）
-    private const float DAMAGE_PER_OVERFLOW = 0.01f; // 每 100% 溢出攻速 → +1% 伤害
 
     public static readonly ConditionalWeakTable<Hero, BonusHolder> DamageBonusMap = new();
-
+    
     // patch get_attackSpeedMultiplier
     [HarmonyPostfix]
     [HarmonyPatch("get_attackSpeedMultiplier")]
     public static void get_attackSpeedMultiplier_Postfix(EntityStatus __instance, ref float __result)
     {
+        var maxAttackSpeed = DewAttackSpeedConvertDamage.Instance.config.MaxAttackSpeed;
+        var damagePerOverflow = DewAttackSpeedConvertDamage.Instance.config.DamagePerOverflow;
+        
         if (__instance.entity is not Hero hero) return;
 
         if (!NetworkServer.active)
@@ -30,24 +30,25 @@ public static class EntityStatus_Patch
         float currentAttackSpeed = baseAttackSpeed * __result;
 
         // 计算溢出
-        float overflow = Mathf.Max(0f, currentAttackSpeed - MAX_ATTACK_SPEED);
+        float overflow = Mathf.Max(0f, currentAttackSpeed - maxAttackSpeed);
         
         float overflowPercentage = overflow / baseAttackSpeed;
-        float damageBonus = overflowPercentage * DAMAGE_PER_OVERFLOW;
+        float damageBonus = overflowPercentage * damagePerOverflow;
         DamageBonusMap.GetOrCreateValue(hero).bonus = damageBonus;
 
         // 限制返回值
         if (overflow > 0f)
         {
-            __result = MAX_ATTACK_SPEED / baseAttackSpeed;
+            __result = maxAttackSpeed / baseAttackSpeed;
         }
 
         // 确保伤害处理器已注册
-        if (!hero.HasData<AttackSpeedUpperTurnHurt>())
+        if (hero.HasData<AttackSpeedUpperTurnHurt>())
         {
-            hero.AddData<AttackSpeedUpperTurnHurt>(default);
-            hero.dealtDamageProcessor.Add(Processor, priority: 500);
+            return;
         }
+        hero.AddData<AttackSpeedUpperTurnHurt>(default);
+        hero.dealtDamageProcessor.Add(Processor, priority: 500);
     }
 
     private static float GetActualBaseAttackSpeed(EntityStatus status)
