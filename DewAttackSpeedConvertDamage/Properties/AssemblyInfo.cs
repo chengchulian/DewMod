@@ -4,11 +4,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("DewAttackSpeedUpperTurnHurt")]
+[assembly: AssemblyTitle("DewAttackSpeedConvertDamage")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("DewAttackSpeedUpperTurnHurt")]
+[assembly: AssemblyProduct("DewAttackSpeedConvertDamage")]
 [assembly: AssemblyCopyright("Copyright ©  2025")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -19,7 +19,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("31FBFB7A-0C26-4C18-B391-FF51BE545D72")]
+[assembly: Guid("7A97767E-AC0D-46CA-804A-412F0C329A9D")]
 
 // Version information for an assembly consists of the following four values:
 //
