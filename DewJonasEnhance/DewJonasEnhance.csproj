@@ -732,6 +732,8 @@
         <Compile Include="util\DewJonasEnhanceUtil.cs" />
     </ItemGroup>
     <ItemGroup>
+      <Content Include="about\preview.png" />
+      <Content Include="about\icon.png" />
       <Content Include="about\description.txt" />
       <Content Include="about\metadata.json" />
       <Content Include="i18n\en-US.json" />
