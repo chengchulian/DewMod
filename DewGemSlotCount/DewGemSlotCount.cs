@@ -13,8 +13,7 @@ namespace DewGemSlotCount
         private void Awake()
         {
             Instance = this;
-            LocalizationSource.Init(this);
-            harmony.PatchAll();
+
         }
 
         private void ActorManagerOnStartClient()
@@ -32,8 +31,12 @@ namespace DewGemSlotCount
 
         private void Start()
         {
-            Debug.Log($"[{mod.metadata.id}] 已加载: {mod.metadata.name} by {mod.metadata.author}");
 
+            instance.isAlteringGameplay = true;
+            
+            LocalizationSource.Init(this);
+            harmony.PatchAll();
+            
             // ActorManager创建设置 (游戏启动后)
             CallOnNetworkedManager<ActorManager>(ActorManagerOnStartClient);
             // ZoneManager创建设置(过图后)
@@ -45,6 +48,10 @@ namespace DewGemSlotCount
                 Debug.Log( "[DewGemSlotCount]  中途加入发送同步数据 ");
                 GemSyncHelper.SyncGemConfigToAllClients(Config);
             };
+            
+            Debug.Log($"[{mod.metadata.id}] 已加载: {mod.metadata.name} by {mod.metadata.author}");
+
+
         }
 
         private void ZoneManagerOnStartClient()

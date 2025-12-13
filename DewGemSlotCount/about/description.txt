@@ -3,11 +3,23 @@
 可以更换位移技能和身份技能
 可以阻止精华合并
 
+注意事项:
+所有配置项目以主机为主
+即使主机安装了此MOD并修改了配置项,客机依然无法使用它
+客机会自动同步主机的配置
+当你在客机更改配置时它并不会生效,还会有奇怪的显示BUG
+
 你可以在此MOD目录下的i18n文件夹内添加你所在地区的本地化翻译json文件
 
 Function:
 Modify the number of gem slot
 Can replace Movement skills and identity skills
 Can prevent gem Merge
+
+Notes:
+All configuration items are mainly based on the host
+Even if the host installs this MOD and modifies the configuration items, the aircraft still cannot use it
+The aircraft will automatically synchronize the configuration of the host
+When you change the configuration of the aircraft, it will not take effect and there will be strange display bugs
 
 You can add your local translation files in the 'i18n' folder under this mod directory.
