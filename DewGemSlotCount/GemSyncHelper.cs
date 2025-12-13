@@ -1,5 +1,4 @@
 ﻿using DewGemSlotCount.config;
-using DewGemSlotCount.entity;
 using UnityEngine;
 using Mirror;
 
@@ -16,26 +15,20 @@ namespace DewGemSlotCount
             {
                 return;
             }
-            
+
             if (!NetworkServer.active)
             {
                 return;
             }
 
-            var msg = new GemConfigSyncMessage
+            var msg = config;
+            if (ActorManager.instance.serverActor == null)
             {
-                Q = config.SkillQGemCount,
-                W = config.SkillWGemCount,
-                E = config.SkillEGemCount,
-                R = config.SkillRGemCount,
-                Identity = config.SkillIdentityGemCount,
-                Movement = config.SkillMovementGemCount,
-            };
-            if (ActorManager.instance.serverActor != null)
-            {
-                ActorManager.instance.serverActor.CustomRpc_SendMessageToAllClients(msg);
-                Debug.Log( "[DewGemSlotCount]  发送 Gem 配置同步消息  " + msg);
+                return;
             }
+
+            ActorManager.instance.serverActor.CustomRpc_SendMessageToAllClients(msg);
+            Debug.Log("[DewGemSlotCount]  发送 Gem 配置同步消息  " + msg);
         }
 
         /// <summary>
@@ -43,16 +36,18 @@ namespace DewGemSlotCount
         /// </summary>
         public static void RegisterGemSyncHandler(PluginConfig config)
         {
-
-            ActorManager.instance.serverActor.CustomRpc_RegisterClientMessageHandler<GemConfigSyncMessage>(msg =>
+            ActorManager.instance.serverActor.CustomRpc_RegisterClientMessageHandler<PluginConfig>(msg =>
             {
-                Debug.Log( "[DewGemSlotCount]  接收 Gem 配置同步消息 " + msg);
-                config.SkillQGemCount = msg.Q;
-                config.SkillWGemCount = msg.W;
-                config.SkillEGemCount = msg.E;
-                config.SkillRGemCount = msg.R;
-                config.SkillIdentityGemCount = msg.Identity;
-                config.SkillMovementGemCount = msg.Movement;
+                Debug.Log("[DewGemSlotCount]  接收 Gem 配置同步消息 " + msg);
+                config.SkillQGemCount = msg.SkillQGemCount;
+                config.SkillWGemCount = msg.SkillWGemCount;
+                config.SkillEGemCount = msg.SkillEGemCount;
+                config.SkillRGemCount = msg.SkillRGemCount;
+                config.SkillIdentityGemCount = msg.SkillIdentityGemCount;
+                config.SkillMovementGemCount = msg.SkillMovementGemCount;
+                config.EditIdentitySkill = msg.EditIdentitySkill;
+                config.EditMovementSkill = msg.EditMovementSkill;
+                config.GemNoMerge = msg.GemNoMerge;
             });
         }
     }

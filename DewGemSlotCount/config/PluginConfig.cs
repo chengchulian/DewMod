@@ -21,6 +21,17 @@ public class PluginConfig : ModConfig
     [LabelText("LabelText.OptimizeUI")]
     public bool OptimizeUI = true;
 
+    [LabelText("LabelText.EditIdentitySkill")]
+    [Description("Description.EditIdentitySkill")]
+    public bool EditIdentitySkill = false;
+    [LabelText("LabelText.EditMovementSkill")]
+    [Description("Description.EditMovementSkill")]
+    public bool EditMovementSkill = false;
+    [LabelText("LabelText.GemNoMerge")]
+    [Description("Description.GemNoMerge")]
+    public bool GemNoMerge = false;
+    
+
     public override void BuildWidgets(Transform parent, out SafeAction onChanged, out SafeAction requestUpdate)
     {
         base.BuildWidgets(parent, out onChanged, out requestUpdate);

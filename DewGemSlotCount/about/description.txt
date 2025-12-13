@@ -1,7 +1,13 @@
+功能:
 修改精华槽数量
+可以更换位移技能和身份技能
+可以阻止精华合并
 
 你可以在此MOD目录下的i18n文件夹内添加你所在地区的本地化翻译json文件
 
+Function:
 Modify the number of gem slot
+Can replace Movement skills and identity skills
+Can prevent gem Merge
 
 You can add your local translation files in the 'i18n' folder under this mod directory.

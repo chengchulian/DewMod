@@ -5,5 +5,11 @@
   "LabelText.SkillRGemCount": "Quantidade de gemas da habilidade R",
   "LabelText.SkillIdentityGemCount": "Quantidade de gemas de identidade",
   "LabelText.SkillMovementGemCount": "Quantidade de gemas de movimento",
-  "LabelText.OptimizeUI": "Otimizar UI"
+  "LabelText.OptimizeUI": "Otimizar interface",
+  "LabelText.EditIdentitySkill": "Editar habilidade de identidade",
+  "Description.EditIdentitySkill": "Permite alterar habilidades de identidade",
+  "LabelText.EditMovementSkill": "Editar habilidade de movimento",
+  "Description.EditMovementSkill": "Permite alterar habilidades de movimento",
+  "LabelText.GemNoMerge": "Impedir fusão de gemas",
+  "Description.GemNoMerge": "Impede a fusão de gemas, permitindo que as mesmas gemas afetem várias habilidades (colocar as mesmas gemas na mesma habilidade pode causar erros estranhos de ativação)"
 }

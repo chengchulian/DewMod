@@ -1,8 +1,8 @@
 {
   "id": "com.chengchulian.DewMod.DewGemSlotCount",
-  "name": "精华槽数量",
+  "name": "精华槽数量/SkillGemCount",
   "author": "chengchulian",
-  "modVer": "1.1.0",
+  "modVer": "1.2.0",
   "assemblies": [
     "obj/Release/*.dll"
   ]

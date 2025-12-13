@@ -5,5 +5,11 @@
   "LabelText.SkillRGemCount": "Liczba klejnotów umiejętności R",
   "LabelText.SkillIdentityGemCount": "Liczba klejnotów tożsamości",
   "LabelText.SkillMovementGemCount": "Liczba klejnotów ruchu",
-  "LabelText.OptimizeUI": "Optymalizuj UI"
+  "LabelText.OptimizeUI": "Optymalizuj interfejs",
+  "LabelText.EditIdentitySkill": "Edytuj umiejętność tożsamości",
+  "Description.EditIdentitySkill": "Pozwala zmieniać umiejętności tożsamości",
+  "LabelText.EditMovementSkill": "Edytuj umiejętność ruchu",
+  "Description.EditMovementSkill": "Pozwala zmieniać umiejętności ruchu",
+  "LabelText.GemNoMerge": "Zapobiegaj łączeniu klejnotów",
+  "Description.GemNoMerge": "Zapobiega łączeniu klejnotów, umożliwiając tym samym klejnotom wpływ na wiele umiejętności (umieszczenie tych samych klejnotów na tej samej umiejętności może powodować dziwne błędy wyzwalania)"
 }

@@ -5,5 +5,11 @@
   "LabelText.SkillRGemCount": "R 스킬 보석 수",
   "LabelText.SkillIdentityGemCount": "아이덴티티 보석 수",
   "LabelText.SkillMovementGemCount": "이동 스킬 보석 수",
-  "LabelText.OptimizeUI": "UI 최적화"
+  "LabelText.OptimizeUI": "UI 최적화",
+  "LabelText.EditIdentitySkill": "아이덴티티 스킬 편집",
+  "Description.EditIdentitySkill": "아이덴티티 스킬 변경 허용",
+  "LabelText.EditMovementSkill": "이동 스킬 편집",
+  "Description.EditMovementSkill": "이동 스킬 변경 허용",
+  "LabelText.GemNoMerge": "보석 병합 방지",
+  "Description.GemNoMerge": "보석 병합을 방지하여 동일한 보석이 여러 스킬에 영향을 미치도록 합니다 (동일한 보석을 동일한 스킬에 배치하면 이상한 트리거 버그가 발생함)"
 }

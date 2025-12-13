@@ -5,5 +5,11 @@
   "LabelText.SkillRGemCount": "Кол-во самоцветов навыка R",
   "LabelText.SkillIdentityGemCount": "Кол-во самоцветов идентичности",
   "LabelText.SkillMovementGemCount": "Кол-во самоцветов движения",
-  "LabelText.OptimizeUI": "Оптимизировать интерфейс"
+  "LabelText.OptimizeUI": "Оптимизировать интерфейс",
+  "LabelText.EditIdentitySkill": "Редактировать навык идентичности",
+  "Description.EditIdentitySkill": "Позволяет изменять навыки идентичности",
+  "LabelText.EditMovementSkill": "Редактировать навык движения",
+  "Description.EditMovementSkill": "Позволяет изменять навыки движения",
+  "LabelText.GemNoMerge": "Предотвратить объединение самоцветов",
+  "Description.GemNoMerge": "Предотвращает объединение самоцветов, позволяя одним и тем же самоцветам действовать на нескольких навыках (размещение одних и тех же самоцветов на одном навыке может вызвать странные ошибки срабатывания)"
 }

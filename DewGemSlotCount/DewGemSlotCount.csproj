@@ -44,7 +44,6 @@
         <Compile Include="config\PluginConfig.cs" />
         <Compile Include="Constant.cs" />
         <Compile Include="DewGemSlotCount.cs" />
-        <Compile Include="entity\GemConfigSyncMessage.cs" />
         <Compile Include="GemSyncHelper.cs" />
         <Compile Include="patch\HeroSkill_Patch.cs" />
         <Compile Include="patch\UI_InGame_Scoreboard_PlayerItem_Skill_Patch.cs" />

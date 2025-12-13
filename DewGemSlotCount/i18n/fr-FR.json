@@ -5,5 +5,11 @@
   "LabelText.SkillRGemCount": "Nombre de gemmes compétence R",
   "LabelText.SkillIdentityGemCount": "Nombre de gemmes d'identité",
   "LabelText.SkillMovementGemCount": "Nombre de gemmes de mouvement",
-  "LabelText.OptimizeUI": "Optimiser l'UI"
+  "LabelText.OptimizeUI": "Optimiser l'interface",
+  "LabelText.EditIdentitySkill": "Modifier la compétence d'identité",
+  "Description.EditIdentitySkill": "Permet de changer les compétences d'identité",
+  "LabelText.EditMovementSkill": "Modifier la compétence de mouvement",
+  "Description.EditMovementSkill": "Permet de changer les compétences de mouvement",
+  "LabelText.GemNoMerge": "Empêcher la fusion des gemmes",
+  "Description.GemNoMerge": "Empêche la fusion des gemmes, permettant aux mêmes gemmes d'affecter plusieurs compétences (placer les mêmes gemmes sur la même compétence peut causer des bugs étranges de déclenchement)"
 }

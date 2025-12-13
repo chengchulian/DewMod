@@ -3,7 +3,13 @@
   "LabelText.SkillWGemCount": "W-Fähigkeit Edelsteinanzahl",
   "LabelText.SkillEGemCount": "E-Fähigkeit Edelsteinanzahl",
   "LabelText.SkillRGemCount": "R-Fähigkeit Edelsteinanzahl",
-  "LabelText.SkillIdentityGemCount": "Identität Edelsteinanzahl",
-  "LabelText.SkillMovementGemCount": "Bewegung Edelsteinanzahl",
-  "LabelText.OptimizeUI": "UI optimieren"
+  "LabelText.SkillIdentityGemCount": "Identitäts-Edelsteinanzahl",
+  "LabelText.SkillMovementGemCount": "Bewegungs-Edelsteinanzahl",
+  "LabelText.OptimizeUI": "UI optimieren",
+  "LabelText.EditIdentitySkill": "Identitätsfähigkeit bearbeiten",
+  "Description.EditIdentitySkill": "Erlaubt das Ändern der Identitätsfähigkeit",
+  "LabelText.EditMovementSkill": "Bewegungsfähigkeit bearbeiten",
+  "Description.EditMovementSkill": "Erlaubt das Ändern der Bewegungsfähigkeit",
+  "LabelText.GemNoMerge": "Edelstein-Zusammenführung verhindern",
+  "Description.GemNoMerge": "Verhindert die Zusammenführung von Edelsteinen, sodass dieselben Edelsteine auf mehreren Fähigkeiten wirken können (dasselbe Edelstein auf derselben Fähigkeit platziert führt zu merkwürdigen Auslösefehlern)"
 }
