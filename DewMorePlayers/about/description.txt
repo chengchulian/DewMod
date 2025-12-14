@@ -1,7 +1,14 @@
 自定义玩家数量
 
+这是一个仅服务器(房主)Mod,客户端无需安装也可以使用其功能,且客户端调整属性无效
+
+
 你可以在此MOD目录下的i18n文件夹内添加你所在地区的本地化翻译json文件
 
 Customize the number of players
+
+This is a server only (homeowner) Mod,
+ and the client can use its features without installation,
+  and adjusting properties on the client is invalid
 
 You can add your local translation files in the 'i18n' folder under this mod directory.

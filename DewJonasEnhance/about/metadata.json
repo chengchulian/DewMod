@@ -1,8 +1,8 @@
 {
   "id": "com.chengchulian.DewMod.DewJonasEnhance",
-  "name": "商人乔纳斯增强",
+  "name": "商人乔纳斯增强/JonasEnhance",
   "author": "chengchulian",
-  "modVer": "1.1.0",
+  "modVer": "1.1.1",
   "assemblies": [
     "obj/Release/*.dll"
   ]
