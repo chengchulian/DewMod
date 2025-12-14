@@ -1,4 +1,53 @@
 为Mod配置界面添加List支持,如果它正常工作,你应该能在此mod的配置界面看到TestValueList 和 TestInputList
 
+禁用或者卸载它可能会导致你安装的其他mod的配置界面无法工作
+
+如何使用它:
+
+1 它支持无预设值的List,输入框的填写方式和官方版的一致(不需要引用此mod的dll)
+[code]
+    public List<string> TestInputList = new();
+[/code]
+2 预设值的List,需要引用此mod的dll,并给你的List添加 [code] [Values] [/code] 属性,你可以在运行中修改TestValues的值来动态的加载List预设值
+[code]
+    [Values(typeof(ConfigValues), nameof(ConfigValues.GetTestValues))]
+    public List<string> TestValueList = new();
+
+public static class ConfigValues
+{
+    private static readonly List<string> TestValues = ["text1", "text2", "text3"];
+
+    public static IEnumerable<string> GetTestValues()
+    {
+        return TestValues;
+    }
+}
+[/code]
 
 Add List support to the Mod configuration interface. If it works properly, you should be able to see TestValueList and TestInputList in this mod's configuration interface
+
+Disabling or uninstalling it may cause the configuration interface of other mods you have installed to not work
+
+How to use it:
+
+1 It supports List without preset values, and the input box filling method is consistent with the official version
+ (no need to reference the dll of this mod)
+ [code]
+    public List<string> TestInputList = new();
+ [/code]
+2 The List with preset values needs to reference the DLL of this mod and add the [code] [Values] [/code] attribute to your List.
+ You can dynamically load the preset values of the List by modifying the TestValues value during runtime
+ [code]
+    [Values(typeof(ConfigValues), nameof(ConfigValues.GetTestValues))]
+    public List<string> TestValueList = new();
+
+public static class ConfigValues
+{
+    private static readonly List<string> TestValues = ["text1", "text2", "text3"];
+
+    public static IEnumerable<string> GetTestValues()
+    {
+        return TestValues;
+    }
+}
+[/code]

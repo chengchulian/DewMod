@@ -16,6 +16,8 @@ public static class ListSupportHelper
     private static float addBtnWidth = 60f;
     private static float delBtnWidth = 60f;
     private static float labelWidth = 400f; 
+    private static float inputWidth = 600f; 
+    private static float searchWidth = 400f; 
     private static float dropdownWidth = 350f;
 
     public static void InitListSupport()
@@ -199,11 +201,11 @@ public static class ListSupportHelper
         }
 
         input = UnityEngine.Object.Instantiate(DewGUI.widgetInputField, row.transform);
-        input.placeholder.GetComponent<TextMeshProUGUI>().text = isDropdown ? "搜索..." : "输入...";
-        input.gameObject.SetExpandWidth(true); // 填充剩余宽度
+        input.placeholder.GetComponent<TextMeshProUGUI>().text = isDropdown ? "Search..." : "Input...";
+        input.SetWidth(isDropdown? searchWidth : inputWidth ); 
 
         addBtn = UnityEngine.Object.Instantiate(DewGUI.widgetButton, row.transform);
-        addBtn.GetComponentInChildren<TextMeshProUGUI>().text = "+";
+        addBtn.GetComponentInChildren<TextMeshProUGUI>().text = "＋";
         addBtn.SetWidth(addBtnWidth);
     }
 
@@ -217,7 +219,7 @@ public static class ListSupportHelper
         label.SetWidth(labelWidth);
 
         Button delBtn = UnityEngine.Object.Instantiate(DewGUI.widgetButton, row.transform);
-        delBtn.GetComponentInChildren<TextMeshProUGUI>().text = "X";
+        delBtn.GetComponentInChildren<TextMeshProUGUI>().text = "×";
         delBtn.SetWidth(delBtnWidth);
         delBtn.onClick.AddListener(() => onDelete());
     }

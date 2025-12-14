@@ -729,11 +729,10 @@
         </Reference>
     </ItemGroup>
     <ItemGroup>
+      <Content Include="about\preview.png" />
+      <Content Include="about\icon.png" />
       <Content Include="about\description.txt" />
       <Content Include="about\metadata.json" />
-    </ItemGroup>
-    <ItemGroup>
-      <Folder Include="i18n\" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
     <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

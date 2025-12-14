@@ -1,6 +1,6 @@
 {
   "id": "com.chengchulian.DewMod.DewModConfigListSupport",
-  "name": "Mod配置界面列表支持",
+  "name": "Mod配置界面列表支持/ModConfigListSupport",
   "author": "chengchulian",
   "modVer": "1.0.0",
   "assemblies": [

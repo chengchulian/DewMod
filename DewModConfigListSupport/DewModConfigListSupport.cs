@@ -17,10 +17,8 @@ public class DewModConfigListSupport : ModBehaviour
     
     public void Start()
     {
-        Debug.Log($"[{mod.metadata.id}] 已加载: {mod.metadata.name} by {mod.metadata.author}");
         ListSupportHelper.InitListSupport();
-
-
+        Debug.Log($"[{mod.metadata.id}] 已加载: {mod.metadata.name} by {mod.metadata.author}");
     }
 
     public void OnDestroy()
