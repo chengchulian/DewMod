@@ -4,8 +4,8 @@
 - 扩大摄像机视野范围，可自定义缩放倍数
 - 可调节缩放级别步长
 
+这是一个客户端mod,除了你自己,不会影响任何人的游戏体验
 
-你可以在此MOD目录下的i18n文件夹内添加你所在地区的本地化翻译json文件
 
 The MoreVision MOD brings you a broader visual experience, breaking through the original game's visual limitations and allowing you to observe distant scenes more clearly.
 
@@ -13,4 +13,4 @@ Main functions:
 -Expand the camera's field of view and customize the zoom factor
 -Adjustable zoom level step size
 
-You can add your local translation files in the 'i18n' folder under this mod directory.
+This is a client mod that will not affect anyone's gaming experience except for yourself
