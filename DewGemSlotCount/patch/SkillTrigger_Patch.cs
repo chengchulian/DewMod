@@ -32,7 +32,7 @@ public class SkillTrigger_Patch
                  ManagerBase<ControlManager>.instance.dismantleConstraint(__instance)))
             {
                 // 安全调用 CmdDoDismantleTap
-                cmdDoDismantleTapMethod?.Invoke(__instance, new object[] { null });
+                cmdDoDismantleTapMethod?.Invoke(__instance, [null]);
             }
 
             return false;
@@ -52,13 +52,12 @@ public class SkillTrigger_Patch
             return false;
         }
 
-        // 如果不启用所有技能编辑，单独处理 Identity 技能
+        // 如果不启用Identity技能编辑，单独处理 Identity 技能
         if (!DewGemSlotCount.Instance.Config.EditIdentitySkill)
         {
             if (__instance.rarity == Rarity.Identity)
             {
-
-                if (!entity.isOwned )
+                if (!entity.isOwned)
                     return false;
 
                 string msg = string.Format(
@@ -92,6 +91,13 @@ public class SkillTrigger_Patch
 
         if (__instance.isCharacterSkill && __instance.GetType().Name.StartsWith("St_R_") && hero.Skill.R == null)
             emptySkill = HeroSkillLocation.R;
+
+        else if (__instance.GetType().Name.StartsWith("St_M_") && hero.Skill.Movement == null)
+            emptySkill = HeroSkillLocation.Movement;
+
+        else if (__instance.GetType().Name.StartsWith("St_D_") && hero.Skill.Identity == null)
+            emptySkill = HeroSkillLocation.Identity;
+
         else if (hero.Skill.Q == null)
             emptySkill = HeroSkillLocation.Q;
         else if (hero.Skill.W == null)
@@ -100,6 +106,10 @@ public class SkillTrigger_Patch
             emptySkill = HeroSkillLocation.E;
         else if (hero.Skill.R == null)
             emptySkill = HeroSkillLocation.R;
+        else if (hero.Skill.Movement == null)
+            emptySkill = HeroSkillLocation.Movement;
+        else if (hero.Skill.Identity == null)
+            emptySkill = HeroSkillLocation.Identity;
 
         if (emptySkill.HasValue)
         {
@@ -108,7 +118,7 @@ public class SkillTrigger_Patch
                 hero.Skill.EquipSkill(emptySkill.Value, __instance);
 
                 // 安全调用 RpcInvokeOnSkillPickup
-                rpcInvokeOnSkillPickupMethod?.Invoke(hero.Skill, new object[] { __instance });
+                rpcInvokeOnSkillPickupMethod?.Invoke(hero.Skill, [__instance]);
             }
 
             if (entity.isOwned)
