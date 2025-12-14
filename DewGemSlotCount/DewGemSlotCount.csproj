@@ -46,6 +46,7 @@
         <Compile Include="DewGemSlotCount.cs" />
         <Compile Include="GemSyncHelper.cs" />
         <Compile Include="patch\HeroSkill_Patch.cs" />
+        <Compile Include="patch\SkillTrigger_Patch.cs" />
         <Compile Include="patch\UI_InGame_Scoreboard_PlayerItem_Skill_Patch.cs" />
         <Compile Include="patch\UI_InGame_SkillButtons_Patch.cs" />
         <Compile Include="patch\UI_InGame_SkillButton_GemGroup_Patch.cs" />
