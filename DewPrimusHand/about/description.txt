@@ -1,0 +1,19 @@
+普里穆斯之手 (Primus Hand): 你现在可以操控怪物的宿命了！
+此MOD是正式版之前MOD《难度自定制》的延续。
+由于原MOD功能过于臃肿，核心功能已被拆分并独立为此MOD。
+
+普里穆斯之手:你现在可以操纵怪物的宿命了
+
+你可以通过该MOD调节怪物的各类属性、难度和战斗行为。
+
+这是一个仅服务器(房主)Mod,客户端无需安装也可以使用其功能,且客户端调整属性无效
+
+
+
+
+Primus Hand: You can now manipulate the fate of monsters !
+
+You can adjust the various attributes, difficulty, and combat behavior of monsters through this MOD.
+
+This is a server only (homeowner) Mod, 
+and the client can use its features without installation, and adjusting properties on the client is invalid

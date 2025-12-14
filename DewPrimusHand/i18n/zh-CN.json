@@ -1,0 +1,101 @@
+{
+  "Header.DiffConfiguration": "难度配置(此标题下倍数为难度预设值的倍数)",
+  
+  "LabelText.MaxAndSpawnedPopulationMultiplier": "人口过剩人口倍数",
+  "Description.MaxAndSpawnedPopulationMultiplier": "需开启人口过剩清醒梦生效。",
+
+  "LabelText.EnemyMovementSpeedMultiplier": "敌人移动速度倍数",
+  "Description.EnemyMovementSpeedMultiplier": "调整敌人的移动速度。",
+
+  "LabelText.EnemyAttackSpeedMultiplier": "敌人攻击速度倍数",
+  "Description.EnemyAttackSpeedMultiplier": "调整敌人的攻击速度。",
+
+  "LabelText.EnemyAbilityHasteFlatMultiplier": "敌人技能急速倍数",
+  "Description.EnemyAbilityHasteFlatMultiplier": "调整敌人的技能急速。",
+
+  "LabelText.EnemyHealthMultiplier": "敌人生命倍数",
+  "Description.EnemyHealthMultiplier": "调整敌人的生命值。",
+
+  "LabelText.EnemyAttackDamageMultiplier": "敌人攻击伤害倍数",
+  "Description.EnemyAttackDamageMultiplier": "调整敌人的攻击伤害。",
+
+  "LabelText.EnemyAbilityPowerMultiplier": "敌人技能强度倍数",
+  "Description.EnemyAbilityPowerMultiplier": "调整敌人的技能强度。",
+
+  "LabelText.EnemyAddArmor": "敌人增加护甲",
+  "Description.EnemyAddArmor": "为敌人添加额外护甲。",
+
+  "LabelText.EnemyArmorMultiplierAddByZone": "区域添加护甲倍数",
+  "Description.EnemyArmorMultiplierAddByZone": "区域添加护甲倍数。",
+
+  "LabelText.EnemyExtraHealthGrowthMultiplier": "敌人额外生命成长倍数",
+  "Description.EnemyExtraHealthGrowthMultiplier": "此数值为指数成长,例: 怪物原始血量为100 当前关卡数为10 值为2 血量为100*2^10 = 204,800.此数值小于1时怪物血量会减少",
+
+  "LabelText.EnemyExtraDamageGrowthMultiplier": "敌人额外伤害成长倍数",
+  "Description.EnemyExtraDamageGrowthMultiplier": "同 敌人额外生命成长倍数 计算公式一样。",
+  
+  "Header.LittleMonsterConfiguration": "小怪配置",
+
+  "LabelText.LittleMonsterHealthMultiplier": "小怪生命倍数",
+  "Description.LittleMonsterHealthMultiplier": "调整小怪的生命值。",
+
+  "LabelText.LittleMonsterDamageMultiplier": "小怪伤害倍数",
+  "Description.LittleMonsterDamageMultiplier": "调整小怪的伤害。",
+
+  "LabelText.LittleMonsterMirageChanceMultiplier": "小怪幻影外皮几率倍数",
+  "Description.LittleMonsterMirageChanceMultiplier": "调整小怪的幻影外皮出现几率。",
+  
+  "Header.BossConfiguration": "Boss配置",
+
+  "LabelText.BossHealthMultiplier": "Boss生命倍数",
+  "Description.BossHealthMultiplier": "调整Boss的生命值。",
+
+  "LabelText.BossDamageMultiplier": "Boss伤害倍数",
+  "Description.BossDamageMultiplier": "调整Boss的伤害。",
+
+  "LabelText.MiniBossHealthMultiplier": "迷你Boss生命倍数",
+  "Description.MiniBossHealthMultiplier": "调整迷你Boss的生命值。",
+
+  "LabelText.MiniBossDamageMultiplier": "迷你Boss伤害倍数",
+  "Description.MiniBossDamageMultiplier": "调整迷你Boss的伤害。",
+
+  "LabelText.BossCount": "Boss数量",
+  "Description.BossCount": "设置Boss的数量。",
+
+  "LabelText.BossCountAddByLoop": "每周目增加的Boss数量",
+  "Description.BossCountAddByLoop": "每周目增加的Boss数量。",
+
+  "LabelText.BossCountAddByZone": "每区域增加的Boss数量",
+  "Description.BossCountAddByZone": "每个区域增加的Boss数量。",
+
+  "LabelText.BossMirageChance": "Boss幻影外皮几率",
+  "Description.BossMirageChance": "设置Boss的幻影外皮出现几率。设置为1时为最大值,大于等于1时100%概率",
+
+  "LabelText.BossHunterChance": "Boss猎手化几率",
+  "Description.BossHunterChance": "设置Boss猎手化的几率。设置为1时为最大值,大于等于1时100%概率",
+
+  "LabelText.BossSpawnAllOnce": "所有Boss同时生成",
+  "Description.BossSpawnAllOnce": "启用后所有Boss将一次性生成。",
+
+  "LabelText.BossSingleInjuryHealthMultiplier": "Boss单次收到的伤害血量占比",
+  "Description.BossSingleInjuryHealthMultiplier": "Boss单次收到的伤害血量占比(限伤)。",
+  
+  "Header.HeroConfiguration": "英雄配置",
+
+  "LabelText.HeroHealMultiplier": "英雄治疗倍数",
+  "Description.HeroHealMultiplier": "调整英雄的治疗效果。小于1时治疗效果会减少",
+
+  "LabelText.HeroMaxShieldMultiplier": "限制英雄最大护盾比生命值倍数",
+  "Description.HeroMaxShieldMultiplier": "调整英雄的最大护盾值。 -1 时不做限制",
+
+  "LabelText.HeroShieldCoolDownSeconds": "英雄护盾冷却时间（秒）",
+  "Description.HeroShieldCoolDownSeconds": "调整英雄护盾的冷却时间。-1 时不做限制",
+
+  "LabelText.HeroIgnoreShieldCoolDownFromOthers": "英雄忽略其他来源的护盾冷却",
+  "Description.HeroIgnoreShieldCoolDownFromOthers": "启用后英雄将忽略来自其他来源的护盾冷却 英雄护盾冷却时间 未设置时此项不生效。",
+  
+  "Header.WorldConfiguration": "世界配置",
+  
+  "LabelText.WorldReveal": "千里眼",
+  "Description.WorldReveal": "启用后将开启千里眼,与宝藏千里眼功能相同。"
+}
