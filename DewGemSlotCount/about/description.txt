@@ -9,7 +9,6 @@
 客户端会自动同步服务器(房主)的配置
 当你在客户端更改配置时它并不会生效,还会有奇怪的显示BUG
 
-你可以在此MOD目录下的i18n文件夹内添加你所在地区的本地化翻译json文件
 
 Function:
 Modify the number of gem slot
@@ -21,5 +20,3 @@ All configuration items are primarily focused on servers (homeowners)
 Even if the server (homeowner) installs this MOD and modifies the configuration items, uninstalled clients still cannot use it
 The client will automatically synchronize the configuration of the server (homeowner)
 When you change the configuration on the client side, it will not take effect and there will be strange display bugs
-
-You can add your local translation files in the 'i18n' folder under this mod directory.
