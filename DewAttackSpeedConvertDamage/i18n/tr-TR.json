@@ -1,0 +1,7 @@
+{
+  "LabelText.MaxAttackSpeed": "Maksimum saldırı hızı",
+  "Description.MaxAttackSpeed": "Etkili olabilecek maksimum saldırı hızı çarpanı. Bu değerin üzerindeki saldırı hızı taşma olarak kabul edilir.",
+
+  "LabelText.DamagePerOverflow": "Taşan saldırı hızından hasar çarpanı",
+  "Description.DamagePerOverflow": "Her %100 taşan saldırı hızı için ek hasar çarpanı kazanılır (ör. %100 = +%1 hasar)."
+}

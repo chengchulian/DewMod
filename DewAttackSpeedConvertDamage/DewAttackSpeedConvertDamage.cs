@@ -11,7 +11,7 @@ public class DewAttackSpeedConvertDamage : ModBehaviour
     {
         Instance = this;
 
-    }
+    }   
     private void Start()
     {
         LocalizationSource.Init(this);

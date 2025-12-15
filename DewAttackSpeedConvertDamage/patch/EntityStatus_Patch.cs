@@ -8,9 +8,8 @@ namespace DewAttackSpeedConvertDamage.patch;
 [HarmonyPatch(typeof(EntityStatus))]
 public static class EntityStatus_Patch
 {
-
     public static readonly ConditionalWeakTable<Hero, BonusHolder> DamageBonusMap = new();
-    
+
     // patch get_attackSpeedMultiplier
     [HarmonyPostfix]
     [HarmonyPatch("get_attackSpeedMultiplier")]
@@ -18,7 +17,7 @@ public static class EntityStatus_Patch
     {
         var maxAttackSpeed = DewAttackSpeedConvertDamage.Instance.config.MaxAttackSpeed;
         var damagePerOverflow = DewAttackSpeedConvertDamage.Instance.config.DamagePerOverflow;
-        
+
         if (__instance.entity is not Hero hero) return;
 
         if (!NetworkServer.active)
@@ -31,7 +30,7 @@ public static class EntityStatus_Patch
 
         // 计算溢出
         float overflow = Mathf.Max(0f, currentAttackSpeed - maxAttackSpeed);
-        
+
         float overflowPercentage = overflow / baseAttackSpeed;
         float damageBonus = overflowPercentage * damagePerOverflow;
         DamageBonusMap.GetOrCreateValue(hero).bonus = damageBonus;
@@ -43,11 +42,12 @@ public static class EntityStatus_Patch
         }
 
         // 确保伤害处理器已注册
-        if (hero.HasData<AttackSpeedUpperTurnHurt>())
+        if (hero.HasData<AttackSpeedUpperConvertDamage>())
         {
             return;
         }
-        hero.AddData<AttackSpeedUpperTurnHurt>(default);
+
+        hero.AddData<AttackSpeedUpperConvertDamage>(default);
         hero.dealtDamageProcessor.Add(Processor, priority: 500);
     }
 
@@ -72,7 +72,7 @@ public static class EntityStatus_Patch
         }
     }
 
-    public struct AttackSpeedUpperTurnHurt
+    public struct AttackSpeedUpperConvertDamage
     {
     }
 

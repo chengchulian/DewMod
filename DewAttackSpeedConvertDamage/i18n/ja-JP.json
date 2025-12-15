@@ -1,0 +1,7 @@
+{
+  "LabelText.MaxAttackSpeed": "攻撃速度の上限",
+  "Description.MaxAttackSpeed": "有効となる最大攻撃速度倍率。この値を超えた攻撃速度は溢れ分として扱われます。",
+
+  "LabelText.DamagePerOverflow": "溢れ攻撃速度によるダメージ倍率",
+  "Description.DamagePerOverflow": "攻撃速度が100%溢れるごとに、追加のダメージ倍率を獲得します（例：100% = ダメージ+1%）。"
+}

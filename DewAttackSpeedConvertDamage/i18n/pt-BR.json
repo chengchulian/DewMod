@@ -1,0 +1,7 @@
+{
+  "LabelText.MaxAttackSpeed": "Velocidade de ataque máxima",
+  "Description.MaxAttackSpeed": "O multiplicador máximo efetivo de velocidade de ataque. Qualquer valor acima disso é considerado excedente.",
+
+  "LabelText.DamagePerOverflow": "Multiplicador de dano por excesso de velocidade",
+  "Description.DamagePerOverflow": "A cada 100% de velocidade de ataque excedente, ganha-se um multiplicador de dano adicional (ex.: 100% = +1% de dano)."
+}

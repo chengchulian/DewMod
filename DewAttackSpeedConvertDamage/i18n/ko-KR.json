@@ -1,0 +1,7 @@
+{
+  "LabelText.MaxAttackSpeed": "공격 속도 상한",
+  "Description.MaxAttackSpeed": "적용되는 최대 공격 속도 배율입니다. 이 값을 초과한 공격 속도는 초과분으로 처리됩니다.",
+
+  "LabelText.DamagePerOverflow": "초과 공격 속도 피해 배율",
+  "Description.DamagePerOverflow": "공격 속도가 100% 초과될 때마다 추가 피해 배율을 획득합니다 (예: 100% = 피해 +1%)."
+}

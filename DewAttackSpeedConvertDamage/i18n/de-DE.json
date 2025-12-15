@@ -1,0 +1,7 @@
+{
+  "LabelText.MaxAttackSpeed": "Maximale Angriffsgeschwindigkeit",
+  "Description.MaxAttackSpeed": "Die maximal wirksame Angriffsgeschwindigkeits-Multiplikation. Angriffsgeschwindigkeit über diesem Wert gilt als Überschuss.",
+
+  "LabelText.DamagePerOverflow": "Schadensmultiplikator aus Überschuss-Angriffsgeschwindigkeit",
+  "Description.DamagePerOverflow": "Für jeweils 100 % überschüssige Angriffsgeschwindigkeit wird ein zusätzlicher Schadensmultiplikator gewährt (z. B. 100 % = +1 % Schaden)."
+}

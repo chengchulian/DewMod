@@ -1,0 +1,7 @@
+{
+  "LabelText.MaxAttackSpeed": "Maksymalna szybkość ataku",
+  "Description.MaxAttackSpeed": "Maksymalny efektywny mnożnik szybkości ataku. Szybkość powyżej tej wartości traktowana jest jako nadmiar.",
+
+  "LabelText.DamagePerOverflow": "Mnożnik obrażeń z nadmiaru szybkości ataku",
+  "Description.DamagePerOverflow": "Za każde 100% nadmiarowej szybkości ataku przyznawany jest dodatkowy mnożnik obrażeń (np. 100% = +1% obrażeń)."
+}

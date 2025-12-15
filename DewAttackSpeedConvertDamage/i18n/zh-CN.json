@@ -1,0 +1,7 @@
+{
+  "LabelText.MaxAttackSpeed": "攻击速度上限",
+  "Description.MaxAttackSpeed": "角色可生效的最大攻击速度倍率，超过该数值的攻速将被视为溢出部分。",
+
+  "LabelText.DamagePerOverflow": "溢出攻速转化伤害倍率",
+  "Description.DamagePerOverflow": "每溢出 100% 攻击速度时，转化为额外的伤害倍率加成（例如 100% = +1% 伤害）。"
+}

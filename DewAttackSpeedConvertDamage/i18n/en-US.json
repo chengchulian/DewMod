@@ -1,0 +1,7 @@
+{
+  "LabelText.MaxAttackSpeed": "Maximum Attack Speed",
+  "Description.MaxAttackSpeed": "The maximum effective attack speed multiplier. Any attack speed exceeding this value is treated as overflow.",
+
+  "LabelText.DamagePerOverflow": "Damage Multiplier per Overflow Attack Speed",
+  "Description.DamagePerOverflow": "For every 100% overflow attack speed, additional damage multiplier is gained (e.g. 100% = +1% damage)."
+}
