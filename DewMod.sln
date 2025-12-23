@@ -30,6 +30,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DewAttackSpeedConvertDamage
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DewPrimusHand", "DewPrimusHand\DewPrimusHand.csproj", "{FF44F1F4-0AEE-4D9F-A5A7-61F53134A074}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DewZoneTwistedPath", "DewZoneTwistedPath\DewZoneTwistedPath.csproj", "{F419A8F5-34D4-4007-BDB5-8DA8ED901A1B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -80,6 +82,10 @@ Global
 		{FF44F1F4-0AEE-4D9F-A5A7-61F53134A074}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FF44F1F4-0AEE-4D9F-A5A7-61F53134A074}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FF44F1F4-0AEE-4D9F-A5A7-61F53134A074}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F419A8F5-34D4-4007-BDB5-8DA8ED901A1B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F419A8F5-34D4-4007-BDB5-8DA8ED901A1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F419A8F5-34D4-4007-BDB5-8DA8ED901A1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F419A8F5-34D4-4007-BDB5-8DA8ED901A1B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

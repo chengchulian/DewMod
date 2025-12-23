@@ -1,0 +1,19 @@
+主要功能:
+
+重排区域顺序
+(例: 你可以在第一区打天空图)
+(它的优先级比宝藏低,当你购买宝藏灵魂硬币后,设置的重排便不会生效)
+
+这是一个仅服务器(房主)Mod,客户端无需安装也可以使用其功能,且客户端调整属性无效
+
+
+Main functions:
+
+Rearrange the order of zones
+(AS: You can create a sky map in the first zone)
+(Its priority is lower than treasure, and the heavy defecation set will not take effect when you purchase treasure soul coins)
+
+This is a server only (homeowner) Mod,
+ and the client can use its features without installation,
+  and adjusting properties on the client is invalid
+  

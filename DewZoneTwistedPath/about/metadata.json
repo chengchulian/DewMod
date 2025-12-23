@@ -1,0 +1,9 @@
+{
+  "id": "com.chengchulian.DewMod.DewZoneTwistedPath",
+  "name": "区域重排/ZoneTwistedPath",
+  "author": "chengchulian",
+  "modVer": "1.0.0",
+  "assemblies": [
+    "obj/Release/*.dll"
+  ]
+}
