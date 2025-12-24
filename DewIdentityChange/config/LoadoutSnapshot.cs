@@ -1,7 +1,13 @@
-﻿namespace DewIdentityChange.config;
+﻿using System.Collections.Generic;
+using System.Linq;
+
+namespace DewIdentityChange.config;
 
 public sealed class LoadoutSnapshot
 {
+    private static readonly Dictionary<HeroSkill, LoadoutSnapshot> _heroSkillSnapshot = new();
+
+
     public AssetRef<SkillTrigger>[] Q;
     public AssetRef<SkillTrigger>[] R;
     public AssetRef<SkillTrigger>[] Trait;
@@ -15,9 +21,9 @@ public sealed class LoadoutSnapshot
         return arr;
     }
 
-    public static LoadoutSnapshot Capture(HeroSkill hs)
+    public static void Capture(HeroSkill hs)
     {
-        return new LoadoutSnapshot
+        _heroSkillSnapshot[hs] = new LoadoutSnapshot
         {
             Q = Clone(hs.loadoutQ),
             R = Clone(hs.loadoutR),
@@ -26,11 +32,67 @@ public sealed class LoadoutSnapshot
         };
     }
 
-    public void Restore(HeroSkill hs)
+    public static void Restore(HeroSkill hs)
     {
-        hs.loadoutQ        = Clone(Q);
-        hs.loadoutR        = Clone(R);
-        hs.loadoutTrait    = Clone(Trait);
-        hs.loadoutMovement = Clone(Movement);
+        if (!_heroSkillSnapshot.TryGetValue(hs, out var snapshot))
+        {
+            return;
+        }
+
+        hs.loadoutQ = Clone(snapshot.Q);
+        hs.loadoutR = Clone(snapshot.R);
+        hs.loadoutTrait = Clone(snapshot.Trait);
+        hs.loadoutMovement = Clone(snapshot.Movement);
+    }
+
+    public static void Switch(bool isOn)
+    {
+        if (isOn)
+        {
+            TurnOnAll();
+        }
+        else
+        {
+            RestoreAll();
+        }
+    }
+
+
+    public static void RestoreAll()
+    {
+        foreach (var heroSkill in _heroSkillSnapshot.Keys)
+        {
+            Restore(heroSkill);
+        }
+    }
+
+    public static void TurnOnAll()
+    {
+        foreach (var heroSkill in _heroSkillSnapshot.Keys)
+        {
+            TurnOn(heroSkill);
+        }
+    }
+
+    public static void TurnOn(HeroSkill hs)
+    {
+        hs.loadoutQ = HeroSkillSource.SkillNamesByType[HeroSkillLocation.Q]
+            .Select(name => DewResources.GetByShortTypeName<SkillTrigger>(name))
+            .ToArray()
+            .ToAssetRefs();
+        hs.loadoutR = HeroSkillSource.SkillNamesByType[HeroSkillLocation.R]
+            .Select(name => DewResources.GetByShortTypeName<SkillTrigger>(name))
+            .ToArray()
+            .ToAssetRefs();
+
+        hs.loadoutTrait = HeroSkillSource.SkillNamesByType[HeroSkillLocation.Identity]
+            .Select(name => DewResources.GetByShortTypeName<SkillTrigger>(name))
+            .ToArray()
+            .ToAssetRefs();
+
+        hs.loadoutMovement = HeroSkillSource.SkillNamesByType[HeroSkillLocation.Movement]
+            .Select(name => DewResources.GetByShortTypeName<SkillTrigger>(name))
+            .ToArray()
+            .ToAssetRefs();
     }
 }

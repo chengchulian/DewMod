@@ -12,4 +12,10 @@ public class PluginConfig : ModConfig
         base.BuildWidgets(parent, out onChanged, out requestUpdate);
         LocalizationSource.LocalizeUI(parent);
     }
+
+    public override void CopyTo(ModConfig other)
+    {
+        LoadoutSnapshot.Switch(enable);
+        base.CopyTo(other);
+    }
 }

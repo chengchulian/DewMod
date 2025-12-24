@@ -714,7 +714,6 @@
         <Compile Include="config\LocalizationSource.cs" />
         <Compile Include="config\PluginConfig.cs" />
         <Compile Include="DewIdentityChange.cs" />
-        <Compile Include="patch\HeroSkill_Patch.cs" />
         <Compile Include="Properties\AssemblyInfo.cs"/>
     </ItemGroup>
     <ItemGroup>
@@ -722,6 +721,9 @@
       <Content Include="about\metadata.json" />
       <Content Include="i18n\en-US.json" />
       <Content Include="i18n\zh-CN.json" />
+    </ItemGroup>
+    <ItemGroup>
+      <Folder Include="patch\" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
     <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

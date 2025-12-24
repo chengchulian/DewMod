@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace DewIdentityChange.config;
 
 public class HeroSkillSource
 {
+    
+    
+    
         private static readonly Lazy<Dictionary<HeroSkillLocation, List<string>>> _skillsByTypeLazy =
         new(() =>
         {
@@ -55,6 +59,7 @@ public class HeroSkillSource
     public static Dictionary<HeroSkillLocation, List<string>> SkillNamesByType => _skillsByTypeLazy.Value;
     
 
-    
+
+
 
 }
