@@ -12,9 +12,22 @@ public static class DewJonasEnhanceUtil
         }
         
         ZoneManager.instance.ClientEvent_OnRoomLoaded += MerchantReload;
+        ZoneManager.instance.ClientEvent_OnZoneLoaded += ClientEventOnZoneLoaded;
+        
+    }
+
+    
+    private static void ClientEventOnZoneLoaded(EventInfoLoadZone obj)
+    {
+
+        Dew.CallDelayed(OnNewZoneReached);
+    }
+
+    private static void OnNewZoneReached()
+    {
         NetworkedManagerBase<ZoneManager>.instance.CallOnReadyAfterTransition(AddPlatinumCoins);
     }
-    
+
 
     private static void MerchantReload(EventInfoLoadRoom obj)
     {
@@ -51,7 +64,5 @@ public static class DewJonasEnhanceUtil
                 player.platinumCoin += DewJonasEnhance.Instance.Config.AddPlatinumCoin;
             }
         }, 100);
-
-
     }
 }

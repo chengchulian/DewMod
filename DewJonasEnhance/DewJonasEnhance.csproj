@@ -725,7 +725,6 @@
         <Compile Include="config\PluginConfig.cs" />
         <Compile Include="DewJonasEnhance.cs" />
         <Compile Include="patch\DewPlayer_Patch.cs" />
-        <Compile Include="patch\EveryZoneStarEffect_Patch.cs" />
         <Compile Include="patch\PropEnt_Merchant_Jonas_Patch.cs" />
         <Compile Include="Properties\AssemblyInfo.cs"/>
         <Compile Include="util\Constant.cs" />

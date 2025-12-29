@@ -20,7 +20,8 @@ public class DewJonasEnhance : ModBehaviour
         LocalizationSource.Init(this);
         harmony.PatchAll();
         Debug.Log($"[{mod.metadata.id}] 已加载: {mod.metadata.name} by {mod.metadata.author}");
-
+        
+        CallOnNetworkedManager<ZoneManager>(DewJonasEnhanceUtil.ZoneManagerOnStart);
     }
     public void OnDestroy()
     {
