@@ -1,0 +1,4 @@
+{
+  "LabelText.VisibleSecondsAfterPing": "Ping 後の公開時間",
+  "Description.VisibleSecondsAfterPing": "所有者がスキルまたはエッセンスを ping した後、他のプレイヤーに見える秒数です。時間が過ぎると、地面に残っている場合は再び非表示になります。"
+}

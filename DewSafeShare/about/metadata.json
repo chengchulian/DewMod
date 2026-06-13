@@ -1,0 +1,9 @@
+{
+  "id": "com.chengchulian.DewMod.DewSafeShare",
+  "name": "DewSafeShare | 安全共享",
+  "author": "chengchulian",
+  "modVer": "1.0.0",
+  "assemblies": [
+    "obj/Release/*.dll"
+  ]
+}

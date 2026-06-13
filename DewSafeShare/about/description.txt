@@ -1,0 +1,31 @@
+[h1]DewSafeShare | 安全共享[/h1]
+
+Keep valuable drops private until you choose to share them.
+
+[h2]Features[/h2]
+[list]
+[*]Skills and essences bought from shops remain visible only to the owner until pinged.
+[*]Skills and essences removed from a hero now follow the same rule.
+[*]After the owner pings the item, other players can see it for a configurable duration.
+[*]Default reveal duration: 10 seconds.
+[*]After the reveal window ends, the item becomes private again if it is still on the ground.
+[*]Host-only mod: it only takes effect when enabled by the host/server. It has no effect when you join someone else's room as a client.
+[/list]
+
+[h2]中文说明[/h2]
+安全共享会让技能和精粹在被物主主动 ping 之前保持私有。
+
+[list]
+[*]从商店购买的技能和精粹：默认只有购买者可见。
+[*]从英雄身上卸下或丢下的技能和精粹：现在也默认只有物主可见。
+[*]物主 ping 物品后，其他玩家可以在配置时间内看到。
+[*]默认公开时间为 10 秒。
+[*]公开时间结束后，如果物品仍在地上，会再次隐藏。
+[*]仅主机 Mod：只有房主/服务器启用时才会生效。作为客机加入别人的房间时无效。
+[/list]
+
+[h2]Configuration[/h2]
+[b]Reveal duration after ping[/b]: controls how many seconds an item stays visible to other players after the owner pings it.
+
+[h2]Credits[/h2]
+Preview and icon use hero, skill, and essence materials from the Shape of Dreams BWiki.

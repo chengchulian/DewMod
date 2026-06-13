@@ -1,0 +1,4 @@
+{
+  "LabelText.VisibleSecondsAfterPing": "Duracao visivel apos o ping",
+  "Description.VisibleSecondsAfterPing": "Por quantos segundos habilidades e essencias ficam visiveis para outros jogadores apos o ping do dono."
+}

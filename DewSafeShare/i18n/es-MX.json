@@ -1,0 +1,4 @@
+{
+  "LabelText.VisibleSecondsAfterPing": "Duracion visible tras el ping",
+  "Description.VisibleSecondsAfterPing": "Cuantos segundos las habilidades y esencias permanecen visibles para otros jugadores despues de que su propietario les haga ping."
+}

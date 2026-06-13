@@ -1,0 +1,4 @@
+{
+  "LabelText.VisibleSecondsAfterPing": "Ping 后公开持续时间",
+  "Description.VisibleSecondsAfterPing": "物主 ping 技能或精粹后，其他玩家可见的秒数。时间结束后若物品仍在地上，会重新隐藏。"
+}
