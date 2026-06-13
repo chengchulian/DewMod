@@ -40,6 +40,8 @@
   "Description.MiniBossDamageMultiplier": "調整迷你Boss的傷害。",
   "LabelText.BossCount": "Boss數量",
   "Description.BossCount": "設定Boss的數量。",
+  "LabelText.BossCountInRoom": "房間內Boss上限",
+  "Description.BossCountInRoom": "房間內可同時存活的Boss最大數量。剩餘Boss會在佇列中等待。",
   "LabelText.BossCountAddByLoop": "每週目增加的Boss數量",
   "Description.BossCountAddByLoop": "每週目增加的Boss數量。",
   "LabelText.BossCountAddByZone": "每區域增加的Boss數量",

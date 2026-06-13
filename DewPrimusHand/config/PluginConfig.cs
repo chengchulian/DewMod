@@ -85,6 +85,10 @@ public class PluginConfig : ModConfig
     [Description("Description.BossCount")]
     public int BossCount = 1;
 
+    [LabelText("LabelText.BossCountInRoom")]
+    [Description("Description.BossCountInRoom")]
+    public int BossCountInRoom = 2;
+
     [LabelText("LabelText.BossCountAddByLoop")]
     [Description("Description.BossCountAddByLoop")]
     public int BossCountAddByLoop = 0;

@@ -40,6 +40,8 @@
   "Description.MiniBossDamageMultiplier": "ミニボスのダメージを調整します。",
   "LabelText.BossCount": "ボスの数",
   "Description.BossCount": "ボスの数を設定します。",
+  "LabelText.BossCountInRoom": "部屋内の最大ボス数",
+  "Description.BossCountInRoom": "部屋内で同時に生存できるボスの最大数。残りのボスはキューで待機します。",
   "LabelText.BossCountAddByLoop": "ループごとのボス追加数",
   "Description.BossCountAddByLoop": "各ループごとに追加されるボスの数。",
   "LabelText.BossCountAddByZone": "ゾーンごとのボス追加数",

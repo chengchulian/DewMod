@@ -40,6 +40,8 @@
   "Description.MiniBossDamageMultiplier": "Ajusta el daño de los mini jefes.",
   "LabelText.BossCount": "Cantidad de jefes",
   "Description.BossCount": "Configura la cantidad de jefes.",
+  "LabelText.BossCountInRoom": "Máximo de jefes en la sala",
+  "Description.BossCountInRoom": "Número máximo de jefes que pueden estar vivos en la sala al mismo tiempo. Los jefes restantes esperan en una cola.",
   "LabelText.BossCountAddByLoop": "Cantidad de jefes por ciclo",
   "Description.BossCountAddByLoop": "Configura cuántos jefes se añaden por ciclo.",
   "LabelText.BossCountAddByZone": "Cantidad de jefes por zona",

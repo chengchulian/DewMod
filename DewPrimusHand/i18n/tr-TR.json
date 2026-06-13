@@ -40,6 +40,8 @@
   "Description.MiniBossDamageMultiplier": "Mini bossların hasarını ayarlayın.",
   "LabelText.BossCount": "Boss Sayısı",
   "Description.BossCount": "Boss sayısını ayarlayın.",
+  "LabelText.BossCountInRoom": "Odadaki Maksimum Boss Sayısı",
+  "Description.BossCountInRoom": "Odada aynı anda canlı kalabilecek maksimum boss sayısı. Kalan bosslar sırada bekler.",
   "LabelText.BossCountAddByLoop": "Her Döngüde Eklenen Boss Sayısı",
   "Description.BossCountAddByLoop": "Her döngüde eklenen boss sayısını ayarlayın.",
   "LabelText.BossCountAddByZone": "Her Bölgedeki Eklenen Boss Sayısı",

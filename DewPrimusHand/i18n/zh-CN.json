@@ -61,6 +61,8 @@
 
   "LabelText.BossCount": "Boss数量",
   "Description.BossCount": "设置Boss的数量。",
+  "LabelText.BossCountInRoom": "房间内Boss上限",
+  "Description.BossCountInRoom": "房间内可同时存活的Boss最大数量。剩余Boss会在队列中等待。",
 
   "LabelText.BossCountAddByLoop": "每周目增加的Boss数量",
   "Description.BossCountAddByLoop": "每周目增加的Boss数量。",

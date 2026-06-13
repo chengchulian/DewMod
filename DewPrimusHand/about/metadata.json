@@ -1,8 +1,8 @@
 {
   "id": "com.chengchulian.DewMod.DewPrimusHand",
-  "name": "普里穆斯之手/PrimusHand",
+  "name": "普里穆斯之手|PrimusHand",
   "author": "chengchulian",
-  "modVer": "1.0.0",
+  "modVer": "1.1.0",
   "assemblies": [
     "obj/Release/*.dll"
   ]

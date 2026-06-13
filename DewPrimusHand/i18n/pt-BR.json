@@ -40,6 +40,8 @@
   "Description.MiniBossDamageMultiplier": "Ajusta o dano dos mini bosses.",
   "LabelText.BossCount": "Número de Bosses",
   "Description.BossCount": "Define o número de bosses.",
+  "LabelText.BossCountInRoom": "Máximo de Bosses na Sala",
+  "Description.BossCountInRoom": "Número máximo de bosses que podem estar vivos na sala ao mesmo tempo. Os bosses restantes aguardam em uma fila.",
   "LabelText.BossCountAddByLoop": "Número de Bosses Adicionados por Ciclo",
   "Description.BossCountAddByLoop": "Define quantos bosses são adicionados por ciclo.",
   "LabelText.BossCountAddByZone": "Número de Bosses Adicionados por Zona",

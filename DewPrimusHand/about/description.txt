@@ -1,19 +1,48 @@
-普里穆斯之手 (Primus Hand): 你现在可以操控怪物的宿命了！
-此MOD是正式版之前MOD《难度自定制》的延续。
-由于原MOD功能过于臃肿，核心功能已被拆分并独立为此MOD。
+[h1]普里穆斯之手 | Primus Hand[/h1]
+[b]你现在可以操控怪物的宿命了。[/b]
 
-普里穆斯之手:你现在可以操纵怪物的宿命了
+这是正式版前 MOD《难度自定义》的延续与拆分版，专注于怪物、Boss 与战斗强度相关的配置。
 
-你可以通过该MOD调节怪物的各类属性、难度和战斗行为。
+[h2]核心功能[/h2]
+[list]
+[*][b]怪物属性调整[/b]：生命、伤害、护甲、移动速度、攻击速度、技能急速等。
+[*][b]小怪与 Boss 独立配置[/b]：分别调整小怪、迷你 Boss、Boss 的生命与伤害倍率。
+[*][b]多 Boss 模式[/b]：设置 Boss 数量、每房间同时存在上限，并支持按区域/周目追加数量。
+[*][b]额外 Boss 效果[/b]：可配置 Boss 猎手化与幻影外皮出现概率。
+[*][b]英雄与地图辅助[/b]：治疗倍率、护盾限制、护盾冷却、千里眼等。
+[/list]
 
-这是一个仅服务器(房主)Mod,客户端无需安装也可以使用其功能,且客户端调整属性无效
+[h2]Boss 生成说明[/h2]
+[list]
+[*][b]Boss 数量[/b] 控制一场 Boss 战希望刷出的份数。
+[*][b]每房间最大 Boss 数[/b] 控制同屏上限，超出的 Boss 会进入等待队列。
+[*]白夜/玄月这类双 Boss 机制会按完整组合顺序生成，避免原版配对机制冲突。
+[/list]
 
+[h2]多人说明[/h2]
+[list]
+[*]这是 [b]仅服务器/房主生效[/b] 的 MOD。
+[*]客户端无需安装也可以加入并体验效果。
+[*]客户端本地修改配置不会生效，实际效果以房主设置为准。
+[/list]
 
+[h2]English[/h2]
+[b]Primus Hand lets the host reshape monster difficulty and boss encounters.[/b]
 
+This mod is a focused continuation of the pre-release difficulty customization mod, now split into a cleaner tool for monster and boss tuning.
 
-Primus Hand: You can now manipulate the fate of monsters !
+[h2]Features[/h2]
+[list]
+[*][b]Monster scaling[/b]: health, damage, armor, movement speed, attack speed, ability haste, and more.
+[*][b]Separate normal monster and boss tuning[/b]: adjust small monsters, mini bosses, and bosses independently.
+[*][b]Multi-boss mode[/b]: configure boss count, maximum active bosses per room, and extra bosses by zone or loop.
+[*][b]Extra boss effects[/b]: optional Hunter transformation and Mirage Skin chance for bosses.
+[*][b]Hero and map options[/b]: healing multiplier, shield limits, shield cooldown, world reveal, and more.
+[/list]
 
-You can adjust the various attributes, difficulty, and combat behavior of monsters through this MOD.
-
-This is a server only (homeowner) Mod, 
-and the client can use its features without installation, and adjusting properties on the client is invalid
+[h2]Multiplayer[/h2]
+[list]
+[*]This is a [b]server/host-side[/b] mod.
+[*]Clients can join and use the effects without installing it.
+[*]Client-side config changes do not take effect. The host config is authoritative.
+[/list]

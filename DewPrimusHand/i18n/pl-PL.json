@@ -40,6 +40,8 @@
   "Description.MiniBossDamageMultiplier": "Dostosuj obrażenia mini-bossów.",
   "LabelText.BossCount": "Liczba bossów",
   "Description.BossCount": "Ustaw liczbę bossów.",
+  "LabelText.BossCountInRoom": "Maksymalna liczba bossów w pokoju",
+  "Description.BossCountInRoom": "Maksymalna liczba bossów, którzy mogą jednocześnie żyć w pokoju. Pozostali bossowie czekają w kolejce.",
   "LabelText.BossCountAddByLoop": "Liczba bossów dodawanych co rundę",
   "Description.BossCountAddByLoop": "Ustaw liczbę bossów dodawanych co rundę.",
   "LabelText.BossCountAddByZone": "Liczba bossów dodawanych co strefę",

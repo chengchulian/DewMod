@@ -726,6 +726,7 @@
       <Content Include="about\description.txt" />
       <Content Include="about\icon.png" />
       <Content Include="about\metadata.json" />
+      <Content Include="about\publishedfileid.txt" />
       <Content Include="i18n\de-DE.json" />
       <Content Include="i18n\en-US.json" />
       <Content Include="i18n\es-MX.json" />

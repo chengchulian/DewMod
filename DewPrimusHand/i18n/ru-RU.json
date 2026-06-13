@@ -40,6 +40,8 @@
   "Description.MiniBossDamageMultiplier": "Настройте урон мини-боссов.",
   "LabelText.BossCount": "Количество боссов",
   "Description.BossCount": "Установите количество боссов.",
+  "LabelText.BossCountInRoom": "Максимум боссов в комнате",
+  "Description.BossCountInRoom": "Максимальное число боссов, которые могут одновременно быть живы в комнате. Остальные боссы ждут в очереди.",
   "LabelText.BossCountAddByLoop": "Количество боссов на цикл",
   "Description.BossCountAddByLoop": "Установите количество боссов, добавляемых на цикл.",
   "LabelText.BossCountAddByZone": "Количество боссов на зону",

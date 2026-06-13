@@ -40,6 +40,8 @@
   "Description.MiniBossDamageMultiplier": "미니 보스의 피해를 조정합니다.",
   "LabelText.BossCount": "보스 수",
   "Description.BossCount": "보스의 수를 설정합니다.",
+  "LabelText.BossCountInRoom": "방 안 최대 보스 수",
+  "Description.BossCountInRoom": "방 안에서 동시에 살아 있을 수 있는 보스의 최대 수입니다. 나머지 보스는 대기열에서 기다립니다.",
   "LabelText.BossCountAddByLoop": "반복마다 추가되는 보스 수",
   "Description.BossCountAddByLoop": "각 반복마다 추가되는 보스의 수입니다.",
   "LabelText.BossCountAddByZone": "구역마다 추가되는 보스 수",
