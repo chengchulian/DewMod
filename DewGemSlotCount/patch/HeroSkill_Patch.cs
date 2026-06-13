@@ -8,24 +8,59 @@ namespace DewGemSlotCount.patch;
 [HarmonyPatch(typeof(HeroSkill), nameof(HeroSkill.GetMaxGemCount))]
 public class HeroSkill_Patch
 {
-    [HarmonyPrefix]
+    [HarmonyPostfix]
     [HarmonyPatch(nameof(HeroSkill.GetMaxGemCount))]
-    public static bool GetMaxGemCount_Prefix(HeroSkill __instance, HeroSkillLocation type, ref int __result)
+    public static void GetMaxGemCount_Postfix(HeroSkill __instance, HeroSkillLocation type, ref int __result)
     {
-        __result = type switch
+        int dynamicGemCount = __result - GetVanillaBaseGemCount(type);
+        __result = GetConfiguredBaseGemCount(type) + dynamicGemCount;
+        __result = Mathf.Clamp(__result, Constant.MinGemCount, Constant.MaxGemCount);
+    }
+
+    public static int GetConfiguredBaseGemCount(HeroSkillLocation type)
+    {
+        int count = type switch
         {
-            HeroSkillLocation.Q => DewGemSlotCount.Instance.Config.SkillQGemCount,
-            HeroSkillLocation.W => DewGemSlotCount.Instance.Config.SkillWGemCount,
-            HeroSkillLocation.E => DewGemSlotCount.Instance.Config.SkillEGemCount,
-            HeroSkillLocation.R => DewGemSlotCount.Instance.Config.SkillRGemCount,
-            HeroSkillLocation.Identity => DewGemSlotCount.Instance.Config.SkillIdentityGemCount,
-            HeroSkillLocation.Movement => DewGemSlotCount.Instance.Config.SkillMovementGemCount,
+            HeroSkillLocation.Q => DewGemSlotCount.Instance.GameplayConfig.SkillQGemCount,
+            HeroSkillLocation.W => DewGemSlotCount.Instance.GameplayConfig.SkillWGemCount,
+            HeroSkillLocation.E => DewGemSlotCount.Instance.GameplayConfig.SkillEGemCount,
+            HeroSkillLocation.R => DewGemSlotCount.Instance.GameplayConfig.SkillRGemCount,
+            HeroSkillLocation.Identity => DewGemSlotCount.Instance.GameplayConfig.SkillIdentityGemCount,
+            HeroSkillLocation.Movement => DewGemSlotCount.Instance.GameplayConfig.SkillMovementGemCount,
             _ => 0
         };
 
-        __result = Mathf.Clamp(__result, Constant.MinGemCount, Constant.MaxGemCount);
-        // 跳过原方法
-        return false;
+        return Mathf.Clamp(count, Constant.MinGemCount, Constant.MaxGemCount);
+    }
+
+    public static int GetVanillaBaseGemCount(HeroSkillLocation type)
+    {
+        return type switch
+        {
+            HeroSkillLocation.Q => 3,
+            HeroSkillLocation.W => 3,
+            HeroSkillLocation.E => 3,
+            HeroSkillLocation.R => 3,
+            HeroSkillLocation.Identity => 0,
+            HeroSkillLocation.Movement => 0,
+            _ => 0
+        };
+    }
+
+    public static int GetCorruptedChaosMaxGemCount(HeroSkillLocation type)
+    {
+        int count = type switch
+        {
+            HeroSkillLocation.Q => DewGemSlotCount.Instance.GameplayConfig.SkillQCorruptedChaosMaxGemCount,
+            HeroSkillLocation.W => DewGemSlotCount.Instance.GameplayConfig.SkillWCorruptedChaosMaxGemCount,
+            HeroSkillLocation.E => DewGemSlotCount.Instance.GameplayConfig.SkillECorruptedChaosMaxGemCount,
+            HeroSkillLocation.R => DewGemSlotCount.Instance.GameplayConfig.SkillRCorruptedChaosMaxGemCount,
+            HeroSkillLocation.Identity => DewGemSlotCount.Instance.GameplayConfig.SkillIdentityCorruptedChaosMaxGemCount,
+            HeroSkillLocation.Movement => DewGemSlotCount.Instance.GameplayConfig.SkillMovementCorruptedChaosMaxGemCount,
+            _ => Constant.MaxGemCount
+        };
+
+        return Mathf.Clamp(count, Constant.MinGemCount, Constant.MaxGemCount);
     }
 
     [HarmonyPrefix]
@@ -40,13 +75,13 @@ public class HeroSkill_Patch
         }
 
 
-        if (type == HeroSkillLocation.Identity && DewGemSlotCount.Instance.Config.EditIdentitySkill)
+        if (type == HeroSkillLocation.Identity && DewGemSlotCount.Instance.GameplayConfig.EditIdentitySkill)
         {
             __result = true;
             return false;
         }
 
-        if (type == HeroSkillLocation.Movement && DewGemSlotCount.Instance.Config.EditMovementSkill)
+        if (type == HeroSkillLocation.Movement && DewGemSlotCount.Instance.GameplayConfig.EditMovementSkill)
         {
             __result = true;
             return false;
@@ -69,7 +104,7 @@ public class HeroSkill_Patch
             {
                 loc = p.Key;
                 gem = p.Value;
-                __result = !DewGemSlotCount.Instance.Config.GemNoMerge;
+                __result = !DewGemSlotCount.Instance.GameplayConfig.GemNoMerge;
                 return false;
             }
         }

@@ -5,11 +5,20 @@
   "LabelText.SkillRGemCount": "R yetenek mücevher sayısı",
   "LabelText.SkillIdentityGemCount": "Kimlik mücevher sayısı",
   "LabelText.SkillMovementGemCount": "Hareket mücevher sayısı",
+  "LabelText.SkillQCorruptedChaosMaxGemCount": "Q yeteneği Bozulmuş Kaos azami mücevher sayısı",
+  "LabelText.SkillWCorruptedChaosMaxGemCount": "W yeteneği Bozulmuş Kaos azami mücevher sayısı",
+  "LabelText.SkillECorruptedChaosMaxGemCount": "E yeteneği Bozulmuş Kaos azami mücevher sayısı",
+  "LabelText.SkillRCorruptedChaosMaxGemCount": "R yeteneği Bozulmuş Kaos azami mücevher sayısı",
+  "LabelText.SkillIdentityCorruptedChaosMaxGemCount": "Kimlik Bozulmuş Kaos azami mücevher sayısı",
+  "LabelText.SkillMovementCorruptedChaosMaxGemCount": "Hareket Bozulmuş Kaos azami mücevher sayısı",
   "LabelText.OptimizeUI": "Arayüzü optimize et",
   "LabelText.EditIdentitySkill": "Kimlik becerisini düzenle",
   "Description.EditIdentitySkill": "Kimlik becerilerinin değiştirilmesine izin verir",
   "LabelText.EditMovementSkill": "Hareket becerisini düzenle",
   "Description.EditMovementSkill": "Hareket becerilerinin değiştirilmesine izin verir",
+  "LabelText.AllowMovementCorruptedChaos": "Hareket Bozulmuş Kaos'una izin ver",
+  "Description.AllowMovementCorruptedChaos": "Bozulmuş Kaos'un hareket becerilerine mücevher yuvası eklemesine izin verir",
   "LabelText.GemNoMerge": "Mücevher birleşmesini engelle",
-  "Description.GemNoMerge": "Mücevher birleşmesini engeller, aynı mücevherlerin birden fazla beceriyi etkilemesini sağlar (aynı mücevherleri aynı beceriye yerleştirmek garip tetikleme hatalarına neden olabilir)"
+  "Description.GemNoMerge": "Mücevher birleşmesini engeller, aynı mücevherlerin birden fazla beceriyi etkilemesini sağlar (aynı mücevherleri aynı beceriye yerleştirmek garip tetikleme hatalarına neden olabilir)",
+  "Message.MovementCorruptedChaosDisabled": "Bozulmuş Kaos hareket becerilerine yuva ekleyemez"
 }

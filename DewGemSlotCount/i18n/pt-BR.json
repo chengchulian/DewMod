@@ -5,11 +5,20 @@
   "LabelText.SkillRGemCount": "Quantidade de gemas da habilidade R",
   "LabelText.SkillIdentityGemCount": "Quantidade de gemas de identidade",
   "LabelText.SkillMovementGemCount": "Quantidade de gemas de movimento",
+  "LabelText.SkillQCorruptedChaosMaxGemCount": "Máx. de gemas do Caos corrompido da habilidade Q",
+  "LabelText.SkillWCorruptedChaosMaxGemCount": "Máx. de gemas do Caos corrompido da habilidade W",
+  "LabelText.SkillECorruptedChaosMaxGemCount": "Máx. de gemas do Caos corrompido da habilidade E",
+  "LabelText.SkillRCorruptedChaosMaxGemCount": "Máx. de gemas do Caos corrompido da habilidade R",
+  "LabelText.SkillIdentityCorruptedChaosMaxGemCount": "Máx. de gemas do Caos corrompido de identidade",
+  "LabelText.SkillMovementCorruptedChaosMaxGemCount": "Máx. de gemas do Caos corrompido de movimento",
   "LabelText.OptimizeUI": "Otimizar interface",
   "LabelText.EditIdentitySkill": "Editar habilidade de identidade",
   "Description.EditIdentitySkill": "Permite alterar habilidades de identidade",
   "LabelText.EditMovementSkill": "Editar habilidade de movimento",
   "Description.EditMovementSkill": "Permite alterar habilidades de movimento",
+  "LabelText.AllowMovementCorruptedChaos": "Permitir Caos corrompido em movimento",
+  "Description.AllowMovementCorruptedChaos": "Permite que o Caos corrompido adicione espaços de gema a habilidades de movimento",
   "LabelText.GemNoMerge": "Impedir fusão de gemas",
-  "Description.GemNoMerge": "Impede a fusão de gemas, permitindo que as mesmas gemas afetem várias habilidades (colocar as mesmas gemas na mesma habilidade pode causar erros estranhos de ativação)"
+  "Description.GemNoMerge": "Impede a fusão de gemas, permitindo que as mesmas gemas afetem várias habilidades (colocar as mesmas gemas na mesma habilidade pode causar erros estranhos de ativação)",
+  "Message.MovementCorruptedChaosDisabled": "O Caos corrompido não pode adicionar espaços a habilidades de movimento"
 }

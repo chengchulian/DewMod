@@ -5,11 +5,20 @@
   "LabelText.SkillRGemCount": "Кол-во самоцветов навыка R",
   "LabelText.SkillIdentityGemCount": "Кол-во самоцветов идентичности",
   "LabelText.SkillMovementGemCount": "Кол-во самоцветов движения",
+  "LabelText.SkillQCorruptedChaosMaxGemCount": "Макс. кол-во самоцветов Искаженного хаоса навыка Q",
+  "LabelText.SkillWCorruptedChaosMaxGemCount": "Макс. кол-во самоцветов Искаженного хаоса навыка W",
+  "LabelText.SkillECorruptedChaosMaxGemCount": "Макс. кол-во самоцветов Искаженного хаоса навыка E",
+  "LabelText.SkillRCorruptedChaosMaxGemCount": "Макс. кол-во самоцветов Искаженного хаоса навыка R",
+  "LabelText.SkillIdentityCorruptedChaosMaxGemCount": "Макс. кол-во самоцветов Искаженного хаоса идентичности",
+  "LabelText.SkillMovementCorruptedChaosMaxGemCount": "Макс. кол-во самоцветов Искаженного хаоса движения",
   "LabelText.OptimizeUI": "Оптимизировать интерфейс",
   "LabelText.EditIdentitySkill": "Редактировать навык идентичности",
   "Description.EditIdentitySkill": "Позволяет изменять навыки идентичности",
   "LabelText.EditMovementSkill": "Редактировать навык движения",
   "Description.EditMovementSkill": "Позволяет изменять навыки движения",
+  "LabelText.AllowMovementCorruptedChaos": "Разрешить Искаженный хаос для движения",
+  "Description.AllowMovementCorruptedChaos": "Позволяет Искаженному хаосу добавлять ячейки самоцветов к навыкам движения",
   "LabelText.GemNoMerge": "Предотвратить объединение самоцветов",
-  "Description.GemNoMerge": "Предотвращает объединение самоцветов, позволяя одним и тем же самоцветам действовать на нескольких навыках (размещение одних и тех же самоцветов на одном навыке может вызвать странные ошибки срабатывания)"
+  "Description.GemNoMerge": "Предотвращает объединение самоцветов, позволяя одним и тем же самоцветам действовать на нескольких навыках (размещение одних и тех же самоцветов на одном навыке может вызвать странные ошибки срабатывания)",
+  "Message.MovementCorruptedChaosDisabled": "Искаженный хаос не может добавлять ячейки к навыкам движения"
 }

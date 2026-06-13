@@ -5,11 +5,20 @@
   "LabelText.SkillRGemCount": "Liczba klejnotów umiejętności R",
   "LabelText.SkillIdentityGemCount": "Liczba klejnotów tożsamości",
   "LabelText.SkillMovementGemCount": "Liczba klejnotów ruchu",
+  "LabelText.SkillQCorruptedChaosMaxGemCount": "Maks. liczba klejnotów spaczonego chaosu umiejętności Q",
+  "LabelText.SkillWCorruptedChaosMaxGemCount": "Maks. liczba klejnotów spaczonego chaosu umiejętności W",
+  "LabelText.SkillECorruptedChaosMaxGemCount": "Maks. liczba klejnotów spaczonego chaosu umiejętności E",
+  "LabelText.SkillRCorruptedChaosMaxGemCount": "Maks. liczba klejnotów spaczonego chaosu umiejętności R",
+  "LabelText.SkillIdentityCorruptedChaosMaxGemCount": "Maks. liczba klejnotów spaczonego chaosu tożsamości",
+  "LabelText.SkillMovementCorruptedChaosMaxGemCount": "Maks. liczba klejnotów spaczonego chaosu ruchu",
   "LabelText.OptimizeUI": "Optymalizuj interfejs",
   "LabelText.EditIdentitySkill": "Edytuj umiejętność tożsamości",
   "Description.EditIdentitySkill": "Pozwala zmieniać umiejętności tożsamości",
   "LabelText.EditMovementSkill": "Edytuj umiejętność ruchu",
   "Description.EditMovementSkill": "Pozwala zmieniać umiejętności ruchu",
+  "LabelText.AllowMovementCorruptedChaos": "Pozwól spaczonemu chaosowi na ruch",
+  "Description.AllowMovementCorruptedChaos": "Pozwala spaczonemu chaosowi dodawać miejsca na klejnoty do umiejętności ruchu",
   "LabelText.GemNoMerge": "Zapobiegaj łączeniu klejnotów",
-  "Description.GemNoMerge": "Zapobiega łączeniu klejnotów, umożliwiając tym samym klejnotom wpływ na wiele umiejętności (umieszczenie tych samych klejnotów na tej samej umiejętności może powodować dziwne błędy wyzwalania)"
+  "Description.GemNoMerge": "Zapobiega łączeniu klejnotów, umożliwiając tym samym klejnotom wpływ na wiele umiejętności (umieszczenie tych samych klejnotów na tej samej umiejętności może powodować dziwne błędy wyzwalania)",
+  "Message.MovementCorruptedChaosDisabled": "Spaczony chaos nie może dodawać miejsc do umiejętności ruchu"
 }

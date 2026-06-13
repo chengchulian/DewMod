@@ -46,6 +46,7 @@
         <Compile Include="DewGemSlotCount.cs" />
         <Compile Include="GemSyncHelper.cs" />
         <Compile Include="patch\HeroSkill_Patch.cs" />
+        <Compile Include="patch\Shrine_CorruptedChaos_Patch.cs" />
         <Compile Include="patch\SkillTrigger_Patch.cs" />
         <Compile Include="patch\UI_InGame_Scoreboard_PlayerItem_Skill_Patch.cs" />
         <Compile Include="patch\UI_InGame_SkillButtons_Patch.cs" />
@@ -738,6 +739,7 @@
       <Content Include="about\icon.png" />
       <Content Include="about\description.txt" />
       <Content Include="about\metadata.json" />
+      <Content Include="about\publishedfileid.txt" />
       <Content Include="i18n\de-DE.json" />
       <Content Include="i18n\en-US.json" />
       <Content Include="i18n\es-MX.json" />

@@ -1,22 +1,43 @@
-功能:
-修改精华槽数量
-可以更换位移技能和身份技能
-可以阻止精华合并
+[h1]DewGemSlotCount / SkillGemCount[/h1]
 
-注意事项:
-所有配置项目以服务器(房主)为主
-即使服务器(房主)安装了此MOD并修改了配置项,未安装的客户端依然无法使用它
-客户端会自动同步服务器(房主)的配置
-当你在客户端更改配置时它并不会生效,还会有奇怪的显示BUG
+[b]功能[/b]
+[list]
+[*]修改 Q / W / E / R 技能的基础精华槽数量。
+[*]可选修改身份技能和位移技能的基础精华槽数量。
+[*]支持配置 Q / W / E / R / 身份 / 位移技能通过堕落混沌最多增加到的精华槽数量。
+[*]保留原版运行时加成，堕落混沌增加精华槽后会正常生效。
+[*]可单独开启或关闭“堕落混沌给位移技能增加精华槽”。
+[*]可允许更换身份技能和位移技能。
+[*]可阻止精华合并，让同类精华可以同时作用于多个技能。
+[/list]
 
+[b]注意事项[/b]
+[list]
+[*]所有玩法配置以服务器 / 房主为准。
+[*]客户端安装本 MOD 后会自动同步服务器 / 房主的配置。
+[*]未安装本 MOD 的客户端无法使用本 MOD 提供的功能。
+[*]在客户端本地修改配置不会对联机房间生效，并可能造成显示异常。
+[*]“允许移动技能堕落混沌加槽”默认关闭，需要房主在配置中手动开启。
+[/list]
 
-Function:
-Modify the number of gem slot
-Can replace Movement skills and identity skills
-Can prevent gem Merge
+[hr][/hr]
 
-Notes:
-All configuration items are primarily focused on servers (homeowners)
-Even if the server (homeowner) installs this MOD and modifies the configuration items, uninstalled clients still cannot use it
-The client will automatically synchronize the configuration of the server (homeowner)
-When you change the configuration on the client side, it will not take effect and there will be strange display bugs
+[b]Features[/b]
+[list]
+[*]Change the base essence slot count for Q / W / E / R skills.
+[*]Optionally change the base essence slot count for Identity and Movement skills.
+[*]Configure the maximum essence slot count that Corrupted Chaos can reach for Q / W / E / R / Identity / Movement skills.
+[*]Keeps vanilla runtime bonuses, so essence slots added by Corrupted Chaos now work correctly.
+[*]Toggle whether Corrupted Chaos is allowed to add essence slots to Movement skills.
+[*]Allow replacing Identity and Movement skills.
+[*]Prevent essence merging, allowing the same essence type to affect multiple skills.
+[/list]
+
+[b]Notes[/b]
+[list]
+[*]Gameplay configuration is controlled by the server / host.
+[*]Clients with this mod installed will automatically sync the server / host configuration.
+[*]Clients without this mod installed cannot use the features provided by this mod.
+[*]Changing the configuration locally on a client will not affect a multiplayer room and may cause display issues.
+[*]The Movement skill Corrupted Chaos option is disabled by default and must be enabled by the host.
+[/list]

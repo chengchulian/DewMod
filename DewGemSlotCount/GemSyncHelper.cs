@@ -1,54 +1,169 @@
-﻿using DewGemSlotCount.config;
-using UnityEngine;
+using System;
+using DewGemSlotCount.config;
 using Mirror;
+using UnityEngine;
 
 namespace DewGemSlotCount
 {
-    public static class GemSyncHelper
+    public class GemConfigSyncMessage
     {
-        /// <summary>
-        /// 发送当前 Gem 配置给所有客户端
-        /// </summary>
-        public static void SyncGemConfigToAllClients(PluginConfig config)
+        public int SkillQGemCount;
+        public int SkillWGemCount;
+        public int SkillEGemCount;
+        public int SkillRGemCount;
+        public int SkillIdentityGemCount;
+        public int SkillMovementGemCount;
+        public int SkillQCorruptedChaosMaxGemCount;
+        public int SkillWCorruptedChaosMaxGemCount;
+        public int SkillECorruptedChaosMaxGemCount;
+        public int SkillRCorruptedChaosMaxGemCount;
+        public int SkillIdentityCorruptedChaosMaxGemCount;
+        public int SkillMovementCorruptedChaosMaxGemCount;
+        public bool EditIdentitySkill;
+        public bool EditMovementSkill;
+        public bool AllowMovementCorruptedChaos;
+        public bool GemNoMerge;
+
+        public static GemConfigSyncMessage FromConfig(PluginConfig config)
         {
-            if (ActorManager.instance == null)
+            return new GemConfigSyncMessage
             {
-                return;
-            }
-
-            if (!NetworkServer.active)
-            {
-                return;
-            }
-
-            var msg = config;
-            if (ActorManager.instance.serverActor == null)
-            {
-                return;
-            }
-
-            ActorManager.instance.serverActor.CustomRpc_SendMessageToAllClients(msg);
-            Debug.Log("[DewGemSlotCount]  发送 Gem 配置同步消息  " + msg);
+                SkillQGemCount = config.SkillQGemCount,
+                SkillWGemCount = config.SkillWGemCount,
+                SkillEGemCount = config.SkillEGemCount,
+                SkillRGemCount = config.SkillRGemCount,
+                SkillIdentityGemCount = config.SkillIdentityGemCount,
+                SkillMovementGemCount = config.SkillMovementGemCount,
+                SkillQCorruptedChaosMaxGemCount = config.SkillQCorruptedChaosMaxGemCount,
+                SkillWCorruptedChaosMaxGemCount = config.SkillWCorruptedChaosMaxGemCount,
+                SkillECorruptedChaosMaxGemCount = config.SkillECorruptedChaosMaxGemCount,
+                SkillRCorruptedChaosMaxGemCount = config.SkillRCorruptedChaosMaxGemCount,
+                SkillIdentityCorruptedChaosMaxGemCount = config.SkillIdentityCorruptedChaosMaxGemCount,
+                SkillMovementCorruptedChaosMaxGemCount = config.SkillMovementCorruptedChaosMaxGemCount,
+                EditIdentitySkill = config.EditIdentitySkill,
+                EditMovementSkill = config.EditMovementSkill,
+                AllowMovementCorruptedChaos = config.AllowMovementCorruptedChaos,
+                GemNoMerge = config.GemNoMerge
+            };
         }
 
-        /// <summary>
-        /// 注册接收 Gem 配置同步消息的回调
-        /// </summary>
-        public static void RegisterGemSyncHandler(PluginConfig config)
+        public void ApplyTo(PluginConfig config)
         {
-            ActorManager.instance.serverActor.CustomRpc_RegisterClientMessageHandler<PluginConfig>(msg =>
+            config.SkillQGemCount = SkillQGemCount;
+            config.SkillWGemCount = SkillWGemCount;
+            config.SkillEGemCount = SkillEGemCount;
+            config.SkillRGemCount = SkillRGemCount;
+            config.SkillIdentityGemCount = SkillIdentityGemCount;
+            config.SkillMovementGemCount = SkillMovementGemCount;
+            config.SkillQCorruptedChaosMaxGemCount = SkillQCorruptedChaosMaxGemCount;
+            config.SkillWCorruptedChaosMaxGemCount = SkillWCorruptedChaosMaxGemCount;
+            config.SkillECorruptedChaosMaxGemCount = SkillECorruptedChaosMaxGemCount;
+            config.SkillRCorruptedChaosMaxGemCount = SkillRCorruptedChaosMaxGemCount;
+            config.SkillIdentityCorruptedChaosMaxGemCount = SkillIdentityCorruptedChaosMaxGemCount;
+            config.SkillMovementCorruptedChaosMaxGemCount = SkillMovementCorruptedChaosMaxGemCount;
+            config.EditIdentitySkill = EditIdentitySkill;
+            config.EditMovementSkill = EditMovementSkill;
+            config.AllowMovementCorruptedChaos = AllowMovementCorruptedChaos;
+            config.GemNoMerge = GemNoMerge;
+        }
+    }
+
+    public class GemConfigSyncRequest
+    {
+        public int Version = 1;
+    }
+
+    public static class GemSyncHelper
+    {
+        public static void SyncGemConfigToAllClients(PluginConfig config)
+        {
+            var serverActor = GetServerActor();
+            if (!NetworkServer.active || serverActor == null)
             {
-                Debug.Log("[DewGemSlotCount]  接收 Gem 配置同步消息 " + msg);
-                config.SkillQGemCount = msg.SkillQGemCount;
-                config.SkillWGemCount = msg.SkillWGemCount;
-                config.SkillEGemCount = msg.SkillEGemCount;
-                config.SkillRGemCount = msg.SkillRGemCount;
-                config.SkillIdentityGemCount = msg.SkillIdentityGemCount;
-                config.SkillMovementGemCount = msg.SkillMovementGemCount;
-                config.EditIdentitySkill = msg.EditIdentitySkill;
-                config.EditMovementSkill = msg.EditMovementSkill;
-                config.GemNoMerge = msg.GemNoMerge;
-            });
+                Debug.Log("[DewGemSlotCount] Skip syncing Gem config to all clients: server not ready");
+                return;
+            }
+
+            serverActor.CustomRpc_SendMessageToAllClients(GemConfigSyncMessage.FromConfig(config));
+            Debug.Log("[DewGemSlotCount] Sync Gem config to all clients");
+        }
+
+        public static void SyncGemConfigToClient(PluginConfig config, DewPlayer target)
+        {
+            var serverActor = GetServerActor();
+            if (!NetworkServer.active || serverActor == null || target == null)
+            {
+                Debug.Log("[DewGemSlotCount] Skip syncing Gem config to client: server, actor, or target not ready");
+                return;
+            }
+
+            serverActor.CustomRpc_SendMessageToClient(target, GemConfigSyncMessage.FromConfig(config));
+            Debug.Log("[DewGemSlotCount] Sync Gem config to client " + target.playerNameRaw);
+        }
+
+        public static bool RegisterGemSyncHandler(Action<GemConfigSyncMessage> handler)
+        {
+            var serverActor = GetServerActor();
+            if (serverActor == null || handler == null)
+            {
+                return false;
+            }
+
+            serverActor.CustomRpc_UnregisterClientMessageHandler(handler);
+            serverActor.CustomRpc_RegisterClientMessageHandler(handler);
+            return true;
+        }
+
+        public static bool RegisterGemSyncRequestHandler(Action<GemConfigSyncRequest, DewPlayer> handler)
+        {
+            var serverActor = GetServerActor();
+            if (!NetworkServer.active || serverActor == null || handler == null)
+            {
+                return false;
+            }
+
+            serverActor.CustomRpc_UnregisterServerMessageHandler(handler);
+            serverActor.CustomRpc_RegisterServerMessageHandler("DewGemSlotCount", handler);
+            return true;
+        }
+
+        public static void UnregisterGemSyncHandler(Action<GemConfigSyncMessage> handler)
+        {
+            var serverActor = GetServerActor();
+            if (serverActor == null || handler == null)
+            {
+                return;
+            }
+
+            serverActor.CustomRpc_UnregisterClientMessageHandler(handler);
+        }
+
+        public static void UnregisterGemSyncRequestHandler(Action<GemConfigSyncRequest, DewPlayer> handler)
+        {
+            var serverActor = GetServerActor();
+            if (serverActor == null || handler == null)
+            {
+                return;
+            }
+
+            serverActor.CustomRpc_UnregisterServerMessageHandler(handler);
+        }
+
+        public static bool RequestGemConfigFromServer()
+        {
+            var serverActor = GetServerActor();
+            if (!NetworkClient.active || serverActor == null)
+            {
+                return false;
+            }
+
+            serverActor.CustomRpc_SendMessageToServer(new GemConfigSyncRequest());
+            return true;
+        }
+
+        private static Actor GetServerActor()
+        {
+            return ActorManager.instance == null ? null : ActorManager.instance.serverActor;
         }
     }
 }

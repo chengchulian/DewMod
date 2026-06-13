@@ -5,11 +5,20 @@
   "LabelText.SkillRGemCount": "R技能寶石槽數量",
   "LabelText.SkillIdentityGemCount": "身份技能寶石槽數量",
   "LabelText.SkillMovementGemCount": "移動技能寶石槽數量",
+  "LabelText.SkillQCorruptedChaosMaxGemCount": "Q技能墮落混沌最大寶石槽數量",
+  "LabelText.SkillWCorruptedChaosMaxGemCount": "W技能墮落混沌最大寶石槽數量",
+  "LabelText.SkillECorruptedChaosMaxGemCount": "E技能墮落混沌最大寶石槽數量",
+  "LabelText.SkillRCorruptedChaosMaxGemCount": "R技能墮落混沌最大寶石槽數量",
+  "LabelText.SkillIdentityCorruptedChaosMaxGemCount": "身份技能墮落混沌最大寶石槽數量",
+  "LabelText.SkillMovementCorruptedChaosMaxGemCount": "移動技能墮落混沌最大寶石槽數量",
   "LabelText.OptimizeUI": "優化技能介面佈局",
   "LabelText.EditIdentitySkill": "編輯身份技能",
   "Description.EditIdentitySkill": "允許更換身份技能",
   "LabelText.EditMovementSkill": "編輯移動技能",
   "Description.EditMovementSkill": "允許更換移動技能",
+  "LabelText.AllowMovementCorruptedChaos": "允許移動技能墮落混沌加槽",
+  "Description.AllowMovementCorruptedChaos": "允許墮落混沌給移動技能增加寶石槽",
   "LabelText.GemNoMerge": "阻止寶石合併",
-  "Description.GemNoMerge": "阻止寶石合併，使同樣的寶石作用在多個技能上（同樣的寶石放在同一個技能上會有奇怪的觸發BUG）"
+  "Description.GemNoMerge": "阻止寶石合併，使同樣的寶石作用在多個技能上（同樣的寶石放在同一個技能上會有奇怪的觸發BUG）",
+  "Message.MovementCorruptedChaosDisabled": "墮落混沌不能給移動技能增加寶石槽"
 }

@@ -5,11 +5,20 @@
   "LabelText.SkillRGemCount": "Skill R Gem Count",
   "LabelText.SkillIdentityGemCount": "Identity Gem Count",
   "LabelText.SkillMovementGemCount": "Movement Gem Count",
+  "LabelText.SkillQCorruptedChaosMaxGemCount": "Skill Q Corrupted Chaos Max Gem Count",
+  "LabelText.SkillWCorruptedChaosMaxGemCount": "Skill W Corrupted Chaos Max Gem Count",
+  "LabelText.SkillECorruptedChaosMaxGemCount": "Skill E Corrupted Chaos Max Gem Count",
+  "LabelText.SkillRCorruptedChaosMaxGemCount": "Skill R Corrupted Chaos Max Gem Count",
+  "LabelText.SkillIdentityCorruptedChaosMaxGemCount": "Identity Corrupted Chaos Max Gem Count",
+  "LabelText.SkillMovementCorruptedChaosMaxGemCount": "Movement Corrupted Chaos Max Gem Count",
   "LabelText.OptimizeUI": "Optimize UI",
   "LabelText.EditIdentitySkill": "Edit Identity Skill",
   "Description.EditIdentitySkill": "Allows changing identity skills",
   "LabelText.EditMovementSkill": "Edit Movement Skill",
   "Description.EditMovementSkill": "Allows changing movement skills",
+  "LabelText.AllowMovementCorruptedChaos": "Allow Movement Corrupted Chaos",
+  "Description.AllowMovementCorruptedChaos": "Allows Corrupted Chaos to add essence slots to movement skills",
   "LabelText.GemNoMerge": "Prevent Gem Merging",
-  "Description.GemNoMerge": "Prevents gem merging, allowing the same gems to affect multiple skills (placing the same gems on the same skill can cause strange trigger bugs)"
+  "Description.GemNoMerge": "Prevents gem merging, allowing the same gems to affect multiple skills (placing the same gems on the same skill can cause strange trigger bugs)",
+  "Message.MovementCorruptedChaosDisabled": "Corrupted Chaos cannot add slots to movement skills"
 }

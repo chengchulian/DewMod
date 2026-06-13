@@ -5,11 +5,20 @@
   "LabelText.SkillRGemCount": "R技能精粹槽数量",
   "LabelText.SkillIdentityGemCount": "身份技能精粹槽数量",
   "LabelText.SkillMovementGemCount": "移动技能精粹槽数量",
+  "LabelText.SkillQCorruptedChaosMaxGemCount": "Q技能堕落混沌最大精粹槽数量",
+  "LabelText.SkillWCorruptedChaosMaxGemCount": "W技能堕落混沌最大精粹槽数量",
+  "LabelText.SkillECorruptedChaosMaxGemCount": "E技能堕落混沌最大精粹槽数量",
+  "LabelText.SkillRCorruptedChaosMaxGemCount": "R技能堕落混沌最大精粹槽数量",
+  "LabelText.SkillIdentityCorruptedChaosMaxGemCount": "身份技能堕落混沌最大精粹槽数量",
+  "LabelText.SkillMovementCorruptedChaosMaxGemCount": "移动技能堕落混沌最大精粹槽数量",
   "LabelText.OptimizeUI": "优化技能界面布局",
   "LabelText.EditIdentitySkill": "编辑身份技能",
   "Description.EditIdentitySkill": "允许更换身份技能",
   "LabelText.EditMovementSkill": "编辑移动技能",
   "Description.EditMovementSkill": "允许更换移动技能",
+  "LabelText.AllowMovementCorruptedChaos": "允许移动技能堕落混沌加槽",
+  "Description.AllowMovementCorruptedChaos": "允许堕落混沌给移动技能增加精粹槽",
   "LabelText.GemNoMerge": "阻止精粹合并",
-  "Description.GemNoMerge": "阻止精粹合并,使同样的精粹作用在多个技能上(同样的精粹放在同一个技能上会有奇怪的触发BUG)"
+  "Description.GemNoMerge": "阻止精粹合并,使同样的精粹作用在多个技能上(同样的精粹放在同一个技能上会有奇怪的触发BUG)",
+  "Message.MovementCorruptedChaosDisabled": "堕落混沌不能给移动技能增加精粹槽"
 }

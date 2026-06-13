@@ -32,6 +32,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DewZoneTwistedPath", "DewZo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DewIdentityChange", "DewIdentityChange\DewIdentityChange.csproj", "{E30D1985-E673-439C-999F-218A0271B773}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DewTestCode", "DewTestCode\DewTestCode.csproj", "{2F6FE77E-6F40-417B-98F4-7C5C5E53D323}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -86,6 +88,10 @@ Global
 		{E30D1985-E673-439C-999F-218A0271B773}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E30D1985-E673-439C-999F-218A0271B773}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E30D1985-E673-439C-999F-218A0271B773}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F6FE77E-6F40-417B-98F4-7C5C5E53D323}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F6FE77E-6F40-417B-98F4-7C5C5E53D323}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F6FE77E-6F40-417B-98F4-7C5C5E53D323}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F6FE77E-6F40-417B-98F4-7C5C5E53D323}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

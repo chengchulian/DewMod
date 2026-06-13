@@ -18,19 +18,35 @@ public class PluginConfig : ModConfig
     public int SkillIdentityGemCount = 0;
     [LabelText("LabelText.SkillMovementGemCount")]
     public int SkillMovementGemCount = 0;
-    [LabelText("LabelText.OptimizeUI")]
-    public bool OptimizeUI = true;
 
+    [LabelText("LabelText.SkillQCorruptedChaosMaxGemCount")]
+    public int SkillQCorruptedChaosMaxGemCount = 4;
+    [LabelText("LabelText.SkillWCorruptedChaosMaxGemCount")]
+    public int SkillWCorruptedChaosMaxGemCount = 4;
+    [LabelText("LabelText.SkillECorruptedChaosMaxGemCount")]
+    public int SkillECorruptedChaosMaxGemCount = 4;
+    [LabelText("LabelText.SkillRCorruptedChaosMaxGemCount")]
+    public int SkillRCorruptedChaosMaxGemCount = 4;
+    [LabelText("LabelText.SkillIdentityCorruptedChaosMaxGemCount")]
+    public int SkillIdentityCorruptedChaosMaxGemCount = 4;
+    [LabelText("LabelText.AllowMovementCorruptedChaos")]
+    [Description("Description.AllowMovementCorruptedChaos")]
+    public bool AllowMovementCorruptedChaos = false;
+    [LabelText("LabelText.SkillMovementCorruptedChaosMaxGemCount")]
+    public int SkillMovementCorruptedChaosMaxGemCount = 4;
     [LabelText("LabelText.EditIdentitySkill")]
     [Description("Description.EditIdentitySkill")]
     public bool EditIdentitySkill = false;
     [LabelText("LabelText.EditMovementSkill")]
     [Description("Description.EditMovementSkill")]
     public bool EditMovementSkill = false;
+
     [LabelText("LabelText.GemNoMerge")]
     [Description("Description.GemNoMerge")]
     public bool GemNoMerge = false;
-    
+
+    [LabelText("LabelText.OptimizeUI")]
+    public bool OptimizeUI = true;
 
     public override void BuildWidgets(Transform parent, out SafeAction onChanged, out SafeAction requestUpdate)
     {

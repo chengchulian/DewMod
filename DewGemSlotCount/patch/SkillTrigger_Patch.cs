@@ -53,7 +53,7 @@ public class SkillTrigger_Patch
         }
 
         // 如果不启用Identity技能编辑，单独处理 Identity 技能
-        if (!DewGemSlotCount.Instance.Config.EditIdentitySkill)
+        if (!DewGemSlotCount.Instance.GameplayConfig.EditIdentitySkill)
         {
             if (__instance.rarity == Rarity.Identity)
             {

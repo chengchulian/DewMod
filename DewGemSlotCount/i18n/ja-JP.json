@@ -5,11 +5,20 @@
   "LabelText.SkillRGemCount": "スキルRの宝石数",
   "LabelText.SkillIdentityGemCount": "アイデンティティ宝石数",
   "LabelText.SkillMovementGemCount": "移動スキル宝石数",
+  "LabelText.SkillQCorruptedChaosMaxGemCount": "スキルQの腐敗した混沌による最大宝石数",
+  "LabelText.SkillWCorruptedChaosMaxGemCount": "スキルWの腐敗した混沌による最大宝石数",
+  "LabelText.SkillECorruptedChaosMaxGemCount": "スキルEの腐敗した混沌による最大宝石数",
+  "LabelText.SkillRCorruptedChaosMaxGemCount": "スキルRの腐敗した混沌による最大宝石数",
+  "LabelText.SkillIdentityCorruptedChaosMaxGemCount": "アイデンティティの腐敗した混沌による最大宝石数",
+  "LabelText.SkillMovementCorruptedChaosMaxGemCount": "移動スキルの腐敗した混沌による最大宝石数",
   "LabelText.OptimizeUI": "UI最適化",
   "LabelText.EditIdentitySkill": "アイデンティティスキルを編集",
   "Description.EditIdentitySkill": "アイデンティティスキルの変更を許可",
   "LabelText.EditMovementSkill": "移動スキルを編集",
   "Description.EditMovementSkill": "移動スキルの変更を許可",
+  "LabelText.AllowMovementCorruptedChaos": "移動スキルへの腐敗した混沌を許可",
+  "Description.AllowMovementCorruptedChaos": "腐敗した混沌が移動スキルに宝石スロットを追加することを許可",
   "LabelText.GemNoMerge": "宝石の結合を阻止",
-  "Description.GemNoMerge": "宝石の結合を阻止し、同じ宝石が複数のスキルに作用するようにする（同じ宝石を同じスキルに配置すると奇妙なトリガーバグが発生する）"
+  "Description.GemNoMerge": "宝石の結合を阻止し、同じ宝石が複数のスキルに作用するようにする（同じ宝石を同じスキルに配置すると奇妙なトリガーバグが発生する）",
+  "Message.MovementCorruptedChaosDisabled": "腐敗した混沌は移動スキルにスロットを追加できません"
 }

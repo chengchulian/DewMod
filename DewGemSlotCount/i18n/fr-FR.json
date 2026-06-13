@@ -5,11 +5,20 @@
   "LabelText.SkillRGemCount": "Nombre de gemmes compétence R",
   "LabelText.SkillIdentityGemCount": "Nombre de gemmes d'identité",
   "LabelText.SkillMovementGemCount": "Nombre de gemmes de mouvement",
+  "LabelText.SkillQCorruptedChaosMaxGemCount": "Nombre max. de gemmes de Chaos corrompu pour compétence Q",
+  "LabelText.SkillWCorruptedChaosMaxGemCount": "Nombre max. de gemmes de Chaos corrompu pour compétence W",
+  "LabelText.SkillECorruptedChaosMaxGemCount": "Nombre max. de gemmes de Chaos corrompu pour compétence E",
+  "LabelText.SkillRCorruptedChaosMaxGemCount": "Nombre max. de gemmes de Chaos corrompu pour compétence R",
+  "LabelText.SkillIdentityCorruptedChaosMaxGemCount": "Nombre max. de gemmes de Chaos corrompu pour identité",
+  "LabelText.SkillMovementCorruptedChaosMaxGemCount": "Nombre max. de gemmes de Chaos corrompu pour mouvement",
   "LabelText.OptimizeUI": "Optimiser l'interface",
   "LabelText.EditIdentitySkill": "Modifier la compétence d'identité",
   "Description.EditIdentitySkill": "Permet de changer les compétences d'identité",
   "LabelText.EditMovementSkill": "Modifier la compétence de mouvement",
   "Description.EditMovementSkill": "Permet de changer les compétences de mouvement",
+  "LabelText.AllowMovementCorruptedChaos": "Autoriser le Chaos corrompu sur le mouvement",
+  "Description.AllowMovementCorruptedChaos": "Permet au Chaos corrompu d'ajouter des emplacements de gemmes aux compétences de mouvement",
   "LabelText.GemNoMerge": "Empêcher la fusion des gemmes",
-  "Description.GemNoMerge": "Empêche la fusion des gemmes, permettant aux mêmes gemmes d'affecter plusieurs compétences (placer les mêmes gemmes sur la même compétence peut causer des bugs étranges de déclenchement)"
+  "Description.GemNoMerge": "Empêche la fusion des gemmes, permettant aux mêmes gemmes d'affecter plusieurs compétences (placer les mêmes gemmes sur la même compétence peut causer des bugs étranges de déclenchement)",
+  "Message.MovementCorruptedChaosDisabled": "Le Chaos corrompu ne peut pas ajouter d'emplacements aux compétences de mouvement"
 }

@@ -5,11 +5,20 @@
   "LabelText.SkillRGemCount": "R-Fähigkeit Edelsteinanzahl",
   "LabelText.SkillIdentityGemCount": "Identitäts-Edelsteinanzahl",
   "LabelText.SkillMovementGemCount": "Bewegungs-Edelsteinanzahl",
+  "LabelText.SkillQCorruptedChaosMaxGemCount": "Max. Edelsteinanzahl durch Verderbtes Chaos für Q-Fähigkeit",
+  "LabelText.SkillWCorruptedChaosMaxGemCount": "Max. Edelsteinanzahl durch Verderbtes Chaos für W-Fähigkeit",
+  "LabelText.SkillECorruptedChaosMaxGemCount": "Max. Edelsteinanzahl durch Verderbtes Chaos für E-Fähigkeit",
+  "LabelText.SkillRCorruptedChaosMaxGemCount": "Max. Edelsteinanzahl durch Verderbtes Chaos für R-Fähigkeit",
+  "LabelText.SkillIdentityCorruptedChaosMaxGemCount": "Max. Edelsteinanzahl durch Verderbtes Chaos für Identität",
+  "LabelText.SkillMovementCorruptedChaosMaxGemCount": "Max. Edelsteinanzahl durch Verderbtes Chaos für Bewegung",
   "LabelText.OptimizeUI": "UI optimieren",
   "LabelText.EditIdentitySkill": "Identitätsfähigkeit bearbeiten",
   "Description.EditIdentitySkill": "Erlaubt das Ändern der Identitätsfähigkeit",
   "LabelText.EditMovementSkill": "Bewegungsfähigkeit bearbeiten",
   "Description.EditMovementSkill": "Erlaubt das Ändern der Bewegungsfähigkeit",
+  "LabelText.AllowMovementCorruptedChaos": "Verderbtes Chaos für Bewegungsfähigkeit erlauben",
+  "Description.AllowMovementCorruptedChaos": "Erlaubt Verderbtem Chaos, Edelsteinplätze zu Bewegungsfähigkeiten hinzuzufügen",
   "LabelText.GemNoMerge": "Edelstein-Zusammenführung verhindern",
-  "Description.GemNoMerge": "Verhindert die Zusammenführung von Edelsteinen, sodass dieselben Edelsteine auf mehreren Fähigkeiten wirken können (dasselbe Edelstein auf derselben Fähigkeit platziert führt zu merkwürdigen Auslösefehlern)"
+  "Description.GemNoMerge": "Verhindert die Zusammenführung von Edelsteinen, sodass dieselben Edelsteine auf mehreren Fähigkeiten wirken können (dasselbe Edelstein auf derselben Fähigkeit platziert führt zu merkwürdigen Auslösefehlern)",
+  "Message.MovementCorruptedChaosDisabled": "Verderbtes Chaos kann Bewegungsfähigkeiten keine Edelsteinplätze hinzufügen"
 }

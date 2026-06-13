@@ -5,11 +5,20 @@
   "LabelText.SkillRGemCount": "Numero di gemme abilità R",
   "LabelText.SkillIdentityGemCount": "Numero di gemme identità",
   "LabelText.SkillMovementGemCount": "Numero di gemme movimento",
+  "LabelText.SkillQCorruptedChaosMaxGemCount": "Numero max gemme Caos corrotto abilità Q",
+  "LabelText.SkillWCorruptedChaosMaxGemCount": "Numero max gemme Caos corrotto abilità W",
+  "LabelText.SkillECorruptedChaosMaxGemCount": "Numero max gemme Caos corrotto abilità E",
+  "LabelText.SkillRCorruptedChaosMaxGemCount": "Numero max gemme Caos corrotto abilità R",
+  "LabelText.SkillIdentityCorruptedChaosMaxGemCount": "Numero max gemme Caos corrotto identità",
+  "LabelText.SkillMovementCorruptedChaosMaxGemCount": "Numero max gemme Caos corrotto movimento",
   "LabelText.OptimizeUI": "Ottimizza interfaccia",
   "LabelText.EditIdentitySkill": "Modifica abilità identità",
   "Description.EditIdentitySkill": "Consente di cambiare le abilità identità",
   "LabelText.EditMovementSkill": "Modifica abilità movimento",
   "Description.EditMovementSkill": "Consente di cambiare le abilità movimento",
+  "LabelText.AllowMovementCorruptedChaos": "Consenti Caos corrotto sul movimento",
+  "Description.AllowMovementCorruptedChaos": "Consente al Caos corrotto di aggiungere slot gemme alle abilità movimento",
   "LabelText.GemNoMerge": "Impedisci fusione gemme",
-  "Description.GemNoMerge": "Impedisce la fusione delle gemme, consentendo alle stesse gemme di influenzare più abilità (posizionare le stesse gemme sulla stessa abilità può causare strani bug di attivazione)"
+  "Description.GemNoMerge": "Impedisce la fusione delle gemme, consentendo alle stesse gemme di influenzare più abilità (posizionare le stesse gemme sulla stessa abilità può causare strani bug di attivazione)",
+  "Message.MovementCorruptedChaosDisabled": "Il Caos corrotto non può aggiungere slot alle abilità movimento"
 }
