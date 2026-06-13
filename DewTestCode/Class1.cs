@@ -4,10 +4,11 @@ public class Class1
 {
     public static void Main(string[] args)
     {
-        Dew.CreateActor<Shrine_CorruptedChaos>(DewConsoleCommands.GetCursorWorldPos(), null);
+        SpawnAnityaShrine();
     }
-        
 
-
-        
+    private static void SpawnAnityaShrine()
+    {
+        Dew.CreateActor<Shrine_Anitya>(DewConsoleCommands.GetCursorWorldPos(), null);
+    }
 }
