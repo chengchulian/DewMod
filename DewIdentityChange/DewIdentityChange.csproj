@@ -710,15 +710,28 @@
     </ItemGroup>
     <ItemGroup>
         <Compile Include="config\HeroSkillSource.cs" />
+        <Compile Include="config\IdentityConfigSync.cs" />
+        <Compile Include="config\LoadoutPageMapper.cs" />
         <Compile Include="config\LoadoutSnapshot.cs" />
         <Compile Include="config\LocalizationSource.cs" />
         <Compile Include="config\PluginConfig.cs" />
         <Compile Include="DewIdentityChange.cs" />
+        <Compile Include="patch\DewPlayer_Patch.cs" />
+        <Compile Include="patch\HeroLoadoutData_Patch.cs" />
+        <Compile Include="patch\UI_Lobby_Constellations_Patch.cs" />
+        <Compile Include="patch\UI_Lobby_Constellations_QuickLoadoutSwitch_Patch.cs" />
+        <Compile Include="patch\UI_Lobby_Constellations_Skills_Slot_Patch.cs" />
+        <Compile Include="patch\UI_Lobby_Constellations_StarList_Patch.cs" />
+        <Compile Include="patch\UI_Lobby_Loadout_AvailableSkills_Patch.cs" />
+        <Compile Include="patch\UI_Lobby_Loadout_SkillSlot_Patch.cs" />
         <Compile Include="Properties\AssemblyInfo.cs"/>
     </ItemGroup>
     <ItemGroup>
       <Content Include="about\description.txt" />
+      <Content Include="about\icon.png" />
       <Content Include="about\metadata.json" />
+      <Content Include="about\preview.png" />
+      <Content Include="about\publishedfileid.txt" />
       <Content Include="i18n\en-US.json" />
       <Content Include="i18n\zh-CN.json" />
     </ItemGroup>

@@ -1,93 +1,68 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using TMPro;
 using UnityEngine;
 
-namespace DewIdentityChange.config
+namespace DewIdentityChange.config;
+
+public static class LocalizationSource
 {
-    public static class LocalizationSource
+    private static readonly Dictionary<string, Dictionary<string, string>> LocalizationSourceMap = new();
+
+    public static void Init(ModBehaviour modBehaviour)
     {
-        private static Dictionary<string, Dictionary<string, string>> LocalizationSourceMap = new();
+        string i18nPath = Path.Combine(modBehaviour.mod.path, "i18n");
 
-        private static string GetLanguage()
+        if (!Directory.Exists(i18nPath))
         {
-            return DewSave.profileMain.language;
+            Debug.LogWarning($"[Localization] i18n folder does not exist: {i18nPath}");
+            return;
         }
 
-        /// <summary>
-        /// 初始化：从 MOD 文件夹加载 i18n JSON 文件
-        /// </summary>
-        public static void Init(ModBehaviour modBehaviour)
+        var files = Directory.GetFiles(i18nPath, "*.json");
+        foreach (var file in files)
         {
-            string modPath = modBehaviour.mod.path;
-
-            string i18nPath = Path.Combine(modPath, "i18n");
-
-            if (!Directory.Exists(i18nPath))
+            try
             {
-                Debug.LogWarning($"[Localization] i18n folder does not exist: {i18nPath}");
-                return;
+                string lang = Path.GetFileNameWithoutExtension(file);
+                string jsonText = File.ReadAllText(file);
+                var langDict = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, string>>(jsonText);
+                LocalizationSourceMap[lang] = langDict;
             }
-
-            var files = Directory.GetFiles(i18nPath, "*.json");
-            foreach (var file in files)
+            catch (Exception e)
             {
-                try
-                {
-                    string lang = Path.GetFileNameWithoutExtension(file);
-                    string jsonText = File.ReadAllText(file);
-                    // 解析JSON文本为字典
-                    Dictionary<string, string> langDict =
-                        Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, string>>(jsonText);
-
-                    // 将语言字典添加到本地化源映射中
-                    LocalizationSourceMap[lang] = langDict;
-                }
-                catch (Exception e)
-                {
-                    Debug.LogError($"[Localization] Failed to load {file}\n{e}");
-                }
+                Debug.LogError($"[Localization] Failed to load {file}\n{e}");
             }
         }
+    }
 
-        /// <summary>
-        /// 查询翻译
-        /// </summary>
-        public static string GetLocalizationText(string key, params object[] args)
+    public static string GetLocalizationText(string key, params object[] args)
+    {
+        var lang = DewSave.profileMain.language;
+        if (!LocalizationSourceMap.ContainsKey(lang))
         {
-            var lang = GetLanguage();
-            if (!LocalizationSourceMap.ContainsKey(lang))
-            {
-                lang = "en-US";
-            }
-
-            if (!LocalizationSourceMap.TryGetValue(lang, out var dict))
-            {
-                return key;
-            }
-
-            if (!dict.TryGetValue(key, out var val))
-            {
-                return key;
-            }
-
-            return string.Format(val, args);
+            lang = "en-US";
         }
 
-
-        public static void LocalizeUI(Transform root)
+        if (!LocalizationSourceMap.TryGetValue(lang, out var dict))
         {
-            foreach (var text in root.GetComponentsInChildren<TMP_Text>(true))
-            {
-                ReplaceText(text);
-            }
+            return key;
         }
 
-        private static void ReplaceText(TMP_Text text)
+        if (!dict.TryGetValue(key, out var val))
         {
-            string key = text.text;
-            text.text = GetLocalizationText(key);
+            return key;
+        }
+
+        return string.Format(val, args);
+    }
+
+    public static void LocalizeUI(Transform root)
+    {
+        foreach (var text in root.GetComponentsInChildren<TMP_Text>(true))
+        {
+            text.text = GetLocalizationText(text.text);
         }
     }
 }

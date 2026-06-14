@@ -1,0 +1,49 @@
+[h1]转职 | Identity Change[/h1]
+
+[b]让每位英雄都能尝试不同职业的技能组合。[/b]
+
+[h2]主要功能[/h2]
+[list]
+[*]任何英雄都可以装备所有角色技能。
+[*]任何英雄都可以使用所有角色天赋/星座搭配。
+[*]大厅内由房主的转职开关决定是否启用，客户端会跟随房主设置。
+[*]开始游戏后会锁定本局最开始的设定，游戏中修改开关不会影响当前对局。
+[/list]
+
+[h2]联机说明[/h2]
+[list]
+[*]房主和所有客户端都需要安装本 Mod。
+[*]客户端会忽略自己的本地转职开关，以房主大厅设置为准。
+[/list]
+
+[h2]注意事项[/h2]
+[list]
+[*]部分跨英雄技能组合可能存在原版机制限制或异常表现。
+[*]本 Mod 会修改角色技能/天赋选择范围，建议所有玩家使用相同版本。
+[/list]
+
+[hr][/hr]
+
+[h1]Identity Change[/h1]
+
+[b]Mix character skills across heroes and build unusual loadouts.[/b]
+
+[h2]Features[/h2]
+[list]
+[*]Every hero can equip all character skills.
+[*]Every hero can use all character talents/constellation options.
+[*]In the lobby, the host setting controls whether Identity Change is enabled.
+[*]After the game starts, the initial lobby setting is locked for the current run. Changing the switch in-game will not affect the ongoing run.
+[/list]
+
+[h2]Multiplayer[/h2]
+[list]
+[*]The host and all clients must install this mod.
+[*]Clients ignore their local switch and follow the host lobby setting.
+[/list]
+
+[h2]Notes[/h2]
+[list]
+[*]Some cross-hero skill combinations may have bugs or limitations from the original game logic.
+[*]This mod changes the available skill/talent pool, so using the same mod version is recommended for all players.
+[/list]

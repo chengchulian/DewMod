@@ -1,8 +1,8 @@
 {
   "id": "com.chengchulian.DewMod.DewIdentityChange",
-  "name": "转职|DewIdentityChange",
+  "name": "转职|IdentityChange",
   "author": "chengchulian",
-  "modVer": "1.0.0",
+  "modVer": "1.1.0",
   "assemblies": [
     "obj/Release/*.dll"
   ]
