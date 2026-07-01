@@ -1,0 +1,9 @@
+{
+  "id": "com.chengchulian.DewMod.GoldenBurstAutoTarget",
+  "name": "Golden Burst Auto Target（金色爆发自动瞄准）",
+  "author": "chengchulian",
+  "modVer": "1.0.0",
+  "assemblies": [
+    "obj/Release/*.dll"
+  ]
+}

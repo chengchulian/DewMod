@@ -1,0 +1,20 @@
+{
+  "Header.Input": "Entrada",
+  "Header.Targets": "Alvos",
+  "LabelText.CastKey": "Tecla de atalho",
+  "Description.CastKey": "Tecla usada para mirar automaticamente e lancar Golden Burst no espaco Q.",
+  "LabelText.HoldToCast": "Segurar para lancar",
+  "Description.HoldToCast": "Quando ativado, segurar a tecla continua lancando automaticamente. Quando desativado, cada pressionamento lanca uma vez.",
+  "LabelText.TargetAllies": "Lancar em aliados",
+  "Description.TargetAllies": "Permite selecionar unidades aliadas como alvos.",
+  "LabelText.RequireFriendlyTeammates": "Somente colegas aliados",
+  "Description.RequireFriendlyTeammates": "Quando ativado, alvos herois sao ignorados a menos que sejam aliados no momento.",
+  "LabelText.TargetMonsters": "Lancar em monstros",
+  "Description.TargetMonsters": "Permite selecionar monstros que nao sejam chefes como alvos.",
+  "LabelText.TargetBosses": "Lancar em chefes",
+  "Description.TargetBosses": "Permite selecionar elites, minichefes e chefes como alvos.",
+  "LabelText.SkipDamageImmuneMonsters": "Ignorar monstros invulneraveis",
+  "Description.SkipDamageImmuneMonsters": "Quando ativado, alvos monstros sao ignorados enquanto tiverem imunidade a dano.",
+  "LabelText.TargetStones": "Lancar em pedras",
+  "Description.TargetStones": "Permite selecionar ouro, poeira de sonho e outros alvos de pedra."
+}

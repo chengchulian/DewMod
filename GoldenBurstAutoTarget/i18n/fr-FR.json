@@ -1,0 +1,20 @@
+{
+  "Header.Input": "Entree",
+  "Header.Targets": "Cibles",
+  "LabelText.CastKey": "Raccourci",
+  "Description.CastKey": "Touche utilisee pour cibler automatiquement et lancer Golden Burst depuis l emplacement Q.",
+  "LabelText.HoldToCast": "Maintenir pour lancer",
+  "Description.HoldToCast": "Si active, maintenir le raccourci lance automatiquement en continu. Sinon, chaque pression lance une fois.",
+  "LabelText.TargetAllies": "Lancer sur les allies",
+  "Description.TargetAllies": "Autorise la selection des unites alliees comme cibles.",
+  "LabelText.RequireFriendlyTeammates": "Coequipiers allies uniquement",
+  "Description.RequireFriendlyTeammates": "Si active, les heros cibles sont ignores sauf s ils sont actuellement allies.",
+  "LabelText.TargetMonsters": "Lancer sur les monstres",
+  "Description.TargetMonsters": "Autorise la selection des monstres non boss comme cibles.",
+  "LabelText.TargetBosses": "Lancer sur les boss",
+  "Description.TargetBosses": "Autorise la selection des elites, mini-boss et boss comme cibles.",
+  "LabelText.SkipDamageImmuneMonsters": "Ignorer les monstres invulnerables",
+  "Description.SkipDamageImmuneMonsters": "Si active, les monstres sont ignores tant qu ils ont une immunite aux degats.",
+  "LabelText.TargetStones": "Lancer sur les pierres",
+  "Description.TargetStones": "Autorise la selection de l or, de la poussiere de reve et des autres cibles de pierre."
+}

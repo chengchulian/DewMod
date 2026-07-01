@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props"
+            Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')"/>
+    <PropertyGroup>
+        <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+        <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+        <ProjectGuid>{E99B7E63-63D9-4004-AE96-B27DA5FE534C}</ProjectGuid>
+        <OutputType>Library</OutputType>
+        <AppDesignerFolder>Properties</AppDesignerFolder>
+        <RootNamespace>GoldenBurstAutoTarget</RootNamespace>
+        <AssemblyName>GoldenBurstAutoTarget</AssemblyName>
+        <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
+        <FileAlignment>512</FileAlignment>
+        <LangVersion>12</LangVersion>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+        <PlatformTarget>AnyCPU</PlatformTarget>
+        <DebugSymbols>true</DebugSymbols>
+        <DebugType>full</DebugType>
+        <Optimize>false</Optimize>
+        <OutputPath>bin\Debug\</OutputPath>
+        <DefineConstants>DEBUG;TRACE</DefineConstants>
+        <ErrorReport>prompt</ErrorReport>
+        <WarningLevel>4</WarningLevel>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+        <PlatformTarget>AnyCPU</PlatformTarget>
+        <DebugType>pdbonly</DebugType>
+        <Optimize>true</Optimize>
+        <OutputPath>bin\Release\</OutputPath>
+        <DefineConstants>TRACE</DefineConstants>
+        <ErrorReport>prompt</ErrorReport>
+        <WarningLevel>4</WarningLevel>
+    </PropertyGroup>
+    <ItemGroup>
+        <Reference Include="System"/>
+        <Reference Include="System.Core"/>
+        <Reference Include="System.Data"/>
+        <Reference Include="System.Xml"/>
+        <Reference Include="Dew.Core">
+            <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\Dew.Core.dll</HintPath>
+        </Reference>
+        <Reference Include="Mirror">
+            <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\Mirror.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine">
+            <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\UnityEngine.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.CoreModule">
+            <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.InputLegacyModule">
+            <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\UnityEngine.InputLegacyModule.dll</HintPath>
+        </Reference>
+        <Reference Include="Newtonsoft.Json">
+            <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\Newtonsoft.Json.dll</HintPath>
+        </Reference>
+        <Reference Include="Unity.TextMeshPro">
+            <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\Unity.TextMeshPro.dll</HintPath>
+        </Reference>
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="src\GoldenBurstAutoTargetController.cs" />
+        <Compile Include="src\GoldenBurstCastInput.cs" />
+        <Compile Include="src\GoldenBurstCaster.cs" />
+        <Compile Include="src\GoldenBurstSkillProvider.cs" />
+        <Compile Include="src\GoldenBurstTargetClassifier.cs" />
+        <Compile Include="src\GoldenBurstTargetSelector.cs" />
+        <Compile Include="src\GoldenBurstAutoTarget.cs" />
+        <Compile Include="src\config\LocalizationSource.cs" />
+        <Compile Include="src\config\PluginConfig.cs" />
+        <Compile Include="src\Properties\AssemblyInfo.cs"/>
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="about\description.txt" />
+        <Content Include="about\icon.png" />
+        <Content Include="about\metadata.json" />
+        <Content Include="about\preview.png" />
+        <Content Include="i18n\de-DE.json" />
+        <Content Include="i18n\en-US.json" />
+        <Content Include="i18n\es-MX.json" />
+        <Content Include="i18n\fr-FR.json" />
+        <Content Include="i18n\it-IT.json" />
+        <Content Include="i18n\ja-JP.json" />
+        <Content Include="i18n\ko-KR.json" />
+        <Content Include="i18n\pl-PL.json" />
+        <Content Include="i18n\pt-BR.json" />
+        <Content Include="i18n\ru-RU.json" />
+        <Content Include="i18n\tr-TR.json" />
+        <Content Include="i18n\zh-CN.json" />
+        <Content Include="i18n\zh-TW.json" />
+    </ItemGroup>
+    <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
+    <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+         Other similar extension points exist, see Microsoft.Common.targets.
+    <Target Name="BeforeBuild">
+    </Target>
+    <Target Name="AfterBuild">
+    </Target>
+    -->
+
+</Project>

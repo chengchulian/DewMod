@@ -1,0 +1,20 @@
+{
+  "Header.Input": "Wejscie",
+  "Header.Targets": "Cele",
+  "LabelText.CastKey": "Skrot",
+  "Description.CastKey": "Klawisz do automatycznego namierzania i rzucania Golden Burst ze slotu Q.",
+  "LabelText.HoldToCast": "Przytrzymaj, aby rzucac",
+  "Description.HoldToCast": "Gdy wlaczone, przytrzymanie skrotu rzuca automatycznie. Gdy wylaczone, kazde nacisniecie rzuca raz.",
+  "LabelText.TargetAllies": "Rzucaj na sojusznikow",
+  "Description.TargetAllies": "Pozwala wybierac jednostki sojusznicze jako cele.",
+  "LabelText.RequireFriendlyTeammates": "Tylko sojuszniczy gracze",
+  "Description.RequireFriendlyTeammates": "Gdy wlaczone, cele bohaterow sa ignorowane, jesli nie sa aktualnie sojusznikami.",
+  "LabelText.TargetMonsters": "Rzucaj na potwory",
+  "Description.TargetMonsters": "Pozwala wybierac potwory niebedace bossami jako cele.",
+  "LabelText.TargetBosses": "Rzucaj na bossow",
+  "Description.TargetBosses": "Pozwala wybierac elity, minibossow i bossow jako cele.",
+  "LabelText.SkipDamageImmuneMonsters": "Pomin nietykalne potwory",
+  "Description.SkipDamageImmuneMonsters": "Gdy wlaczone, cele potworow sa ignorowane, gdy maja odpornosc na obrazenia.",
+  "LabelText.TargetStones": "Rzucaj na kamienie",
+  "Description.TargetStones": "Pozwala wybierac zloto, pyl snow i inne kamienne cele."
+}

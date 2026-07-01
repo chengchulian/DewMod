@@ -1,0 +1,20 @@
+{
+  "Header.Input": "Girdi",
+  "Header.Targets": "Hedefler",
+  "LabelText.CastKey": "Kisayol",
+  "Description.CastKey": "Q yuvasindaki Golden Burst icin otomatik hedef secip kullanacak tus.",
+  "LabelText.HoldToCast": "Basili tutarak kullan",
+  "Description.HoldToCast": "Etkinse kisayolu basili tutmak otomatik kullanmaya devam eder. Devre disiysa her basis bir kez kullanir.",
+  "LabelText.TargetAllies": "Muttefiklere kullan",
+  "Description.TargetAllies": "Muttefik birimlerin hedef olarak secilmesine izin verir.",
+  "LabelText.RequireFriendlyTeammates": "Yalnizca dost takim arkadaslari",
+  "Description.RequireFriendlyTeammates": "Etkinse kahraman hedefler su anda muttefik degilse yok sayilir.",
+  "LabelText.TargetMonsters": "Canavarlara kullan",
+  "Description.TargetMonsters": "Boss olmayan canavarlarin hedef secilmesine izin verir.",
+  "LabelText.TargetBosses": "Bosslara kullan",
+  "Description.TargetBosses": "Elitlerin, mini bosslarin ve bosslarin hedef secilmesine izin verir.",
+  "LabelText.SkipDamageImmuneMonsters": "Yenilmez canavarlari atla",
+  "Description.SkipDamageImmuneMonsters": "Etkinse hasar bagisikligi olan canavar hedefler yok sayilir.",
+  "LabelText.TargetStones": "Taslara kullan",
+  "Description.TargetStones": "Altin, ruya tozu ve diger tas hedeflerin secilmesine izin verir."
+}

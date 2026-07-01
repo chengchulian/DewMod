@@ -1,0 +1,20 @@
+{
+  "Header.Input": "Entrada",
+  "Header.Targets": "Objetivos",
+  "LabelText.CastKey": "Tecla rapida",
+  "Description.CastKey": "Tecla usada para apuntar automaticamente y lanzar Golden Burst desde la ranura Q.",
+  "LabelText.HoldToCast": "Mantener para lanzar",
+  "Description.HoldToCast": "Si esta activado, mantener la tecla seguira lanzando automaticamente. Si esta desactivado, cada pulsacion lanza una vez.",
+  "LabelText.TargetAllies": "Lanzar en aliados",
+  "Description.TargetAllies": "Permite seleccionar unidades aliadas como objetivos.",
+  "LabelText.RequireFriendlyTeammates": "Solo companeros aliados",
+  "Description.RequireFriendlyTeammates": "Si esta activado, se ignoran los heroes objetivo a menos que sean aliados actualmente.",
+  "LabelText.TargetMonsters": "Lanzar en monstruos",
+  "Description.TargetMonsters": "Permite seleccionar monstruos que no sean jefes como objetivos.",
+  "LabelText.TargetBosses": "Lanzar en jefes",
+  "Description.TargetBosses": "Permite seleccionar elites, minijefes y jefes como objetivos.",
+  "LabelText.SkipDamageImmuneMonsters": "Omitir monstruos invulnerables",
+  "Description.SkipDamageImmuneMonsters": "Si esta activado, se ignoran los monstruos mientras tengan inmunidad al dano.",
+  "LabelText.TargetStones": "Lanzar en piedras",
+  "Description.TargetStones": "Permite seleccionar oro, polvo de sueno y otros objetivos de piedra."
+}

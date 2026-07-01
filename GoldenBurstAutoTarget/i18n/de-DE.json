@@ -1,0 +1,20 @@
+{
+  "Header.Input": "Eingabe",
+  "Header.Targets": "Ziele",
+  "LabelText.CastKey": "Hotkey",
+  "Description.CastKey": "Taste zum automatischen Anvisieren und Wirken von Golden Burst im Q-Slot.",
+  "LabelText.HoldToCast": "Zum Wirken Halten",
+  "Description.HoldToCast": "Wenn aktiviert, wirkt das Halten des Hotkeys automatisch weiter. Wenn deaktiviert, wirkt jeder Tastendruck einmal.",
+  "LabelText.TargetAllies": "Auf Verbuendete Wirken",
+  "Description.TargetAllies": "Erlaubt verbuendete Einheiten als Ziele.",
+  "LabelText.RequireFriendlyTeammates": "Nur Freundliche Teammitglieder",
+  "Description.RequireFriendlyTeammates": "Wenn aktiviert, werden Heldenziele ignoriert, sofern sie derzeit keine Verbuendeten sind.",
+  "LabelText.TargetMonsters": "Auf Monster Wirken",
+  "Description.TargetMonsters": "Erlaubt Nicht-Boss-Monster als Ziele.",
+  "LabelText.TargetBosses": "Auf Bosse Wirken",
+  "Description.TargetBosses": "Erlaubt Eliten, Minibosse und Bosse als Ziele.",
+  "LabelText.SkipDamageImmuneMonsters": "Unverwundbare Monster Ueberspringen",
+  "Description.SkipDamageImmuneMonsters": "Wenn aktiviert, werden Monsterziele ignoriert, solange sie Schadensimmunitaet haben.",
+  "LabelText.TargetStones": "Auf Steine Wirken",
+  "Description.TargetStones": "Erlaubt Gold-, Traumstaub- und andere Steinziele."
+}

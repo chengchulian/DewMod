@@ -1,0 +1,20 @@
+{
+  "Header.Input": "Input",
+  "Header.Targets": "Targets",
+  "LabelText.CastKey": "Hotkey",
+  "Description.CastKey": "Key used to auto-target and cast Golden Burst from the Q slot.",
+  "LabelText.HoldToCast": "Hold to Cast",
+  "Description.HoldToCast": "When enabled, holding the hotkey keeps casting automatically. When disabled, each key press casts once.",
+  "LabelText.TargetAllies": "Cast on Allies",
+  "Description.TargetAllies": "Allow allied units to be selected as targets.",
+  "LabelText.RequireFriendlyTeammates": "Skip Non-Friendly Teammates",
+  "Description.RequireFriendlyTeammates": "When enabled, hero targets are ignored when they are not currently allies.",
+  "LabelText.TargetMonsters": "Cast on Monsters",
+  "Description.TargetMonsters": "Allow non-boss monsters to be selected as targets.",
+  "LabelText.TargetBosses": "Cast on Bosses",
+  "Description.TargetBosses": "Allow elites, minibosses, and bosses to be selected as targets.",
+  "LabelText.SkipDamageImmuneMonsters": "Skip Invulnerable Monsters",
+  "Description.SkipDamageImmuneMonsters": "When enabled, monster targets are ignored while they have damage immunity.",
+  "LabelText.TargetStones": "Cast on Stones",
+  "Description.TargetStones": "Allow gold, dream dust, and other stone targets to be selected."
+}

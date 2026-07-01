@@ -1,0 +1,27 @@
+金色爆发自动瞄准
+
+自动寻找最近的已启用目标，并从 Q 技能位释放 Golden Burst（金色爆发）。
+
+功能：
+- 可配置快捷键
+- 支持长按连续释放
+- 可选择目标类型：队友、小怪、BOSS、石头
+- 可开启“队友非友军时跳过”，避免对当前不是友军的英雄释放
+- 可开启“跳过无敌怪物”，避免对拥有伤害免疫的小怪释放
+- 配置界面文本使用 JSON 本地化
+
+这是一个客户端辅助 Mod。
+
+Golden Burst Auto Target
+
+Automatically finds the nearest configured target and casts Golden Burst from the Q slot.
+
+Features:
+- Configurable hotkey
+- Hold-to-cast mode
+- Optional target categories: allies, monsters, bosses, and stones
+- Optional safety check that skips teammate heroes when they are not currently allies
+- Optional safety check that skips damage-immune monsters
+- JSON localization for configuration text
+
+This is a client-side helper mod.

@@ -1,0 +1,20 @@
+{
+  "Header.Input": "Input",
+  "Header.Targets": "Bersagli",
+  "LabelText.CastKey": "Tasto rapido",
+  "Description.CastKey": "Tasto usato per mirare automaticamente e lanciare Golden Burst dallo slot Q.",
+  "LabelText.HoldToCast": "Tieni premuto per lanciare",
+  "Description.HoldToCast": "Se attivo, tenere premuto il tasto continua a lanciare automaticamente. Se disattivo, ogni pressione lancia una volta.",
+  "LabelText.TargetAllies": "Lancia sugli alleati",
+  "Description.TargetAllies": "Permette di selezionare unita alleate come bersagli.",
+  "LabelText.RequireFriendlyTeammates": "Solo compagni alleati",
+  "Description.RequireFriendlyTeammates": "Se attivo, i bersagli eroe vengono ignorati a meno che non siano attualmente alleati.",
+  "LabelText.TargetMonsters": "Lancia sui mostri",
+  "Description.TargetMonsters": "Permette di selezionare mostri non boss come bersagli.",
+  "LabelText.TargetBosses": "Lancia sui boss",
+  "Description.TargetBosses": "Permette di selezionare elite, miniboss e boss come bersagli.",
+  "LabelText.SkipDamageImmuneMonsters": "Salta mostri invulnerabili",
+  "Description.SkipDamageImmuneMonsters": "Se attivo, i bersagli mostro vengono ignorati mentre hanno immunita ai danni.",
+  "LabelText.TargetStones": "Lancia sulle pietre",
+  "Description.TargetStones": "Permette di selezionare oro, polvere di sogno e altri bersagli di pietra."
+}
