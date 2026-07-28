@@ -1,0 +1,9 @@
+{
+  "id": "com.chengchulian.DewMod.DewSuperSmart",
+  "name": "SuperSmart 超级智能",
+  "author": "chengchulian",
+  "modVer": "1.0.0",
+  "assemblies": [
+    "obj/Release/*.dll"
+  ]
+}

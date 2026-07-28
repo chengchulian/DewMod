@@ -1,0 +1,7 @@
+{
+  "skill.name": "血管小偷",
+  "skill.shortDescription": "对BOSS使用，窃取BOSS的一项能力。",
+  "skill.description": "窃取BOSS的一项能力为自己所用，卸下此技能后能力失效，可重新窃取。释放窃取到的技能造成{0}%伤害。",
+  "skill.memory": "从BOSS的血管里借走战斗本能。",
+  "skill.currentStolen": "当前窃取: {0}"
+}

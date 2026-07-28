@@ -1,0 +1,7 @@
+{
+  "skill.name": "Vascular Thief",
+  "skill.shortDescription": "Use on a boss to steal one of its abilities.",
+  "skill.description": "Steal one of a boss's abilities for your own use. Removing this skill invalidates the stolen ability and lets you steal again. Casting the stolen ability deals {0}% damage.",
+  "skill.memory": "Borrow battle instinct from a boss's veins.",
+  "skill.currentStolen": "Current stolen: {0}"
+}

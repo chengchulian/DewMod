@@ -1,0 +1,7 @@
+{
+  "skill.name": "Voleur vasculaire",
+  "skill.shortDescription": "À utiliser sur un boss pour voler l'une de ses capacités.",
+  "skill.description": "Vole une capacité d'un boss pour l'utiliser toi-même. Retirer cette compétence annule la capacité volée et permet de voler à nouveau. La capacité volée inflige {0}% de dégâts.",
+  "skill.memory": "Emprunte l'instinct de combat dans les veines d'un boss.",
+  "skill.currentStolen": "Vol actuel : {0}"
+}

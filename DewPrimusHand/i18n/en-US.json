@@ -65,5 +65,7 @@
   "Description.HeroIgnoreShieldCoolDownFromOthers": "Enable this option to allow the hero to ignore shield cooldowns from other sources.",
   "Header.WorldConfiguration": "World Configuration",
   "LabelText.WorldReveal": "World Reveal",
-  "Description.WorldReveal": "Enable this option to activate World Reveal, similar to the Treasure World Reveal feature."
+  "Description.WorldReveal": "Enable this option to activate World Reveal, similar to the Treasure World Reveal feature.",
+  "LabelText.SpawnLostSoulInCurrentRoom": "Spawn Lost Soul in Current Room",
+  "Description.SpawnLostSoulInCurrentRoom": "When a teammate is knocked out, spawn their Lost Soul in the current room instead of a later room."
 }

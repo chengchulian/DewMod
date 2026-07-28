@@ -65,5 +65,7 @@
   "Description.HeroIgnoreShieldCoolDownFromOthers": "有効にすると、ヒーローは他のシールドのクールダウンを無視します。",
   "Header.WorldConfiguration": "ワールド設定",
   "LabelText.WorldReveal": "千里眼",
-  "Description.WorldReveal": "有効にすると、宝物千里眼と同様に千里眼が有効になります。"
+  "Description.WorldReveal": "有効にすると、宝物千里眼と同様に千里眼が有効になります。",
+  "LabelText.SpawnLostSoulInCurrentRoom": "現在の部屋に迷える魂を生成",
+  "Description.SpawnLostSoulInCurrentRoom": "有効にすると、味方がダウンした際、その迷える魂が後の部屋ではなく現在の部屋に出現します。"
 }

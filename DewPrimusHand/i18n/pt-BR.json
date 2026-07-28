@@ -65,5 +65,7 @@
   "Description.HeroIgnoreShieldCoolDownFromOthers": "Ativando esta opção, o herói ignorará o tempo de recarga do escudo de outras fontes.",
   "Header.WorldConfiguration": "Configuração do Mundo",
   "LabelText.WorldReveal": "Visão do Mundo",
-  "Description.WorldReveal": "Ativando esta opção, a Visão do Mundo será ativada, igual à função Visão do Tesouro."
+  "Description.WorldReveal": "Ativando esta opção, a Visão do Mundo será ativada, igual à função Visão do Tesouro.",
+  "LabelText.SpawnLostSoulInCurrentRoom": "Alma perdida na sala atual",
+  "Description.SpawnLostSoulInCurrentRoom": "Quando um aliado for abatido, sua alma perdida aparecerá na sala atual em vez de uma sala posterior."
 }

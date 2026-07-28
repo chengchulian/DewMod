@@ -1,0 +1,7 @@
+{
+  "skill.name": "혈관 도둑",
+  "skill.shortDescription": "보스에게 사용해 보스의 능력 하나를 훔칩니다.",
+  "skill.description": "보스의 능력 하나를 훔쳐 자신의 것으로 사용합니다. 이 스킬을 해제하면 훔친 능력이 사라지며 다시 훔칠 수 있습니다. 훔친 스킬은 {0}%의 피해를 줍니다.",
+  "skill.memory": "보스의 혈관에서 전투 본능을 빌려 옵니다.",
+  "skill.currentStolen": "현재 훔친 능력: {0}"
+}

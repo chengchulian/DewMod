@@ -80,17 +80,82 @@ build.ps1                          # MSBuild 构建脚本
 | `DewBootcamp` | 训练营 | 1.1.0 | 生成测试单位，方便测试 DPS 与 build。 |
 | `DewGemSlotCount` | 精华槽数量 / SkillGemCount | 1.3.0 | 调整技能基础精华槽数量，以及堕落混沌可增加到的上限。 |
 | `DewHeroSkillJonas` | 出售英雄技能的乔纳斯 | 1.0.0 | 在礼物房间加入额外商人，用于出售英雄技能。 |
-| `DewIdentityChange` | 转职 / IdentityChange | 1.1.0 | 允许英雄装备其他角色技能，并使用不同角色的天赋/星座组合。 |
+| `DewIdentityChange` | 转职 / IdentityChange | 1.3.0 | 允许英雄装备其他角色技能、使用跨角色天赋，并可将角色技能加入全局掉落池。 |
 | `DewJonasEnhance` | 商人乔纳斯增强 / JonasEnhance | 1.1.2 | 增强乔纳斯商店，支持商品刷新、列数和初始白金币等配置。 |
 | `DewModConfigListSupport` | Mod配置界面列表支持 / ModConfigListSupport | 1.0.0 | 为 Mod 配置界面增加 `List` 类型支持。 |
 | `DewMorePlayers` | 更多的玩家人数 / MorePlayers | 1.0.1 | 房主侧自定义玩家数量。 |
 | `DewMoreVision` | 无限视距 / MoreVision | 1.1.0 | 客户端扩展摄像机视野范围，并支持调整缩放步长。 |
 | `DewPrimusHand` | 普里穆斯之手 / PrimusHand | 1.1.0 | 调整怪物、Boss 与战斗强度相关参数。 |
 | `DewSafeShare` | DewSafeShare / 安全共享 | 1.0.0 | 掉落物在玩家主动标记前仅所有者可见。 |
-| `DewSuperSmart` | DewSuperSmart | 1.0.0 | 显示攻击/技能范围和威胁区域，支持按住闪避键自动规避。 |
+| `DewSuperSmart` | SuperSmart 超级智能 | 1.0.0 | 显示攻击/技能范围和怪物/飞弹威胁区域，支持按住闪避键自动规避。 |
 | `DewVascularThief` | 血管小偷 / Vascular Thief | 1.0.0 | 新增可窃取 Boss 能力的专属技能。 |
 | `DewZoneTwistedPath` | 区域重排 / ZoneTwistedPath | 1.0.0 | 房主侧重排区域顺序。 |
 | `GoldenBurstAutoTarget` | Golden Burst Auto Target（金色爆发自动瞄准） | 1.0.0 | 自动选择目标并从 Q 技能位释放 Golden Burst。 |
+
+## DewSuperSmart / SuperSmart 超级智能
+
+`DewSuperSmart` 是本地客户端战斗辅助显示与自动躲避 Mod，不修改房主规则，主要用于提升怪物技能、飞弹和英雄技能范围的可读性。
+
+### 显示功能
+
+- 绘制本地英雄普通攻击范围。
+- 分别绘制英雄 Q、W、E、R、位移技能和身份技能范围。
+- 绘制怪物攻击与技能预测范围，形状包括圆形、扇形和方框/直线区域。
+- 绘制敌方飞弹路径和碰撞范围，飞弹以方框/直线威胁区域显示。
+- 威胁绘制层使用置顶材质，尽量避免被场景、地形或单位遮挡。
+
+### 威胁颜色
+
+未释放的怪物攻击/技能预览固定显示为绿色，不参与距离和时间判定。
+
+已释放/正在释放的威胁会同时根据角色距离和预计命中时间判定颜色，并取更危险的等级：
+
+- 绿色：距离或命中时间大于 `2.0`。
+- 黄色：距离 `<= 1.8`，或预计 `<= 1.8` 秒命中。
+- 红色：距离 `<= 0.8`，或预计 `<= 0.8` 秒命中。
+
+距离判定使用角色碰撞半径加威胁 padding 后，到威胁区域边缘的距离。
+
+### 自动躲避
+
+- 按住自动躲避按键时启用，默认按键为 `LeftShift`。
+- 自动采集怪物攻击、怪物正在释放的技能区域、已释放技能实例和敌方飞弹威胁。
+- 默认优先使用可用位移技能前往安全点；没有合适位移时使用普通移动规避。
+- 会在角色周围采样安全点，评估终点风险、路径风险和预计命中时间后执行躲避。
+- `Dodge Interval / 躲避间隔` 控制自动躲避指令的最小间隔，默认 `0.1` 秒，内部最低保护值为 `0.03` 秒。
+
+### 躲避等级
+
+`AutoDodgeLevel / 躲避等级` 用于控制自动躲避触发范围：
+
+- `Green`：躲避全部威胁等级，包括未释放的绿色预览范围。
+- `Yellow`：只躲避已释放/正在释放威胁中距离 `<= 1.8` 或 `<= 1.8` 秒命中的威胁。
+- `Red`：只躲避已释放/正在释放威胁中距离 `<= 0.8` 或 `<= 0.8` 秒命中的威胁。
+
+### 配置项
+
+当前公开配置项：
+
+- `ShowAttackRange`：显示普攻范围。
+- `ShowQRange`：显示 Q 技能范围。
+- `ShowWRange`：显示 W 技能范围。
+- `ShowERange`：显示 E 技能范围。
+- `ShowRRange`：显示 R 技能范围。
+- `ShowMovementRange`：显示位移技能范围。
+- `ShowIdentityRange`：显示身份技能范围。
+- `ShowMonsterThreatRanges`：显示怪物威胁范围。
+- `ShowProjectileThreatRanges`：显示飞弹威胁范围。
+- `EnableAutoDodge`：启用自动躲避。
+- `AutoDodgeUseMovementSkill`：自动躲避时优先使用位移技能。
+- `AutoDodgeLevel`：选择红/黄/绿躲避等级。
+- `AutoDodgeCommandInterval`：自动躲避指令间隔。
+- `AutoDodgeKey`：自动躲避按键。
+
+### 本地化
+
+`DewSuperSmart/i18n` 提供 13 个语言 JSON：
+
+`de-DE`、`en-US`、`es-MX`、`fr-FR`、`it-IT`、`ja-JP`、`ko-KR`、`pl-PL`、`pt-BR`、`ru-RU`、`tr-TR`、`zh-CN`、`zh-TW`。
 
 ## 开发约定
 

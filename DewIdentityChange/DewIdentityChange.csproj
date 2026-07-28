@@ -709,6 +709,7 @@
         <Reference Include="System.Xml"/>
     </ItemGroup>
     <ItemGroup>
+        <Compile Include="config\CharacterSkillLootPool.cs" />
         <Compile Include="config\HeroSkillSource.cs" />
         <Compile Include="config\IdentityConfigSync.cs" />
         <Compile Include="config\LoadoutPageMapper.cs" />
@@ -718,6 +719,8 @@
         <Compile Include="DewIdentityChange.cs" />
         <Compile Include="patch\DewPlayer_Patch.cs" />
         <Compile Include="patch\HeroLoadoutData_Patch.cs" />
+        <Compile Include="patch\LootManager_Patch.cs" />
+        <Compile Include="patch\StarEffect_Patch.cs" />
         <Compile Include="patch\UI_Lobby_Constellations_Patch.cs" />
         <Compile Include="patch\UI_Lobby_Constellations_QuickLoadoutSwitch_Patch.cs" />
         <Compile Include="patch\UI_Lobby_Constellations_Skills_Slot_Patch.cs" />

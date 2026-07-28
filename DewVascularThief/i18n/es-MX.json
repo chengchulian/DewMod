@@ -1,0 +1,7 @@
+{
+  "skill.name": "Ladrón vascular",
+  "skill.shortDescription": "Úsalo en un jefe para robar una de sus habilidades.",
+  "skill.description": "Roba una habilidad de un jefe para usarla tú. Al quitar esta habilidad, la habilidad robada deja de funcionar y puedes volver a robar. La habilidad robada inflige {0}% de daño.",
+  "skill.memory": "Toma prestado el instinto de combate de las venas de un jefe.",
+  "skill.currentStolen": "Robado actual: {0}"
+}

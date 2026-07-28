@@ -65,5 +65,7 @@
   "Description.HeroIgnoreShieldCoolDownFromOthers": "Aktivieren Sie diese Option, damit der Held die Abklingzeit von anderen Quellen ignoriert.",
   "Header.WorldConfiguration": "Welt Konfiguration",
   "LabelText.WorldReveal": "Fernsicht",
-  "Description.WorldReveal": "Aktivieren Sie diese Option für Fernsicht, gleich wie bei Schatz-Fernsicht."
+  "Description.WorldReveal": "Aktivieren Sie diese Option für Fernsicht, gleich wie bei Schatz-Fernsicht.",
+  "LabelText.SpawnLostSoulInCurrentRoom": "Verlorene Seele im aktuellen Raum",
+  "Description.SpawnLostSoulInCurrentRoom": "Wenn ein Teammitglied kampfunfähig wird, erscheint seine verlorene Seele im aktuellen statt in einem späteren Raum."
 }

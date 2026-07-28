@@ -27,4 +27,13 @@ public class DewPrimusHand : ModBehaviour
     {
         harmony.UnpatchAll(harmony.Id);
     }
+
+    public override void OnConfigChanged()
+    {
+        var zoneManager = NetworkedManagerBase<ZoneManager>.instance;
+        if (Config.WorldReveal && zoneManager != null && zoneManager.isServer)
+        {
+            zoneManager.RevealWorld(true);
+        }
+    }
 }

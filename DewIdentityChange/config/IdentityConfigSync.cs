@@ -1,24 +1,39 @@
 using System;
 using System.Collections.Generic;
-using Mirror;
 using UnityEngine;
 
 namespace DewIdentityChange.config;
 
+[Serializable]
+public sealed class IdentityConfigSyncSnapshot
+{
+    public const int CurrentProtocolVersion = 2;
+
+    public int ProtocolVersion = CurrentProtocolVersion;
+    public uint Revision;
+    public bool Enable;
+    public bool AddCharacterSkillsToLoot;
+}
+
 public sealed class IdentityConfigSync
 {
-    private const string SyncKey = "DewIdentityChange::enable";
+    private const string SyncKey = "DewIdentityChange::config:v2";
 
     private readonly Action _applyEffects;
     private readonly PluginConfig _config;
     private readonly global::DewIdentityChange.DewIdentityChange _owner;
 
-    private bool _hasHostEnable;
-    private bool _hostEnable;
+    private bool _hasLobbyConfig;
     private bool _isGameConfigLocked;
-    private bool _isGameSettingsSubscribed;
-    private bool _isLobbySubscribed;
+    private bool _lobbyEnable;
+    private bool _lobbyAddCharacterSkillsToLoot;
     private bool _lockedEnable;
+    private bool _lockedAddCharacterSkillsToLoot;
+    private bool _isLobbySubscribed;
+    private string _currentLobbyId;
+    private string _lastAppliedPayload;
+    private uint _lastAppliedRevision;
+    private uint _publishedRevision;
 
     public IdentityConfigSync(
         global::DewIdentityChange.DewIdentityChange owner,
@@ -34,48 +49,61 @@ public sealed class IdentityConfigSync
     {
         get
         {
-            if (!_isGameConfigLocked && IsGameStarted())
+            LobbyInstance lobby = GetCurrentLobby();
+            if (lobby == null)
             {
-                LockGameConfig("read", applyEffects: false);
+                return _config.enable;
             }
 
+            EnsureCurrentLobby(lobby);
+            EnsureGameConfigLocked(lobby, "enable read");
             if (_isGameConfigLocked)
             {
                 return _lockedEnable;
             }
 
-            return IsConfigAuthoritative() ? _config.enable : _hasHostEnable && _hostEnable;
+            ApplyLobbyConfig(lobby, "enable read");
+            return _hasLobbyConfig
+                ? _lobbyEnable
+                : lobby.isLobbyLeader && _config.enable;
+        }
+    }
+
+    public bool IsCharacterSkillLootEnabled
+    {
+        get
+        {
+            LobbyInstance lobby = GetCurrentLobby();
+            if (lobby == null)
+            {
+                return _config.addCharacterSkillsToLoot;
+            }
+
+            EnsureCurrentLobby(lobby);
+            EnsureGameConfigLocked(lobby, "shop config read");
+            if (_isGameConfigLocked)
+            {
+                return _lockedAddCharacterSkillsToLoot;
+            }
+
+            ApplyLobbyConfig(lobby, "shop config read");
+            return _hasLobbyConfig
+                ? _lobbyAddCharacterSkillsToLoot
+                : lobby.isLobbyLeader && _config.addCharacterSkillsToLoot;
         }
     }
 
     public void LobbyManagerOnStart()
     {
         SubscribeLobbyChanged();
-        SyncOrLockConfig("lobby start");
-        Dew.CallDelayed(() => SyncOrLockConfig("lobby retry 1"), 30);
-        Dew.CallDelayed(() => SyncOrLockConfig("lobby retry 2"), 120);
+        SyncOrLockConfig("lobby manager start");
+        Dew.CallDelayed(() => RefreshFromLobby("lobby retry 1"), 30);
+        Dew.CallDelayed(() => RefreshFromLobby("lobby retry 2"), 120);
     }
 
     public void LobbyManagerOnStop()
     {
         UnsubscribeLobbyChanged();
-    }
-
-    public void GameSettingsManagerOnStartClient()
-    {
-        SubscribeGameSettingsChanged();
-        SyncOrLockConfig("game settings start");
-        Dew.CallDelayed(() => SyncOrLockConfig("game settings retry"), 30);
-    }
-
-    public void GameSettingsManagerOnStopClient()
-    {
-        UnsubscribeGameSettingsChanged();
-        if (NetworkClient.active || NetworkServer.active)
-        {
-            return;
-        }
-
         ResetSyncedState();
         _applyEffects();
     }
@@ -90,247 +118,62 @@ public sealed class IdentityConfigSync
         Dew.CallOnReady(
             _owner,
             () => DewPlayer.local == player && !string.IsNullOrEmpty(player.selectedHeroType),
-            () =>
-            {
-                SyncOrLockConfig("local player ready");
-                _applyEffects();
-            });
+            () => RefreshFromLobby("local player ready"));
     }
 
     public void SyncOrLockConfig(string reason)
     {
-        if (_isGameConfigLocked)
+        LobbyInstance lobby = GetCurrentLobby();
+        if (lobby == null)
         {
-            if (!IsInLobby())
-            {
-                return;
-            }
-
             ResetSyncedState();
-        }
-
-        if (IsGameStarted())
-        {
-            LockGameConfig(reason);
             return;
         }
 
-        if (IsConfigAuthoritative())
+        EnsureCurrentLobby(lobby);
+
+        if (_isGameConfigLocked && !IsRunStarted(lobby))
         {
-            PublishHostConfig(reason);
+            _isGameConfigLocked = false;
+            _lockedEnable = false;
+            _lockedAddCharacterSkillsToLoot = false;
+        }
+
+        if (IsRunStarted(lobby))
+        {
+            LockGameConfig(lobby, reason);
+            return;
+        }
+
+        if (lobby.isLobbyLeader)
+        {
+            PublishLobbyConfig(lobby, reason);
         }
         else
         {
-            ApplyHostConfig(reason);
+            ApplyLobbyConfig(lobby, reason);
         }
     }
 
     public void Dispose()
     {
         UnsubscribeLobbyChanged();
-        UnsubscribeGameSettingsChanged();
-    }
-
-    private void LockGameConfig(string reason, bool applyEffects = true)
-    {
-        if (_isGameConfigLocked)
-        {
-            return;
-        }
-
-        bool hasConfig = TryResolveEnable(out _lockedEnable);
-        _hostEnable = _lockedEnable;
-        _hasHostEnable = true;
-        _isGameConfigLocked = true;
-        UnsubscribeGameSettingsChanged();
-
-        if (!hasConfig && !IsConfigAuthoritative())
-        {
-            Debug.LogWarning("[DewIdentityChange] Locked without host config; default disabled: " + reason);
-        }
-        else
-        {
-            Debug.Log("[DewIdentityChange] Locked config enable=" + _lockedEnable + ": " + reason);
-        }
-
-        if (applyEffects)
-        {
-            _applyEffects();
-        }
-    }
-
-    private void PublishHostConfig(string reason)
-    {
-        if (!IsConfigAuthoritative() || IsGameStarted())
-        {
-            return;
-        }
-
-        string value = Encode(_config.enable);
-        PublishLobbyConfig(value, reason);
-        PublishGameSettingsConfig(value, reason);
-    }
-
-    private void PublishLobbyConfig(string value, string reason)
-    {
-        var lobbyManager = ManagerBase<LobbyManager>.softInstance;
-        var lobby = lobbyManager?.service?.currentLobby;
-        if (lobby == null || !lobby.isLobbyLeader)
-        {
-            return;
-        }
-
-        var data = lobby.customData == null
-            ? new Dictionary<string, string>()
-            : new Dictionary<string, string>(lobby.customData);
-
-        if (data.TryGetValue(SyncKey, out string current) && current == value)
-        {
-            return;
-        }
-
-        data[SyncKey] = value;
-        lobby.customData = data;
-        lobbyManager.service.SetLobbyAttribute("customData", data);
-        Debug.Log("[DewIdentityChange] Publish lobby config " + _config.enable + ": " + reason);
-    }
-
-    private void PublishGameSettingsConfig(string value, string reason)
-    {
-        var gameSettings = NetworkedManagerBase<GameSettingsManager>.softInstance;
-        if (!NetworkServer.active || gameSettings?.customData == null || gameSettings.state != GameState.InLobby)
-        {
-            return;
-        }
-
-        if (gameSettings.customData.TryGetValue(SyncKey, out string current) && current == value)
-        {
-            return;
-        }
-
-        gameSettings.customData[SyncKey] = value;
-        Debug.Log("[DewIdentityChange] Publish game settings config " + _config.enable + ": " + reason);
-    }
-
-    private void ApplyHostConfig(string reason)
-    {
-        if (IsConfigAuthoritative() || IsGameStarted() || !TryReadSyncedEnable(out bool enable))
-        {
-            return;
-        }
-
-        if (_hasHostEnable && _hostEnable == enable)
-        {
-            return;
-        }
-
-        _hostEnable = enable;
-        _hasHostEnable = true;
-        Debug.Log("[DewIdentityChange] Applied host config enable=" + enable + ": " + reason);
-        _applyEffects();
-    }
-
-    private bool TryResolveEnable(out bool enable)
-    {
-        if (TryReadSyncedEnable(out enable))
-        {
-            return true;
-        }
-
-        if (_hasHostEnable)
-        {
-            enable = _hostEnable;
-            return true;
-        }
-
-        if (IsConfigAuthoritative())
-        {
-            enable = _config.enable;
-            return true;
-        }
-
-        enable = false;
-        return false;
-    }
-
-    private bool TryReadSyncedEnable(out bool enable)
-    {
-        if (TryReadGameSettingsEnable(out enable))
-        {
-            return true;
-        }
-
-        return TryReadLobbyEnable(out enable);
-    }
-
-    private bool TryReadGameSettingsEnable(out bool enable)
-    {
-        var data = NetworkedManagerBase<GameSettingsManager>.softInstance?.customData;
-        if (data != null && data.TryGetValue(SyncKey, out string value))
-        {
-            return TryDecode(value, out enable);
-        }
-
-        enable = false;
-        return false;
-    }
-
-    private bool TryReadLobbyEnable(out bool enable)
-    {
-        var data = ManagerBase<LobbyManager>.softInstance?.service?.currentLobby?.customData;
-        if (data != null && data.TryGetValue(SyncKey, out string value))
-        {
-            return TryDecode(value, out enable);
-        }
-
-        enable = false;
-        return false;
-    }
-
-    private bool IsConfigAuthoritative()
-    {
-        if (NetworkServer.active)
-        {
-            return true;
-        }
-
-        var lobby = ManagerBase<LobbyManager>.softInstance?.service?.currentLobby;
-        return lobby?.isLobbyLeader ?? !NetworkClient.active;
-    }
-
-    private bool IsGameStarted()
-    {
-        var gameSettings = NetworkedManagerBase<GameSettingsManager>.softInstance;
-        return gameSettings != null && gameSettings.state != GameState.InLobby;
-    }
-
-    private bool IsInLobby()
-    {
-        var gameSettings = NetworkedManagerBase<GameSettingsManager>.softInstance;
-        return gameSettings != null && gameSettings.state == GameState.InLobby;
     }
 
     private void OnCurrentLobbyChanged()
     {
-        SyncOrLockConfig("lobby changed");
+        RefreshFromLobby("current lobby changed");
     }
 
-    private void OnGameSettingsCustomDataChanged(string key)
+    private void RefreshFromLobby(string reason)
     {
-        if (key == SyncKey)
-        {
-            SyncOrLockConfig("game settings changed");
-        }
-    }
-
-    private void OnGameSettingsStateChanged()
-    {
-        SyncOrLockConfig("game state changed");
+        SyncOrLockConfig(reason);
+        _applyEffects();
     }
 
     private void SubscribeLobbyChanged()
     {
-        var lobbyManager = ManagerBase<LobbyManager>.softInstance;
+        LobbyManager lobbyManager = ManagerBase<LobbyManager>.softInstance;
         if (_isLobbySubscribed || lobbyManager == null)
         {
             return;
@@ -343,7 +186,7 @@ public sealed class IdentityConfigSync
 
     private void UnsubscribeLobbyChanged()
     {
-        var lobbyManager = ManagerBase<LobbyManager>.softInstance;
+        LobbyManager lobbyManager = ManagerBase<LobbyManager>.softInstance;
         if (_isLobbySubscribed && lobbyManager != null)
         {
             lobbyManager.onCurrentLobbyChanged -= OnCurrentLobbyChanged;
@@ -352,54 +195,220 @@ public sealed class IdentityConfigSync
         _isLobbySubscribed = false;
     }
 
-    private void SubscribeGameSettingsChanged()
+    private void PublishLobbyConfig(LobbyInstance lobby, string reason)
     {
-        var gameSettings = NetworkedManagerBase<GameSettingsManager>.softInstance;
-        if (_isGameSettingsSubscribed || gameSettings == null)
+        LobbyManager lobbyManager = ManagerBase<LobbyManager>.softInstance;
+        if (lobbyManager?.service == null || !lobby.isLobbyLeader || IsRunStarted(lobby))
         {
             return;
         }
 
-        gameSettings.ClientEvent_OnCustomDataChanged -= OnGameSettingsCustomDataChanged;
-        gameSettings.ClientEvent_OnCustomDataChanged += OnGameSettingsCustomDataChanged;
-        gameSettings.ClientEvent_OnStateChanged -= OnGameSettingsStateChanged;
-        gameSettings.ClientEvent_OnStateChanged += OnGameSettingsStateChanged;
-        _isGameSettingsSubscribed = true;
-    }
-
-    private void UnsubscribeGameSettingsChanged()
-    {
-        var gameSettings = NetworkedManagerBase<GameSettingsManager>.softInstance;
-        if (_isGameSettingsSubscribed && gameSettings != null)
+        string currentPayload = null;
+        lobby.customData?.TryGetValue(SyncKey, out currentPayload);
+        if (TryDeserialize(currentPayload, out IdentityConfigSyncSnapshot current, out _) &&
+            current.Enable == _config.enable &&
+            current.AddCharacterSkillsToLoot == _config.addCharacterSkillsToLoot)
         {
-            gameSettings.ClientEvent_OnCustomDataChanged -= OnGameSettingsCustomDataChanged;
-            gameSettings.ClientEvent_OnStateChanged -= OnGameSettingsStateChanged;
+            _publishedRevision = Math.Max(_publishedRevision, current.Revision);
+            ApplySnapshot(currentPayload, current, reason);
+            return;
         }
 
-        _isGameSettingsSubscribed = false;
+        var snapshot = new IdentityConfigSyncSnapshot
+        {
+            Revision = ++_publishedRevision,
+            Enable = _config.enable,
+            AddCharacterSkillsToLoot = _config.addCharacterSkillsToLoot
+        };
+        string payload = JsonUtility.ToJson(snapshot);
+        var data = lobby.customData == null
+            ? new Dictionary<string, string>()
+            : new Dictionary<string, string>(lobby.customData);
+        data[SyncKey] = payload;
+
+        lobby.customData = data;
+        ApplySnapshot(payload, snapshot, reason);
+        lobbyManager.service.SetLobbyAttribute("customData", data);
+
+        Debug.Log(
+            "[DewIdentityChange] Published lobby customData config r" + snapshot.Revision +
+            " enable=" + snapshot.Enable +
+            ", addCharacterSkillsToLoot=" + snapshot.AddCharacterSkillsToLoot +
+            ": " + reason);
+    }
+
+    private bool ApplyLobbyConfig(LobbyInstance lobby, string reason, bool force = false)
+    {
+        if (lobby?.customData == null ||
+            !lobby.customData.TryGetValue(SyncKey, out string payload))
+        {
+            return false;
+        }
+
+        if (!force && payload == _lastAppliedPayload)
+        {
+            return _hasLobbyConfig;
+        }
+
+        if (!TryDeserialize(payload, out IdentityConfigSyncSnapshot snapshot, out string error))
+        {
+            Debug.LogWarning("[DewIdentityChange] Ignored invalid lobby customData config: " + error);
+            return false;
+        }
+
+        if (!force && _hasLobbyConfig && snapshot.Revision < _lastAppliedRevision)
+        {
+            return true;
+        }
+
+        ApplySnapshot(payload, snapshot, reason);
+        return true;
+    }
+
+    private void ApplySnapshot(
+        string payload,
+        IdentityConfigSyncSnapshot snapshot,
+        string reason)
+    {
+        bool changed = !_hasLobbyConfig ||
+                       _lobbyEnable != snapshot.Enable ||
+                       _lobbyAddCharacterSkillsToLoot != snapshot.AddCharacterSkillsToLoot;
+
+        _lobbyEnable = snapshot.Enable;
+        _lobbyAddCharacterSkillsToLoot = snapshot.AddCharacterSkillsToLoot;
+        _hasLobbyConfig = true;
+        _lastAppliedRevision = snapshot.Revision;
+        _lastAppliedPayload = payload;
+
+        if (changed)
+        {
+            Debug.Log(
+                "[DewIdentityChange] Applied lobby customData config r" + snapshot.Revision +
+                " enable=" + snapshot.Enable +
+                ", addCharacterSkillsToLoot=" + snapshot.AddCharacterSkillsToLoot +
+                ": " + reason);
+        }
+    }
+
+    private void EnsureGameConfigLocked(LobbyInstance lobby, string reason)
+    {
+        if (!_isGameConfigLocked && IsRunStarted(lobby))
+        {
+            LockGameConfig(lobby, reason);
+        }
+    }
+
+    private void LockGameConfig(LobbyInstance lobby, string reason)
+    {
+        if (_isGameConfigLocked)
+        {
+            return;
+        }
+
+        if (!_hasLobbyConfig && !ApplyLobbyConfig(lobby, reason, force: true))
+        {
+            if (!lobby.isLobbyLeader)
+            {
+                Debug.LogWarning(
+                    "[DewIdentityChange] Waiting for lobby customData before locking config: " + reason);
+                return;
+            }
+
+            _lobbyEnable = _config.enable;
+            _lobbyAddCharacterSkillsToLoot = _config.addCharacterSkillsToLoot;
+            _hasLobbyConfig = true;
+        }
+
+        _lockedEnable = _lobbyEnable;
+        _lockedAddCharacterSkillsToLoot = _lobbyAddCharacterSkillsToLoot;
+        _isGameConfigLocked = true;
+
+        Debug.Log(
+            "[DewIdentityChange] Locked lobby customData config enable=" + _lockedEnable +
+            ", addCharacterSkillsToLoot=" + _lockedAddCharacterSkillsToLoot +
+            ": " + reason);
+    }
+
+    private void EnsureCurrentLobby(LobbyInstance lobby)
+    {
+        if (_currentLobbyId == lobby.id)
+        {
+            return;
+        }
+
+        ResetSyncedState();
+        _currentLobbyId = lobby.id;
+    }
+
+    private static LobbyInstance GetCurrentLobby()
+    {
+        return ManagerBase<LobbyManager>.softInstance?.service?.currentLobby;
+    }
+
+    private static bool IsRunStarted(LobbyInstance lobby)
+    {
+        if (lobby?.hasGameStarted == true)
+        {
+            return true;
+        }
+
+        GameSettingsManager gameSettings =
+            NetworkedManagerBase<GameSettingsManager>.softInstance;
+        return gameSettings != null && gameSettings.state != GameState.InLobby;
     }
 
     private void ResetSyncedState()
     {
-        _hasHostEnable = false;
-        _hostEnable = false;
+        _hasLobbyConfig = false;
         _isGameConfigLocked = false;
+        _lobbyEnable = false;
+        _lobbyAddCharacterSkillsToLoot = false;
         _lockedEnable = false;
+        _lockedAddCharacterSkillsToLoot = false;
+        _currentLobbyId = null;
+        _lastAppliedPayload = null;
+        _lastAppliedRevision = 0;
     }
 
-    private static string Encode(bool enable)
+    private static bool TryDeserialize(
+        string payload,
+        out IdentityConfigSyncSnapshot snapshot,
+        out string error)
     {
-        return enable ? "1" : "0";
-    }
+        snapshot = null;
+        error = null;
 
-    private static bool TryDecode(string value, out bool enable)
-    {
-        if (value == "1" || value == "0")
+        if (string.IsNullOrWhiteSpace(payload))
         {
-            enable = value == "1";
-            return true;
+            error = "payload is empty";
+            return false;
         }
 
-        return bool.TryParse(value, out enable);
+        try
+        {
+            snapshot = JsonUtility.FromJson<IdentityConfigSyncSnapshot>(payload);
+        }
+        catch (Exception exception)
+        {
+            error = exception.Message;
+            return false;
+        }
+
+        if (snapshot == null)
+        {
+            error = "payload did not contain a snapshot";
+            return false;
+        }
+
+        if (snapshot.ProtocolVersion != IdentityConfigSyncSnapshot.CurrentProtocolVersion)
+        {
+            error =
+                "unsupported protocol version " + snapshot.ProtocolVersion +
+                " (expected " + IdentityConfigSyncSnapshot.CurrentProtocolVersion + ")";
+            snapshot = null;
+            return false;
+        }
+
+        return true;
     }
 }

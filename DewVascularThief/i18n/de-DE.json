@@ -1,0 +1,7 @@
+{
+  "skill.name": "Gefäßdieb",
+  "skill.shortDescription": "Auf einen Boss anwenden, um eine seiner Fähigkeiten zu stehlen.",
+  "skill.description": "Stiehl eine Fähigkeit eines Bosses und nutze sie selbst. Wird diese Fähigkeit abgelegt, verfällt die gestohlene Fähigkeit und du kannst erneut stehlen. Die gestohlene Fähigkeit verursacht {0}% Schaden.",
+  "skill.memory": "Leiht sich Kampfinstinkt aus den Adern eines Bosses.",
+  "skill.currentStolen": "Aktuell gestohlen: {0}"
+}

@@ -65,5 +65,7 @@
   "Description.HeroIgnoreShieldCoolDownFromOthers": "Po włączeniu tej opcji bohater zignoruje czas odnowienia tarczy od innych źródeł.",
   "Header.WorldConfiguration": "Konfiguracja świata",
   "LabelText.WorldReveal": "Wzrok świata",
-  "Description.WorldReveal": "Po włączeniu tej opcji aktywuje się funkcja wzroku świata, podobnie jak funkcja wzroku skarbów."
+  "Description.WorldReveal": "Po włączeniu tej opcji aktywuje się funkcja wzroku świata, podobnie jak funkcja wzroku skarbów.",
+  "LabelText.SpawnLostSoulInCurrentRoom": "Zagubiona dusza w bieżącej sali",
+  "Description.SpawnLostSoulInCurrentRoom": "Gdy członek drużyny zostanie powalony, jego zagubiona dusza pojawi się w bieżącej sali zamiast w późniejszej."
 }

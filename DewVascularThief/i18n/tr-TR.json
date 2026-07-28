@@ -1,0 +1,7 @@
+{
+  "skill.name": "Damar Hırsızı",
+  "skill.shortDescription": "Bir boss üzerinde kullanarak yeteneklerinden birini çal.",
+  "skill.description": "Bir bossun yeteneklerinden birini çalıp kendi kullanımına al. Bu yeteneği çıkarınca çalınan yetenek geçersiz olur ve yeniden çalabilirsin. Çalınan yetenek {0}% hasar verir.",
+  "skill.memory": "Bir bossun damarlarından savaş içgüdüsünü ödünç alır.",
+  "skill.currentStolen": "Mevcut çalınan: {0}"
+}

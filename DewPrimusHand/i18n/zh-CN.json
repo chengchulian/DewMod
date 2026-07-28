@@ -99,5 +99,8 @@
   "Header.WorldConfiguration": "世界配置",
   
   "LabelText.WorldReveal": "千里眼",
-  "Description.WorldReveal": "启用后将开启千里眼,与宝藏千里眼功能相同。"
+  "Description.WorldReveal": "启用后将开启千里眼,与宝藏千里眼功能相同。",
+
+  "LabelText.SpawnLostSoulInCurrentRoom": "当前地图生成迷失灵魂",
+  "Description.SpawnLostSoulInCurrentRoom": "启用后，队友被击倒时会在当前地图生成迷失灵魂，而非后续地图。"
 }

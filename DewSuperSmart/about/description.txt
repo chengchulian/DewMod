@@ -1,0 +1,17 @@
+DewSuperSmart adds combat awareness tools for the local hero.
+
+Features:
+- Draw basic attack and hero skill ranges.
+- Draw monster threat zones as circles, cones, and rectangular line/projectile boxes.
+- Highlight active threats by distance or estimated time to impact: red, yellow, and green.
+- Auto dodge monster skills and active projectiles while the dodge key is held.
+- JSON localization is available in the i18n folder.
+
+DewSuperSmart 为本地英雄添加战斗辅助显示。
+
+功能：
+- 绘制普攻和英雄技能范围。
+- 以圆形、扇形、方框绘制怪物技能和飞弹威胁。
+- 根据距离或预计命中时间显示已释放/正在释放威胁的红、黄、绿等级。
+- 按住躲避键时自动躲避怪物技能和飞弹。
+- i18n 文件夹内提供 JSON 本地化文本。

@@ -65,5 +65,7 @@
   "Description.HeroIgnoreShieldCoolDownFromOthers": "Bu seçeneği etkinleştirirseniz, kahraman diğer kaynaklardan gelen kalkan yenileme süresini görmezden gelir.",
   "Header.WorldConfiguration": "Dünya Yapılandırması",
   "LabelText.WorldReveal": "Dünya Görünürlüğü",
-  "Description.WorldReveal": "Bu seçeneği etkinleştirirseniz, Dünya Görünürlüğü, Hazine Görünürlüğü işlevine benzer şekilde aktif hale gelir."
+  "Description.WorldReveal": "Bu seçeneği etkinleştirirseniz, Dünya Görünürlüğü, Hazine Görünürlüğü işlevine benzer şekilde aktif hale gelir.",
+  "LabelText.SpawnLostSoulInCurrentRoom": "Kayıp ruhu mevcut odada oluştur",
+  "Description.SpawnLostSoulInCurrentRoom": "Bir takım arkadaşı yere düştüğünde kayıp ruhu sonraki bir oda yerine mevcut odada oluşur."
 }

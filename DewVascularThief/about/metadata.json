@@ -1,0 +1,9 @@
+{
+  "id": "com.chengchulian.DewMod.DewVascularThief",
+  "name": "血管小偷|Vascular Thief",
+  "author": "chengchulian",
+  "modVer": "1.0.0",
+  "assemblies": [
+    "obj/Release/*.dll"
+  ]
+}

@@ -65,5 +65,7 @@
   "Description.HeroIgnoreShieldCoolDownFromOthers": "Включив эту опцию, герой будет игнорировать время восстановления щита от других источников.",
   "Header.WorldConfiguration": "Конфигурация мира",
   "LabelText.WorldReveal": "Окно мира",
-  "Description.WorldReveal": "Включив эту опцию, будет активирована функция Окна мира, аналогичная функции Окна сокровищ."
+  "Description.WorldReveal": "Включив эту опцию, будет активирована функция Окна мира, аналогичная функции Окна сокровищ.",
+  "LabelText.SpawnLostSoulInCurrentRoom": "Потерянная душа в текущей комнате",
+  "Description.SpawnLostSoulInCurrentRoom": "Когда союзник будет повержен, его потерянная душа появится в текущей, а не в последующей комнате."
 }

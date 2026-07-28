@@ -65,5 +65,7 @@
   "Description.HeroIgnoreShieldCoolDownFromOthers": "Activa esta opción para que el héroe ignore los tiempos de recarga de otros escudos.",
   "Header.WorldConfiguration": "Configuración del mundo",
   "LabelText.WorldReveal": "Visión mundial",
-  "Description.WorldReveal": "Activa esta opción para habilitar la visión mundial, similar a la función de visión mundial de tesoros."
+  "Description.WorldReveal": "Activa esta opción para habilitar la visión mundial, similar a la función de visión mundial de tesoros.",
+  "LabelText.SpawnLostSoulInCurrentRoom": "Alma perdida en la sala actual",
+  "Description.SpawnLostSoulInCurrentRoom": "Cuando un compañero sea derribado, su alma perdida aparecerá en la sala actual en vez de una sala posterior."
 }

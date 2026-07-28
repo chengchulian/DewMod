@@ -9,7 +9,7 @@
 [*][b]小怪与 Boss 独立配置[/b]：分别调整小怪、迷你 Boss、Boss 的生命与伤害倍率。
 [*][b]多 Boss 模式[/b]：设置 Boss 数量、每房间同时存在上限，并支持按区域/周目追加数量。
 [*][b]额外 Boss 效果[/b]：可配置 Boss 猎手化与幻影外皮出现概率。
-[*][b]英雄与地图辅助[/b]：治疗倍率、护盾限制、护盾冷却、千里眼等。
+[*][b]英雄与地图辅助[/b]：治疗倍率、护盾限制、护盾冷却、千里眼，以及让倒地队友的迷失灵魂出现在当前地图。
 [/list]
 
 [h2]Boss 生成说明[/h2]
@@ -37,7 +37,7 @@ This mod is a focused continuation of the pre-release difficulty customization m
 [*][b]Separate normal monster and boss tuning[/b]: adjust small monsters, mini bosses, and bosses independently.
 [*][b]Multi-boss mode[/b]: configure boss count, maximum active bosses per room, and extra bosses by zone or loop.
 [*][b]Extra boss effects[/b]: optional Hunter transformation and Mirage Skin chance for bosses.
-[*][b]Hero and map options[/b]: healing multiplier, shield limits, shield cooldown, world reveal, and more.
+[*][b]Hero and map options[/b]: healing multiplier, shield limits, shield cooldown, world reveal, and spawning a knocked-out teammate's Lost Soul in the current room.
 [/list]
 
 [h2]Multiplayer[/h2]

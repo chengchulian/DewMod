@@ -65,5 +65,7 @@
   "Description.HeroIgnoreShieldCoolDownFromOthers": "Abilita questa opzione per far sì che l'eroe ignori i tempi di ricarica degli scudi da altre fonti.",
   "Header.WorldConfiguration": "Configurazione del mondo",
   "LabelText.WorldReveal": "Visione del mondo",
-  "Description.WorldReveal": "Abilita questa opzione per attivare la Visione del mondo, simile alla funzione Visione del tesoro."
+  "Description.WorldReveal": "Abilita questa opzione per attivare la Visione del mondo, simile alla funzione Visione del tesoro.",
+  "LabelText.SpawnLostSoulInCurrentRoom": "Anima perduta nella stanza attuale",
+  "Description.SpawnLostSoulInCurrentRoom": "Quando un compagno viene abbattuto, la sua anima perduta appare nella stanza attuale invece che in una stanza successiva."
 }

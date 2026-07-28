@@ -65,5 +65,7 @@
   "Description.HeroIgnoreShieldCoolDownFromOthers": "Active cette option pour que le héros ignore le temps de recharge des boucliers des autres sources.",
   "Header.WorldConfiguration": "Configuration du monde",
   "LabelText.WorldReveal": "Vision du monde",
-  "Description.WorldReveal": "Active cette option pour activer la Vision du monde, similaire à la fonction Vision des trésors."
+  "Description.WorldReveal": "Active cette option pour activer la Vision du monde, similaire à la fonction Vision des trésors.",
+  "LabelText.SpawnLostSoulInCurrentRoom": "Âme perdue dans la salle actuelle",
+  "Description.SpawnLostSoulInCurrentRoom": "Lorsqu'un coéquipier est mis à terre, son âme perdue apparaît dans la salle actuelle plutôt que dans une salle ultérieure."
 }

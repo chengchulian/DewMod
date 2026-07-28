@@ -6,6 +6,7 @@
 [list]
 [*]任何英雄都可以装备所有角色技能。
 [*]任何英雄都可以使用所有角色天赋/星座搭配。
+[*]开启“添加角色技能到全局掉落池”后，商店、宝箱、祭坛和房间奖励等技能掉落均可出现角色技能。
 [*]大厅内由房主的转职开关决定是否启用，客户端会跟随房主设置。
 [*]开始游戏后会锁定本局最开始的设定，游戏中修改开关不会影响当前对局。
 [/list]
@@ -32,6 +33,7 @@
 [list]
 [*]Every hero can equip all character skills.
 [*]Every hero can use all character talents/constellation options.
+[*]When “Add Character Skills to All Loot Pools” is enabled, character skills can appear in shops, chests, shrines, room rewards, and other skill drops.
 [*]In the lobby, the host setting controls whether Identity Change is enabled.
 [*]After the game starts, the initial lobby setting is locked for the current run. Changing the switch in-game will not affect the ongoing run.
 [/list]

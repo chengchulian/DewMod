@@ -40,6 +40,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DewVascularThief", "DewVasc
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoldenBurstAutoTarget", "GoldenBurstAutoTarget\GoldenBurstAutoTarget.csproj", "{E99B7E63-63D9-4004-AE96-B27DA5FE534C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DewSuperSmart", "DewSuperSmart\DewSuperSmart.csproj", "{F6B375E7-9CE0-4B52-ACC2-46BBEAB0C1D1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -110,6 +112,10 @@ Global
 		{E99B7E63-63D9-4004-AE96-B27DA5FE534C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E99B7E63-63D9-4004-AE96-B27DA5FE534C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E99B7E63-63D9-4004-AE96-B27DA5FE534C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6B375E7-9CE0-4B52-ACC2-46BBEAB0C1D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6B375E7-9CE0-4B52-ACC2-46BBEAB0C1D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6B375E7-9CE0-4B52-ACC2-46BBEAB0C1D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6B375E7-9CE0-4B52-ACC2-46BBEAB0C1D1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

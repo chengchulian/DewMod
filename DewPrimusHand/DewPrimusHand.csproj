@@ -48,6 +48,7 @@
         <Compile Include="patch\GameManager_Patch.cs" />
         <Compile Include="patch\GameMod_MirageSkin_Patch.cs" />
         <Compile Include="patch\RoomMonsters_Patch.cs" />
+        <Compile Include="patch\Se_HeroKnockedOut_Patch.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
         <Compile Include="util\DewPrimusHandUtil.cs" />
         <Compile Include="util\DifficultyMath.cs" />

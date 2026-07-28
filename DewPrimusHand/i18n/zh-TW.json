@@ -65,5 +65,7 @@
   "Description.HeroIgnoreShieldCoolDownFromOthers": "啟用後英雄將忽略來自其他來源的護盾冷卻 英雄護盾冷卻時間 未設置時此項不生效。",
   "Header.WorldConfiguration": "世界配置",
   "LabelText.WorldReveal": "千里眼",
-  "Description.WorldReveal": "啟用後將開啟千里眼，與寶藏千里眼功能相同。"
+  "Description.WorldReveal": "啟用後將開啟千里眼，與寶藏千里眼功能相同。",
+  "LabelText.SpawnLostSoulInCurrentRoom": "在目前地圖生成迷失靈魂",
+  "Description.SpawnLostSoulInCurrentRoom": "啟用後，隊友被擊倒時會在目前地圖生成迷失靈魂，而非後續地圖。"
 }

@@ -13,28 +13,18 @@ namespace DewGemSlotCount
         [NonSerialized]
         private readonly PluginConfig _serverConfig = new PluginConfig();
 
-        private const int ClientSyncRequestMaxAttempts = 30;
-        private const int ClientSyncRequestRetryFrames = 30;
-        private const int ServerPlayerSyncRetryFrames = 30;
-        private const int ServerPlayerSyncSecondRetryFrames = 120;
-
-        private Action<GemConfigSyncMessage> _syncHandler;
-        private Action<GemConfigSyncRequest, DewPlayer> _syncRequestHandler;
-        private bool _isActorManagerStarted;
-        private bool _isActorAddSubscribed;
-        private bool _isSyncHandlerRegistered;
-        private bool _isSyncRequestHandlerRegistered;
+        private GameSettingsManager _subscribedGameSettings;
         private bool _hasServerConfig;
         private bool _isApplyingServerConfig;
-        private int _clientSyncRequestToken;
+        private uint _lastAppliedRevision;
+        private uint _publishedRevision;
+        private string _lastAppliedPayload;
 
         public PluginConfig GameplayConfig => NetworkServer.active ? Config : _serverConfig;
 
         private void Awake()
         {
             Instance = this;
-            _syncHandler = ApplyServerConfig;
-            _syncRequestHandler = OnGemSyncRequest;
         }
 
         private void Start()
@@ -44,120 +34,125 @@ namespace DewGemSlotCount
             LocalizationSource.Init(this);
             harmony.PatchAll();
 
-            CallOnNetworkedManager<ActorManager>(ActorManagerOnStartClient, ActorManagerOnStopClient);
-            CallOnNetworkedManager<ZoneManager>(ZoneManagerOnStartClient, ZoneManagerOnStopClient);
-            SubscribeHumanPlayerAdded();
+            CallOnNetworkedManager<GameSettingsManager>(
+                GameSettingsManagerOnStartClient,
+                GameSettingsManagerOnStopClient);
 
             Debug.Log($"[{mod.metadata.id}] Loaded {mod.metadata.name} by {mod.metadata.author}");
         }
 
-        private void ActorManagerOnStartClient()
+        private void GameSettingsManagerOnStartClient()
         {
-            _isActorManagerStarted = true;
-            SubscribeHumanPlayerAdded();
-            SubscribeActorAdded();
+            var gameSettings = NetworkedManagerBase<GameSettingsManager>.softInstance;
+            if (gameSettings == null)
+            {
+                Debug.LogWarning("[DewGemSlotCount] GameSettingsManager started without an instance");
+                return;
+            }
+
+            SubscribeGameSettings(gameSettings);
+
+            if (NetworkServer.active)
+            {
+                PublishServerConfig("game settings start");
+            }
+            else
+            {
+                ResetServerConfigCache();
+                ApplyServerConfig("game settings initial state");
+            }
+        }
+
+        private void GameSettingsManagerOnStopClient()
+        {
+            UnsubscribeGameSettings();
             ResetServerConfigCache();
-            TrySetupGemSync("actor manager start");
-            SyncConfigToAllClients("game start");
-            Dew.CallDelayed(() => SyncConfigToAllClients("game start retry 1"), ServerPlayerSyncRetryFrames);
-            Dew.CallDelayed(() => SyncConfigToAllClients("game start retry 2"), ServerPlayerSyncSecondRetryFrames);
-            RequestGemConfigFromServer("actor manager start");
         }
 
-        private void ActorManagerOnStopClient()
+        private void SubscribeGameSettings(GameSettingsManager gameSettings)
         {
-            _clientSyncRequestToken++;
-            _isActorManagerStarted = false;
-            _hasServerConfig = false;
-            UnsubscribeActorAdded();
-
-            if (_isSyncHandlerRegistered)
+            if (_subscribedGameSettings == gameSettings)
             {
-                GemSyncHelper.UnregisterGemSyncHandler(_syncHandler);
-                _isSyncHandlerRegistered = false;
+                return;
             }
 
-            if (_isSyncRequestHandlerRegistered)
-            {
-                GemSyncHelper.UnregisterGemSyncRequestHandler(_syncRequestHandler);
-                _isSyncRequestHandlerRegistered = false;
-            }
+            UnsubscribeGameSettings();
+            gameSettings.ClientEvent_OnCustomDataChanged -= OnGameSettingsCustomDataChanged;
+            gameSettings.ClientEvent_OnCustomDataChanged += OnGameSettingsCustomDataChanged;
+            _subscribedGameSettings = gameSettings;
         }
 
-        private void ZoneManagerOnStartClient()
+        private void UnsubscribeGameSettings()
         {
-            if (ZoneManager.instance != null)
+            if (_subscribedGameSettings != null)
             {
-                ZoneManager.instance.ClientEvent_OnRoomLoaded += OnRoomLoaded;
+                _subscribedGameSettings.ClientEvent_OnCustomDataChanged -= OnGameSettingsCustomDataChanged;
             }
+
+            _subscribedGameSettings = null;
         }
 
-        private void ZoneManagerOnStopClient()
+        private void OnGameSettingsCustomDataChanged(string key)
         {
-            if (ZoneManager.instance != null)
+            if (key != GemSyncHelper.SyncKey || NetworkServer.active)
             {
-                ZoneManager.instance.ClientEvent_OnRoomLoaded -= OnRoomLoaded;
+                return;
             }
+
+            ApplyServerConfig("network snapshot changed");
         }
 
-        private void OnHumanPlayerAdded(DewPlayer player)
+        private void PublishServerConfig(string reason)
         {
             if (!NetworkServer.active)
             {
                 return;
             }
 
-            SyncConfigToClient(player, "player joined");
-            Dew.CallDelayed(() => SyncConfigToClient(player, "player joined retry 1"), ServerPlayerSyncRetryFrames);
-            Dew.CallDelayed(() => SyncConfigToClient(player, "player joined retry 2"), ServerPlayerSyncSecondRetryFrames);
+            var gameSettings = _subscribedGameSettings ??
+                               NetworkedManagerBase<GameSettingsManager>.softInstance;
+            if (gameSettings?.customData == null)
+            {
+                Debug.LogWarning("[DewGemSlotCount] Cannot publish Gem config: GameSettings custom data is unavailable");
+                return;
+            }
+
+            var snapshot = GemConfigSyncSnapshot.FromConfig(Config, ++_publishedRevision);
+            string payload = GemSyncHelper.Serialize(snapshot);
+            gameSettings.customData[GemSyncHelper.SyncKey] = payload;
+
+            Debug.Log(
+                "[DewGemSlotCount] Published Gem config snapshot r" + snapshot.Revision +
+                ": " + reason);
         }
 
-        private void OnRoomLoaded(EventInfoLoadRoom _)
+        private void ApplyServerConfig(string reason, bool force = false)
         {
-            SyncConfigToAllClients("room loaded");
-            RequestGemConfigFromServer("room loaded");
-        }
-
-        private void OnActorAdded(Actor actor)
-        {
-            if (!IsServerActor(actor))
+            if (NetworkServer.active)
             {
                 return;
             }
 
-            TrySetupGemSync("server actor added");
-            RequestGemConfigFromServer("server actor added");
-        }
-
-        private bool IsServerActor(Actor actor)
-        {
-            if (actor == null)
-            {
-                return false;
-            }
-
-            if (ActorManager.instance != null && actor == ActorManager.instance.serverActor)
-            {
-                return true;
-            }
-
-            return actor.GetType().Name == "ServerActor";
-        }
-
-        private void OnGemSyncRequest(GemConfigSyncRequest request, DewPlayer requester)
-        {
-            if (!NetworkServer.active || requester == null)
+            var gameSettings = _subscribedGameSettings ??
+                               NetworkedManagerBase<GameSettingsManager>.softInstance;
+            if (gameSettings?.customData == null ||
+                !gameSettings.customData.TryGetValue(GemSyncHelper.SyncKey, out string payload))
             {
                 return;
             }
 
-            Debug.Log("[DewGemSlotCount] Received Gem config sync request from " + requester.playerNameRaw);
-            SyncConfigToClient(requester, "client request");
-        }
+            if (!force && payload == _lastAppliedPayload)
+            {
+                return;
+            }
 
-        private void ApplyServerConfig(GemConfigSyncMessage msg)
-        {
-            if (msg == null)
+            if (!GemSyncHelper.TryDeserialize(payload, out GemConfigSyncSnapshot snapshot, out string error))
+            {
+                Debug.LogWarning("[DewGemSlotCount] Ignored invalid Gem config snapshot: " + error);
+                return;
+            }
+
+            if (!force && _hasServerConfig && snapshot.Revision <= _lastAppliedRevision)
             {
                 return;
             }
@@ -165,170 +160,33 @@ namespace DewGemSlotCount
             _isApplyingServerConfig = true;
             try
             {
-                msg.ApplyTo(_serverConfig);
+                snapshot.ApplyTo(_serverConfig);
+                snapshot.ApplyTo(Config);
                 _hasServerConfig = true;
-                _clientSyncRequestToken++;
-
-                if (!NetworkServer.active)
-                {
-                    msg.ApplyTo(Config);
-                }
+                _lastAppliedRevision = snapshot.Revision;
+                _lastAppliedPayload = payload;
             }
             finally
             {
                 _isApplyingServerConfig = false;
             }
 
-            Debug.Log("[DewGemSlotCount] Applied server Gem config");
+            Debug.Log(
+                "[DewGemSlotCount] Applied server Gem config snapshot r" + snapshot.Revision +
+                ": " + reason);
         }
 
         private void ResetServerConfigCache()
         {
-            if (NetworkServer.active)
-            {
-                return;
-            }
-
-            GemConfigSyncMessage.FromConfig(new PluginConfig()).ApplyTo(_serverConfig);
+            GemConfigSyncSnapshot.FromConfig(new PluginConfig(), 0).ApplyTo(_serverConfig);
             _hasServerConfig = false;
-        }
-
-        private void RestoreServerConfigToLocalConfig()
-        {
-            if (!_hasServerConfig)
-            {
-                return;
-            }
-
-            _isApplyingServerConfig = true;
-            try
-            {
-                GemConfigSyncMessage.FromConfig(_serverConfig).ApplyTo(Config);
-            }
-            finally
-            {
-                _isApplyingServerConfig = false;
-            }
-        }
-
-        private void TrySetupGemSync(string reason)
-        {
-            if (!_isSyncHandlerRegistered)
-            {
-                _isSyncHandlerRegistered = GemSyncHelper.RegisterGemSyncHandler(_syncHandler);
-                if (_isSyncHandlerRegistered)
-                {
-                    Debug.Log("[DewGemSlotCount] Registered Gem config receive handler: " + reason);
-                }
-            }
-
-            if (NetworkServer.active && !_isSyncRequestHandlerRegistered)
-            {
-                _isSyncRequestHandlerRegistered = GemSyncHelper.RegisterGemSyncRequestHandler(_syncRequestHandler);
-                if (_isSyncRequestHandlerRegistered)
-                {
-                    Debug.Log("[DewGemSlotCount] Registered Gem config request handler: " + reason);
-                }
-            }
-        }
-
-        private void RequestGemConfigFromServer(string reason)
-        {
-            if (NetworkServer.active)
-            {
-                return;
-            }
-
-            var token = ++_clientSyncRequestToken;
-            RequestGemConfigFromServerAttempt(reason, token, 1);
-        }
-
-        private void RequestGemConfigFromServerAttempt(string reason, int token, int attempt)
-        {
-            if (this == null || token != _clientSyncRequestToken || !_isActorManagerStarted || NetworkServer.active || _hasServerConfig)
-            {
-                return;
-            }
-
-            TrySetupGemSync(reason);
-
-            if (_isSyncHandlerRegistered && GemSyncHelper.RequestGemConfigFromServer())
-            {
-                Debug.Log("[DewGemSlotCount] Requested server Gem config: " + reason + " (attempt " + attempt + ")");
-            }
-
-            if (_hasServerConfig)
-            {
-                return;
-            }
-
-            if (attempt >= ClientSyncRequestMaxAttempts)
-            {
-                Debug.LogWarning("[DewGemSlotCount] Gem config sync request timed out: " + reason);
-                return;
-            }
-
-            Dew.CallDelayed(() => RequestGemConfigFromServerAttempt(reason, token, attempt + 1), ClientSyncRequestRetryFrames);
-        }
-
-        private void SyncConfigToAllClients(string reason)
-        {
-            if (this == null || !_isActorManagerStarted || !NetworkServer.active)
-            {
-                return;
-            }
-
-            TrySetupGemSync(reason);
-            Debug.Log("[DewGemSlotCount] Sync Gem config: " + reason);
-            GemSyncHelper.SyncGemConfigToAllClients(Config);
-        }
-
-        private void SyncConfigToClient(DewPlayer player, string reason)
-        {
-            if (this == null || !_isActorManagerStarted || !NetworkServer.active || player == null)
-            {
-                return;
-            }
-
-            TrySetupGemSync(reason);
-            Debug.Log("[DewGemSlotCount] Sync Gem config to " + player.playerNameRaw + ": " + reason);
-            GemSyncHelper.SyncGemConfigToClient(Config, player);
-        }
-
-        private void SubscribeActorAdded()
-        {
-            if (_isActorAddSubscribed || ActorManager.instance == null)
-            {
-                return;
-            }
-
-            ActorManager.instance.ClientEvent_OnActorAdd += OnActorAdded;
-            _isActorAddSubscribed = true;
-        }
-
-        private void UnsubscribeActorAdded()
-        {
-            if (!_isActorAddSubscribed || ActorManager.instance == null)
-            {
-                _isActorAddSubscribed = false;
-                return;
-            }
-
-            ActorManager.instance.ClientEvent_OnActorAdd -= OnActorAdded;
-            _isActorAddSubscribed = false;
-        }
-
-        private void SubscribeHumanPlayerAdded()
-        {
-            DewPlayer.onHumanPlayerAdded -= OnHumanPlayerAdded;
-            DewPlayer.onHumanPlayerAdded += OnHumanPlayerAdded;
+            _lastAppliedRevision = 0;
+            _lastAppliedPayload = null;
         }
 
         private void OnDestroy()
         {
-            DewPlayer.onHumanPlayerAdded -= OnHumanPlayerAdded;
-            ActorManagerOnStopClient();
-            ZoneManagerOnStopClient();
+            UnsubscribeGameSettings();
             harmony.UnpatchAll(harmony.Id);
         }
 
@@ -341,11 +199,14 @@ namespace DewGemSlotCount
 
             if (NetworkServer.active)
             {
-                SyncConfigToAllClients("config changed");
+                PublishServerConfig("config changed");
                 return;
             }
 
-            RestoreServerConfigToLocalConfig();
+            if (_hasServerConfig)
+            {
+                ApplyServerConfig("restore authoritative server config", force: true);
+            }
         }
     }
 }

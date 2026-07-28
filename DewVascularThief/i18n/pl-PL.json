@@ -1,0 +1,7 @@
+{
+  "skill.name": "Złodziej naczyń",
+  "skill.shortDescription": "Użyj na bossie, aby ukraść jedną z jego zdolności.",
+  "skill.description": "Ukradnij jedną zdolność bossa i używaj jej jako własnej. Zdjęcie tej umiejętności unieważnia skradzioną zdolność i pozwala kraść ponownie. Skradziona umiejętność zadaje {0}% obrażeń.",
+  "skill.memory": "Pożycza instynkt walki z żył bossa.",
+  "skill.currentStolen": "Obecnie skradziono: {0}"
+}

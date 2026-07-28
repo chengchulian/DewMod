@@ -5,22 +5,15 @@ namespace DewPrimusHand.util;
 
 public static class DewPrimusHandUtil
 {
-    public static void ZoneManagerOnStarted()
+    public static Action ZoneManagerOnStarted(ZoneManager zoneManager)
     {
-        if (!NetworkServer.active)
-        {
-            return;
-        }
-        
-        ZoneManager.instance.ClientEvent_OnZoneLoaded += EnableWorldReveal;
-        
-        
-
+        zoneManager.ClientEvent_OnZoneLoaded += EnableWorldReveal;
+        return () => zoneManager.ClientEvent_OnZoneLoaded -= EnableWorldReveal;
     }
 
     private static void EnableWorldReveal(EventInfoLoadZone e)
     {
-        if (DewPrimusHand.Instance.Config.WorldReveal)
+        if (NetworkServer.active && DewPrimusHand.Instance.Config.WorldReveal)
         {
             NetworkedManagerBase<ZoneManager>.instance.RevealWorld(true);
         }

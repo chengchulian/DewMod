@@ -13,6 +13,9 @@ public class DewIdentityChange : ModBehaviour
 
     public bool IsIdentityEnabled => _sync?.IsIdentityEnabled ?? config.enable;
 
+    public bool IsCharacterSkillLootEnabled =>
+        IsIdentityEnabled && (_sync?.IsCharacterSkillLootEnabled ?? config.addCharacterSkillsToLoot);
+
     private void Awake()
     {
         Instance = this;
@@ -29,7 +32,6 @@ public class DewIdentityChange : ModBehaviour
         LoadoutSnapshot.CaptureLoadedHeroSkills();
         ApplyConfigEffects();
         CallOnManager<LobbyManager>(_sync.LobbyManagerOnStart, _sync.LobbyManagerOnStop);
-        CallOnNetworkedManager<GameSettingsManager>(_sync.GameSettingsManagerOnStartClient, _sync.GameSettingsManagerOnStopClient);
 
         DewPlayer.onHumanPlayerAdded -= _sync.OnHumanPlayerAdded;
         DewPlayer.onHumanPlayerAdded += _sync.OnHumanPlayerAdded;

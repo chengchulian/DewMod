@@ -1,0 +1,7 @@
+{
+  "skill.name": "Ladro vascolare",
+  "skill.shortDescription": "Usala su un boss per rubare una delle sue abilità.",
+  "skill.description": "Ruba una abilità di un boss e usala per te. Rimuovere questa abilità annulla l'abilità rubata e permette di rubarne un'altra. L'abilità rubata infligge il {0}% dei danni.",
+  "skill.memory": "Prende in prestito l'istinto di battaglia dalle vene di un boss.",
+  "skill.currentStolen": "Rubata attuale: {0}"
+}

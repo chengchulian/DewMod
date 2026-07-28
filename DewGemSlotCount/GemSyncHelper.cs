@@ -1,12 +1,16 @@
 using System;
 using DewGemSlotCount.config;
-using Mirror;
 using UnityEngine;
 
 namespace DewGemSlotCount
 {
-    public class GemConfigSyncMessage
+    [Serializable]
+    public sealed class GemConfigSyncSnapshot
     {
+        public const int CurrentProtocolVersion = 2;
+
+        public int ProtocolVersion = CurrentProtocolVersion;
+        public uint Revision;
         public int SkillQGemCount;
         public int SkillWGemCount;
         public int SkillEGemCount;
@@ -24,10 +28,11 @@ namespace DewGemSlotCount
         public bool AllowMovementCorruptedChaos;
         public bool GemNoMerge;
 
-        public static GemConfigSyncMessage FromConfig(PluginConfig config)
+        public static GemConfigSyncSnapshot FromConfig(PluginConfig config, uint revision)
         {
-            return new GemConfigSyncMessage
+            return new GemConfigSyncSnapshot
             {
+                Revision = revision,
                 SkillQGemCount = config.SkillQGemCount,
                 SkillWGemCount = config.SkillWGemCount,
                 SkillEGemCount = config.SkillEGemCount,
@@ -68,102 +73,55 @@ namespace DewGemSlotCount
         }
     }
 
-    public class GemConfigSyncRequest
-    {
-        public int Version = 1;
-    }
-
     public static class GemSyncHelper
     {
-        public static void SyncGemConfigToAllClients(PluginConfig config)
-        {
-            var serverActor = GetServerActor();
-            if (!NetworkServer.active || serverActor == null)
-            {
-                Debug.Log("[DewGemSlotCount] Skip syncing Gem config to all clients: server not ready");
-                return;
-            }
+        public const string SyncKey = "DewGemSlotCount::config:v2";
 
-            serverActor.CustomRpc_SendMessageToAllClients(GemConfigSyncMessage.FromConfig(config));
-            Debug.Log("[DewGemSlotCount] Sync Gem config to all clients");
+        public static string Serialize(GemConfigSyncSnapshot snapshot)
+        {
+            return JsonUtility.ToJson(snapshot);
         }
 
-        public static void SyncGemConfigToClient(PluginConfig config, DewPlayer target)
+        public static bool TryDeserialize(
+            string payload,
+            out GemConfigSyncSnapshot snapshot,
+            out string error)
         {
-            var serverActor = GetServerActor();
-            if (!NetworkServer.active || serverActor == null || target == null)
-            {
-                Debug.Log("[DewGemSlotCount] Skip syncing Gem config to client: server, actor, or target not ready");
-                return;
-            }
+            snapshot = null;
+            error = null;
 
-            serverActor.CustomRpc_SendMessageToClient(target, GemConfigSyncMessage.FromConfig(config));
-            Debug.Log("[DewGemSlotCount] Sync Gem config to client " + target.playerNameRaw);
-        }
-
-        public static bool RegisterGemSyncHandler(Action<GemConfigSyncMessage> handler)
-        {
-            var serverActor = GetServerActor();
-            if (serverActor == null || handler == null)
+            if (string.IsNullOrWhiteSpace(payload))
             {
+                error = "payload is empty";
                 return false;
             }
 
-            serverActor.CustomRpc_UnregisterClientMessageHandler(handler);
-            serverActor.CustomRpc_RegisterClientMessageHandler(handler);
-            return true;
-        }
-
-        public static bool RegisterGemSyncRequestHandler(Action<GemConfigSyncRequest, DewPlayer> handler)
-        {
-            var serverActor = GetServerActor();
-            if (!NetworkServer.active || serverActor == null || handler == null)
+            try
             {
+                snapshot = JsonUtility.FromJson<GemConfigSyncSnapshot>(payload);
+            }
+            catch (Exception exception)
+            {
+                error = exception.Message;
                 return false;
             }
 
-            serverActor.CustomRpc_UnregisterServerMessageHandler(handler);
-            serverActor.CustomRpc_RegisterServerMessageHandler("DewGemSlotCount", handler);
-            return true;
-        }
-
-        public static void UnregisterGemSyncHandler(Action<GemConfigSyncMessage> handler)
-        {
-            var serverActor = GetServerActor();
-            if (serverActor == null || handler == null)
+            if (snapshot == null)
             {
-                return;
-            }
-
-            serverActor.CustomRpc_UnregisterClientMessageHandler(handler);
-        }
-
-        public static void UnregisterGemSyncRequestHandler(Action<GemConfigSyncRequest, DewPlayer> handler)
-        {
-            var serverActor = GetServerActor();
-            if (serverActor == null || handler == null)
-            {
-                return;
-            }
-
-            serverActor.CustomRpc_UnregisterServerMessageHandler(handler);
-        }
-
-        public static bool RequestGemConfigFromServer()
-        {
-            var serverActor = GetServerActor();
-            if (!NetworkClient.active || serverActor == null)
-            {
+                error = "payload did not contain a snapshot";
                 return false;
             }
 
-            serverActor.CustomRpc_SendMessageToServer(new GemConfigSyncRequest());
-            return true;
-        }
+            if (snapshot.ProtocolVersion != GemConfigSyncSnapshot.CurrentProtocolVersion)
+            {
+                error =
+                    "unsupported protocol version " + snapshot.ProtocolVersion +
+                    " (expected " + GemConfigSyncSnapshot.CurrentProtocolVersion + ")";
+                snapshot = null;
+                return false;
+            }
 
-        private static Actor GetServerActor()
-        {
-            return ActorManager.instance == null ? null : ActorManager.instance.serverActor;
+            return true;
         }
     }
 }

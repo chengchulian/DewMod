@@ -135,6 +135,10 @@ public class PluginConfig : ModConfig
     [Description("Description.WorldReveal")]
     public bool WorldReveal = false;
 
+    [LabelText("LabelText.SpawnLostSoulInCurrentRoom")]
+    [Description("Description.SpawnLostSoulInCurrentRoom")]
+    public bool SpawnLostSoulInCurrentRoom = false;
+
     public override void BuildWidgets(Transform parent, out SafeAction onChanged, out SafeAction requestUpdate)
     {
         base.BuildWidgets(parent, out onChanged, out requestUpdate);
@@ -142,13 +146,4 @@ public class PluginConfig : ModConfig
         LocalizationSource.LocalizeUI(parent);
     }
 
-    public override void CopyTo(ModConfig other)
-    {
-        if (WorldReveal)
-        {
-            NetworkedManagerBase<ZoneManager>.instance.RevealWorld(true);
-        }
-
-        base.CopyTo(other);
-    }
 }

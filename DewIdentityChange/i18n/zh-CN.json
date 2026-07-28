@@ -1,3 +1,4 @@
 {
-    "LabelText.Enable": "启用"
+  "LabelText.Enable": "启用",
+  "LabelText.AddCharacterSkillsToLoot": "添加角色技能到全局掉落池"
 }
