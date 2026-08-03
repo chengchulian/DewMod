@@ -1,4 +1,9 @@
 {
-  "LabelText.MaxPlayer": "MaxPlayer (1-16)"
-
+  "LobbyMenu.MaxPlayers": "Max players (1-16)",
+  "ContinueDialog.Title": "Continue game",
+  "ContinueDialog.Description": "Choose the maximum number of players for this saved multiplayer lobby (1-16).",
+  "ContinueDialog.PlayerCount": "Maximum players (1-16)",
+  "ContinueDialog.Placeholder": "Enter 1-16",
+  "ContinueDialog.Confirm": "Continue",
+  "ContinueDialog.Cancel": "Cancel"
 }

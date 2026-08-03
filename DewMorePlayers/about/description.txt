@@ -1,11 +1,11 @@
-自定义玩家数量
+自定义玩家数量。创建大厅时可直接设置最大玩家数；继续多人游戏时也会弹出人数选择窗口。本MOD不再提供或保存人数配置。
 
 这是一个仅服务器(房主)Mod,客户端无需安装也可以使用其功能,且客户端调整属性无效
 
 
 你可以在此MOD目录下的i18n文件夹内添加你所在地区的本地化翻译json文件
 
-Customize the number of players
+Customize the number of players. Choose the maximum player count when creating a lobby or continuing a saved multiplayer game. This mod no longer stores a player-count configuration.
 
 This is a server only (homeowner) Mod,
  and the client can use its features without installation,

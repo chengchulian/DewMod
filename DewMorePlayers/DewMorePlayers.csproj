@@ -715,21 +715,37 @@
         </Reference>
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="config\LocalizationSource.cs" />
-        <Compile Include="config\PluginConfig.cs" />
-        <Compile Include="Constant.cs" />
-        <Compile Include="DewMorePlayers.cs" />
-        <Compile Include="patch\DewNetworkStartSettings_Patch.cs" />
-        <Compile Include="patch\UI_Lobby_HideIfSingleplayer_Patch.cs" />
-        <Compile Include="Properties\AssemblyInfo.cs"/>
+        <Compile Include="src\config\LocalizationSource.cs" />
+        <Compile Include="src\Constant.cs" />
+        <Compile Include="src\ContinuePlayerCountDialog.cs" />
+        <Compile Include="src\DewMorePlayers.cs" />
+        <Compile Include="src\DewMorePlayersUiCleanup.cs" />
+        <Compile Include="src\MorePlayersLobbyController.cs" />
+        <Compile Include="src\patch\DewNetworkStartSettings_Patch.cs" />
+        <Compile Include="src\patch\TitleManager_EnterContinueDreaming_Patch.cs" />
+        <Compile Include="src\patch\UI_Title_CreateLobbyView_Patch.cs" />
+        <Compile Include="src\patch\UI_Lobby_HideIfSingleplayer_Patch.cs" />
+        <Compile Include="src\Properties\AssemblyInfo.cs"/>
     </ItemGroup>
     <ItemGroup>
       <Content Include="about\preview.png" />
       <Content Include="about\icon.png" />
       <Content Include="about\description.txt" />
       <Content Include="about\metadata.json" />
+      <Content Include="about\publishedfileid.txt" />
       <Content Include="i18n\en-US.json" />
+      <Content Include="i18n\de-DE.json" />
+      <Content Include="i18n\es-MX.json" />
+      <Content Include="i18n\fr-FR.json" />
+      <Content Include="i18n\it-IT.json" />
+      <Content Include="i18n\ja-JP.json" />
+      <Content Include="i18n\ko-KR.json" />
+      <Content Include="i18n\pl-PL.json" />
+      <Content Include="i18n\pt-BR.json" />
+      <Content Include="i18n\ru-RU.json" />
+      <Content Include="i18n\tr-TR.json" />
       <Content Include="i18n\zh-CN.json" />
+      <Content Include="i18n\zh-TW.json" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
     <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

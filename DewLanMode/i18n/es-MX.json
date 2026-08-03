@@ -1,0 +1,7 @@
+{
+  "LanMenu.Mode": "Modo de conexión", "LanMenu.Steam": "Modo Steam", "LanMenu.Lan": "Modo LAN", "LanMenu.Address": "Dirección del anfitrión", "LanMenu.Port": "Puerto LAN", "LanMenu.Host": "Crear sala LAN", "LanMenu.Join": "Unirse a partida LAN",
+  "LanMenu.InvalidPort": "El puerto debe ser un número entero entre 1024 y 65535.", "LanMenu.InvalidAddress": "Ingresa una dirección IP LAN o un nombre de host válido.", "LanMenu.InvalidInput": "La entrada no es válida.",
+  "LanMenu.SteamRoom": "Salas de Steam", "LanMenu.LanRoom": "Salas LAN", "LanMenu.JoinByIp": "Unirse por IP a LAN", "LanMenu.LanListHint": "Se encontraron salas LAN. Selecciona una para unirte.", "LanMenu.RoomSource": "Origen de salas",
+  "LanMenu.Searching": "Buscando salas LAN...", "LanMenu.NoLanRooms": "No se encontraron salas LAN. Actualiza la lista o únete directamente por IP.", "LanMenu.JoinByIpTitle": "Unirse por IP a LAN",
+  "LanMenu.JoinByIpDescription": "Ingresa la dirección IP LAN y el puerto del anfitrión. El anfitrión y todos los clientes deben instalar este mod.", "LanMenu.AddressPlaceholder": "IP del anfitrión, por ejemplo 192.168.1.100", "LanMenu.PortPlaceholder": "Puerto (1024-65535)", "LanMenu.Cancel": "Cancelar (Esc)"
+}

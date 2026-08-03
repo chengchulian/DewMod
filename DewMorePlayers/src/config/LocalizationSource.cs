@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using TMPro;
 using UnityEngine;
 
@@ -21,6 +22,7 @@ namespace DewMorePlayers.config
         /// </summary>
         public static void Init(ModBehaviour modBehaviour)
         {
+            LocalizationSourceMap.Clear();
             string modPath = modBehaviour.mod.path;
 
             string i18nPath = Path.Combine(modPath, "i18n");
@@ -37,7 +39,7 @@ namespace DewMorePlayers.config
                 try
                 {
                     string lang = Path.GetFileNameWithoutExtension(file);
-                    string jsonText = File.ReadAllText(file);
+                    string jsonText = File.ReadAllText(file, Encoding.UTF8);
                     // 解析JSON文本为字典
                     Dictionary<string, string> langDict =
                         Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, string>>(jsonText);
@@ -68,7 +70,9 @@ namespace DewMorePlayers.config
                 return key;
             }
 
-            if (!dict.TryGetValue(key, out var val))
+            if (!dict.TryGetValue(key, out var val)
+                && (!LocalizationSourceMap.TryGetValue("en-US", out var fallback)
+                    || !fallback.TryGetValue(key, out val)))
             {
                 return key;
             }

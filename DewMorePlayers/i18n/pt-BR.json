@@ -1,0 +1,9 @@
+{
+  "LobbyMenu.MaxPlayers": "Máx. de jogadores (1–16)",
+  "ContinueDialog.Title": "Continuar jogo",
+  "ContinueDialog.Description": "Escolha o número máximo de jogadores para este lobby multijogador salvo.",
+  "ContinueDialog.PlayerCount": "Máximo de jogadores (1–16)",
+  "ContinueDialog.Placeholder": "Digite 1–16",
+  "ContinueDialog.Confirm": "Continuar",
+  "ContinueDialog.Cancel": "Cancelar"
+}

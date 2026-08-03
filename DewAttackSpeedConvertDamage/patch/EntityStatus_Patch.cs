@@ -26,20 +26,17 @@ public static class EntityStatus_Patch
         }
 
         float baseAttackSpeed = GetActualBaseAttackSpeed(__instance);
-        float currentAttackSpeed = baseAttackSpeed * __result;
+        float uncappedBonusMultiplier = GetUncappedBonusMultiplier(__instance);
+        float cappedMultiplier = Mathf.Max(0f, __result - uncappedBonusMultiplier);
+        float maxAttackSpeedMultiplier = maxAttackSpeed / baseAttackSpeed;
 
-        // 计算溢出
-        float overflow = Mathf.Max(0f, currentAttackSpeed - maxAttackSpeed);
-
-        float overflowPercentage = overflow / baseAttackSpeed;
-        float damageBonus = overflowPercentage * damagePerOverflow;
+        // 修正燃烧弹填装与挚爱的临时急速被错误计入攻速上限的问题。
+        float overflowMultiplier = Mathf.Max(0f, cappedMultiplier - maxAttackSpeedMultiplier);
+        float damageBonus = overflowMultiplier * damagePerOverflow;
         DamageBonusMap.GetOrCreateValue(hero).bonus = damageBonus;
 
-        // 限制返回值
-        if (overflow > 0f)
-        {
-            __result = maxAttackSpeed / baseAttackSpeed;
-        }
+        // 先限制其他来源，再完整保留这两个效果提供的攻速。
+        __result = Mathf.Min(cappedMultiplier, maxAttackSpeedMultiplier) + uncappedBonusMultiplier;
 
         // 确保伤害处理器已注册
         if (hero.HasData<AttackSpeedUpperConvertDamage>())
@@ -58,6 +55,27 @@ public static class EntityStatus_Patch
 
         float cd = entity.Ability.attackAbility.configs[0].cooldownTime;
         return cd > 0f ? 1f / cd : 1f;
+    }
+
+    private static float GetUncappedBonusMultiplier(EntityStatus status)
+    {
+        float hastePercentage = 0f;
+        foreach (StatusEffect effect in status.statusEffects)
+        {
+            if (effect is Se_Q_IncendiaryRounds_EmpowerAttacks incendiaryRounds)
+            {
+                hastePercentage += Mathf.Max(0f, incendiaryRounds.GetValue(incendiaryRounds.hasteAmount));
+            }
+            else if (effect is Se_Gem_C_Love love)
+            {
+                float selfMultiplier = love.info.caster == love.victim ? 1f - love.selfReduction : 1f;
+                hastePercentage += Mathf.Max(0f, love.GetValue(love.bonusAmount) * selfMultiplier);
+            }
+        }
+
+        // EntityStatus 在最终属性中会让所有急速共同受到致残倍率影响。
+        float crippleMultiplier = Mathf.Clamp01(1f - status.totalCripple / 100f);
+        return hastePercentage / 100f * crippleMultiplier;
     }
 
     private static void Processor(ref DamageData data, Actor actor, Entity target)

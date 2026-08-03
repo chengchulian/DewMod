@@ -1,0 +1,7 @@
+{
+  "LanMenu.Mode": "Tryb połączenia", "LanMenu.Steam": "Tryb Steam", "LanMenu.Lan": "Tryb LAN", "LanMenu.Address": "Adres hosta", "LanMenu.Port": "Port LAN", "LanMenu.Host": "Utwórz lobby LAN", "LanMenu.Join": "Dołącz do gry LAN",
+  "LanMenu.InvalidPort": "Port musi być liczbą całkowitą od 1024 do 65535.", "LanMenu.InvalidAddress": "Wpisz prawidłowy adres IP LAN lub nazwę hosta.", "LanMenu.InvalidInput": "Wprowadzona wartość jest nieprawidłowa.",
+  "LanMenu.SteamRoom": "Lobby Steam", "LanMenu.LanRoom": "Lobby LAN", "LanMenu.JoinByIp": "Dołącz przez IP", "LanMenu.LanListHint": "Znaleziono lobby LAN. Wybierz jedno, aby dołączyć.", "LanMenu.RoomSource": "Źródło lobby",
+  "LanMenu.Searching": "Wyszukiwanie lobby LAN...", "LanMenu.NoLanRooms": "Nie znaleziono lobby LAN. Odśwież lub dołącz bezpośrednio przez IP.", "LanMenu.JoinByIpTitle": "Dołącz przez IP",
+  "LanMenu.JoinByIpDescription": "Wpisz adres IP LAN i port hosta. Host i wszyscy klienci muszą mieć zainstalowany ten mod.", "LanMenu.AddressPlaceholder": "Adres IP hosta, np. 192.168.1.100", "LanMenu.PortPlaceholder": "Port (1024–65535)", "LanMenu.Cancel": "Anuluj (Esc)"
+}

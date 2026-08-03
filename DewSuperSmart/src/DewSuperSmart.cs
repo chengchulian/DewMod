@@ -1,4 +1,5 @@
 using DewSuperSmart.config;
+using HarmonyLib;
 using UnityEngine;
 
 namespace DewSuperSmart;
@@ -11,6 +12,10 @@ public class DewSuperSmart : ModBehaviour
     private SkillRangeDisplay _skillRangeDisplay;
     private MonsterThreatRangeDisplay _monsterThreatRangeDisplay;
     private AutoDodgeController _autoDodgeController;
+    private ThreatSnapshotProvider _threatSnapshotProvider;
+    private Harmony _harmony;
+
+    internal ThreatSnapshotProvider Threats => _threatSnapshotProvider;
 
     private void Awake()
     {
@@ -20,7 +25,10 @@ public class DewSuperSmart : ModBehaviour
     private void Start()
     {
         LocalizationSource.Init(this);
+        _harmony = new Harmony("com.chengchulian.DewMod.DewSuperSmart.ThreatTracking");
+        SafeZoneTracker.Install(_harmony);
 
+        _threatSnapshotProvider = gameObject.GetComponent<ThreatSnapshotProvider>() ?? gameObject.AddComponent<ThreatSnapshotProvider>();
         _skillRangeDisplay = gameObject.GetComponent<SkillRangeDisplay>() ?? gameObject.AddComponent<SkillRangeDisplay>();
         _monsterThreatRangeDisplay = gameObject.GetComponent<MonsterThreatRangeDisplay>() ?? gameObject.AddComponent<MonsterThreatRangeDisplay>();
         _autoDodgeController = gameObject.GetComponent<AutoDodgeController>() ?? gameObject.AddComponent<AutoDodgeController>();
@@ -30,6 +38,14 @@ public class DewSuperSmart : ModBehaviour
 
     private void OnDestroy()
     {
+        if (_harmony != null)
+        {
+            _harmony.UnpatchAll(_harmony.Id);
+            _harmony = null;
+        }
+
+        SafeZoneTracker.Clear();
+
         if (_skillRangeDisplay != null)
         {
             Destroy(_skillRangeDisplay);
@@ -46,6 +62,12 @@ public class DewSuperSmart : ModBehaviour
         {
             Destroy(_autoDodgeController);
             _autoDodgeController = null;
+        }
+
+        if (_threatSnapshotProvider != null)
+        {
+            Destroy(_threatSnapshotProvider);
+            _threatSnapshotProvider = null;
         }
 
         if (Instance == this)

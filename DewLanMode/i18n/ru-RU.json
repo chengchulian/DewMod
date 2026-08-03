@@ -1,0 +1,7 @@
+{
+  "LanMenu.Mode": "Режим подключения", "LanMenu.Steam": "Режим Steam", "LanMenu.Lan": "Режим LAN", "LanMenu.Address": "Адрес хоста", "LanMenu.Port": "Порт LAN", "LanMenu.Host": "Создать лобби LAN", "LanMenu.Join": "Подключиться к игре LAN",
+  "LanMenu.InvalidPort": "Порт должен быть целым числом от 1024 до 65535.", "LanMenu.InvalidAddress": "Введите допустимый IP-адрес LAN или имя хоста.", "LanMenu.InvalidInput": "Введено недопустимое значение.",
+  "LanMenu.SteamRoom": "Лобби Steam", "LanMenu.LanRoom": "Лобби LAN", "LanMenu.JoinByIp": "Войти по IP", "LanMenu.LanListHint": "Найдены лобби LAN. Выберите лобби для входа.", "LanMenu.RoomSource": "Источник лобби",
+  "LanMenu.Searching": "Поиск лобби LAN...", "LanMenu.NoLanRooms": "Лобби LAN не найдены. Обновите список или войдите напрямую по IP.", "LanMenu.JoinByIpTitle": "Войти по IP",
+  "LanMenu.JoinByIpDescription": "Введите IP-адрес LAN и порт хоста. Этот мод должен быть установлен у хоста и всех клиентов.", "LanMenu.AddressPlaceholder": "IP-адрес хоста, например 192.168.1.100", "LanMenu.PortPlaceholder": "Порт (1024–65535)", "LanMenu.Cancel": "Отмена (Esc)"
+}

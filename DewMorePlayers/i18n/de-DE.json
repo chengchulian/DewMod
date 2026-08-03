@@ -1,0 +1,9 @@
+{
+  "LobbyMenu.MaxPlayers": "Max. Spieler (1–16)",
+  "ContinueDialog.Title": "Spiel fortsetzen",
+  "ContinueDialog.Description": "Lege die maximale Spielerzahl für diese gespeicherte Mehrspieler-Lobby fest.",
+  "ContinueDialog.PlayerCount": "Maximale Spielerzahl (1–16)",
+  "ContinueDialog.Placeholder": "1–16 eingeben",
+  "ContinueDialog.Confirm": "Fortsetzen",
+  "ContinueDialog.Cancel": "Abbrechen"
+}

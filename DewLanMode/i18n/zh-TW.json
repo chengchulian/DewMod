@@ -1,0 +1,7 @@
+{
+  "LanMenu.Mode": "連線模式", "LanMenu.Steam": "Steam 模式", "LanMenu.Lan": "區域網路模式", "LanMenu.Address": "房主位址", "LanMenu.Port": "區域網路連接埠", "LanMenu.Host": "建立區域網路大廳", "LanMenu.Join": "加入區域網路遊戲",
+  "LanMenu.InvalidPort": "連接埠必須是 1024 到 65535 之間的整數。", "LanMenu.InvalidAddress": "請輸入有效的區域網路 IP 位址或主機名稱。", "LanMenu.InvalidInput": "輸入內容無效。",
+  "LanMenu.SteamRoom": "Steam 房間", "LanMenu.LanRoom": "區域網路房間", "LanMenu.JoinByIp": "使用 IP 加入區域網路", "LanMenu.LanListHint": "已找到區域網路房間，可選擇後直接加入。", "LanMenu.RoomSource": "房間來源",
+  "LanMenu.Searching": "正在搜尋區域網路房間……", "LanMenu.NoLanRooms": "未找到區域網路房間。可重新整理列表，或使用 IP 直接加入。", "LanMenu.JoinByIpTitle": "使用 IP 加入區域網路",
+  "LanMenu.JoinByIpDescription": "輸入房主的區域網路 IP 位址和連接埠。房主與所有客機都必須安裝此 MOD。", "LanMenu.AddressPlaceholder": "房主 IP 位址，例如 192.168.1.100", "LanMenu.PortPlaceholder": "連接埠（1024-65535）", "LanMenu.Cancel": "取消（Esc）"
+}

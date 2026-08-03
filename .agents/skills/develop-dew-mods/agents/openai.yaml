@@ -1,0 +1,4 @@
+interface:
+  display_name: "Dew Mod Development"
+  short_description: "Develop Shape of Dreams mods from local game sources"
+  default_prompt: "Use $develop-dew-mods to inspect GameSource and implement a source-backed Dew Mod change."

@@ -1,0 +1,9 @@
+{
+  "LobbyMenu.MaxPlayers": "Макс. игроков (1–16)",
+  "ContinueDialog.Title": "Продолжить игру",
+  "ContinueDialog.Description": "Выберите максимальное число игроков для сохранённого сетевого лобби.",
+  "ContinueDialog.PlayerCount": "Максимум игроков (1–16)",
+  "ContinueDialog.Placeholder": "Введите 1–16",
+  "ContinueDialog.Confirm": "Продолжить",
+  "ContinueDialog.Cancel": "Отмена"
+}

@@ -1,3 +1,9 @@
 {
-    "LabelText.MaxPlayer": "房间最大玩家数 (1-16)"
+  "LobbyMenu.MaxPlayers": "最大玩家数 (1-16)",
+  "ContinueDialog.Title": "继续游戏",
+  "ContinueDialog.Description": "选择此多人存档大厅的最大玩家数。",
+  "ContinueDialog.PlayerCount": "最大玩家数 (1-16)",
+  "ContinueDialog.Placeholder": "请输入 1-16",
+  "ContinueDialog.Confirm": "继续",
+  "ContinueDialog.Cancel": "取消"
 }

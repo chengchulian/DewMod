@@ -1,0 +1,9 @@
+{
+  "LobbyMenu.MaxPlayers": "Joueurs max. (1-16)",
+  "ContinueDialog.Title": "Continuer la partie",
+  "ContinueDialog.Description": "Choisissez le nombre maximal de joueurs pour ce salon multijoueur sauvegardé.",
+  "ContinueDialog.PlayerCount": "Nombre maximal de joueurs (1-16)",
+  "ContinueDialog.Placeholder": "Saisissez 1-16",
+  "ContinueDialog.Confirm": "Continuer",
+  "ContinueDialog.Cancel": "Annuler"
+}

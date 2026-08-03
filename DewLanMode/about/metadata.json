@@ -1,0 +1,9 @@
+{
+  "id": "com.chengchulian.DewMod.DewLanMode",
+  "name": "LanMode | 局域网模式",
+  "author": "chengchulian",
+  "modVer": "1.4.5",
+  "assemblies": [
+    "obj/Release/*.dll"
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "LobbyMenu.MaxPlayers": "Maks. oyuncu (1-16)",
+  "ContinueDialog.Title": "Oyuna devam et",
+  "ContinueDialog.Description": "Kaydedilmiş çok oyunculu lobi için maksimum oyuncu sayısını seçin.",
+  "ContinueDialog.PlayerCount": "Maksimum oyuncu sayısı (1-16)",
+  "ContinueDialog.Placeholder": "1-16 girin",
+  "ContinueDialog.Confirm": "Devam et",
+  "ContinueDialog.Cancel": "İptal"
+}

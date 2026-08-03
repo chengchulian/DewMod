@@ -57,6 +57,10 @@ public class PluginConfig : ModConfig
     [Description("Description.AutoDodgeUseMovementSkill")]
     public bool AutoDodgeUseMovementSkill = true;
 
+    [LabelText("LabelText.AutoDodgeReserveOneCharge")]
+    [Description("Description.AutoDodgeReserveOneCharge")]
+    public bool AutoDodgeReserveOneCharge;
+
     [LabelText("LabelText.AutoDodgeLevel")]
     [Description("Description.AutoDodgeLevel")]
     public AutoDodgeThreatLevel AutoDodgeLevel = AutoDodgeThreatLevel.Green;
@@ -67,11 +71,10 @@ public class PluginConfig : ModConfig
 
     [LabelText("LabelText.AutoDodgeKey")]
     [Description("Description.AutoDodgeKey")]
-    public KeyCode AutoDodgeKey = KeyCode.LeftShift;
+    public KeyCode AutoDodgeKey = KeyCode.None;
 
     internal float AutoDodgeHoldDelay => 0.12f;
     internal bool AutoDodgeMoveFallback => true;
-    internal bool AutoDodgeReadyThreatsOnly => true;
     internal float AutoDodgeRiskThreshold => 0.9f;
     internal float ThreatScanRange => 24f;
     internal float AutoDodgeSearchRadius => 7f;
@@ -83,7 +86,7 @@ public class PluginConfig : ModConfig
     internal float ProjectileLookAheadDistance => 12f;
     internal float DefaultThreatLineWidth => 1.1f;
     internal float DefaultThreatAreaRadius => 1.2f;
-    internal int MaxThreatRenderers => 48;
+    internal int MaxThreatRenderers => 256;
 
     public override void BuildWidgets(Transform parent, out SafeAction onChanged, out SafeAction requestUpdate)
     {

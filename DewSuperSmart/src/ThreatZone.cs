@@ -6,7 +6,24 @@ internal enum ThreatZoneKind
 {
     Circle,
     Cone,
-    Line
+    Line,
+    Polygon,
+    OutsideCircles
+}
+
+internal enum ThreatSourceKind
+{
+    EnemyCast,
+    ActiveEffect,
+    Projectile,
+    Environment
+}
+
+internal enum ThreatActivity
+{
+    Preview,
+    Imminent,
+    Active
 }
 
 internal readonly struct ThreatZone
@@ -14,73 +31,239 @@ internal readonly struct ThreatZone
     private const float NearMissFalloff = 1.75f;
 
     public readonly ThreatZoneKind Kind;
-    public readonly Entity Source;
+    public readonly ThreatSourceKind SourceKind;
+    public readonly ThreatActivity Activity;
+    public readonly Actor Source;
     public readonly AbilityTrigger Trigger;
     public readonly Projectile Projectile;
     public readonly Vector3 Origin;
     public readonly Vector3 Center;
     public readonly Vector3 Direction;
+    public readonly Vector3[] Points;
     public readonly float Radius;
     public readonly float Length;
     public readonly float Width;
     public readonly float Angle;
     public readonly float Weight;
     public readonly float TimeToImpact;
-    public readonly bool IsReady;
-    public readonly bool IsProjectile;
+    public readonly float ProjectileSpeed;
+    public readonly bool IsDodgeable;
+
+    public bool IsProjectile => SourceKind == ThreatSourceKind.Projectile;
+    public bool IsActive => Activity != ThreatActivity.Preview;
 
     private ThreatZone(
         ThreatZoneKind kind,
-        Entity source,
+        ThreatSourceKind sourceKind,
+        ThreatActivity activity,
+        Actor source,
         AbilityTrigger trigger,
         Projectile projectile,
         Vector3 origin,
         Vector3 center,
         Vector3 direction,
+        Vector3[] points,
         float radius,
         float length,
         float width,
         float angle,
         float weight,
         float timeToImpact,
-        bool isReady,
-        bool isProjectile)
+        float projectileSpeed,
+        bool isDodgeable)
     {
         Kind = kind;
+        SourceKind = sourceKind;
+        Activity = activity;
         Source = source;
         Trigger = trigger;
         Projectile = projectile;
         Origin = origin;
         Center = center;
         Direction = NormalizeFlat(direction);
+        Points = points;
         Radius = radius;
         Length = length;
         Width = width;
         Angle = angle;
         Weight = weight;
         TimeToImpact = timeToImpact;
-        IsReady = isReady;
-        IsProjectile = isProjectile;
+        ProjectileSpeed = projectileSpeed;
+        IsDodgeable = isDodgeable;
     }
 
-    public static ThreatZone Circle(Entity source, AbilityTrigger trigger, Vector3 center, float radius, bool isReady, float weight, float timeToImpact = float.PositiveInfinity)
+    public static ThreatZone Circle(
+        Actor source,
+        AbilityTrigger trigger,
+        Vector3 center,
+        float radius,
+        ThreatSourceKind sourceKind,
+        ThreatActivity activity,
+        float weight,
+        float timeToImpact,
+        bool isDodgeable)
     {
-        return new ThreatZone(ThreatZoneKind.Circle, source, trigger, null, center, center, Vector3.forward, radius, 0f, 0f, 360f, weight, timeToImpact, isReady, false);
+        return new ThreatZone(
+            ThreatZoneKind.Circle,
+            sourceKind,
+            activity,
+            source,
+            trigger,
+            sourceKind == ThreatSourceKind.Projectile ? source as Projectile : null,
+            center,
+            center,
+            Vector3.forward,
+            null,
+            Mathf.Max(radius, 0.01f),
+            0f,
+            0f,
+            360f,
+            weight,
+            timeToImpact,
+            0f,
+            isDodgeable);
     }
 
-    public static ThreatZone Cone(Entity source, AbilityTrigger trigger, Vector3 origin, Vector3 direction, float radius, float angle, bool isReady, float weight, float timeToImpact = float.PositiveInfinity)
+    public static ThreatZone Cone(
+        Actor source,
+        AbilityTrigger trigger,
+        Vector3 origin,
+        Vector3 direction,
+        float radius,
+        float angle,
+        ThreatActivity activity,
+        float weight,
+        float timeToImpact,
+        bool isDodgeable)
     {
-        return new ThreatZone(ThreatZoneKind.Cone, source, trigger, null, origin, origin, direction, radius, 0f, 0f, angle, weight, timeToImpact, isReady, false);
+        return new ThreatZone(
+            ThreatZoneKind.Cone,
+            ThreatSourceKind.EnemyCast,
+            activity,
+            source,
+            trigger,
+            null,
+            origin,
+            origin,
+            direction,
+            null,
+            Mathf.Max(radius, 0.01f),
+            0f,
+            0f,
+            Mathf.Clamp(angle, 0.01f, 360f),
+            weight,
+            timeToImpact,
+            0f,
+            isDodgeable);
     }
 
-    public static ThreatZone Line(Entity source, AbilityTrigger trigger, Vector3 origin, Vector3 direction, float length, float width, bool isReady, float weight, float timeToImpact = float.PositiveInfinity)
+    public static ThreatZone Line(
+        Actor source,
+        AbilityTrigger trigger,
+        Projectile projectile,
+        Vector3 origin,
+        Vector3 direction,
+        float length,
+        float width,
+        ThreatSourceKind sourceKind,
+        ThreatActivity activity,
+        float weight,
+        float timeToImpact,
+        bool isDodgeable,
+        float projectileSpeed = 0f)
     {
-        return new ThreatZone(ThreatZoneKind.Line, source, trigger, null, origin, origin, direction, 0f, length, width, 0f, weight, timeToImpact, isReady, false);
+        return new ThreatZone(
+            ThreatZoneKind.Line,
+            sourceKind,
+            activity,
+            source,
+            trigger,
+            projectile,
+            origin,
+            origin,
+            direction,
+            null,
+            0f,
+            Mathf.Max(length, 0.01f),
+            Mathf.Max(width, 0.01f),
+            0f,
+            weight,
+            timeToImpact,
+            Mathf.Max(projectileSpeed, 0f),
+            isDodgeable);
     }
 
-    public static ThreatZone ProjectileLine(Projectile projectile, Entity source, Vector3 origin, Vector3 direction, float length, float width, float weight, float timeToImpact)
+    public static ThreatZone Polygon(
+        Actor source,
+        Vector3[] points,
+        ThreatSourceKind sourceKind,
+        ThreatActivity activity,
+        float weight,
+        float timeToImpact,
+        bool isDodgeable)
     {
-        return new ThreatZone(ThreatZoneKind.Line, source, null, projectile, origin, origin, direction, 0f, length, width, 0f, weight, timeToImpact, true, true);
+        Vector3 center = Vector3.zero;
+        if (points != null && points.Length > 0)
+        {
+            for (int i = 0; i < points.Length; i++)
+            {
+                center += points[i];
+            }
+
+            center /= points.Length;
+        }
+
+        return new ThreatZone(
+            ThreatZoneKind.Polygon,
+            sourceKind,
+            activity,
+            source,
+            null,
+            sourceKind == ThreatSourceKind.Projectile ? source as Projectile : null,
+            center,
+            center,
+            Vector3.forward,
+            points,
+            0f,
+            0f,
+            0f,
+            0f,
+            weight,
+            timeToImpact,
+            0f,
+            isDodgeable);
+    }
+
+    public static ThreatZone OutsideCircles(
+        Actor source,
+        Vector3[] centers,
+        float radius,
+        ThreatSourceKind sourceKind,
+        ThreatActivity activity,
+        float weight,
+        float timeToImpact,
+        bool isDodgeable)
+    {
+        Vector3 center = centers != null && centers.Length > 0 ? centers[0] : Vector3.zero;
+        return new ThreatZone(
+            ThreatZoneKind.OutsideCircles,
+            sourceKind,
+            activity,
+            source,
+            null,
+            null,
+            center,
+            center,
+            Vector3.forward,
+            centers,
+            Mathf.Max(radius, 0.01f),
+            0f,
+            0f,
+            360f,
+            weight,
+            timeToImpact,
+            0f,
+            isDodgeable);
     }
 
     public float RiskAt(Vector3 point, float extraRadius)
@@ -109,6 +292,10 @@ internal readonly struct ThreatZone
                 return SignedDistanceToCone(point, extraRadius);
             case ThreatZoneKind.Line:
                 return DistancePointToSegment(point, Origin, Origin + Direction * Length) - Width * 0.5f - extraRadius;
+            case ThreatZoneKind.Polygon:
+                return SignedDistanceToPolygon(point, extraRadius);
+            case ThreatZoneKind.OutsideCircles:
+                return SignedDistanceOutsideCircles(point, extraRadius);
             default:
                 return float.PositiveInfinity;
         }
@@ -123,6 +310,10 @@ internal readonly struct ThreatZone
             case ThreatZoneKind.Cone:
             case ThreatZoneKind.Line:
                 return ClosestPointOnSegment(point, Origin, Origin + Direction * Length);
+            case ThreatZoneKind.Polygon:
+                return ClosestPointOnPolygon(point);
+            case ThreatZoneKind.OutsideCircles:
+                return ClosestSafeCircleCenter(point);
             default:
                 return point;
         }
@@ -132,7 +323,6 @@ internal readonly struct ThreatZone
     {
         Vector3 delta = point - Origin;
         delta.y = 0f;
-
         float distance = delta.magnitude;
         if (distance <= 0.001f)
         {
@@ -154,9 +344,111 @@ internal readonly struct ThreatZone
         return Mathf.Max(radialDistance, angularDistance);
     }
 
+    private float SignedDistanceToPolygon(Vector3 point, float extraRadius)
+    {
+        if (Points == null || Points.Length < 3)
+        {
+            return float.PositiveInfinity;
+        }
+
+        Vector2 query = point.ToXY();
+        float minimumDistance = float.PositiveInfinity;
+        bool inside = false;
+
+        for (int i = 0, j = Points.Length - 1; i < Points.Length; j = i++)
+        {
+            Vector2 a = Points[j].ToXY();
+            Vector2 b = Points[i].ToXY();
+            minimumDistance = Mathf.Min(minimumDistance, DistancePointToSegment(query, a, b));
+
+            if ((a.y > query.y) != (b.y > query.y) &&
+                query.x < (b.x - a.x) * (query.y - a.y) / (b.y - a.y) + a.x)
+            {
+                inside = !inside;
+            }
+        }
+
+        return (inside ? -minimumDistance : minimumDistance) - extraRadius;
+    }
+
+    private Vector3 ClosestPointOnPolygon(Vector3 point)
+    {
+        if (Points == null || Points.Length == 0)
+        {
+            return point;
+        }
+
+        Vector3 best = Points[0];
+        float bestDistance = float.PositiveInfinity;
+        for (int i = 0; i < Points.Length; i++)
+        {
+            Vector3 candidate = ClosestPointOnSegment(point, Points[i], Points[(i + 1) % Points.Length]);
+            float distance = (candidate.ToXY() - point.ToXY()).sqrMagnitude;
+            if (distance < bestDistance)
+            {
+                best = candidate;
+                bestDistance = distance;
+            }
+        }
+
+        return best;
+    }
+
+    private float SignedDistanceOutsideCircles(Vector3 point, float extraRadius)
+    {
+        if (Points == null || Points.Length == 0)
+        {
+            return float.PositiveInfinity;
+        }
+
+        float bestSafeMargin = float.NegativeInfinity;
+        for (int i = 0; i < Points.Length; i++)
+        {
+            float safeMargin = Radius - Vector2.Distance(point.ToXY(), Points[i].ToXY()) - extraRadius;
+            bestSafeMargin = Mathf.Max(bestSafeMargin, safeMargin);
+        }
+
+        return bestSafeMargin;
+    }
+
+    private Vector3 ClosestSafeCircleCenter(Vector3 point)
+    {
+        if (Points == null || Points.Length == 0)
+        {
+            return point;
+        }
+
+        Vector3 best = Points[0];
+        float bestDistance = Vector2.SqrMagnitude(point.ToXY() - best.ToXY());
+        for (int i = 1; i < Points.Length; i++)
+        {
+            float distance = Vector2.SqrMagnitude(point.ToXY() - Points[i].ToXY());
+            if (distance < bestDistance)
+            {
+                best = Points[i];
+                bestDistance = distance;
+            }
+        }
+
+        return best;
+    }
+
     private static float DistancePointToSegment(Vector3 point, Vector3 start, Vector3 end)
     {
-        return Vector2.Distance(point.ToXY(), ClosestPointOnSegment(point, start, end).ToXY());
+        return DistancePointToSegment(point.ToXY(), start.ToXY(), end.ToXY());
+    }
+
+    private static float DistancePointToSegment(Vector2 point, Vector2 start, Vector2 end)
+    {
+        Vector2 segment = end - start;
+        float sqrLength = segment.sqrMagnitude;
+        if (sqrLength <= 0.0001f)
+        {
+            return Vector2.Distance(point, start);
+        }
+
+        float t = Mathf.Clamp01(Vector2.Dot(point - start, segment) / sqrLength);
+        return Vector2.Distance(point, start + segment * t);
     }
 
     private static Vector3 ClosestPointOnSegment(Vector3 point, Vector3 start, Vector3 end)
@@ -179,11 +471,6 @@ internal readonly struct ThreatZone
     private static Vector3 NormalizeFlat(Vector3 value)
     {
         value.y = 0f;
-        if (value.sqrMagnitude <= 0.0001f)
-        {
-            return Vector3.forward;
-        }
-
-        return value.normalized;
+        return value.sqrMagnitude <= 0.0001f ? Vector3.forward : value.normalized;
     }
 }

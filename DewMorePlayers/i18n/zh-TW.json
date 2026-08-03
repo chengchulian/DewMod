@@ -1,0 +1,9 @@
+{
+  "LobbyMenu.MaxPlayers": "最大玩家數 (1-16)",
+  "ContinueDialog.Title": "繼續遊戲",
+  "ContinueDialog.Description": "選擇此多人存檔大廳的最大玩家數。",
+  "ContinueDialog.PlayerCount": "最大玩家數 (1-16)",
+  "ContinueDialog.Placeholder": "請輸入 1-16",
+  "ContinueDialog.Confirm": "繼續",
+  "ContinueDialog.Cancel": "取消"
+}

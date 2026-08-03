@@ -1,0 +1,13 @@
+为《梦之形》增加局域网联机模式，并保留原本的 Steam 联机模式。
+
+使用方法：
+1. 房主和所有客机都安装本 MOD。
+2. 进入“共同梦游 -> 创建大厅”，在“联机模式”中选择“局域网模式”。
+3. 房主设置端口并创建局域网大厅，把本机局域网地址和端口告诉其他玩家。
+4. 客机进入“共同梦游 -> 加入大厅”，在右上角“房间来源”中选择“局域网房间”。
+5. 选择自动发现的局域网房间后直接加入；若未发现，也可点击“使用 IP 加入局域网”手动输入地址和端口。
+6. 若 Windows 防火墙询问，请允许游戏通过专用网络；房主需开放所设置的 TCP 端口。自动发现还会使用 UDP 47777，若该端口被拦截仍可通过 IP 直接加入。
+
+只有主客机都安装且协议兼容时，局域网连接才会被接受。使用默认的 Steam 模式时，游戏行为不受影响。
+
+Adds TCP-based LAN multiplayer to Shape of Dreams while keeping the original Steam mode. Hosts choose LAN mode under “Dream Together -> Create Lobby”. Clients open “Dream Together -> Find Lobby” and select “LAN lobbies” to discover and join rooms, with direct IP joining as a fallback. Both the host and every client must install this mod.

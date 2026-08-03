@@ -1,0 +1,9 @@
+{
+  "LobbyMenu.MaxPlayers": "最大プレイヤー数 (1～16)",
+  "ContinueDialog.Title": "ゲームを続ける",
+  "ContinueDialog.Description": "保存されたマルチプレイロビーの最大プレイヤー数を選択します。",
+  "ContinueDialog.PlayerCount": "最大プレイヤー数 (1～16)",
+  "ContinueDialog.Placeholder": "1～16を入力",
+  "ContinueDialog.Confirm": "続ける",
+  "ContinueDialog.Cancel": "キャンセル"
+}

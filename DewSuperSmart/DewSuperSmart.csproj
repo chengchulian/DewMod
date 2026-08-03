@@ -35,6 +35,9 @@
         <WarningLevel>4</WarningLevel>
     </PropertyGroup>
     <ItemGroup>
+        <Reference Include="0Harmony">
+          <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\0Harmony.dll</HintPath>
+        </Reference>
         <Reference Include="Assembly-CSharp">
           <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\Assembly-CSharp.dll</HintPath>
         </Reference>
@@ -89,9 +92,11 @@
         <Compile Include="src\config\PluginConfig.cs" />
         <Compile Include="src\DewSuperSmart.cs" />
         <Compile Include="src\MonsterThreatRangeDisplay.cs" />
+        <Compile Include="src\SafeZoneTracker.cs" />
         <Compile Include="src\Properties\AssemblyInfo.cs"/>
         <Compile Include="src\SkillRangeDisplay.cs" />
         <Compile Include="src\ThreatAnalyzer.cs" />
+        <Compile Include="src\ThreatSnapshotProvider.cs" />
         <Compile Include="src\ThreatZone.cs" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>

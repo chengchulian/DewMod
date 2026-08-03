@@ -25,7 +25,6 @@ internal sealed class MonsterThreatRangeDisplay : MonoBehaviour
     private static readonly Color GreenThreatColor = new Color(0.18f, 1f, 0.42f, 0.82f);
     private static readonly Vector3[] UnitCirclePoints = BuildUnitCirclePoints();
 
-    private readonly ThreatAnalyzer _threatAnalyzer = new ThreatAnalyzer();
     private readonly List<ThreatZone> _threats = new List<ThreatZone>(128);
     private readonly ThreatMeshLayer[] _layers = new ThreatMeshLayer[3];
 
@@ -86,7 +85,17 @@ internal sealed class MonsterThreatRangeDisplay : MonoBehaviour
         bool snapshotUpdated = false;
         if (!_hasThreatSnapshot || now >= _nextThreatCollectTime)
         {
-            _threatAnalyzer.CollectThreats(hero, config, _threats, forAutoDodge: false);
+            IReadOnlyList<ThreatZone> snapshot = instance.Threats.GetThreats(hero, config);
+            _threats.Clear();
+            for (int i = 0; i < snapshot.Count; i++)
+            {
+                ThreatZone threat = snapshot[i];
+                if (ShouldDisplayThreat(threat, config))
+                {
+                    _threats.Add(threat);
+                }
+            }
+
             SortThreats(heroPosition, heroRadius);
             _hasThreatSnapshot = true;
             _nextThreatCollectTime = now + ThreatCollectInterval;
@@ -146,15 +155,30 @@ internal sealed class MonsterThreatRangeDisplay : MonoBehaviour
             return ThreatLevel.Green;
         }
 
+        if (threat.IsProjectile && !float.IsNaN(threat.TimeToImpact) && !float.IsInfinity(threat.TimeToImpact))
+        {
+            if (IsWithinThreatLevel(threat.TimeToImpact, RedTimeToImpact))
+            {
+                return ThreatLevel.Red;
+            }
+
+            if (IsWithinThreatLevel(threat.TimeToImpact, YellowTimeToImpact))
+            {
+                return ThreatLevel.Yellow;
+            }
+
+            return ThreatLevel.Green;
+        }
+
         float distanceToHero = threat.SignedDistance(heroPosition, heroRadius);
         if (IsWithinThreatLevel(distanceToHero, RedDistanceToHero) ||
-            IsWithinThreatLevel(threat.TimeToImpact, RedTimeToImpact))
+            (threat.Activity == ThreatActivity.Imminent && IsWithinThreatLevel(threat.TimeToImpact, RedTimeToImpact)))
         {
             return ThreatLevel.Red;
         }
 
         if (IsWithinThreatLevel(distanceToHero, YellowDistanceToHero) ||
-            IsWithinThreatLevel(threat.TimeToImpact, YellowTimeToImpact))
+            (threat.Activity == ThreatActivity.Imminent && IsWithinThreatLevel(threat.TimeToImpact, YellowTimeToImpact)))
         {
             return ThreatLevel.Yellow;
         }
@@ -169,7 +193,14 @@ internal sealed class MonsterThreatRangeDisplay : MonoBehaviour
 
     private static bool IsActiveThreat(ThreatZone threat)
     {
-        return threat.IsProjectile || threat.Trigger == null || threat.Trigger.Network_isCasting;
+        return threat.IsActive;
+    }
+
+    private static bool ShouldDisplayThreat(ThreatZone threat, PluginConfig config)
+    {
+        return threat.SourceKind == ThreatSourceKind.Projectile
+            ? config.ShowProjectileThreatRanges
+            : config.ShowMonsterThreatRanges;
     }
 
     private static float GetHeroThreatRadius(Hero hero, PluginConfig config)
@@ -458,6 +489,12 @@ internal sealed class MonsterThreatRangeDisplay : MonoBehaviour
                 case ThreatZoneKind.Line:
                     AddBox(threat, renderY, width);
                     break;
+                case ThreatZoneKind.Polygon:
+                    AddPolygon(threat, renderY, width);
+                    break;
+                case ThreatZoneKind.OutsideCircles:
+                    AddOutsideCircles(threat, renderY, width);
+                    break;
             }
         }
 
@@ -532,9 +569,11 @@ internal sealed class MonsterThreatRangeDisplay : MonoBehaviour
                         threat.Trigger,
                         threat.Origin,
                         threat.Radius,
-                        threat.IsReady,
+                        threat.SourceKind,
+                        threat.Activity,
                         threat.Weight,
-                        threat.TimeToImpact),
+                        threat.TimeToImpact,
+                        threat.IsDodgeable),
                     renderY,
                     width);
                 return;
@@ -592,6 +631,41 @@ internal sealed class MonsterThreatRangeDisplay : MonoBehaviour
             AddSegment(b, c, width);
             AddSegment(c, d, width);
             AddSegment(d, a, width);
+        }
+
+        private void AddPolygon(ThreatZone threat, float renderY, float width)
+        {
+            if (threat.Points == null || threat.Points.Length < 2)
+            {
+                return;
+            }
+
+            for (int i = 0; i < threat.Points.Length; i++)
+            {
+                Vector3 start = RenderPoint(threat.Points[i], renderY);
+                Vector3 end = RenderPoint(threat.Points[(i + 1) % threat.Points.Length], renderY);
+                AddSegment(start, end, width);
+            }
+        }
+
+        private void AddOutsideCircles(ThreatZone threat, float renderY, float width)
+        {
+            if (threat.Points == null)
+            {
+                return;
+            }
+
+            for (int circle = 0; circle < threat.Points.Length; circle++)
+            {
+                Vector3 center = RenderPoint(threat.Points[circle], renderY);
+                float radius = Mathf.Max(threat.Radius, 0.01f);
+                for (int i = 0; i < CircleSegmentCount; i++)
+                {
+                    Vector3 start = center + UnitCirclePoints[i] * radius;
+                    Vector3 end = center + UnitCirclePoints[(i + 1) % CircleSegmentCount] * radius;
+                    AddSegment(start, end, width);
+                }
+            }
         }
 
         private void AddSegment(Vector3 start, Vector3 end, float width)

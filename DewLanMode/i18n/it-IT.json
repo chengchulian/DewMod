@@ -1,0 +1,7 @@
+{
+  "LanMenu.Mode": "Modalità di connessione", "LanMenu.Steam": "Modalità Steam", "LanMenu.Lan": "Modalità LAN", "LanMenu.Address": "Indirizzo host", "LanMenu.Port": "Porta LAN", "LanMenu.Host": "Crea lobby LAN", "LanMenu.Join": "Unisciti alla partita LAN",
+  "LanMenu.InvalidPort": "La porta deve essere un numero intero compreso tra 1024 e 65535.", "LanMenu.InvalidAddress": "Inserisci un indirizzo IP LAN o un nome host valido.", "LanMenu.InvalidInput": "Il valore inserito non è valido.",
+  "LanMenu.SteamRoom": "Lobby Steam", "LanMenu.LanRoom": "Lobby LAN", "LanMenu.JoinByIp": "Unisciti via IP", "LanMenu.LanListHint": "Lobby LAN trovate. Selezionane una per unirti.", "LanMenu.RoomSource": "Origine lobby",
+  "LanMenu.Searching": "Ricerca lobby LAN...", "LanMenu.NoLanRooms": "Nessuna lobby LAN trovata. Aggiorna o unisciti direttamente via IP.", "LanMenu.JoinByIpTitle": "Unisciti via IP",
+  "LanMenu.JoinByIpDescription": "Inserisci l'indirizzo IP LAN e la porta dell'host. L'host e tutti i client devono installare questa mod.", "LanMenu.AddressPlaceholder": "IP host, ad esempio 192.168.1.100", "LanMenu.PortPlaceholder": "Porta (1024-65535)", "LanMenu.Cancel": "Annulla (Esc)"
+}
