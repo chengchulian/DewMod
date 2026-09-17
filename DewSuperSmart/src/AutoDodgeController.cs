@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Reflection;
 using DewSuperSmart.config;
 using UnityEngine;
 
@@ -6,32 +8,41 @@ namespace DewSuperSmart;
 
 internal sealed class AutoDodgeController : MonoBehaviour
 {
-    private const int RingCount = 3;
-    private const int BaseDirectionSamples = 12;
-    private const float MinimumCommandInterval = 0.03f;
-    private const float ThreatCollectInterval = 0.05f;
-    private const float RedDistanceToHero = 0.8f;
-    private const float YellowDistanceToHero = 1.8f;
-    private const float RedTimeToImpact = 0.8f;
-    private const float YellowTimeToImpact = 1.8f;
-    private const int PathSafetySampleCount = 3;
+    private const int RingCount = 5;
+    private const int BaseDirectionSamples = 16;
+    private const float MinimumCommandInterval = 0.05f;
+    private const float ThreatCollectInterval = 0.02f;
+    private const float RedThreatThreshold = 0.5f;
+    private const float YellowThreatThreshold = 1f;
+    private const float GreenThreatThreshold = 1.5f;
+    private const int PathSafetySampleCount = 7;
     private const float MinimumCandidateDistance = 0.25f;
     private const float MinimumSafeThreatDistance = 0.1f;
+    private const float ThreatNearMissFalloff = 1.75f;
     private const float CurrentThreatPathIgnoreDistance = 0.75f;
     private const float MinimumTravelSpeed = 2f;
-    private const float DodgeSkillTravelSpeed = 12f;
-    private const float MinimumTimedThreatWindow = 0.05f;
-    private const float ProjectilePredictionStep = 0.075f;
+    private const float FallbackDodgeSkillTravelSpeed = 12f;
+    private const float MovementResponseDelay = 0.04f;
+    private const float MovementSkillCommandLeadTime = 0.04f;
+    private const float FallbackDodgeSkillUncollidableRatio = 0.7f;
+    private const float EmergencyDodgeMaxTimeToImpact = 0.1f;
+    private const float MovementSkillCommandLockoutPadding = 0.1f;
+    private const float SideDodgeMinimumAlignment = 0.8f;
+    private const float MovementSkillLandingClearance = 0.35f;
+    private const float ProjectilePredictionStep = 0.025f;
     private const float ProjectileArrivalSafetyWindow = 0.45f;
     private const float DenseBarrageArrivalSafetyWindow = 1.15f;
     private const string PrimusMeteorProjectileTypeName =
         "Ai_Mon_Primus_BossPrimusAeron_Adapt_Doom_Meteor_SubFireball";
 
     private readonly List<ThreatZone> _threats = new List<ThreatZone>(128);
+    private readonly List<float> _currentThreatDistances = new List<float>(128);
 
     private float _keyDownTime = float.NegativeInfinity;
     private float _lastCommandTime = float.NegativeInfinity;
     private float _nextThreatCollectTime = float.NegativeInfinity;
+    private float _threatSnapshotTime = float.NegativeInfinity;
+    private float _movementSkillLockUntil = float.NegativeInfinity;
     private AutoDodgeThreatLevel _lastAutoDodgeLevel;
     private bool _hasThreatSnapshot;
 
@@ -61,29 +72,89 @@ internal sealed class AutoDodgeController : MonoBehaviour
         RefreshThreatSnapshot(hero, config, heroRadius);
         if (_threats.Count == 0)
         {
+            TryMoveTowardCursorWhileHeld(hero, config);
             return;
         }
 
-        float currentRisk = CalculateRisk(hero.agentPosition, heroRadius);
+        float currentRisk = CalculateRisk(
+            hero.agentPosition,
+            heroRadius,
+            out float currentMinimumDistance,
+            _currentThreatDistances);
         if (currentRisk < Mathf.Max(config.AutoDodgeRiskThreshold, 0.01f))
         {
+            TryMoveTowardCursorWhileHeld(hero, config);
             return;
         }
 
+        if (Time.unscaledTime < _movementSkillLockUntil)
+        {
+            return;
+        }
+
+        float movementSearchRadius = GetMovementSearchRadius(config);
+        float movementSpeed = EstimateMovementSpeed(hero);
+        bool hasMonsterThreat = TryGetSideDodgeAxis(hero.agentPosition, heroRadius, out Vector3 sideDodgeAxis);
+        bool hasMovementPoint = TryFindSafePoint(
+            hero,
+            config,
+            heroRadius,
+            currentRisk,
+            currentMinimumDistance,
+            movementSearchRadius,
+            movementSpeed,
+            MovementResponseDelay,
+            minimumTravelDistance: 0f,
+            uncollidableRatio: 0f,
+            isMovementSkill: false,
+            hasMonsterThreat,
+            sideDodgeAxis,
+            out Vector3 movementPoint,
+            out bool isMovementPointSafe);
+
+        float timeSinceLastCommand = Time.unscaledTime - _lastCommandTime;
         float commandInterval = Mathf.Max(config.AutoDodgeCommandInterval, MinimumCommandInterval);
-        if (Time.unscaledTime - _lastCommandTime < commandInterval)
-        {
-            return;
-        }
+        bool hasIncomingImpact = TryGetEarliestIncomingImpact(hero.agentPosition, heroRadius, out float earliestImpact);
+        bool canIssueMovementCommand = timeSinceLastCommand >= commandInterval ||
+                                       hasIncomingImpact &&
+                                       earliestImpact <= 0.25f &&
+                                       timeSinceLastCommand >= MinimumCommandInterval;
 
-        if (!TryFindSafePoint(hero, config, heroRadius, out Vector3 safePoint))
-        {
-            return;
-        }
-
-        if (TryCastMovementSkill(hero, safePoint, config) || TryMoveToSafePoint(hero, safePoint, config))
+        if (hasMovementPoint &&
+            isMovementPointSafe &&
+            canIssueMovementCommand &&
+            TryMoveToSafePoint(hero, movementPoint, config))
         {
             _lastCommandTime = Time.unscaledTime;
+            return;
+        }
+
+        if (!isMovementPointSafe &&
+            hasIncomingImpact &&
+            TryGetAutoDodgeMovementSkill(hero, config, out SkillTrigger movementSkill) &&
+            TryGetDodgeSkillProfile(movementSkill, config, out DodgeSkillProfile skillProfile) &&
+            earliestImpact <= EmergencyDodgeMaxTimeToImpact + skillProfile.ActivationDelay &&
+            TryFindSafePoint(
+                hero,
+                config,
+                heroRadius,
+                currentRisk,
+                currentMinimumDistance,
+                skillProfile.SearchRadius,
+                skillProfile.TravelSpeed,
+                skillProfile.ActivationDelay,
+                skillProfile.MinimumDistance,
+                skillProfile.UncollidableRatio,
+                isMovementSkill: true,
+                hasMonsterThreat,
+                sideDodgeAxis,
+                out Vector3 skillPoint,
+                out bool isSkillPointSafe) &&
+            isSkillPointSafe &&
+            TryCastMovementSkill(hero, skillPoint, config, skillProfile))
+        {
+            _lastCommandTime = Time.unscaledTime;
+            return;
         }
     }
 
@@ -151,6 +222,7 @@ internal sealed class AutoDodgeController : MonoBehaviour
         FilterThreatsByDodgeLevel(level, hero.agentPosition, heroRadius);
         _lastAutoDodgeLevel = level;
         _hasThreatSnapshot = true;
+        _threatSnapshotTime = now;
         _nextThreatCollectTime = now + ThreatCollectInterval;
     }
 
@@ -159,6 +231,8 @@ internal sealed class AutoDodgeController : MonoBehaviour
         _threats.Clear();
         _hasThreatSnapshot = false;
         _nextThreatCollectTime = float.NegativeInfinity;
+        _threatSnapshotTime = float.NegativeInfinity;
+        _movementSkillLockUntil = float.NegativeInfinity;
     }
 
     private static bool ShouldDodgeThreat(ThreatZone threat, AutoDodgeThreatLevel level, Vector3 heroPosition, float heroRadius)
@@ -168,17 +242,21 @@ internal sealed class AutoDodgeController : MonoBehaviour
             return false;
         }
 
-        if (level == AutoDodgeThreatLevel.Green)
-        {
-            return true;
-        }
+        float threshold = GetThreatLevelThreshold(level);
+        return IsThreatUrgent(threat, heroPosition, heroRadius, threshold, threshold);
+    }
 
-        if (level == AutoDodgeThreatLevel.Red)
+    private static float GetThreatLevelThreshold(AutoDodgeThreatLevel level)
+    {
+        switch (level)
         {
-            return IsThreatUrgent(threat, heroPosition, heroRadius, RedDistanceToHero, RedTimeToImpact);
+            case AutoDodgeThreatLevel.Red:
+                return RedThreatThreshold;
+            case AutoDodgeThreatLevel.Yellow:
+                return YellowThreatThreshold;
+            default:
+                return GreenThreatThreshold;
         }
-
-        return IsThreatUrgent(threat, heroPosition, heroRadius, YellowDistanceToHero, YellowTimeToImpact);
     }
 
     private static bool IsThreatUrgent(
@@ -207,27 +285,135 @@ internal sealed class AutoDodgeController : MonoBehaviour
         return !float.IsNaN(value) && !float.IsInfinity(value) && Mathf.Max(value, 0f) <= threshold;
     }
 
+    private bool TryGetSideDodgeAxis(Vector3 heroPosition, float heroRadius, out Vector3 sideDodgeAxis)
+    {
+        sideDodgeAxis = Vector3.zero;
+        Monster primaryMonster = null;
+        ThreatZone primaryThreat = default;
+        float bestPriority = float.NegativeInfinity;
+
+        for (int i = 0; i < _threats.Count; i++)
+        {
+            ThreatZone threat = _threats[i];
+            Monster monster = ResolveThreatMonster(threat);
+            if (monster == null || monster.IsNullInactiveDeadOrKnockedOut())
+            {
+                continue;
+            }
+
+            float signedDistance = threat.SignedDistance(heroPosition, heroRadius);
+            float distancePriority = signedDistance <= 0f
+                ? 4f
+                : Mathf.Max(2f - signedDistance, 0f);
+            float timeToImpact = GetRemainingTimeToImpact(threat);
+            float timePriority = !float.IsNaN(timeToImpact) && !float.IsInfinity(timeToImpact)
+                ? Mathf.Max(2f - Mathf.Max(timeToImpact, 0f), 0f)
+                : 0f;
+            float priority = threat.Weight * 2f + distancePriority + timePriority;
+            if (priority <= bestPriority)
+            {
+                continue;
+            }
+
+            bestPriority = priority;
+            primaryMonster = monster;
+            primaryThreat = threat;
+        }
+
+        if (primaryMonster == null)
+        {
+            return false;
+        }
+
+        Vector3 attackAxis = heroPosition - primaryMonster.agentPosition;
+        attackAxis.y = 0f;
+        if (attackAxis.sqrMagnitude <= 0.0001f)
+        {
+            attackAxis = primaryThreat.Direction;
+            attackAxis.y = 0f;
+        }
+
+        if (attackAxis.sqrMagnitude <= 0.0001f)
+        {
+            return false;
+        }
+
+        attackAxis.Normalize();
+        sideDodgeAxis = new Vector3(-attackAxis.z, 0f, attackAxis.x);
+        return true;
+    }
+
+    private static Monster ResolveThreatMonster(ThreatZone threat)
+    {
+        if (threat.Trigger != null && threat.Trigger.owner is Monster triggerOwner)
+        {
+            return triggerOwner;
+        }
+
+        Actor cursor = threat.Source;
+        for (int depth = 0; cursor != null && depth < 8; depth++)
+        {
+            if (cursor is Monster monster)
+            {
+                return monster;
+            }
+
+            if (cursor is AbilityInstance instance && instance.info.caster is Monster caster)
+            {
+                return caster;
+            }
+
+            cursor = cursor.parentActor;
+        }
+
+        return null;
+    }
+
+    private static bool IsSideDodgeCandidate(Vector3 candidate, Vector3 heroPosition, Vector3 sideDodgeAxis)
+    {
+        Vector3 travelDirection = candidate - heroPosition;
+        travelDirection.y = 0f;
+        if (travelDirection.sqrMagnitude <= 0.0001f || sideDodgeAxis.sqrMagnitude <= 0.0001f)
+        {
+            return false;
+        }
+
+        float sideAlignment = Mathf.Abs(Vector3.Dot(travelDirection.normalized, sideDodgeAxis.normalized));
+        return sideAlignment >= SideDodgeMinimumAlignment;
+    }
+
     private bool TryFindSafePoint(
         Hero hero,
         PluginConfig config,
         float heroRadius,
-        out Vector3 safePoint)
+        float currentRisk,
+        float currentMinimumDistance,
+        float searchRadius,
+        float travelSpeed,
+        float responseDelay,
+        float minimumTravelDistance,
+        float uncollidableRatio,
+        bool isMovementSkill,
+        bool hasMonsterThreat,
+        Vector3 sideDodgeAxis,
+        out Vector3 safePoint,
+        out bool isFullySafe)
     {
         Vector3 heroPosition = hero.agentPosition;
         safePoint = heroPosition;
+        isFullySafe = false;
         float safeRiskThreshold = Mathf.Max(config.AutoDodgeRiskThreshold, 0.01f);
-        float searchRadius = GetSearchRadius(hero, config);
-        float travelSpeed = EstimateDodgeTravelSpeed(hero, config);
         Vector3 desiredDirection = GetDesiredDirection(heroPosition);
         CandidateEvaluation best = default;
         bool hasBest = false;
         CandidateEvaluation bestProgress = default;
         bool hasProgress = false;
-        float currentRisk = CalculateRisk(heroPosition, heroRadius, out float currentMinimumDistance);
-
         for (int ring = 1; ring <= RingCount; ring++)
         {
-            float distance = searchRadius * ring / RingCount;
+            float distance = Mathf.Lerp(
+                Mathf.Min(minimumTravelDistance, searchRadius),
+                searchRadius,
+                ring / (float)RingCount);
             int samples = BaseDirectionSamples + ring * 8;
 
             for (int i = 0; i < samples; i++)
@@ -242,14 +428,24 @@ internal sealed class AutoDodgeController : MonoBehaviour
                     continue;
                 }
 
+                if (hasMonsterThreat && !IsSideDodgeCandidate(candidate, heroPosition, sideDodgeAxis))
+                {
+                    continue;
+                }
+
                 CandidateEvaluation evaluation = EvaluateCandidate(
                     candidate,
                     heroPosition,
                     desiredDirection,
                     heroRadius,
-                    travelSpeed);
+                    travelSpeed,
+                    responseDelay,
+                    uncollidableRatio,
+                    isMovementSkill);
+                float requiredEndpointDistance = MinimumSafeThreatDistance +
+                                                 (isMovementSkill ? MovementSkillLandingClearance : 0f);
                 bool isSafe = evaluation.EndpointRisk <= safeRiskThreshold &&
-                              evaluation.EndpointMinimumDistance >= MinimumSafeThreatDistance &&
+                              evaluation.EndpointMinimumDistance >= requiredEndpointDistance &&
                               evaluation.AvoidablePathRisk <= safeRiskThreshold &&
                               evaluation.TimedImpactRisk <= safeRiskThreshold;
                 if (isSafe)
@@ -272,6 +468,7 @@ internal sealed class AutoDodgeController : MonoBehaviour
         if (hasBest)
         {
             safePoint = best.Point;
+            isFullySafe = true;
             return true;
         }
 
@@ -284,22 +481,60 @@ internal sealed class AutoDodgeController : MonoBehaviour
         return true;
     }
 
+    private bool TryGetEarliestIncomingImpact(
+        Vector3 heroPosition,
+        float heroRadius,
+        out float earliestImpact)
+    {
+        earliestImpact = float.PositiveInfinity;
+        for (int i = 0; i < _threats.Count; i++)
+        {
+            ThreatZone threat = _threats[i];
+            float timeToImpact = GetRemainingTimeToImpact(threat);
+            if (threat.IsDodgeable &&
+                threat.IsActive &&
+                !float.IsNaN(timeToImpact) &&
+                !float.IsInfinity(timeToImpact) &&
+                timeToImpact > 0f &&
+                (threat.RequiresDodgeSkill ||
+                 threat.IsProjectile ||
+                 threat.SignedDistance(heroPosition, heroRadius) <= MinimumSafeThreatDistance))
+            {
+                earliestImpact = Mathf.Min(earliestImpact, timeToImpact);
+            }
+        }
+
+        return !float.IsPositiveInfinity(earliestImpact);
+    }
+
     private CandidateEvaluation EvaluateCandidate(
         Vector3 candidate,
         Vector3 heroPosition,
         Vector3 desiredDirection,
         float heroRadius,
-        float travelSpeed)
+        float travelSpeed,
+        float responseDelay,
+        float uncollidableRatio,
+        bool isMovementSkill)
     {
         float endpointRisk = CalculateNonProjectileRisk(candidate, heroRadius, out float endpointMinimumDistance);
         float avoidablePathRisk = CalculateAvoidablePathRisk(candidate, heroPosition, heroRadius);
-        float timedImpactRisk = CalculateTimedImpactRisk(candidate, heroPosition, heroRadius, travelSpeed);
+        float timedImpactRisk = CalculateTimedImpactRisk(
+            candidate,
+            heroPosition,
+            heroRadius,
+            travelSpeed,
+            responseDelay,
+            uncollidableRatio,
+            isMovementSkill);
         float escapeMargin = 0f;
 
         for (int i = 0; i < _threats.Count; i++)
         {
             ThreatZone threat = _threats[i];
-            float currentDistance = threat.SignedDistance(heroPosition, heroRadius);
+            float currentDistance = i < _currentThreatDistances.Count
+                ? _currentThreatDistances[i]
+                : threat.SignedDistance(heroPosition, heroRadius);
             if (currentDistance <= 0.75f)
             {
                 escapeMargin += Mathf.Clamp(threat.SignedDistance(candidate, heroRadius), -2f, 6f);
@@ -344,17 +579,27 @@ internal sealed class AutoDodgeController : MonoBehaviour
             for (int i = 0; i < _threats.Count; i++)
             {
                 ThreatZone threat = _threats[i];
-                if (threat.IsProjectile)
+                if (threat.IsProjectile || threat.RequiresDodgeSkill)
                 {
                     continue;
                 }
 
-                if (threat.SignedDistance(heroPosition, heroRadius) <= CurrentThreatPathIgnoreDistance)
+                float currentDistance = i < _currentThreatDistances.Count
+                    ? _currentThreatDistances[i]
+                    : threat.SignedDistance(heroPosition, heroRadius);
+                if (currentDistance <= CurrentThreatPathIgnoreDistance)
                 {
                     continue;
                 }
 
-                sampleRisk += threat.RiskAt(point, heroRadius);
+                if (threat.Kind == ThreatZoneKind.GroundHazard && sample % 2 != 0)
+                {
+                    continue;
+                }
+
+                sampleRisk += threat.RiskAt(
+                    point,
+                    threat.Kind == ThreatZoneKind.GroundHazard ? 0f : heroRadius);
             }
 
             pathRisk = Mathf.Max(pathRisk, sampleRisk);
@@ -363,7 +608,14 @@ internal sealed class AutoDodgeController : MonoBehaviour
         return pathRisk;
     }
 
-    private float CalculateTimedImpactRisk(Vector3 candidate, Vector3 heroPosition, float heroRadius, float travelSpeed)
+    private float CalculateTimedImpactRisk(
+        Vector3 candidate,
+        Vector3 heroPosition,
+        float heroRadius,
+        float travelSpeed,
+        float responseDelay,
+        float uncollidableRatio,
+        bool isMovementSkill)
     {
         float travelDistance = Vector2.Distance(candidate.ToXY(), heroPosition.ToXY());
         if (travelDistance <= 0.01f || travelSpeed <= 0.01f)
@@ -371,7 +623,8 @@ internal sealed class AutoDodgeController : MonoBehaviour
             return 0f;
         }
 
-        float travelTime = travelDistance / travelSpeed;
+        float displacementTime = travelDistance / travelSpeed;
+        float travelTime = responseDelay + displacementTime;
         if (travelTime <= 0.01f)
         {
             return 0f;
@@ -381,7 +634,10 @@ internal sealed class AutoDodgeController : MonoBehaviour
             candidate,
             heroPosition,
             heroRadius,
-            travelTime);
+            travelTime,
+            responseDelay,
+            uncollidableRatio,
+            isMovementSkill);
         for (int i = 0; i < _threats.Count; i++)
         {
             ThreatZone threat = _threats[i];
@@ -390,21 +646,45 @@ internal sealed class AutoDodgeController : MonoBehaviour
                 continue;
             }
 
-            float timeToImpact = threat.TimeToImpact;
+            float timeToImpact = GetRemainingTimeToImpact(threat);
             if (float.IsNaN(timeToImpact) ||
                 float.IsInfinity(timeToImpact) ||
-                timeToImpact <= MinimumTimedThreatWindow ||
-                timeToImpact >= travelTime)
+                timeToImpact <= 0f)
             {
                 continue;
             }
 
-            if (threat.SignedDistance(heroPosition, heroRadius) > YellowDistanceToHero)
+            if (IsProtectedByDodgeSkill(
+                    timeToImpact,
+                    responseDelay,
+                    displacementTime,
+                    uncollidableRatio,
+                    isMovementSkill))
             {
                 continue;
             }
 
-            Vector3 pointAtImpact = Vector3.Lerp(heroPosition, candidate, Mathf.Clamp01(timeToImpact / travelTime));
+            if (threat.RequiresDodgeSkill)
+            {
+                if (isMovementSkill && timeToImpact > travelTime)
+                {
+                    continue;
+                }
+
+                impactRisk += threat.Weight + 1f;
+                continue;
+            }
+
+            if (timeToImpact >= travelTime ||
+                threat.SignedDistance(heroPosition, heroRadius) > GreenThreatThreshold)
+            {
+                continue;
+            }
+
+            float movementProgress = displacementTime > 0.001f
+                ? Mathf.Clamp01((timeToImpact - responseDelay) / displacementTime)
+                : 1f;
+            Vector3 pointAtImpact = Vector3.Lerp(heroPosition, candidate, movementProgress);
             impactRisk += threat.RiskAt(pointAtImpact, heroRadius);
         }
 
@@ -415,7 +695,10 @@ internal sealed class AutoDodgeController : MonoBehaviour
         Vector3 candidate,
         Vector3 heroPosition,
         float heroRadius,
-        float travelTime)
+        float travelTime,
+        float responseDelay,
+        float uncollidableRatio,
+        bool isMovementSkill)
     {
         float maximumRisk = 0f;
         float accumulatedRisk = 0f;
@@ -444,25 +727,65 @@ internal sealed class AutoDodgeController : MonoBehaviour
             float nearMissRadius = collisionRadius + (IsDenseBarrageProjectile(threat) ? 1.15f : 0.65f);
             float threatRisk = 0f;
             int samples = Mathf.Max(Mathf.CeilToInt(horizon / ProjectilePredictionStep), 1);
+            float displacementTime = Mathf.Max(travelTime - responseDelay, 0f);
+            Vector3 projectileOrigin = threat.Projectile != null ? threat.Projectile.position : threat.Origin;
+            Vector2 previousRelativePosition = Vector2.zero;
+            float previousTime = 0f;
+            bool hasPreviousSample = false;
 
             for (int sample = 0; sample <= samples; sample++)
             {
                 float time = horizon * sample / samples;
-                float heroProgress = travelTime > 0.001f ? Mathf.Clamp01(time / travelTime) : 1f;
+                float heroProgress = displacementTime > 0.001f
+                    ? Mathf.Clamp01((time - responseDelay) / displacementTime)
+                    : 1f;
                 Vector3 heroAtTime = Vector3.Lerp(heroPosition, candidate, heroProgress);
-                Vector3 projectileAtTime =
-                    threat.Origin + threat.Direction * Mathf.Min(threat.ProjectileSpeed * time, threat.Length);
-                float clearance = Vector2.Distance(heroAtTime.ToXY(), projectileAtTime.ToXY()) - collisionRadius;
+                Vector3 projectileAtTime = projectileOrigin +
+                                           threat.Direction * Mathf.Min(threat.ProjectileSpeed * time, threat.Length);
+                Vector2 relativePosition = heroAtTime.ToXY() - projectileAtTime.ToXY();
+                float clearance;
+                if (hasPreviousSample)
+                {
+                    Vector2 relativeDelta = relativePosition - previousRelativePosition;
+                    float relativeLengthSquared = relativeDelta.sqrMagnitude;
+                    float closestProgress = relativeLengthSquared > 0.000001f
+                        ? Mathf.Clamp01(-Vector2.Dot(previousRelativePosition, relativeDelta) / relativeLengthSquared)
+                        : 1f;
+                    clearance = (previousRelativePosition + relativeDelta * closestProgress).magnitude - collisionRadius;
+                }
+                else
+                {
+                    clearance = relativePosition.magnitude - collisionRadius;
+                }
 
                 if (clearance <= 0f)
                 {
-                    threatRisk = Mathf.Max(threatRisk, threat.Weight + 1f + Mathf.Clamp01(-clearance));
+                    bool isProtected = IsProtectedByDodgeSkill(
+                                           time,
+                                           responseDelay,
+                                           displacementTime,
+                                           uncollidableRatio,
+                                           isMovementSkill) &&
+                                       (!hasPreviousSample || IsProtectedByDodgeSkill(
+                                           previousTime,
+                                           responseDelay,
+                                           displacementTime,
+                                           uncollidableRatio,
+                                           isMovementSkill));
+                    if (!isProtected)
+                    {
+                        threatRisk = Mathf.Max(threatRisk, threat.Weight + 1f + Mathf.Clamp01(-clearance));
+                    }
                 }
                 else if (clearance < nearMissRadius - collisionRadius)
                 {
                     float proximity = 1f - clearance / (nearMissRadius - collisionRadius);
                     threatRisk = Mathf.Max(threatRisk, threat.Weight * 0.45f * proximity);
                 }
+
+                previousRelativePosition = relativePosition;
+                previousTime = time;
+                hasPreviousSample = true;
             }
 
             maximumRisk = Mathf.Max(maximumRisk, threatRisk);
@@ -470,6 +793,32 @@ internal sealed class AutoDodgeController : MonoBehaviour
         }
 
         return maximumRisk + accumulatedRisk * 0.35f;
+    }
+
+    private static bool IsProtectedByDodgeSkill(
+        float time,
+        float responseDelay,
+        float displacementTime,
+        float uncollidableRatio,
+        bool isMovementSkill)
+    {
+        return isMovementSkill &&
+               time >= responseDelay &&
+               time <= responseDelay + displacementTime * uncollidableRatio;
+    }
+
+    private float GetRemainingTimeToImpact(ThreatZone threat)
+    {
+        float timeToImpact = threat.TimeToImpact;
+        if (float.IsNaN(timeToImpact) || float.IsInfinity(timeToImpact))
+        {
+            return timeToImpact;
+        }
+
+        float snapshotAge = float.IsNegativeInfinity(_threatSnapshotTime)
+            ? 0f
+            : Mathf.Max(Time.unscaledTime - _threatSnapshotTime, 0f);
+        return Mathf.Max(timeToImpact - snapshotAge, 0f);
     }
 
     private static bool IsDenseBarrageProjectile(ThreatZone threat)
@@ -485,13 +834,32 @@ internal sealed class AutoDodgeController : MonoBehaviour
 
     private float CalculateRisk(Vector3 point, float heroRadius, out float minimumSignedDistance)
     {
+        return CalculateRisk(point, heroRadius, out minimumSignedDistance, distances: null);
+    }
+
+    private float CalculateRisk(
+        Vector3 point,
+        float heroRadius,
+        out float minimumSignedDistance,
+        List<float> distances)
+    {
         float risk = 0f;
         minimumSignedDistance = float.PositiveInfinity;
+        distances?.Clear();
         for (int i = 0; i < _threats.Count; i++)
         {
             ThreatZone threat = _threats[i];
-            minimumSignedDistance = Mathf.Min(minimumSignedDistance, threat.SignedDistance(point, heroRadius));
-            risk += threat.RiskAt(point, heroRadius);
+            float distance = threat.SignedDistance(point, heroRadius);
+            distances?.Add(distance);
+            minimumSignedDistance = Mathf.Min(minimumSignedDistance, distance);
+            if (distance <= 0f)
+            {
+                risk += threat.Weight + Mathf.Clamp01(-distance / 2f);
+            }
+            else if (distance < ThreatNearMissFalloff)
+            {
+                risk += threat.Weight * 0.25f * (1f - distance / ThreatNearMissFalloff);
+            }
         }
 
         return risk;
@@ -507,7 +875,7 @@ internal sealed class AutoDodgeController : MonoBehaviour
         for (int i = 0; i < _threats.Count; i++)
         {
             ThreatZone threat = _threats[i];
-            if (threat.IsProjectile)
+            if (threat.IsProjectile || threat.RequiresDodgeSkill)
             {
                 continue;
             }
@@ -527,33 +895,95 @@ internal sealed class AutoDodgeController : MonoBehaviour
         return Mathf.Max(radius + Mathf.Max(config.ThreatPadding, 0f), 0.1f);
     }
 
-    private static float EstimateDodgeTravelSpeed(Hero hero, PluginConfig config)
+    private static float EstimateMovementSpeed(Hero hero)
     {
         float speed = hero.Control != null ? hero.Control.currentMaxAgentSpeed : 0f;
-        if (TryGetAutoDodgeMovementSkill(hero, config, out _))
-        {
-            speed = Mathf.Max(speed, DodgeSkillTravelSpeed);
-        }
-
         return Mathf.Max(speed, MinimumTravelSpeed);
     }
 
-    private static float GetSearchRadius(Hero hero, PluginConfig config)
+    private static float GetMovementSearchRadius(PluginConfig config)
     {
-        float maxSearch = Mathf.Max(config.AutoDodgeSearchRadius, 1f);
-        float fallback = Mathf.Clamp(config.AutoDodgeFallbackDistance, 1f, maxSearch);
+        return Mathf.Max(config.AutoDodgeSearchRadius, 1f);
+    }
 
-        if (TryGetAutoDodgeMovementSkill(hero, config, out SkillTrigger movementSkill) &&
-            TryGetSkillRange(movementSkill, out float skillRange))
+    private static bool TryGetDodgeSkillProfile(
+        SkillTrigger movementSkill,
+        PluginConfig config,
+        out DodgeSkillProfile profile)
+    {
+        profile = default;
+        if (!TryGetSkillRange(movementSkill, out float skillRange))
         {
-            return Mathf.Clamp(skillRange, 1f, maxSearch);
+            return false;
+        }
+
+        float maxSearch = Mathf.Max(config.AutoDodgeSearchRadius, 1f);
+        TriggerConfig triggerConfig = movementSkill.currentConfig;
+        object spawnedInstance = triggerConfig.spawnedInstance;
+        float speed = ReadSkillFloat(spawnedInstance, "speed", FallbackDodgeSkillTravelSpeed);
+        float minimumDistance = ReadSkillFloat(spawnedInstance, "minDistance", 0f);
+        float uncollidableRatio = Mathf.Clamp01(ReadSkillFloat(
+            spawnedInstance,
+            "uncollidableRatio",
+            FallbackDodgeSkillUncollidableRatio));
+        float channelDuration = triggerConfig.channel != null ? Mathf.Max(triggerConfig.channel.duration, 0f) : 0f;
+        try
+        {
+            channelDuration *= movementSkill.GetChannelDurationMultiplier();
+        }
+        catch (Exception)
+        {
+            // The base timing remains a safe fallback for version-specific triggers.
+        }
+
+        profile = new DodgeSkillProfile(
+            Mathf.Clamp(skillRange, 1f, maxSearch),
+            Mathf.Max(speed, MinimumTravelSpeed),
+            Mathf.Clamp(minimumDistance, 0f, skillRange),
+            MovementSkillCommandLeadTime + channelDuration,
+            Mathf.Max(uncollidableRatio, 0.05f));
+        return true;
+    }
+
+    private static float ReadSkillFloat(object instance, string fieldName, float fallback)
+    {
+        if (instance == null)
+        {
+            return fallback;
+        }
+
+        try
+        {
+            FieldInfo field = instance.GetType().GetField(
+                fieldName,
+                BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+            if (field?.GetValue(instance) is float value &&
+                value >= 0f &&
+                !float.IsNaN(value) &&
+                !float.IsInfinity(value))
+            {
+                return value;
+            }
+        }
+        catch (Exception)
+        {
+            // Movement skill implementations vary by hero and game version.
         }
 
         return fallback;
     }
 
-    private static bool TryCastMovementSkill(Hero hero, Vector3 destination, PluginConfig config)
+    private bool TryCastMovementSkill(
+        Hero hero,
+        Vector3 destination,
+        PluginConfig config,
+        DodgeSkillProfile skillProfile)
     {
+        if (Time.unscaledTime < _movementSkillLockUntil)
+        {
+            return true;
+        }
+
         if (hero.Control == null ||
             hero.Control.isDisplacing ||
             !TryGetAutoDodgeMovementSkill(hero, config, out SkillTrigger movementSkill))
@@ -569,6 +999,13 @@ internal sealed class AutoDodgeController : MonoBehaviour
             hero.Control.CmdAttack(null, doChase: false);
         }
 
+        float travelDistance = Vector2.Distance(hero.agentPosition.ToXY(), destination.ToXY());
+        float displacementTime = travelDistance / Mathf.Max(skillProfile.TravelSpeed, MinimumTravelSpeed);
+        float invulnerabilityDuration = skillProfile.ActivationDelay +
+                                        displacementTime * skillProfile.UncollidableRatio;
+        _movementSkillLockUntil = Time.unscaledTime +
+                                  invulnerabilityDuration +
+                                  MovementSkillCommandLockoutPadding;
         return true;
     }
 
@@ -581,6 +1018,27 @@ internal sealed class AutoDodgeController : MonoBehaviour
 
         hero.Control.CmdMoveToDestination(destination, immediately: true, speedMult: 1f);
         return true;
+    }
+
+    private void TryMoveTowardCursorWhileHeld(Hero hero, PluginConfig config)
+    {
+        KeyCode key = config.AutoDodgeKey;
+        float commandInterval = Mathf.Max(config.AutoDodgeCommandInterval, MinimumCommandInterval);
+        if (key == KeyCode.None || !Input.GetKey(key) ||
+            Time.unscaledTime - _lastCommandTime < commandInterval)
+        {
+            return;
+        }
+
+        Vector3 cursorPoint = ControlManager.GetWorldPositionOnGroundOnCursor();
+        if (!Dew.IsOkay(cursorPoint) ||
+            Vector2.Distance(cursorPoint.ToXY(), hero.agentPosition.ToXY()) < MinimumCandidateDistance ||
+            !TryMoveToSafePoint(hero, cursorPoint, config))
+        {
+            return;
+        }
+
+        _lastCommandTime = Time.unscaledTime;
     }
 
     private static Vector3 GetDesiredDirection(Vector3 heroPosition)
@@ -669,6 +1127,29 @@ internal sealed class AutoDodgeController : MonoBehaviour
 
         range = config.effectiveRange;
         return range > 0.25f && !float.IsNaN(range) && !float.IsInfinity(range);
+    }
+
+    private readonly struct DodgeSkillProfile
+    {
+        public readonly float SearchRadius;
+        public readonly float TravelSpeed;
+        public readonly float MinimumDistance;
+        public readonly float ActivationDelay;
+        public readonly float UncollidableRatio;
+
+        public DodgeSkillProfile(
+            float searchRadius,
+            float travelSpeed,
+            float minimumDistance,
+            float activationDelay,
+            float uncollidableRatio)
+        {
+            SearchRadius = searchRadius;
+            TravelSpeed = travelSpeed;
+            MinimumDistance = minimumDistance;
+            ActivationDelay = activationDelay;
+            UncollidableRatio = uncollidableRatio;
+        }
     }
 
     private readonly struct CandidateEvaluation

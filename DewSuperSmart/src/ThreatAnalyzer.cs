@@ -14,6 +14,7 @@ internal sealed class ThreatAnalyzer
     private const float FallbackProjectileSpeed = 10f;
     private const float ColliderCacheRefreshInterval = 0.5f;
     private const float ColliderCacheCleanupInterval = 2f;
+    private const float MonsterRushThreatWeight = 2.35f;
 
     private static readonly string[] DelayFieldNames =
     {
@@ -42,6 +43,7 @@ internal sealed class ThreatAnalyzer
     private readonly HashSet<Actor> _seenActors = new HashSet<Actor>();
     private readonly List<DewCollider> _colliderBuffer = new List<DewCollider>(16);
     private readonly Dictionary<int, ColliderCacheEntry> _collidersByActor = new Dictionary<int, ColliderCacheEntry>();
+    private readonly Dictionary<int, float> _castStartTimes = new Dictionary<int, float>();
     private readonly List<int> _staleColliderCacheKeys = new List<int>();
 
     private float _nextColliderCacheCleanupTime = float.NegativeInfinity;
@@ -128,7 +130,7 @@ internal sealed class ThreatAnalyzer
         }
     }
 
-    private static void CollectEnemyCastPreviews(
+    private void CollectEnemyCastPreviews(
         Hero hero,
         PluginConfig config,
         ActorManager manager,
@@ -152,7 +154,7 @@ internal sealed class ThreatAnalyzer
         }
     }
 
-    private static void AddCastPreview(
+    private void AddCastPreview(
         Hero hero,
         Monster monster,
         AbilityTrigger trigger,
@@ -162,18 +164,41 @@ internal sealed class ThreatAnalyzer
     {
         if (!TryGetUsableTrigger(hero, monster, trigger, out TriggerConfig triggerConfig, out bool isReady))
         {
+            if (trigger != null)
+            {
+                _castStartTimes.Remove(trigger.GetInstanceID());
+            }
+
             return;
         }
 
         bool isCasting = trigger.Network_isCasting;
+        int triggerId = trigger.GetInstanceID();
+        if (isCasting)
+        {
+            if (!_castStartTimes.ContainsKey(triggerId))
+            {
+                _castStartTimes[triggerId] = Time.time;
+            }
+        }
+        else
+        {
+            _castStartTimes.Remove(triggerId);
+        }
+
         ThreatActivity activity = isCasting ? ThreatActivity.Imminent : ThreatActivity.Preview;
-        float timeToImpact = isCasting ? GetRemainingChannelTime(monster, triggerConfig) : float.PositiveInfinity;
+        float timeToImpact = isCasting
+            ? GetRemainingChannelTime(monster, trigger, triggerConfig, _castStartTimes[triggerId])
+            : float.PositiveInfinity;
         float weight = (trigger is AttackTrigger ? 1f : 1.35f) + (isCasting ? 0.65f : 0f);
         CastInfo castInfo = GetThreatCastInfo(trigger, hero, config.ThreatPredictionStrength);
         CastMethodData method = triggerConfig.castMethod;
         Vector3 origin = monster.agentPosition;
         Vector3 direction = GetThreatDirection(origin, hero.agentPosition, castInfo);
         bool isDodgeable = isCasting;
+        bool requiresDodgeSkill = isCasting &&
+                                  method.type == CastMethodType.Target &&
+                                  IsTargetingHero(monster, hero);
 
         ThreatZone threat;
         switch (method.type)
@@ -237,7 +262,7 @@ internal sealed class ThreatAnalyzer
                     isDodgeable);
                 break;
             case CastMethodType.Target:
-                // Target casts are not spatially avoidable. Their acquisition range is still useful as a preview.
+                // Locked target damage cannot be escaped spatially, but dodge invulnerability can avoid it.
                 threat = ThreatZone.Circle(
                     monster,
                     trigger,
@@ -247,7 +272,8 @@ internal sealed class ThreatAnalyzer
                     activity,
                     weight,
                     timeToImpact,
-                    isDodgeable: false);
+                    isDodgeable: requiresDodgeSkill,
+                    requiresDodgeSkill);
                 break;
             default:
                 return;
@@ -326,12 +352,30 @@ internal sealed class ThreatAnalyzer
             return;
         }
 
+        bool isRoomHazard = IsRoomHazardAbility(instance);
+        bool isMeteorRainImpact = IsMeteorRainImpact(instance);
         TryAddBeamThreat(instance, hero, scanRange, results);
         CollectScriptedAbilityThreats(instance, caster, hero, scanRange, results);
         TryAddBlackholeAttractionThreat(instance, caster, hero, scanRange, results);
         TryAddCataclysmUnsafeArea(instance, hero, scanRange, results);
         TryAddRotatingStarThreats(instance, hero, scanRange, results);
+        bool isMonsterRush = IsMonsterRush(instance, caster);
         CollectColliders(instance, _colliderBuffer);
+        if (isMonsterRush &&
+            TryGetMonsterRushShape(instance, _colliderBuffer, out Vector3 rushOrigin, out Vector3 rushDirection, out float rushLength, out float rushWidth))
+        {
+            AddMonsterRushThreat(
+                instance,
+                hero,
+                sourceKind: isRoomHazard ? ThreatSourceKind.Environment : ThreatSourceKind.ActiveEffect,
+                rushOrigin,
+                rushDirection,
+                rushLength,
+                rushWidth,
+                scanRange,
+                results);
+        }
+
         if (_colliderBuffer.Count == 0)
         {
             return;
@@ -339,7 +383,10 @@ internal sealed class ThreatAnalyzer
 
         float timeToImpact = EstimateAbilityTimeToImpact(instance);
         ThreatActivity activity = timeToImpact > 0.05f ? ThreatActivity.Imminent : ThreatActivity.Active;
-        float weight = instance is DamageInstance ? 1.9f : 1.65f;
+        float weight = isMeteorRainImpact ? 2.35f : instance is DamageInstance ? 1.9f : 1.65f;
+        ThreatSourceKind sourceKind = isRoomHazard
+            ? ThreatSourceKind.Environment
+            : ThreatSourceKind.ActiveEffect;
         bool isDodgeable = instance is DamageInstance || threatOwner != null || IsEnvironmentalAbility(instance);
 
         for (int i = 0; i < _colliderBuffer.Count; i++)
@@ -352,7 +399,24 @@ internal sealed class ThreatAnalyzer
                     instance.transform,
                     statusEffect.victim.agentPosition,
                     statusEffect.victim.rotation,
-                    ThreatSourceKind.ActiveEffect,
+                    sourceKind,
+                    activity,
+                    weight,
+                    timeToImpact,
+                    isDodgeable,
+                    hero,
+                    scanRange,
+                    results);
+            }
+            else if (isMonsterRush && !IsLongRangeSweepRush(instance))
+            {
+                AddProjectedColliderThreat(
+                    instance,
+                    _colliderBuffer[i],
+                    instance.transform,
+                    caster.agentPosition,
+                    caster.rotation,
+                    sourceKind,
                     activity,
                     weight,
                     timeToImpact,
@@ -366,7 +430,7 @@ internal sealed class ThreatAnalyzer
                 AddColliderThreat(
                     instance,
                     _colliderBuffer[i],
-                    ThreatSourceKind.ActiveEffect,
+                    sourceKind,
                     activity,
                     weight,
                     timeToImpact,
@@ -375,6 +439,188 @@ internal sealed class ThreatAnalyzer
                     scanRange,
                     results);
             }
+        }
+    }
+
+    private static bool IsMonsterRush(AbilityInstance instance, Entity caster)
+    {
+        if (!(caster is Monster) || caster.Control == null ||
+            !(caster.Control.ongoingDisplacement is DispByDestination displacement) ||
+            !Dew.IsOkay(displacement.destination))
+        {
+            return false;
+        }
+
+        if (instance is DashAttackInstance)
+        {
+            return true;
+        }
+
+        string name = instance.GetType().Name;
+        return name.IndexOf("Charge", StringComparison.OrdinalIgnoreCase) >= 0 ||
+               name.IndexOf("Dash", StringComparison.OrdinalIgnoreCase) >= 0 ||
+               name.IndexOf("Roll", StringComparison.OrdinalIgnoreCase) >= 0 ||
+               name.IndexOf("Pounce", StringComparison.OrdinalIgnoreCase) >= 0;
+    }
+
+    private static bool IsLongRangeSweepRush(AbilityInstance instance)
+    {
+        return instance.GetType().Name == "Ai_Mon_Special_BossObliviax_DashAtk";
+    }
+
+    private static bool TryGetMonsterRushShape(
+        AbilityInstance instance,
+        List<DewCollider> colliders,
+        out Vector3 origin,
+        out Vector3 direction,
+        out float length,
+        out float width)
+    {
+        origin = Vector3.zero;
+        direction = Vector3.forward;
+        length = 0f;
+        width = 0f;
+
+        Entity caster = ResolveCaster(instance);
+        if (!(caster is Monster) || caster.Control == null ||
+            !(caster.Control.ongoingDisplacement is DispByDestination displacement))
+        {
+            return false;
+        }
+
+        origin = caster.agentPosition;
+        Vector3 destination = displacement.destination;
+        destination.y = origin.y;
+        Vector3 delta = destination - origin;
+        delta.y = 0f;
+        length = delta.magnitude;
+        if (length <= MinimumShapeSize)
+        {
+            return false;
+        }
+
+        direction = delta / length;
+        Vector3 perpendicular = new Vector3(-direction.z, 0f, direction.x);
+        Transform sourceRoot = instance.transform;
+        Vector3 rootPosition = origin;
+        Vector3 Project(Vector3 worldPoint)
+        {
+            Vector3 localPoint = sourceRoot.InverseTransformPoint(worldPoint);
+            Vector3 scaledPoint = Vector3.Scale(localPoint, sourceRoot.lossyScale);
+            return rootPosition + caster.rotation * scaledPoint;
+        }
+
+        float halfWidth = 0f;
+        for (int i = 0; i < colliders.Count; i++)
+        {
+            DewCollider collider = colliders[i];
+            if (collider == null)
+            {
+                continue;
+            }
+
+            Transform colliderTransform = collider.transform;
+            switch (collider.shape)
+            {
+                case DewCollider.ColliderShape.Circle:
+                    Vector3 center = Project(colliderTransform.TransformPoint(new Vector3(collider.offset.x, 0f, collider.offset.y)));
+                    halfWidth = Mathf.Max(
+                        halfWidth,
+                        Mathf.Abs(Vector3.Dot(center - origin, perpendicular)) +
+                        collider.radius * GetMaxFlatScale(colliderTransform));
+                    break;
+                case DewCollider.ColliderShape.Box:
+                    Vector3[] boxPoints = BuildBoxPoints(collider, Project);
+                    halfWidth = Mathf.Max(halfWidth, GetMaximumPerpendicularDistance(boxPoints, origin, perpendicular));
+                    break;
+                case DewCollider.ColliderShape.Polygon:
+                    Vector3[] polygonPoints = BuildPolygonPoints(collider, Project);
+                    halfWidth = Mathf.Max(halfWidth, GetMaximumPerpendicularDistance(polygonPoints, origin, perpendicular));
+                    break;
+            }
+        }
+
+        if (halfWidth <= 0.01f)
+        {
+            string name = instance.GetType().Name;
+            if (name == "Ai_Mon_Despair_BossAzurak_Roll")
+            {
+                halfWidth = ReadFloat(instance, "hitRadius");
+            }
+            else if (name == "Ai_Mon_Sky_BossNyx_StellarDash")
+            {
+                halfWidth = ReadFloat(instance, "colRadius");
+            }
+        }
+
+        width = Mathf.Max(halfWidth * 2f, MinimumShapeSize);
+        return halfWidth > 0.01f;
+    }
+
+    private static float GetMaximumPerpendicularDistance(Vector3[] points, Vector3 origin, Vector3 perpendicular)
+    {
+        float maximum = 0f;
+        if (points == null)
+        {
+            return maximum;
+        }
+
+        for (int i = 0; i < points.Length; i++)
+        {
+            maximum = Mathf.Max(maximum, Mathf.Abs(Vector3.Dot(points[i] - origin, perpendicular)));
+        }
+
+        return maximum;
+    }
+
+    private static void AddMonsterRushThreat(
+        AbilityInstance instance,
+        Hero hero,
+        ThreatSourceKind sourceKind,
+        Vector3 rushOrigin,
+        Vector3 rushDirection,
+        float rushLength,
+        float rushWidth,
+        float scanRange,
+        List<ThreatZone> results)
+    {
+        Entity caster = ResolveCaster(instance);
+        if (caster == null)
+        {
+            return;
+        }
+
+        float timeToImpact = 0f;
+        if (caster.Control.ongoingDisplacement is DispByDestination displacement && displacement.duration > 0.0001f)
+        {
+            float remainingDuration = Mathf.Max(displacement.duration - displacement.elapsedTime, 0f);
+            Vector3 toHero = hero.agentPosition - rushOrigin;
+            toHero.y = 0f;
+            float distanceAlongRush = Vector3.Dot(toHero, rushDirection);
+            distanceAlongRush = Mathf.Clamp(distanceAlongRush, 0f, rushLength);
+            float distanceUntilImpact = Mathf.Max(distanceAlongRush - rushWidth * 0.5f, 0f);
+            float estimatedImpactTime = remainingDuration * Mathf.Clamp01(distanceUntilImpact / rushLength);
+            timeToImpact = Mathf.Max(estimatedImpactTime, Mathf.Min(remainingDuration, 0.01f));
+        }
+
+        ThreatActivity activity = timeToImpact > 0.05f ? ThreatActivity.Imminent : ThreatActivity.Active;
+        ThreatZone threat = ThreatZone.Line(
+            instance,
+            null,
+            null,
+            rushOrigin,
+            rushDirection,
+            rushLength,
+            rushWidth,
+            sourceKind,
+            activity,
+            MonsterRushThreatWeight,
+            timeToImpact,
+            isDodgeable: true);
+
+        if (threat.SignedDistance(hero.agentPosition, 0f) <= scanRange)
+        {
+            results.Add(threat);
         }
     }
 
@@ -618,8 +864,26 @@ internal sealed class ThreatAnalyzer
         List<ThreatZone> results,
         float scanRange)
     {
+        string typeName = actor.GetType().Name;
+        if (typeName == "LavaLand_Lava")
+        {
+            results.Add(ThreatZone.Ground(actor, GroundHazardKind.Lava, threshold: 0f, weight: 2.4f));
+            return;
+        }
+
+        if (typeName == "Sky_LightFogDamager")
+        {
+            if (ReadBool(actor, "doDamage"))
+            {
+                float threshold = ReadFloat(actor, "fogOpacityThreshold");
+                results.Add(ThreatZone.Ground(actor, GroundHazardKind.LightFog, threshold, weight: 2.4f));
+            }
+
+            return;
+        }
+
         string fieldName;
-        switch (actor.GetType().Name)
+        switch (typeName)
         {
             case "Ink_BossRoomDamageGround":
             case "Forest_Fireplace":
@@ -648,7 +912,7 @@ internal sealed class ThreatAnalyzer
             radius,
             ThreatSourceKind.Environment,
             ThreatActivity.Active,
-            weight: 2f,
+            weight: typeName == "Forest_Fireplace" ? 2.4f : 2f,
             timeToImpact: 0f,
             isDodgeable: true);
         if (threat.SignedDistance(hero.agentPosition, 0f) <= scanRange)
@@ -1000,12 +1264,17 @@ internal sealed class ThreatAnalyzer
 
     private static float ReadFloat(AbilityInstance instance, string fieldName)
     {
+        return ReadFloat((Actor)instance, fieldName);
+    }
+
+    private static float ReadFloat(Actor actor, string fieldName)
+    {
         FieldInfo field = GetTypedField(
-            instance.GetType(),
+            actor.GetType(),
             fieldName,
             typeof(float),
             BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
-        return ReadFloat(instance, field);
+        return ReadFloat(actor, field);
     }
 
     private static float ReadFloat(Actor actor, FieldInfo field)
@@ -1035,14 +1304,19 @@ internal sealed class ThreatAnalyzer
 
     private static bool ReadBool(AbilityInstance instance, string fieldName)
     {
+        return ReadBool((Actor)instance, fieldName);
+    }
+
+    private static bool ReadBool(Actor actor, string fieldName)
+    {
         try
         {
             FieldInfo field = GetTypedField(
-                instance.GetType(),
+                actor.GetType(),
                 fieldName,
                 typeof(bool),
                 BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
-            return field?.GetValue(instance) is bool value && value;
+            return field?.GetValue(actor) is bool value && value;
         }
         catch (Exception)
         {
@@ -1613,7 +1887,7 @@ internal sealed class ThreatAnalyzer
             return IsHostileSource(caster, hero, allowUnknown);
         }
 
-        return allowUnknown && (instance is DamageInstance || IsEnvironmentalAbility(instance));
+        return IsEnvironmentalAbility(instance) || allowUnknown && instance is DamageInstance;
     }
 
     private static bool IsHostileSource(Entity caster, Hero hero, bool allowUnknown)
@@ -1633,6 +1907,22 @@ internal sealed class ThreatAnalyzer
                name.IndexOf("RoomMod", StringComparison.OrdinalIgnoreCase) >= 0 ||
                name.IndexOf("Punishment", StringComparison.OrdinalIgnoreCase) >= 0 ||
                name.StartsWith("Ai_Mon_", StringComparison.Ordinal);
+    }
+
+    private static bool IsRoomHazardAbility(AbilityInstance instance)
+    {
+        string name = instance.GetType().Name;
+        return name.StartsWith("Ai_RoomMod_", StringComparison.Ordinal) ||
+               name.IndexOf("Punishment", StringComparison.OrdinalIgnoreCase) >= 0;
+    }
+
+    private static bool IsMeteorRainImpact(AbilityInstance instance)
+    {
+        string name = instance.GetType().Name;
+        return name.IndexOf("Meteor", StringComparison.OrdinalIgnoreCase) >= 0 ||
+               name.IndexOf("Starfall", StringComparison.OrdinalIgnoreCase) >= 0 ||
+               name.IndexOf("StarRain", StringComparison.OrdinalIgnoreCase) >= 0 ||
+               name.IndexOf("RainFire_Damage", StringComparison.OrdinalIgnoreCase) >= 0;
     }
 
     private static bool CanInstanceAffectHero(AbilityInstance instance, Entity caster, Hero hero)
@@ -1733,17 +2023,39 @@ internal sealed class ThreatAnalyzer
         return direction.sqrMagnitude <= 0.0001f ? Vector3.forward : direction.normalized;
     }
 
-    private static float GetRemainingChannelTime(Monster monster, TriggerConfig triggerConfig)
+    private static bool IsTargetingHero(Monster monster, Hero hero)
     {
+        return monster.Control == null || monster.Control.attackTarget == null || monster.Control.attackTarget == hero;
+    }
+
+    private static float GetRemainingChannelTime(
+        Monster monster,
+        AbilityTrigger trigger,
+        TriggerConfig triggerConfig,
+        float observedCastStartTime)
+    {
+        float expectedDuration = triggerConfig.channel != null
+            ? Mathf.Max(triggerConfig.channel.duration * trigger.GetChannelDurationMultiplier(), 0f)
+            : 0f;
         float remaining = float.PositiveInfinity;
+        float bestDurationDelta = float.PositiveInfinity;
         if (monster.Control != null && monster.Control.ongoingChannels != null)
         {
             for (int i = 0; i < monster.Control.ongoingChannels.Count; i++)
             {
                 Channel channel = monster.Control.ongoingChannels[i];
-                if (channel != null && channel.isAlive)
+                if (channel == null || !channel.isAlive || (trigger is AttackTrigger) != channel.isAttack)
                 {
-                    remaining = Mathf.Min(remaining, Mathf.Max(channel.duration - channel.elapsedTime, 0f));
+                    continue;
+                }
+
+                float durationDelta = Mathf.Abs(channel.duration - expectedDuration);
+                float channelRemaining = Mathf.Max(channel.duration - channel.elapsedTime, 0f);
+                if (durationDelta < bestDurationDelta - 0.001f ||
+                    Mathf.Approximately(durationDelta, bestDurationDelta) && channelRemaining < remaining)
+                {
+                    bestDurationDelta = durationDelta;
+                    remaining = channelRemaining;
                 }
             }
         }
@@ -1753,7 +2065,7 @@ internal sealed class ThreatAnalyzer
             return remaining;
         }
 
-        return triggerConfig.channel != null ? Mathf.Max(triggerConfig.channel.duration, 0f) : 0f;
+        return Mathf.Max(expectedDuration - Mathf.Max(Time.time - observedCastStartTime, 0f), 0f);
     }
 
     private static float GetLineWidth(TriggerConfig triggerConfig, PluginConfig config)

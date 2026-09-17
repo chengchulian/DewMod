@@ -1,3 +1,5 @@
+using System;
+using System.Reflection;
 using UnityEngine;
 
 namespace DewSuperSmart;
@@ -8,7 +10,15 @@ internal enum ThreatZoneKind
     Cone,
     Line,
     Polygon,
-    OutsideCircles
+    OutsideCircles,
+    GroundHazard
+}
+
+internal enum GroundHazardKind
+{
+    None,
+    Lava,
+    LightFog
 }
 
 internal enum ThreatSourceKind
@@ -30,6 +40,9 @@ internal readonly struct ThreatZone
 {
     private const float NearMissFalloff = 1.75f;
 
+    private static Component _lightFogSamplerTarget;
+    private static Func<Vector3, float> _lightFogSampler;
+
     public readonly ThreatZoneKind Kind;
     public readonly ThreatSourceKind SourceKind;
     public readonly ThreatActivity Activity;
@@ -48,6 +61,9 @@ internal readonly struct ThreatZone
     public readonly float TimeToImpact;
     public readonly float ProjectileSpeed;
     public readonly bool IsDodgeable;
+    public readonly bool RequiresDodgeSkill;
+    public readonly GroundHazardKind GroundHazard;
+    public readonly float GroundHazardThreshold;
 
     public bool IsProjectile => SourceKind == ThreatSourceKind.Projectile;
     public bool IsActive => Activity != ThreatActivity.Preview;
@@ -70,7 +86,10 @@ internal readonly struct ThreatZone
         float weight,
         float timeToImpact,
         float projectileSpeed,
-        bool isDodgeable)
+        bool isDodgeable,
+        bool requiresDodgeSkill = false,
+        GroundHazardKind groundHazard = GroundHazardKind.None,
+        float groundHazardThreshold = 0f)
     {
         Kind = kind;
         SourceKind = sourceKind;
@@ -90,6 +109,9 @@ internal readonly struct ThreatZone
         TimeToImpact = timeToImpact;
         ProjectileSpeed = projectileSpeed;
         IsDodgeable = isDodgeable;
+        RequiresDodgeSkill = requiresDodgeSkill;
+        GroundHazard = groundHazard;
+        GroundHazardThreshold = groundHazardThreshold;
     }
 
     public static ThreatZone Circle(
@@ -101,7 +123,8 @@ internal readonly struct ThreatZone
         ThreatActivity activity,
         float weight,
         float timeToImpact,
-        bool isDodgeable)
+        bool isDodgeable,
+        bool requiresDodgeSkill = false)
     {
         return new ThreatZone(
             ThreatZoneKind.Circle,
@@ -121,7 +144,8 @@ internal readonly struct ThreatZone
             weight,
             timeToImpact,
             0f,
-            isDodgeable);
+            isDodgeable,
+            requiresDodgeSkill);
     }
 
     public static ThreatZone Cone(
@@ -266,6 +290,36 @@ internal readonly struct ThreatZone
             isDodgeable);
     }
 
+    public static ThreatZone Ground(
+        Actor source,
+        GroundHazardKind groundHazard,
+        float threshold,
+        float weight)
+    {
+        return new ThreatZone(
+            ThreatZoneKind.GroundHazard,
+            ThreatSourceKind.Environment,
+            ThreatActivity.Active,
+            source,
+            null,
+            null,
+            source != null ? source.position : Vector3.zero,
+            source != null ? source.position : Vector3.zero,
+            Vector3.forward,
+            null,
+            0f,
+            0f,
+            0f,
+            360f,
+            weight,
+            0f,
+            0f,
+            isDodgeable: true,
+            requiresDodgeSkill: false,
+            groundHazard,
+            threshold);
+    }
+
     public float RiskAt(Vector3 point, float extraRadius)
     {
         float signedDistance = SignedDistance(point, extraRadius);
@@ -296,6 +350,8 @@ internal readonly struct ThreatZone
                 return SignedDistanceToPolygon(point, extraRadius);
             case ThreatZoneKind.OutsideCircles:
                 return SignedDistanceOutsideCircles(point, extraRadius);
+            case ThreatZoneKind.GroundHazard:
+                return IsGroundHazardAt(point, extraRadius) ? -0.25f : NearMissFalloff;
             default:
                 return float.PositiveInfinity;
         }
@@ -314,9 +370,105 @@ internal readonly struct ThreatZone
                 return ClosestPointOnPolygon(point);
             case ThreatZoneKind.OutsideCircles:
                 return ClosestSafeCircleCenter(point);
+            case ThreatZoneKind.GroundHazard:
+                return point;
             default:
                 return point;
         }
+    }
+
+    private bool IsGroundHazardAt(Vector3 point, float extraRadius)
+    {
+        if (IsGroundHazardAtSingle(point))
+        {
+            return true;
+        }
+
+        float radius = Mathf.Max(extraRadius, 0f);
+        if (radius <= 0.05f)
+        {
+            return false;
+        }
+
+        for (int i = 0; i < 4; i++)
+        {
+            float angle = i * Mathf.PI * 0.5f;
+            Vector3 sample = point + new Vector3(Mathf.Cos(angle), 0f, Mathf.Sin(angle)) * radius;
+            if (IsGroundHazardAtSingle(sample))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private bool IsGroundHazardAtSingle(Vector3 point)
+    {
+        switch (GroundHazard)
+        {
+            case GroundHazardKind.Lava:
+                if (Source == null ||
+                    !Physics.Raycast(point + Vector3.up * 8f, Vector3.down, out RaycastHit hit, 16f, LayerMasks.Ground))
+                {
+                    return false;
+                }
+
+                return hit.transform == Source.transform || hit.transform.IsChildOf(Source.transform);
+            case GroundHazardKind.LightFog:
+                Func<Vector3, float> sampler = GetLightFogSampler();
+                if (sampler == null)
+                {
+                    return false;
+                }
+
+                try
+                {
+                    return sampler(point) >= GroundHazardThreshold;
+                }
+                catch (Exception)
+                {
+                    _lightFogSamplerTarget = null;
+                    _lightFogSampler = null;
+                    return false;
+                }
+            default:
+                return false;
+        }
+    }
+
+    private Func<Vector3, float> GetLightFogSampler()
+    {
+        if (_lightFogSamplerTarget != null && _lightFogSampler != null)
+        {
+            return _lightFogSampler;
+        }
+
+        if (Source == null)
+        {
+            return null;
+        }
+
+        Type fogType = Source.GetType().Assembly.GetType("Sky_LightFog", throwOnError: false);
+        MethodInfo sampleMethod = fogType?.GetMethod(
+            "SampleFogOpacity",
+            BindingFlags.Instance | BindingFlags.Public,
+            binder: null,
+            types: new[] { typeof(Vector3) },
+            modifiers: null);
+        Component target = fogType != null ? UnityEngine.Object.FindAnyObjectByType(fogType) as Component : null;
+        if (target == null || sampleMethod == null)
+        {
+            return null;
+        }
+
+        _lightFogSamplerTarget = target;
+        _lightFogSampler = Delegate.CreateDelegate(
+            typeof(Func<Vector3, float>),
+            target,
+            sampleMethod,
+            throwOnBindFailure: false) as Func<Vector3, float>;
+        return _lightFogSampler;
     }
 
     private float SignedDistanceToCone(Vector3 point, float extraRadius)

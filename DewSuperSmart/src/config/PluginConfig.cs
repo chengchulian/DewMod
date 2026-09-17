@@ -67,7 +67,7 @@ public class PluginConfig : ModConfig
 
     [LabelText("LabelText.AutoDodgeCommandInterval")]
     [Description("Description.AutoDodgeCommandInterval")]
-    public float AutoDodgeCommandInterval = 0.1f;
+    public float AutoDodgeCommandInterval = 0.05f;
 
     [LabelText("LabelText.AutoDodgeKey")]
     [Description("Description.AutoDodgeKey")]

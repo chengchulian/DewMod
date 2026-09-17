@@ -14,10 +14,10 @@ internal sealed class MonsterThreatRangeDisplay : MonoBehaviour
     private const float GroundOffset = 0.16f;
     private const float LineWidth = 0.065f;
     private const float ProjectileLineWidth = 0.075f;
-    private const float RedDistanceToHero = 0.8f;
-    private const float YellowDistanceToHero = 1.8f;
-    private const float RedTimeToImpact = 0.8f;
-    private const float YellowTimeToImpact = 1.8f;
+    private const float RedDistanceToHero = 0.5f;
+    private const float YellowDistanceToHero = 1f;
+    private const float RedTimeToImpact = 0.5f;
+    private const float YellowTimeToImpact = 1f;
     private const int TopRenderQueue = 5000;
 
     private static readonly Color RedThreatColor = new Color(1f, 0.04f, 0.02f, 0.95f);

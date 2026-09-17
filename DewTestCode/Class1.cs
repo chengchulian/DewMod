@@ -1,3 +1,6 @@
+using System.Numerics;
+using Quaternion = UnityEngine.Quaternion;
+
 namespace DewTestCode;
 
 public class Class1
@@ -9,6 +12,16 @@ public class Class1
 
     private static void SpawnAnityaShrine()
     {
+        
+        // 生成北极星
+        Dew.SpawnEntity<Mon_Polaris_BossPolaris>(
+            DewConsoleCommands.GetCursorWorldPos(), 
+            Quaternion.Euler(0f, UnityEngine.Random.Range(0, 360), 0f),
+            null,
+            DewPlayer.environment,
+            1);
+
+
         
         // 生成商人
         Dew.CreateActor<PropEnt_Merchant_Jonas>(DewConsoleCommands.GetCursorWorldPos(), null);

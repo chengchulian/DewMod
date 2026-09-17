@@ -23,15 +23,36 @@ public class UI_Lobby_HideIfSingleplayer_Patch
     /// </summary>
     private static IEnumerator WaitLobbyReady(UI_Lobby_HideIfSingleplayer ui)
     {
-        // 等待 lobby 创建、service 初始化、currentLobby 可用
-        yield return new WaitUntil(() =>
-        {
-            var lobby = ManagerBase<LobbyManager>.instance?.service?.currentLobby;
-            return lobby != null && lobby.maxPlayers == DewNetworkManager.startSettings.maxPlayers;
-        });
+        DewNetworkMode networkMode = DewNetworkManager.startSettings.networkMode;
+        bool isHost = networkMode == DewNetworkMode.MultiplayerHost
+                      || networkMode == DewNetworkMode.MultiplayerHostRestart;
 
-        var lobby = ManagerBase<LobbyManager>.instance.service.currentLobby;
-        int maxPlayers = lobby.maxPlayers;
+        if (isHost)
+        {
+            // Keep the dialog value authoritative while Steam publishes the lobby limit.
+            yield return new WaitUntil(() =>
+            {
+                LobbyInstance lobby = ManagerBase<LobbyManager>.instance?.service?.currentLobby;
+                return lobby != null && lobby.maxPlayers == DewNetworkManager.startSettings.maxPlayers;
+            });
+        }
+        else
+        {
+            // Joining clients start at 4 locally; use the host-published lobby limit.
+            yield return new WaitUntil(() =>
+            {
+                LobbyInstance lobby = ManagerBase<LobbyManager>.instance?.service?.currentLobby;
+                return lobby != null
+                       && lobby.maxPlayers > 4
+                       && lobby.maxPlayers <= Constant.MaxPlayerClamp;
+            });
+        }
+
+        int maxPlayers = ManagerBase<LobbyManager>.instance.service.currentLobby.maxPlayers;
+        if (!isHost)
+        {
+            DewNetworkManager.startSettings.maxPlayers = maxPlayers;
+        }
 
         // 获取“Player List”容器
         Transform listRoot = ui.transform
@@ -48,7 +69,7 @@ public class UI_Lobby_HideIfSingleplayer_Patch
         // 差量添加
         int needAdd = maxPlayers - currentCount;
         
-        Debug.Log( $"当前人数：{currentCount}，需要添加：{needAdd}  添加后人数：{maxPlayers}");
+        Debug.Log($"[DewMorePlayers] Player list slots: {currentCount} -> {maxPlayers}.");
         if (needAdd <= 0) yield break;
 
         // 使用第一个作为模板

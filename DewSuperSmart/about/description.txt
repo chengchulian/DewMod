@@ -2,9 +2,9 @@ DewSuperSmart adds combat awareness tools for the local hero.
 
 Features:
 - Draw basic attack and hero skill ranges.
-- Draw enemy casts, live damage/control colliders, projectiles, status-effect auras, and environmental traps.
+- Draw enemy casts, basic attacks, live damage/control colliders, projectiles, meteor rain impacts, status-effect auras, traps, fireplaces, and damaging terrain.
 - Render exact circle, cone, rotated box, line, and polygon boundaries with impact-aware threat colors.
-- Continuously avoid active or imminent threats; set a dodge key to make activation hold-to-use instead.
+- Avoid spatial threats with normal movement; time dodge invulnerability against locked damage only when movement cannot avoid the impact.
 - Optionally reserve one movement-skill charge instead of consuming the last dodge.
 - JSON localization is available in the i18n folder.
 
@@ -12,8 +12,9 @@ DewSuperSmart 为本地英雄添加战斗辅助显示。
 
 功能：
 - 绘制普攻和英雄技能范围。
-- 绘制敌方施法、实时伤害/控制碰撞区、飞弹、状态光环和环境陷阱。
+- 绘制敌方施法、普通攻击、实时伤害/控制碰撞区、飞弹、流星雨落点、状态光环、陷阱、火堆和伤害地形。
 - 精确绘制圆形、扇形、旋转方框、直线和多边形边界，并按命中风险动态变色。
-- 持续自动躲避已激活或即将生效的威胁；设置躲避键后可改为按住启用。
+- 感知威胁时优先向主要怪物的左右侧移动；普通移动无法安全规避时，才让闪避无碰撞阶段精确覆盖命中时刻。
+- 长按自动躲避键且没有威胁时，角色会持续朝鼠标指针方向移动。
 - 可选择保留一层位移技能充能，避免自动躲避消耗最后一层闪避。
 - i18n 文件夹内提供 JSON 本地化文本。

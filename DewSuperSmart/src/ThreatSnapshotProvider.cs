@@ -6,7 +6,7 @@ namespace DewSuperSmart;
 
 internal sealed class ThreatSnapshotProvider : MonoBehaviour
 {
-    private const float RefreshInterval = 0.04f;
+    private const float RefreshInterval = 0.02f;
 
     private readonly ThreatAnalyzer _analyzer = new ThreatAnalyzer();
     private readonly List<ThreatZone> _threats = new List<ThreatZone>(192);
