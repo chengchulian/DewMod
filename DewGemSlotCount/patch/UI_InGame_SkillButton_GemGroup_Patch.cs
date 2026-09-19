@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using DG.Tweening;
 using HarmonyLib;
 using UnityEngine;
@@ -11,6 +11,21 @@ public static class UI_InGame_SkillButton_GemGroup_Patch
     
     private static readonly float DualLineUpY = 100f;
     private static readonly float DualLineDownY = -100f;
+
+    [HarmonyPostfix]
+    [HarmonyPatch("Awake")]
+    public static void Awake_Postfix(UI_InGame_SkillButton_GemGroup __instance)
+    {
+        // LogicUpdate caches the count, so every group must exist before its first refresh.
+        // Keep templates inactive while cloning to defer slot OnEnable until indices are assigned.
+        foreach (GameObject group in __instance.groups)
+        {
+            group.SetActive(false);
+        }
+
+        // Slot capacity is required even when the optional layout animations are disabled.
+        AddGemCountUI(__instance);
+    }
 
     [HarmonyPrefix]
     [HarmonyPatch(typeof(UI_InGame_SkillButton_GemGroup), "OnStateChanged")]
@@ -26,11 +41,6 @@ public static class UI_InGame_SkillButton_GemGroup_Patch
         {
             return false;
         }
-        
-        
-        AddGemCountUI(__instance);
-        
-
         var transform = __instance.transform;
         var type = typeof(UI_InGame_SkillButton_GemGroup);
 
@@ -90,10 +100,12 @@ public static class UI_InGame_SkillButton_GemGroup_Patch
         {
             return;
         }
+        int originalGroupCount = instance.groups.Length;
         Array.Resize(ref instance.groups, maxGemCount);
-        for (int i = 4; i < maxGemCount; i++)
+        for (int i = originalGroupCount; i < maxGemCount; i++)
         {
             instance.groups[i] = UnityEngine.Object.Instantiate(instance.groups[3], instance.transform);
+            instance.groups[i].SetActive(false);
             instance.groups[i].name = GetEnglishByNum(i + 1);
             Transform group = instance.groups[i].transform;
             int num = i + 1;

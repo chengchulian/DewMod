@@ -14,7 +14,7 @@ public class Class1
     {
         
         // 生成北极星
-        Dew.SpawnEntity<Mon_Polaris_BossPolaris>(
+        Dew.SpawnEntity<Mon_Special_BossPolaris>(
             DewConsoleCommands.GetCursorWorldPos(), 
             Quaternion.Euler(0f, UnityEngine.Random.Range(0, 360), 0f),
             null,
