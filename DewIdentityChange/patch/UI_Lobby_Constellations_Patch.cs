@@ -106,7 +106,7 @@ public static class UI_Lobby_Constellations_Patch
             return false;
         }
 
-        DewEffect.PlayNew(__instance.fxSaveChanges);
+        util.UiEffect.Play(__instance.fxSaveChanges);
         int visibleIndex = LoadoutPageMapper.NormalizeVisibleIndex(__instance.selectedLoadoutIndex);
         loadouts[visibleIndex] = __instance.loadout;
         __instance.LoadLoadout(visibleIndex);

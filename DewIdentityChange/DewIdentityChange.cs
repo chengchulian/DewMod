@@ -59,6 +59,7 @@ public class DewIdentityChange : ModBehaviour
         }
 
         LoadoutSnapshot.RestoreCaptured();
+        ui.MemoryMenuLayout.RestoreAll();
         harmony.UnpatchAll(harmony.Id);
     }
 }

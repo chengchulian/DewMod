@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using DewIdentityChange.util;
 using HarmonyLib;
-using Mirror;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -51,8 +51,23 @@ public class UI_Lobby_Constellations_StarList_Patch
 
         __instance.hoveredIndex = -1;
         listGroup.currentIndex = -1;
-        foreach (var item in items)
+        // Newer game versions pool both groups. Clear those references as well so
+        // switching back to the original Refresh cannot reuse destroyed objects.
+        var previousItems = new HashSet<UI_Lobby_Constellations_StarItem>(items);
+        foreach (string fieldName in new[] { "_heroItems", "_globalItems" })
         {
+            if (AccessTools.Field(typeof(UI_Lobby_Constellations_StarList), fieldName)?.GetValue(__instance)
+                is List<UI_Lobby_Constellations_StarItem> cachedItems)
+            {
+                previousItems.UnionWith(cachedItems);
+                cachedItems.Clear();
+            }
+        }
+
+        foreach (var item in previousItems)
+        {
+            if (item == null) continue;
+            item.gameObject.SetActive(false);
             UnityEngine.Object.Destroy(item.gameObject);
         }
 
@@ -64,7 +79,7 @@ public class UI_Lobby_Constellations_StarList_Patch
         categoryTitleText.color = Color.Lerp(starCategoryColor, Color.white, 0.5f);
         categoryDescText.text = DewLocalization.GetUIValue($"Constellations_Category_{category}_Description");
         categoryDescText.color = ColorExtensions.WithA(Color.Lerp(starCategoryColor, Color.white, 0.5f), 0.66f);
-        DewEffect.PlayNew(fxPerCategoryEffects[categoryGroup.currentIndex], (NetworkIdentity)null);
+        UiEffect.Play(fxPerCategoryEffects[categoryGroup.currentIndex]);
 
         var heroSkill = hero.GetComponent<HeroSkill>();
         SkillTrigger[] loadoutQ = heroSkill.GetLoadoutSkills(HeroSkillLocation.Q);
@@ -114,6 +129,10 @@ public class UI_Lobby_Constellations_StarList_Patch
 
         bool hasCharacterSpecificStars = false;
         bool hasGlobalStars = false;
+        var heroItems = AccessTools.Field(typeof(UI_Lobby_Constellations_StarList), "_heroItems")
+            ?.GetValue(__instance) as List<UI_Lobby_Constellations_StarItem>;
+        var globalItems = AccessTools.Field(typeof(UI_Lobby_Constellations_StarList), "_globalItems")
+            ?.GetValue(__instance) as List<UI_Lobby_Constellations_StarItem>;
         foreach (var star in orderedStars)
         {
             if (star.type != category)
@@ -134,6 +153,8 @@ public class UI_Lobby_Constellations_StarList_Patch
 
             starItem.Setup(star, items.Count);
             items.Add(starItem);
+            // Let vanilla reuse these items if Identity Change is disabled while the UI is open.
+            (star.heroType != null ? heroItems : globalItems)?.Add(starItem);
         }
 
         seperatorObject.SetActive(hasCharacterSpecificStars && hasGlobalStars);

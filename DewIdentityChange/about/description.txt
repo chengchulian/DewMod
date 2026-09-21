@@ -5,6 +5,7 @@
 [h2]主要功能[/h2]
 [list]
 [*]任何英雄都可以装备所有角色技能。
+[*]记忆选择采用屏幕内的多列列表，过多时可用滚轮、拖动或手柄右摇杆滚动。
 [*]任何英雄都可以使用所有角色天赋/星座搭配。
 [*]开启“添加角色技能到全局掉落池”后，商店、宝箱、祭坛和房间奖励等技能掉落均可出现角色技能。
 [*]大厅内由房主的转职开关决定是否启用，客户端会跟随房主设置。
@@ -32,6 +33,7 @@
 [h2]Features[/h2]
 [list]
 [*]Every hero can equip all character skills.
+[*]Memory selection uses a grid kept within the screen. Scroll longer lists with the mouse wheel, dragging, or the right gamepad stick.
 [*]Every hero can use all character talents/constellation options.
 [*]When “Add Character Skills to All Loot Pools” is enabled, character skills can appear in shops, chests, shrines, room rewards, and other skill drops.
 [*]In the lobby, the host setting controls whether Identity Change is enabled.

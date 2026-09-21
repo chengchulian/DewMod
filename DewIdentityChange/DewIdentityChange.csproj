@@ -13,6 +13,7 @@
         <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
         <FileAlignment>512</FileAlignment>
         <LangVersion>12</LangVersion>
+        <CodePage>65001</CodePage>
     </PropertyGroup>
     <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
         <PlatformTarget>AnyCPU</PlatformTarget>
@@ -717,6 +718,9 @@
         <Compile Include="config\LocalizationSource.cs" />
         <Compile Include="config\PluginConfig.cs" />
         <Compile Include="DewIdentityChange.cs" />
+        <Compile Include="ui\MemoryMenuLayout.cs" />
+        <Compile Include="util\UiEffect.cs" />
+        <Compile Include="patch\MemoryMenu_Patch.cs" />
         <Compile Include="patch\DewPlayer_Patch.cs" />
         <Compile Include="patch\HeroLoadoutData_Patch.cs" />
         <Compile Include="patch\LootManager_Patch.cs" />
