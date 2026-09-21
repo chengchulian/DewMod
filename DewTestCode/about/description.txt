@@ -1,0 +1,2 @@
+开发测试项目，用于手动调用游戏 API。
+此项目没有 ModBehaviour 入口，metadata 的 assemblies 保持为空，不作为游戏 Mod 加载。

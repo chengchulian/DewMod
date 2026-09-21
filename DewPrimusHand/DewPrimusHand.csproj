@@ -7,7 +7,7 @@
         <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
         <ProjectGuid>{FF44F1F4-0AEE-4D9F-A5A7-61F53134A074}</ProjectGuid>
         <OutputType>Library</OutputType>
-        <AppDesignerFolder>Properties</AppDesignerFolder>
+        <AppDesignerFolder>src\Properties</AppDesignerFolder>
         <RootNamespace>DewPrimusHand</RootNamespace>
         <AssemblyName>DewPrimusHand</AssemblyName>
         <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
@@ -40,18 +40,18 @@
         <Reference Include="System.Xml"/>
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="DewPrimusHand.cs" />
-        <Compile Include="config\LocalizationSource.cs" />
-        <Compile Include="config\PluginConfig.cs" />
-        <Compile Include="patch\DewDifficultySettings_Patch.cs" />
-        <Compile Include="patch\FinalDamageData_Patch.cs" />
-        <Compile Include="patch\GameManager_Patch.cs" />
-        <Compile Include="patch\GameMod_MirageSkin_Patch.cs" />
-        <Compile Include="patch\RoomMonsters_Patch.cs" />
-        <Compile Include="patch\Se_HeroKnockedOut_Patch.cs" />
-        <Compile Include="Properties\AssemblyInfo.cs" />
-        <Compile Include="util\DewPrimusHandUtil.cs" />
-        <Compile Include="util\DifficultyMath.cs" />
+        <Compile Include="src\DewPrimusHand.cs" />
+        <Compile Include="src\config\LocalizationSource.cs" />
+        <Compile Include="src\config\PluginConfig.cs" />
+        <Compile Include="src\patch\DewDifficultySettings_Patch.cs" />
+        <Compile Include="src\patch\FinalDamageData_Patch.cs" />
+        <Compile Include="src\patch\GameManager_Patch.cs" />
+        <Compile Include="src\patch\GameMod_MirageSkin_Patch.cs" />
+        <Compile Include="src\patch\RoomMonsters_Patch.cs" />
+        <Compile Include="src\patch\Se_HeroKnockedOut_Patch.cs" />
+        <Compile Include="src\Properties\AssemblyInfo.cs" />
+        <Compile Include="src\util\DewPrimusHandUtil.cs" />
+        <Compile Include="src\util\DifficultyMath.cs" />
     </ItemGroup>
     <ItemGroup>
         <Reference Include="0Harmony">

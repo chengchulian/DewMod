@@ -7,7 +7,7 @@
         <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
         <ProjectGuid>{9205F443-3180-4B3D-9B6E-F73D4F3065A5}</ProjectGuid>
         <OutputType>Library</OutputType>
-        <AppDesignerFolder>Properties</AppDesignerFolder>
+        <AppDesignerFolder>src\Properties</AppDesignerFolder>
         <RootNamespace>DewHeroSkillJonas</RootNamespace>
         <AssemblyName>DewHeroSkillJonas</AssemblyName>
         <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
@@ -40,13 +40,13 @@
         <Reference Include="System.Xml"/>
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="config\LocalizationSource.cs" />
-        <Compile Include="config\PluginConfig.cs" />
-        <Compile Include="DewHeroSkillJonas.cs" />
-        <Compile Include="util\PropEnt_Merchant_HeroSkill.cs" />
-        <Compile Include="patch\PropEnt_Merchant_Base_Patch.cs" />
-        <Compile Include="Properties\AssemblyInfo.cs" />
-        <Compile Include="util\Test.cs" />
+        <Compile Include="src\config\LocalizationSource.cs" />
+        <Compile Include="src\config\PluginConfig.cs" />
+        <Compile Include="src\DewHeroSkillJonas.cs" />
+        <Compile Include="src\util\PropEnt_Merchant_HeroSkill.cs" />
+        <Compile Include="src\patch\PropEnt_Merchant_Base_Patch.cs" />
+        <Compile Include="src\Properties\AssemblyInfo.cs" />
+        <Compile Include="src\util\Test.cs" />
     </ItemGroup>
     <ItemGroup>
         <Reference Include="0Harmony">

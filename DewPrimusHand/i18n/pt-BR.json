@@ -67,5 +67,7 @@
   "LabelText.WorldReveal": "Visão do Mundo",
   "Description.WorldReveal": "Ativando esta opção, a Visão do Mundo será ativada, igual à função Visão do Tesouro.",
   "LabelText.SpawnLostSoulInCurrentRoom": "Alma perdida na sala atual",
-  "Description.SpawnLostSoulInCurrentRoom": "Quando um aliado for abatido, sua alma perdida aparecerá na sala atual em vez de uma sala posterior."
+  "Description.SpawnLostSoulInCurrentRoom": "Quando um aliado for abatido, sua alma perdida aparecerá na sala atual em vez de uma sala posterior.",
+  "LabelText.SpawnLostSoulInBossRoom": "Gerar alma perdida na sala do chefe",
+  "Description.SpawnLostSoulInBossRoom": "Permite gerar a alma perdida de um aliado abatido na sala do chefe atual."
 }

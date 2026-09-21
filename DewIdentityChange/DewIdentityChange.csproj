@@ -7,7 +7,7 @@
         <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
         <ProjectGuid>{E30D1985-E673-439C-999F-218A0271B773}</ProjectGuid>
         <OutputType>Library</OutputType>
-        <AppDesignerFolder>Properties</AppDesignerFolder>
+        <AppDesignerFolder>src\Properties</AppDesignerFolder>
         <RootNamespace>DewIdentityChange</RootNamespace>
         <AssemblyName>DewIdentityChange</AssemblyName>
         <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
@@ -710,28 +710,28 @@
         <Reference Include="System.Xml"/>
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="config\CharacterSkillLootPool.cs" />
-        <Compile Include="config\HeroSkillSource.cs" />
-        <Compile Include="config\IdentityConfigSync.cs" />
-        <Compile Include="config\LoadoutPageMapper.cs" />
-        <Compile Include="config\LoadoutSnapshot.cs" />
-        <Compile Include="config\LocalizationSource.cs" />
-        <Compile Include="config\PluginConfig.cs" />
-        <Compile Include="DewIdentityChange.cs" />
-        <Compile Include="ui\MemoryMenuLayout.cs" />
-        <Compile Include="util\UiEffect.cs" />
-        <Compile Include="patch\MemoryMenu_Patch.cs" />
-        <Compile Include="patch\DewPlayer_Patch.cs" />
-        <Compile Include="patch\HeroLoadoutData_Patch.cs" />
-        <Compile Include="patch\LootManager_Patch.cs" />
-        <Compile Include="patch\StarEffect_Patch.cs" />
-        <Compile Include="patch\UI_Lobby_Constellations_Patch.cs" />
-        <Compile Include="patch\UI_Lobby_Constellations_QuickLoadoutSwitch_Patch.cs" />
-        <Compile Include="patch\UI_Lobby_Constellations_Skills_Slot_Patch.cs" />
-        <Compile Include="patch\UI_Lobby_Constellations_StarList_Patch.cs" />
-        <Compile Include="patch\UI_Lobby_Loadout_AvailableSkills_Patch.cs" />
-        <Compile Include="patch\UI_Lobby_Loadout_SkillSlot_Patch.cs" />
-        <Compile Include="Properties\AssemblyInfo.cs"/>
+        <Compile Include="src\config\CharacterSkillLootPool.cs" />
+        <Compile Include="src\config\HeroSkillSource.cs" />
+        <Compile Include="src\config\IdentityConfigSync.cs" />
+        <Compile Include="src\config\LoadoutPageMapper.cs" />
+        <Compile Include="src\config\LoadoutSnapshot.cs" />
+        <Compile Include="src\config\LocalizationSource.cs" />
+        <Compile Include="src\config\PluginConfig.cs" />
+        <Compile Include="src\DewIdentityChange.cs" />
+        <Compile Include="src\ui\MemoryMenuLayout.cs" />
+        <Compile Include="src\ui\UiEffect.cs" />
+        <Compile Include="src\patch\MemoryMenu_Patch.cs" />
+        <Compile Include="src\patch\DewPlayer_Patch.cs" />
+        <Compile Include="src\patch\HeroLoadoutData_Patch.cs" />
+        <Compile Include="src\patch\LootManager_Patch.cs" />
+        <Compile Include="src\patch\StarEffect_Patch.cs" />
+        <Compile Include="src\patch\UI_Lobby_Constellations_Patch.cs" />
+        <Compile Include="src\patch\UI_Lobby_Constellations_QuickLoadoutSwitch_Patch.cs" />
+        <Compile Include="src\patch\UI_Lobby_Constellations_Skills_Slot_Patch.cs" />
+        <Compile Include="src\patch\UI_Lobby_Constellations_StarList_Patch.cs" />
+        <Compile Include="src\patch\UI_Lobby_Loadout_AvailableSkills_Patch.cs" />
+        <Compile Include="src\patch\UI_Lobby_Loadout_SkillSlot_Patch.cs" />
+        <Compile Include="src\Properties\AssemblyInfo.cs"/>
     </ItemGroup>
     <ItemGroup>
       <Content Include="about\description.txt" />

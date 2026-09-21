@@ -67,5 +67,7 @@
   "LabelText.WorldReveal": "Visione del mondo",
   "Description.WorldReveal": "Abilita questa opzione per attivare la Visione del mondo, simile alla funzione Visione del tesoro.",
   "LabelText.SpawnLostSoulInCurrentRoom": "Anima perduta nella stanza attuale",
-  "Description.SpawnLostSoulInCurrentRoom": "Quando un compagno viene abbattuto, la sua anima perduta appare nella stanza attuale invece che in una stanza successiva."
+  "Description.SpawnLostSoulInCurrentRoom": "Quando un compagno viene abbattuto, la sua anima perduta appare nella stanza attuale invece che in una stanza successiva.",
+  "LabelText.SpawnLostSoulInBossRoom": "Genera anima perduta nella stanza del boss",
+  "Description.SpawnLostSoulInBossRoom": "Consente di generare l'anima perduta di un compagno abbattuto nella stanza del boss attuale."
 }

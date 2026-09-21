@@ -38,12 +38,12 @@ public class UI_Lobby_HideIfSingleplayer_Patch
         }
         else
         {
-            // Joining clients start at 4 locally; use the host-published lobby limit.
+            // Joining clients use the host-published limit, including the default 4-player case.
             yield return new WaitUntil(() =>
             {
                 LobbyInstance lobby = ManagerBase<LobbyManager>.instance?.service?.currentLobby;
                 return lobby != null
-                       && lobby.maxPlayers > 4
+                       && lobby.maxPlayers >= Constant.MinPlayerClamp
                        && lobby.maxPlayers <= Constant.MaxPlayerClamp;
             });
         }

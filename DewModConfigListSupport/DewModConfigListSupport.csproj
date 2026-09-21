@@ -7,7 +7,7 @@
         <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
         <ProjectGuid>{85C8F38E-3B18-4F54-8873-17B7EC43FC07}</ProjectGuid>
         <OutputType>Library</OutputType>
-        <AppDesignerFolder>Properties</AppDesignerFolder>
+        <AppDesignerFolder>src\Properties</AppDesignerFolder>
         <RootNamespace>DewModConfigListSupport</RootNamespace>
         <AssemblyName>DewModConfigListSupport</AssemblyName>
         <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
@@ -40,12 +40,12 @@
         <Reference Include="System.Xml"/>
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="attribute\ValuesAttribute.cs" />
-        <Compile Include="config\ConfigValues.cs" />
-        <Compile Include="config\PluginConfig.cs" />
-        <Compile Include="DewModConfigListSupport.cs" />
-        <Compile Include="ListSupportHelper.cs" />
-        <Compile Include="Properties\AssemblyInfo.cs" />
+        <Compile Include="src\attribute\ValuesAttribute.cs" />
+        <Compile Include="src\config\ConfigValues.cs" />
+        <Compile Include="src\config\PluginConfig.cs" />
+        <Compile Include="src\DewModConfigListSupport.cs" />
+        <Compile Include="src\ui\ListSupportHelper.cs" />
+        <Compile Include="src\Properties\AssemblyInfo.cs" />
     </ItemGroup>
     <ItemGroup>
         <Reference Include="0Harmony">
@@ -733,6 +733,11 @@
       <Content Include="about\icon.png" />
       <Content Include="about\description.txt" />
       <Content Include="about\metadata.json" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="src\config\LocalizationSource.cs" />
+        <Content Include="i18n\en-US.json" />
+        <Content Include="i18n\zh-CN.json" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
     <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

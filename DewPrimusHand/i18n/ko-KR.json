@@ -67,5 +67,7 @@
   "LabelText.WorldReveal": "천리안",
   "Description.WorldReveal": "이 옵션을 활성화하면 천리안이 활성화되며, 보물 천리안 기능과 동일합니다.",
   "LabelText.SpawnLostSoulInCurrentRoom": "현재 방에 길 잃은 영혼 생성",
-  "Description.SpawnLostSoulInCurrentRoom": "활성화하면 동료가 쓰러졌을 때 길 잃은 영혼이 이후 방이 아닌 현재 방에 생성됩니다."
+  "Description.SpawnLostSoulInCurrentRoom": "활성화하면 동료가 쓰러졌을 때 길 잃은 영혼이 이후 방이 아닌 현재 방에 생성됩니다.",
+  "LabelText.SpawnLostSoulInBossRoom": "보스 방에 길 잃은 영혼 생성",
+  "Description.SpawnLostSoulInBossRoom": "현재 보스 방에 쓰러진 동료의 길 잃은 영혼을 생성할 수 있습니다."
 }

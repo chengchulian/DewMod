@@ -7,7 +7,7 @@
         <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
         <ProjectGuid>{0C003463-2BB6-4842-BB7F-04A3047CF7FB}</ProjectGuid>
         <OutputType>Library</OutputType>
-        <AppDesignerFolder>Properties</AppDesignerFolder>
+        <AppDesignerFolder>src\Properties</AppDesignerFolder>
         <RootNamespace>DewLanMode</RootNamespace>
         <AssemblyName>DewLanMode</AssemblyName>
         <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
@@ -79,14 +79,14 @@
     </ItemGroup>
     <ItemGroup>
         <Compile Include="src\DewLanMode.cs" />
-        <Compile Include="src\DewLanModeUiCleanup.cs" />
-        <Compile Include="src\FindLobbyController.cs" />
-        <Compile Include="src\LanDiscoveryService.cs" />
-        <Compile Include="src\LanJoinDialog.cs" />
-        <Compile Include="src\LanAuthenticationSceneSync.cs" />
-        <Compile Include="src\LanModeRuntime.cs" />
+        <Compile Include="src\ui\DewLanModeUiCleanup.cs" />
+        <Compile Include="src\controller\FindLobbyController.cs" />
+        <Compile Include="src\network\LanDiscoveryService.cs" />
+        <Compile Include="src\ui\LanJoinDialog.cs" />
+        <Compile Include="src\network\LanAuthenticationSceneSync.cs" />
+        <Compile Include="src\controller\LanModeRuntime.cs" />
         <Compile Include="src\config\LocalizationSource.cs" />
-        <Compile Include="src\LanLobbyController.cs" />
+        <Compile Include="src\controller\LanLobbyController.cs" />
         <Compile Include="src\patch\DewNetworkAuthenticatorPatch.cs" />
         <Compile Include="src\patch\DewNetworkManagerPatch.cs" />
         <Compile Include="src\patch\CreateLobbyViewPatch.cs" />

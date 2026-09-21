@@ -67,5 +67,7 @@
   "LabelText.WorldReveal": "Visión mundial",
   "Description.WorldReveal": "Activa esta opción para habilitar la visión mundial, similar a la función de visión mundial de tesoros.",
   "LabelText.SpawnLostSoulInCurrentRoom": "Alma perdida en la sala actual",
-  "Description.SpawnLostSoulInCurrentRoom": "Cuando un compañero sea derribado, su alma perdida aparecerá en la sala actual en vez de una sala posterior."
+  "Description.SpawnLostSoulInCurrentRoom": "Cuando un compañero sea derribado, su alma perdida aparecerá en la sala actual en vez de una sala posterior.",
+  "LabelText.SpawnLostSoulInBossRoom": "Generar alma perdida en la sala del jefe",
+  "Description.SpawnLostSoulInBossRoom": "Permite generar el alma perdida de un compañero derribado en la sala del jefe actual."
 }

@@ -39,7 +39,8 @@ public static class LocalizationSource
         }
     }
 
-    public static string Get(string key, params object[] args)
+    // 查询当前语言的文本。
+    public static string GetLocalizationText(string key, params object[] args)
     {
         string language = DewSave.profileMain?.language ?? "en-US";
         if (!Sources.TryGetValue(language, out Dictionary<string, string> source) &&
@@ -51,11 +52,17 @@ public static class LocalizationSource
         return source.TryGetValue(key, out string value) ? string.Format(value, args) : key;
     }
 
+    // 保留旧版公开方法，兼容引用此类的已有代码。
+    public static string Get(string key, params object[] args)
+    {
+        return GetLocalizationText(key, args);
+    }
+
     public static void LocalizeUI(Transform root)
     {
         foreach (TMP_Text text in root.GetComponentsInChildren<TMP_Text>(true))
         {
-            text.text = Get(text.text);
+            text.text = GetLocalizationText(text.text);
         }
     }
 }

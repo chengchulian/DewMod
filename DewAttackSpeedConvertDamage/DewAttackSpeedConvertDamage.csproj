@@ -7,7 +7,7 @@
         <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
         <ProjectGuid>{7A97767E-AC0D-46CA-804A-412F0C329A9D}</ProjectGuid>
         <OutputType>Library</OutputType>
-        <AppDesignerFolder>Properties</AppDesignerFolder>
+        <AppDesignerFolder>src\Properties</AppDesignerFolder>
         <RootNamespace>DewAttackSpeedConvertDamage</RootNamespace>
         <AssemblyName>DewAttackSpeedConvertDamage</AssemblyName>
         <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
@@ -40,11 +40,11 @@
         <Reference Include="System.Xml"/>
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="config\LocalizationSource.cs" />
-        <Compile Include="config\PluginConfig.cs" />
-        <Compile Include="DewAttackSpeedConvertDamage.cs" />
-        <Compile Include="patch\EntityStatus_Patch.cs" />
-        <Compile Include="Properties\AssemblyInfo.cs"/>
+        <Compile Include="src\config\LocalizationSource.cs" />
+        <Compile Include="src\config\PluginConfig.cs" />
+        <Compile Include="src\DewAttackSpeedConvertDamage.cs" />
+        <Compile Include="src\patch\EntityStatus_Patch.cs" />
+        <Compile Include="src\Properties\AssemblyInfo.cs"/>
     </ItemGroup>
     <ItemGroup>
         <Reference Include="0Harmony">

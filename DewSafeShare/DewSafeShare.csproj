@@ -7,7 +7,7 @@
         <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
         <ProjectGuid>{D3DBBDDB-6FE3-47AD-9556-4B5939189ADF}</ProjectGuid>
         <OutputType>Library</OutputType>
-        <AppDesignerFolder>Properties</AppDesignerFolder>
+        <AppDesignerFolder>src\Properties</AppDesignerFolder>
         <RootNamespace>DewSafeShare</RootNamespace>
         <AssemblyName>DewSafeShare</AssemblyName>
         <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
@@ -40,13 +40,13 @@
         <Reference Include="System.Xml"/>
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="DewSafeShare.cs" />
-        <Compile Include="config\LocalizationSource.cs" />
-        <Compile Include="config\PluginConfig.cs" />
-        <Compile Include="patch\HeroSkillPatch.cs" />
-        <Compile Include="patch\PingManagerPatch.cs" />
-        <Compile Include="Properties\AssemblyInfo.cs"/>
-        <Compile Include="util\SafeShareController.cs" />
+        <Compile Include="src\DewSafeShare.cs" />
+        <Compile Include="src\config\LocalizationSource.cs" />
+        <Compile Include="src\config\PluginConfig.cs" />
+        <Compile Include="src\patch\HeroSkillPatch.cs" />
+        <Compile Include="src\patch\PingManagerPatch.cs" />
+        <Compile Include="src\Properties\AssemblyInfo.cs"/>
+        <Compile Include="src\controller\SafeShareController.cs" />
     </ItemGroup>
     <ItemGroup>
         <Reference Include="0Harmony">

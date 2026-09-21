@@ -67,5 +67,7 @@
   "LabelText.WorldReveal": "千里眼",
   "Description.WorldReveal": "啟用後將開啟千里眼，與寶藏千里眼功能相同。",
   "LabelText.SpawnLostSoulInCurrentRoom": "在目前地圖生成迷失靈魂",
-  "Description.SpawnLostSoulInCurrentRoom": "啟用後，隊友被擊倒時會在目前地圖生成迷失靈魂，而非後續地圖。"
+  "Description.SpawnLostSoulInCurrentRoom": "啟用後，隊友被擊倒時會在目前地圖生成迷失靈魂，而非後續地圖。",
+  "LabelText.SpawnLostSoulInBossRoom": "在 Boss 房生成迷失靈魂",
+  "Description.SpawnLostSoulInBossRoom": "啟用後，允許在目前 Boss 房生成被擊倒隊友的迷失靈魂。"
 }

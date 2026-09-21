@@ -1,0 +1,8 @@
+{
+  "LabelText.TestValueList": "Preset value list",
+  "Description.TestValueList": "Choose preset values and add them to the list.",
+  "LabelText.TestInputList": "Free input list",
+  "Description.TestInputList": "Enter values and add them to the list.",
+  "List.SearchPlaceholder": "Search...",
+  "List.InputPlaceholder": "Input..."
+}

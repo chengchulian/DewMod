@@ -26,7 +26,7 @@ public class DewSuperSmart : ModBehaviour
     {
         LocalizationSource.Init(this);
         _harmony = new Harmony("com.chengchulian.DewMod.DewSuperSmart.ThreatTracking");
-        SafeZoneTracker.Install(_harmony);
+        SafeZoneRpcPatch.Install(_harmony);
 
         _threatSnapshotProvider = gameObject.GetComponent<ThreatSnapshotProvider>() ?? gameObject.AddComponent<ThreatSnapshotProvider>();
         _skillRangeDisplay = gameObject.GetComponent<SkillRangeDisplay>() ?? gameObject.AddComponent<SkillRangeDisplay>();

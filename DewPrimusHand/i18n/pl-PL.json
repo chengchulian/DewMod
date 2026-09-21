@@ -67,5 +67,7 @@
   "LabelText.WorldReveal": "Wzrok świata",
   "Description.WorldReveal": "Po włączeniu tej opcji aktywuje się funkcja wzroku świata, podobnie jak funkcja wzroku skarbów.",
   "LabelText.SpawnLostSoulInCurrentRoom": "Zagubiona dusza w bieżącej sali",
-  "Description.SpawnLostSoulInCurrentRoom": "Gdy członek drużyny zostanie powalony, jego zagubiona dusza pojawi się w bieżącej sali zamiast w późniejszej."
+  "Description.SpawnLostSoulInCurrentRoom": "Gdy członek drużyny zostanie powalony, jego zagubiona dusza pojawi się w bieżącej sali zamiast w późniejszej.",
+  "LabelText.SpawnLostSoulInBossRoom": "Zagubiona dusza w sali bossa",
+  "Description.SpawnLostSoulInBossRoom": "Pozwala pojawić się zagubionej duszy powalonego członka drużyny w bieżącej sali bossa."
 }

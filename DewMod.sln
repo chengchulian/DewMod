@@ -44,6 +44,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DewSuperSmart", "DewSuperSm
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DewLanMode", "DewLanMode\DewLanMode.csproj", "{0C003463-2BB6-4842-BB7F-04A3047CF7FB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DewShieldModDetection", "DewShieldModDetection\DewShieldModDetection.csproj", "{04751D27-FF24-409C-9D6D-C5A64C3CF10E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -122,6 +124,10 @@ Global
 		{0C003463-2BB6-4842-BB7F-04A3047CF7FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0C003463-2BB6-4842-BB7F-04A3047CF7FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0C003463-2BB6-4842-BB7F-04A3047CF7FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{04751D27-FF24-409C-9D6D-C5A64C3CF10E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04751D27-FF24-409C-9D6D-C5A64C3CF10E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04751D27-FF24-409C-9D6D-C5A64C3CF10E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04751D27-FF24-409C-9D6D-C5A64C3CF10E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

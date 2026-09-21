@@ -7,7 +7,7 @@
         <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
         <ProjectGuid>{2F1306DF-7788-4336-93C9-7D99AD8ADE40}</ProjectGuid>
         <OutputType>Library</OutputType>
-        <AppDesignerFolder>Properties</AppDesignerFolder>
+        <AppDesignerFolder>src\Properties</AppDesignerFolder>
         <RootNamespace>DewVascularThief</RootNamespace>
         <AssemblyName>DewVascularThief</AssemblyName>
         <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
@@ -43,44 +43,44 @@
         </Reference>
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="config\VascularThiefText.cs" />
-        <Compile Include="DewVascularThief.cs" />
-        <Compile Include="localization\VascularThiefI18n.cs" />
-        <Compile Include="localization\VascularThiefI18nKeys.cs" />
-        <Compile Include="localization\VascularThiefSkillText.cs" />
-        <Compile Include="patch\ActionCastPatch.cs" />
-        <Compile Include="patch\HeroSkillPatch.cs" />
-        <Compile Include="patch\SkillTriggerPatch.cs" />
-        <Compile Include="patch\UI_Collectables_MainView_Patch.cs" />
-        <Compile Include="patch\UI_InGame_Interact_Skill_Patch.cs" />
-        <Compile Include="patch\UI_Tooltip_ObjMemory_Patch.cs" />
-        <Compile Include="patch\UI_Tooltip_SkillDescription_Patch.cs" />
-        <Compile Include="patch\UI_Tooltip_SkillTitle_Patch.cs" />
-        <Compile Include="patch\VascularThiefActorPatch.cs" />
-        <Compile Include="patch\VascularThiefLocalizationPatch.cs" />
-        <Compile Include="patch\VascularThiefLootPatch.cs" />
-        <Compile Include="patch\VascularThiefProfilePatch.cs" />
-        <Compile Include="patch\VascularThiefResourcePatch.cs" />
-        <Compile Include="Properties\AssemblyInfo.cs"/>
-        <Compile Include="St_U_VascularThief.cs" />
-        <Compile Include="util\BossAbilitySelector.cs" />
-        <Compile Include="util\StolenAbility.cs" />
-        <Compile Include="util\StolenAbilityCaster.cs" />
-        <Compile Include="util\StolenAbilityFactory.cs" />
-        <Compile Include="util\TriggerConfigRuntimeEditor.cs" />
-        <Compile Include="util\VascularThiefController.cs" />
-        <Compile Include="util\VascularThiefCollectablesRegistry.cs" />
-        <Compile Include="util\VascularThiefSkillIcons.cs" />
-        <Compile Include="util\VascularThiefSkillMode.cs" />
-        <Compile Include="util\VascularThiefLootRegistry.cs" />
-        <Compile Include="util\VascularThiefNetworkHelper.cs" />
-        <Compile Include="util\VascularThiefProfileRegistry.cs" />
-        <Compile Include="util\VascularThiefProxyConfig.cs" />
-        <Compile Include="util\VascularThiefResourceRegistry.cs" />
-        <Compile Include="util\VascularThiefSkillConfigurer.cs" />
-        <Compile Include="util\VascularThiefSkillFactory.cs" />
-        <Compile Include="util\VascularThiefSkillMarker.cs" />
-        <Compile Include="util\VascularThiefUpgradeScaling.cs" />
+        <Compile Include="src\config\VascularThiefText.cs" />
+        <Compile Include="src\DewVascularThief.cs" />
+        <Compile Include="src\config\LocalizationSource.cs" />
+        <Compile Include="src\config\VascularThiefI18nKeys.cs" />
+        <Compile Include="src\config\VascularThiefSkillText.cs" />
+        <Compile Include="src\patch\ActionCastPatch.cs" />
+        <Compile Include="src\patch\HeroSkillPatch.cs" />
+        <Compile Include="src\patch\SkillTriggerPatch.cs" />
+        <Compile Include="src\patch\UI_Collectables_MainView_Patch.cs" />
+        <Compile Include="src\patch\UI_InGame_Interact_Skill_Patch.cs" />
+        <Compile Include="src\patch\UI_Tooltip_ObjMemory_Patch.cs" />
+        <Compile Include="src\patch\UI_Tooltip_SkillDescription_Patch.cs" />
+        <Compile Include="src\patch\UI_Tooltip_SkillTitle_Patch.cs" />
+        <Compile Include="src\patch\VascularThiefActorPatch.cs" />
+        <Compile Include="src\patch\VascularThiefLocalizationPatch.cs" />
+        <Compile Include="src\patch\VascularThiefLootPatch.cs" />
+        <Compile Include="src\patch\VascularThiefProfilePatch.cs" />
+        <Compile Include="src\patch\VascularThiefResourcePatch.cs" />
+        <Compile Include="src\Properties\AssemblyInfo.cs"/>
+        <Compile Include="src\skill\St_U_VascularThief.cs" />
+        <Compile Include="src\util\BossAbilitySelector.cs" />
+        <Compile Include="src\util\StolenAbility.cs" />
+        <Compile Include="src\util\StolenAbilityCaster.cs" />
+        <Compile Include="src\util\StolenAbilityFactory.cs" />
+        <Compile Include="src\util\TriggerConfigRuntimeEditor.cs" />
+        <Compile Include="src\controller\VascularThiefController.cs" />
+        <Compile Include="src\util\VascularThiefCollectablesRegistry.cs" />
+        <Compile Include="src\util\VascularThiefSkillIcons.cs" />
+        <Compile Include="src\util\VascularThiefSkillMode.cs" />
+        <Compile Include="src\util\VascularThiefLootRegistry.cs" />
+        <Compile Include="src\util\VascularThiefNetworkHelper.cs" />
+        <Compile Include="src\util\VascularThiefProfileRegistry.cs" />
+        <Compile Include="src\util\VascularThiefProxyConfig.cs" />
+        <Compile Include="src\util\VascularThiefResourceRegistry.cs" />
+        <Compile Include="src\util\VascularThiefSkillConfigurer.cs" />
+        <Compile Include="src\util\VascularThiefSkillFactory.cs" />
+        <Compile Include="src\util\VascularThiefSkillMarker.cs" />
+        <Compile Include="src\util\VascularThiefUpgradeScaling.cs" />
     </ItemGroup>
     <ItemGroup>
         <Reference Include="0Harmony">

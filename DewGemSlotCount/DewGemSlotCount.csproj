@@ -7,7 +7,7 @@
         <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
         <ProjectGuid>{FEB73D43-9E69-4EA0-86F6-E1FFDF374CC8}</ProjectGuid>
         <OutputType>Library</OutputType>
-        <AppDesignerFolder>Properties</AppDesignerFolder>
+        <AppDesignerFolder>src\Properties</AppDesignerFolder>
         <RootNamespace>DewGemSlotCount</RootNamespace>
         <AssemblyName>DewGemSlotCount</AssemblyName>
         <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
@@ -40,18 +40,18 @@
         <Reference Include="System.Xml"/>
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="config\LocalizationSource.cs" />
-        <Compile Include="config\PluginConfig.cs" />
-        <Compile Include="Constant.cs" />
-        <Compile Include="DewGemSlotCount.cs" />
-        <Compile Include="GemSyncHelper.cs" />
-        <Compile Include="patch\HeroSkill_Patch.cs" />
-        <Compile Include="patch\Shrine_CorruptedChaos_Patch.cs" />
-        <Compile Include="patch\SkillTrigger_Patch.cs" />
-        <Compile Include="patch\UI_InGame_Scoreboard_PlayerItem_Skill_Patch.cs" />
-        <Compile Include="patch\UI_InGame_SkillButtons_Patch.cs" />
-        <Compile Include="patch\UI_InGame_SkillButton_GemGroup_Patch.cs" />
-        <Compile Include="Properties\AssemblyInfo.cs" />
+        <Compile Include="src\config\LocalizationSource.cs" />
+        <Compile Include="src\config\PluginConfig.cs" />
+        <Compile Include="src\config\Constant.cs" />
+        <Compile Include="src\DewGemSlotCount.cs" />
+        <Compile Include="src\util\GemSyncHelper.cs" />
+        <Compile Include="src\patch\HeroSkill_Patch.cs" />
+        <Compile Include="src\patch\Shrine_CorruptedChaos_Patch.cs" />
+        <Compile Include="src\patch\SkillTrigger_Patch.cs" />
+        <Compile Include="src\patch\UI_InGame_Scoreboard_PlayerItem_Skill_Patch.cs" />
+        <Compile Include="src\patch\UI_InGame_SkillButtons_Patch.cs" />
+        <Compile Include="src\patch\UI_InGame_SkillButton_GemGroup_Patch.cs" />
+        <Compile Include="src\Properties\AssemblyInfo.cs" />
     </ItemGroup>
     <ItemGroup>
         <Reference Include="0Harmony">

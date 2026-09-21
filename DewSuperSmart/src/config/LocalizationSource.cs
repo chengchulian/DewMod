@@ -1,3 +1,4 @@
+using System.Text;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -54,7 +55,7 @@ public static class LocalizationSource
         try
         {
             string language = Path.GetFileNameWithoutExtension(file);
-            string json = File.ReadAllText(file);
+            string json = File.ReadAllText(file, Encoding.UTF8);
             Dictionary<string, string> values =
                 Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
 

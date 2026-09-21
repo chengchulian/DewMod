@@ -1,0 +1,8 @@
+{
+  "LabelText.TestValueList": "预设值列表",
+  "Description.TestValueList": "选择预设值并添加到列表。",
+  "LabelText.TestInputList": "自由输入列表",
+  "Description.TestInputList": "输入内容并添加到列表。",
+  "List.SearchPlaceholder": "搜索…",
+  "List.InputPlaceholder": "输入…"
+}

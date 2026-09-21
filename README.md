@@ -59,14 +59,20 @@ $(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\*.dll
 ## 目录结构
 
 ```text
-DewMod.sln                         # 解决方案
-build.ps1                          # MSBuild 构建脚本
-<ModName>/<ModName>.csproj         # 单个 Mod 项目
-<ModName>/about/metadata.json      # Mod 元数据
-<ModName>/about/description.txt    # Mod 描述
-<ModName>/i18n/*.json              # 本地化文本
-<ModName>/config/*.cs              # 配置与本地化加载代码
-<ModName>/patch/*.cs               # Harmony Patch
+DewMod.sln                                    # 解决方案
+build.ps1                                     # MSBuild 构建脚本
+<ModName>/<ModName>.csproj                     # 单个 Mod 项目
+<ModName>/about/metadata.json                  # Mod 元数据
+<ModName>/about/description.txt                # Mod 描述
+<ModName>/i18n/*.json                          # 本地化文本
+<ModName>/src/<ModName>.cs                     # ModBehaviour 入口
+<ModName>/src/Properties/AssemblyInfo.cs       # 程序集信息
+<ModName>/src/config/PluginConfig.cs           # Mod 配置
+<ModName>/src/config/LocalizationSource.cs     # 统一本地化入口
+<ModName>/src/patch/*.cs                       # Harmony Patch
+<ModName>/src/ui/*.cs                          # UI 视图与控件
+<ModName>/src/controller/*.cs                  # 控制器与流程协调
+<ModName>/src/util/*.cs                        # 公共工具
 ```
 
 `DewTestCode` 是开发/测试项目，不作为正式发布 Mod 列入下表。
@@ -157,13 +163,34 @@ build.ps1                          # MSBuild 构建脚本
 
 `de-DE`、`en-US`、`es-MX`、`fr-FR`、`it-IT`、`ja-JP`、`ko-KR`、`pl-PL`、`pt-BR`、`ru-RU`、`tr-TR`、`zh-CN`、`zh-TW`。
 
-## 开发约定
+## Mod 开发规范
 
-- 每个正式 Mod 项目应包含 `about/metadata.json` 和 `about/description.txt`。
-- 有预览图或图标时放在 `about/preview.png` 与 `about/icon.png`。
-- 本地化文件放在 `i18n` 目录，文件名使用语言区域代码，例如 `zh-CN.json`、`en-US.json`。
-- 配置项优先沿用现有 `config/PluginConfig.cs` 和 `config/LocalizationSource.cs` 的写法。
-- Harmony Patch 按功能放在 `patch` 目录，公共工具代码放在 `util` 或项目内已有目录。
+仓库现有 18 个 Mod 和 `DewTestCode` 测试项目已统一源码目录结构，后续新增代码同样遵循以下规范。`DewTestCode` 没有 `ModBehaviour` 入口，其元数据中的 `assemblies` 保持为空，仅用于开发测试。
+
+1. **根目录齐全**：每个 Mod 根目录必须包含 `about/`、`i18n/`、`src/`。`about/` 至少包含 `metadata.json` 和 `description.txt`；预览图与图标分别放在 `about/preview.png`、`about/icon.png`。暂时没有翻译文本时也保留 `i18n/`，可用 `.gitkeep` 跟踪空目录。
+2. **源码集中**：全部维护的 C# 源码迁入 `src/`，包括 Mod 入口、辅助类与 `Properties/AssemblyInfo.cs`；`bin/`、`obj/` 中的构建产物不纳入迁移。项目文件保留在 Mod 根目录，运行时资源仍放在根目录的 `about/`、`i18n/` 等资源目录。
+3. **配置与本地化**：配置代码放在 `src/config/`，包含配置类（通常为 `PluginConfig.cs`）及 `LocalizationSource.cs`。配置分组、标签、说明使用本地化键，并在根目录 `i18n/<语言区域代码>.json` 中维护对应文本，例如 `zh-CN.json`、`en-US.json`。所有维护中的语言文件应同步更新键与格式化占位符。
+4. **统一本地化入口**：加载、查询和 UI 本地化统一使用 `LocalizationSource`，迁移已有其他命名或分散实现并更新调用点。入口在使用文本前调用 `LocalizationSource.Init(this)`；文本查询使用 `GetLocalizationText`，配置控件可在 `BuildWidgets` 中调用 `LocalizeUI`。从 Mod 根目录加载 `i18n/`，文件读取显式指定 UTF-8；保留缺失语言、缺失键的回退处理。
+5. **补丁独立**：Harmony patch 类统一迁入 `src/patch/`，按目标或功能拆分；补丁只负责拦截与转发，UI 和控制流程放入各自目录。
+6. **UI 与控制器分离**：视图、控件和显示交互代码放入 `src/ui/`，控制器、状态与流程协调代码放入 `src/controller/`，公共工具放入 `src/util/`。其他功能目录同样位于 `src/` 下。
+
+### 迁移验收
+
+- 同步更新旧式 `.csproj` 中的 `Compile`、`Content`、相关资源路径及 `AppDesignerFolder`（指向 `src\Properties`），移除失效条目，避免漏编译或重复编译。
+- 检查迁移涉及的命名空间、`using`、反射类型名与本地化调用点；目录迁移本身不要求变更对外类型名、Mod ID、配置键或程序集名称。
+- 确认根目录不再遗留维护中的 `.cs` 或旧源码目录，补丁、UI、controller 已分别归档。
+- 检查本地化 JSON 可解析、键与占位符匹配，并构建受影响项目的 Release 配置；涉及控件、生命周期或 Harmony 的变更还需进行游戏内验证。
+- 函数和特殊逻辑添加中文注释，日志尽量使用中文，所有文本保持 UTF-8。
+
+代理开发时还应遵循 [开发技能中的项目约定](.agents/skills/develop-dew-mods/references/project-conventions.md)。
+
+本地化入口的独立行为检查（使用最小游戏对象替身，覆盖中文、回退、格式化和重复初始化）：
+
+```powershell
+pwsh -NoProfile -File .\scripts\Test-Localization.ps1
+```
+
+此检查覆盖本次新增或重命名的四个入口；UI 布局、Harmony 回调与多人行为仍需游戏内验证。
 
 ## 常见问题
 

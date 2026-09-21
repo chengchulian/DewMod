@@ -67,5 +67,7 @@
   "LabelText.WorldReveal": "World Reveal",
   "Description.WorldReveal": "Enable this option to activate World Reveal, similar to the Treasure World Reveal feature.",
   "LabelText.SpawnLostSoulInCurrentRoom": "Spawn Lost Soul in Current Room",
-  "Description.SpawnLostSoulInCurrentRoom": "When a teammate is knocked out, spawn their Lost Soul in the current room instead of a later room."
+  "Description.SpawnLostSoulInCurrentRoom": "When a teammate is knocked out, spawn their Lost Soul in the current room instead of a later room.",
+  "LabelText.SpawnLostSoulInBossRoom": "Spawn Lost Soul in Boss Room",
+  "Description.SpawnLostSoulInBossRoom": "Allow a knocked-out teammate's Lost Soul to spawn in the current Boss Room."
 }

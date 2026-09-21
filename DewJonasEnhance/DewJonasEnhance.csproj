@@ -7,7 +7,7 @@
         <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
         <ProjectGuid>{248E86A8-1E4E-44BA-8D43-125865076E5B}</ProjectGuid>
         <OutputType>Library</OutputType>
-        <AppDesignerFolder>Properties</AppDesignerFolder>
+        <AppDesignerFolder>src\Properties</AppDesignerFolder>
         <RootNamespace>DewJonasEnhance</RootNamespace>
         <AssemblyName>DewJonasEnhance</AssemblyName>
         <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
@@ -721,14 +721,14 @@
         </Reference>
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="config\LocalizationSource.cs" />
-        <Compile Include="config\PluginConfig.cs" />
-        <Compile Include="DewJonasEnhance.cs" />
-        <Compile Include="patch\DewPlayer_Patch.cs" />
-        <Compile Include="patch\PropEnt_Merchant_Jonas_Patch.cs" />
-        <Compile Include="Properties\AssemblyInfo.cs"/>
-        <Compile Include="util\Constant.cs" />
-        <Compile Include="util\DewJonasEnhanceUtil.cs" />
+        <Compile Include="src\config\LocalizationSource.cs" />
+        <Compile Include="src\config\PluginConfig.cs" />
+        <Compile Include="src\DewJonasEnhance.cs" />
+        <Compile Include="src\patch\DewPlayer_Patch.cs" />
+        <Compile Include="src\patch\PropEnt_Merchant_Jonas_Patch.cs" />
+        <Compile Include="src\Properties\AssemblyInfo.cs"/>
+        <Compile Include="src\util\Constant.cs" />
+        <Compile Include="src\util\DewJonasEnhanceUtil.cs" />
     </ItemGroup>
     <ItemGroup>
       <Content Include="about\preview.png" />
