@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -27,6 +28,7 @@ public sealed class MemoryMenuLayout : MonoBehaviour
     private int _count;
     private int _selected;
     private bool _revealSelection;
+    private bool _restoreQueued;
     private Vector2 _lastAvailableSize;
 
     public bool HasViewport => _content != null;
@@ -185,7 +187,37 @@ public sealed class MemoryMenuLayout : MonoBehaviour
 
     private void OnDisable()
     {
-        // Restore before another menu opening, including when the host disables the mod.
+        // 禁用回调发生在父物体停用过程中，下一帧再改父节点才能避免 Unity 层级异常。
+        QueueRestore();
+    }
+
+    private void QueueRestore()
+    {
+        if (_content == null || _originalParent == null || _restoreQueued)
+        {
+            return;
+        }
+
+        _restoreQueued = true;
+        Dew.GetCoroutiner().StartCoroutine(RestoreNextFrame());
+    }
+
+    // 延迟恢复条目父节点，避开 Unity 正在派发启用/停用回调的时间窗口。
+    private IEnumerator RestoreNextFrame()
+    {
+        yield return null;
+        _restoreQueued = false;
+        if (this == null)
+        {
+            yield break;
+        }
+
+        // 菜单已经重新打开时，放弃旧的恢复请求，避免覆盖新一轮布局。
+        if (isActiveAndEnabled)
+        {
+            yield break;
+        }
+
         Restore();
     }
 
@@ -216,12 +248,27 @@ public sealed class MemoryMenuLayout : MonoBehaviour
     {
         foreach (var layout in Resources.FindObjectsOfTypeAll<MemoryMenuLayout>())
         {
-            layout.Restore();
-            if (layout._viewport != null)
-            {
-                Destroy(layout._viewport.gameObject);
-            }
-            Destroy(layout);
+            // Mod 卸载时也可能正处于菜单停用回调，恢复和销毁统一延后一帧。
+            Dew.GetCoroutiner().StartCoroutine(RestoreAndDestroyNextFrame(layout));
         }
+    }
+
+    // 卸载布局时先恢复原始层级，再销毁滚动容器，避免 SetParent 发生在停用回调中。
+    private static IEnumerator RestoreAndDestroyNextFrame(MemoryMenuLayout layout)
+    {
+        yield return null;
+        if (layout == null)
+        {
+            yield break;
+        }
+
+        layout._restoreQueued = false;
+        layout.Restore();
+        if (layout._viewport != null)
+        {
+            Destroy(layout._viewport.gameObject);
+        }
+
+        Destroy(layout);
     }
 }

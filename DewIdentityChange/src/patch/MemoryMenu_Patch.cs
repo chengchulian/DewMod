@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Collections;
 using DewIdentityChange.ui;
 using HarmonyLib;
 using UnityEngine;
@@ -22,8 +23,29 @@ internal static class MemoryMenu_Patch
             __instance.itemsParent != null &&
             ____items != null)
         {
-            MemoryMenuLayout.Apply(__instance, __instance.itemsParent, ____items, __instance.currentSkill);
+            // Unity 仍在执行菜单及 MemoryContent 的 OnEnable 时不能改动子物体层级。
+            QueueApply(__instance, __instance.itemsParent, new List<UI_Lobby_Constellations_Skills_ContextMenu_Item>(____items), __instance.currentSkill);
         }
+    }
+
+    private static void QueueApply(UI_Lobby_Constellations_Skills_ContextMenu menu,
+        Transform parent, List<UI_Lobby_Constellations_Skills_ContextMenu_Item> items, int selected)
+    {
+        // 把层级调整排到当前 OnEnable 调用栈结束之后。
+        Dew.GetCoroutiner().StartCoroutine(ApplyNextFrame(menu, parent, items, selected));
+    }
+
+    // 下一帧确认菜单仍处于激活状态后再应用滚动布局。
+    private static IEnumerator ApplyNextFrame(UI_Lobby_Constellations_Skills_ContextMenu menu,
+        Transform parent, List<UI_Lobby_Constellations_Skills_ContextMenu_Item> items, int selected)
+    {
+        yield return null;
+        if (menu == null || !menu.isActiveAndEnabled || parent == null || !parent.gameObject.activeInHierarchy)
+        {
+            yield break;
+        }
+
+        MemoryMenuLayout.Apply(menu, parent, items, selected);
     }
 }
 
@@ -44,8 +66,26 @@ internal static class AvailableMemoryMenu_Patch
             __instance.itemsParent != null &&
             ____items != null)
         {
-            MemoryMenuLayout.Apply(__instance, __instance.itemsParent, ____items, __instance.currentSkill);
+            // 延迟到菜单激活流程结束后再移动条目，避免 Unity 层级变更异常。
+            Dew.GetCoroutiner().StartCoroutine(ApplyNextFrame(
+                __instance,
+                __instance.itemsParent,
+                new List<UI_Lobby_Loadout_AvailableSkills_Item>(____items),
+                __instance.currentSkill));
         }
+    }
+
+    private static IEnumerator ApplyNextFrame(UI_Lobby_Loadout_AvailableSkills menu,
+        Transform parent, List<UI_Lobby_Loadout_AvailableSkills_Item> items, int selected)
+    {
+        // 下一帧确认菜单仍处于激活状态后再应用滚动布局。
+        yield return null;
+        if (menu == null || !menu.isActiveAndEnabled || parent == null || !parent.gameObject.activeInHierarchy)
+        {
+            yield break;
+        }
+
+        MemoryMenuLayout.Apply(menu, parent, items, selected);
     }
 
 }
