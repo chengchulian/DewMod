@@ -115,6 +115,11 @@ namespace DewPrimusHand.patch
                 clone.random = new DewRandom(clone.random.NextUInt32());
             }
 
+            if (clone.positionRandom != null)
+            {
+                clone.positionRandom = new DewRandom(clone.positionRandom.NextUInt32());
+            }
+
             clone.monsterSpawnData = state.Origin.monsterSpawnData;
             clone.afterSpawn = state.OriginalAfterSpawn;
             clone.initDelayFlat = 0f;
@@ -424,7 +429,6 @@ namespace DewPrimusHand.patch
             public int RemainingExtra;
             public int PendingExtraRequests;
             public int ActiveExtraBosses;
-            private bool _originalSpawned;
             private bool _originalReservationReleased;
             private bool _originalGenerationFinished;
             private bool _encounterFinished;
@@ -445,7 +449,6 @@ namespace DewPrimusHand.patch
                 if (!IsCountedBoss(entity))
                     return;
 
-                _originalSpawned = true;
                 ReleaseOriginalReservation();
             }
 
