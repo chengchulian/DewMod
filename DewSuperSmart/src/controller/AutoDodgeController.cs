@@ -27,11 +27,12 @@ internal sealed class AutoDodgeController : MonoBehaviour
     private const float FallbackDodgeSkillUncollidableRatio = 0.7f;
     private const float EmergencyDodgeMaxTimeToImpact = 0.1f;
     private const float MovementSkillCommandLockoutPadding = 0.1f;
-    private const float SideDodgeMinimumAlignment = 0.8f;
     private const float MovementSkillLandingClearance = 0.35f;
     private const float ProjectilePredictionStep = 0.025f;
     private const float ProjectileArrivalSafetyWindow = 0.45f;
     private const float DenseBarrageArrivalSafetyWindow = 1.15f;
+    private const float SideDodgePreferenceWeight = 5f;
+    private const float EmergencySearchRadiusBonus = 1.5f;
     private const string PrimusMeteorProjectileTypeName =
         "Ai_Mon_Primus_BossPrimusAeron_Adapt_Doom_Meteor_SubFireball";
 
@@ -92,7 +93,9 @@ internal sealed class AutoDodgeController : MonoBehaviour
             return;
         }
 
-        float movementSearchRadius = GetMovementSearchRadius(config);
+        // 命中越近，扩大候选搜索半径，避免在局部区域找不到真正安全点。
+        bool hasIncomingImpact = TryGetEarliestIncomingImpact(hero.agentPosition, heroRadius, out float earliestImpact);
+        float movementSearchRadius = GetMovementSearchRadius(config, earliestImpact);
         float movementSpeed = EstimateMovementSpeed(hero);
         bool hasMonsterThreat = TryGetSideDodgeAxis(hero.agentPosition, heroRadius, out Vector3 sideDodgeAxis);
         bool hasMovementPoint = TryFindSafePoint(
@@ -114,7 +117,6 @@ internal sealed class AutoDodgeController : MonoBehaviour
 
         float timeSinceLastCommand = Time.unscaledTime - _lastCommandTime;
         float commandInterval = Mathf.Max(config.AutoDodgeCommandInterval, MinimumCommandInterval);
-        bool hasIncomingImpact = TryGetEarliestIncomingImpact(hero.agentPosition, heroRadius, out float earliestImpact);
         bool canIssueMovementCommand = timeSinceLastCommand >= commandInterval ||
                                        hasIncomingImpact &&
                                        earliestImpact <= 0.25f &&
@@ -369,19 +371,6 @@ internal sealed class AutoDodgeController : MonoBehaviour
         return null;
     }
 
-    private static bool IsSideDodgeCandidate(Vector3 candidate, Vector3 heroPosition, Vector3 sideDodgeAxis)
-    {
-        Vector3 travelDirection = candidate - heroPosition;
-        travelDirection.y = 0f;
-        if (travelDirection.sqrMagnitude <= 0.0001f || sideDodgeAxis.sqrMagnitude <= 0.0001f)
-        {
-            return false;
-        }
-
-        float sideAlignment = Mathf.Abs(Vector3.Dot(travelDirection.normalized, sideDodgeAxis.normalized));
-        return sideAlignment >= SideDodgeMinimumAlignment;
-    }
-
     private bool TryFindSafePoint(
         Hero hero,
         PluginConfig config,
@@ -421,14 +410,10 @@ internal sealed class AutoDodgeController : MonoBehaviour
                 float angle = i * 360f / samples;
                 Vector3 direction = Quaternion.Euler(0f, angle, 0f) * Vector3.forward;
                 Vector3 rawPoint = heroPosition + direction * distance;
-                Vector3 candidate = Dew.GetValidAgentDestination_LinearSweep(heroPosition, rawPoint);
+                // 优先使用公开的线性扫掠 API；特殊地形上失败时回退到最近合法点 API。
+                Vector3 candidate = GetValidDodgeDestination(heroPosition, rawPoint);
 
                 if (!Dew.IsOkay(candidate) || Vector2.Distance(candidate.ToXY(), heroPosition.ToXY()) < MinimumCandidateDistance)
-                {
-                    continue;
-                }
-
-                if (hasMonsterThreat && !IsSideDodgeCandidate(candidate, heroPosition, sideDodgeAxis))
                 {
                     continue;
                 }
@@ -441,7 +426,9 @@ internal sealed class AutoDodgeController : MonoBehaviour
                     travelSpeed,
                     responseDelay,
                     uncollidableRatio,
-                    isMovementSkill);
+                    isMovementSkill,
+                    hasMonsterThreat,
+                    sideDodgeAxis);
                 float requiredEndpointDistance = MinimumSafeThreatDistance +
                                                  (isMovementSkill ? MovementSkillLandingClearance : 0f);
                 bool isSafe = evaluation.EndpointRisk <= safeRiskThreshold &&
@@ -515,7 +502,9 @@ internal sealed class AutoDodgeController : MonoBehaviour
         float travelSpeed,
         float responseDelay,
         float uncollidableRatio,
-        bool isMovementSkill)
+        bool isMovementSkill,
+        bool hasMonsterThreat,
+        Vector3 sideDodgeAxis)
     {
         float endpointRisk = CalculateNonProjectileRisk(candidate, heroRadius, out float endpointMinimumDistance);
         float avoidablePathRisk = CalculateAvoidablePathRisk(candidate, heroPosition, heroRadius);
@@ -547,11 +536,16 @@ internal sealed class AutoDodgeController : MonoBehaviour
         float intentPenalty = desiredDirection.sqrMagnitude > 0.0001f && travelDirection.sqrMagnitude > 0.0001f
             ? (1f - Vector3.Dot(desiredDirection, travelDirection.normalized)) * 1.5f
             : 0f;
+        // 侧向闪避作为软约束，保留复杂地形下的可行点作为最后退路。
+        float sideDodgePenalty = hasMonsterThreat
+            ? GetSideDodgePenalty(candidate, heroPosition, sideDodgeAxis)
+            : 0f;
         float score = endpointRisk * 1000f +
                       avoidablePathRisk * 750f +
                       timedImpactRisk * 900f -
                       escapeMargin * 8f +
                       intentPenalty +
+                      sideDodgePenalty +
                       travelDistance * 0.15f -
                       Mathf.Clamp(endpointMinimumDistance, 0f, 6f) * 2f;
 
@@ -901,9 +895,41 @@ internal sealed class AutoDodgeController : MonoBehaviour
         return Mathf.Max(speed, MinimumTravelSpeed);
     }
 
-    private static float GetMovementSearchRadius(PluginConfig config)
+    // 根据尚未发生的命中时间调整候选搜索范围。
+    private static float GetMovementSearchRadius(PluginConfig config, float earliestImpact)
     {
-        return Mathf.Max(config.AutoDodgeSearchRadius, 1f);
+        float baseRadius = Mathf.Max(config.AutoDodgeSearchRadius, 1f);
+        if (float.IsNaN(earliestImpact) || float.IsInfinity(earliestImpact))
+        {
+            return baseRadius;
+        }
+
+        // 命中越近，扩大搜索空间以优先寻找真正脱离威胁的点。
+        float urgency = Mathf.Clamp01(1f - Mathf.Max(earliestImpact, 0f) / 1.5f);
+        return baseRadius + EmergencySearchRadiusBonus * urgency;
+    }
+
+    // 使用公开导航 API 获取可达点；不同版本 API 行为变化时回退到最近合法点。
+    private static Vector3 GetValidDodgeDestination(Vector3 origin, Vector3 target)
+    {
+        Vector3 swept = Dew.GetValidAgentDestination_LinearSweep(origin, target);
+        return Dew.IsOkay(swept)
+            ? swept
+            : Dew.GetValidAgentDestination_Closest(origin, target);
+    }
+
+    // 以评分方式偏好怪物攻击轴的侧面，避免硬过滤导致无候选点。
+    private static float GetSideDodgePenalty(Vector3 candidate, Vector3 heroPosition, Vector3 sideDodgeAxis)
+    {
+        Vector3 travel = candidate - heroPosition;
+        travel.y = 0f;
+        if (travel.sqrMagnitude <= 0.0001f || sideDodgeAxis.sqrMagnitude <= 0.0001f)
+        {
+            return SideDodgePreferenceWeight;
+        }
+
+        float alignment = Mathf.Abs(Vector3.Dot(travel.normalized, sideDodgeAxis.normalized));
+        return (1f - alignment) * SideDodgePreferenceWeight;
     }
 
     private static bool TryGetDodgeSkillProfile(
@@ -920,12 +946,26 @@ internal sealed class AutoDodgeController : MonoBehaviour
         float maxSearch = Mathf.Max(config.AutoDodgeSearchRadius, 1f);
         TriggerConfig triggerConfig = movementSkill.currentConfig;
         object spawnedInstance = triggerConfig.spawnedInstance;
-        float speed = ReadSkillFloat(spawnedInstance, "speed", FallbackDodgeSkillTravelSpeed);
-        float minimumDistance = ReadSkillFloat(spawnedInstance, "minDistance", 0f);
-        float uncollidableRatio = Mathf.Clamp01(ReadSkillFloat(
-            spawnedInstance,
-            "uncollidableRatio",
-            FallbackDodgeSkillUncollidableRatio));
+        float speed;
+        float minimumDistance;
+        float uncollidableRatio;
+        if (spawnedInstance is Ai_GenericDodge genericDodge)
+        {
+            // 通用闪避组件字段是游戏公开运行时类型，优先使用强类型 API。
+            speed = genericDodge.speed;
+            minimumDistance = genericDodge.minDistance;
+            uncollidableRatio = genericDodge.uncollidableRatio;
+        }
+        else
+        {
+            // 自定义位移技能没有统一接口时，回退到字段读取兼容路径。
+            speed = ReadSkillFloat(spawnedInstance, "speed", FallbackDodgeSkillTravelSpeed);
+            minimumDistance = ReadSkillFloat(spawnedInstance, "minDistance", 0f);
+            uncollidableRatio = ReadSkillFloat(
+                spawnedInstance,
+                "uncollidableRatio",
+                FallbackDodgeSkillUncollidableRatio);
+        }
         float channelDuration = triggerConfig.channel != null ? Mathf.Max(triggerConfig.channel.duration, 0f) : 0f;
         try
         {
@@ -941,7 +981,7 @@ internal sealed class AutoDodgeController : MonoBehaviour
             Mathf.Max(speed, MinimumTravelSpeed),
             Mathf.Clamp(minimumDistance, 0f, skillRange),
             MovementSkillCommandLeadTime + channelDuration,
-            Mathf.Max(uncollidableRatio, 0.05f));
+            Mathf.Clamp01(uncollidableRatio));
         return true;
     }
 
