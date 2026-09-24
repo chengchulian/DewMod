@@ -46,6 +46,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DewLanMode", "DewLanMode\De
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DewShieldModDetection", "DewShieldModDetection\DewShieldModDetection.csproj", "{04751D27-FF24-409C-9D6D-C5A64C3CF10E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DewUnLock", "DewUnLock\DewUnLock.csproj", "{0191FA58-AA72-48C7-B501-8549E86EF172}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DewLobbyListEnhance", "DewLobbyListEnhance\DewLobbyListEnhance.csproj", "{8FC48BDA-00A6-4F28-AAD3-651AA54D3BEF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -128,7 +132,19 @@ Global
 		{04751D27-FF24-409C-9D6D-C5A64C3CF10E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{04751D27-FF24-409C-9D6D-C5A64C3CF10E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{04751D27-FF24-409C-9D6D-C5A64C3CF10E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0191FA58-AA72-48C7-B501-8549E86EF172}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0191FA58-AA72-48C7-B501-8549E86EF172}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0191FA58-AA72-48C7-B501-8549E86EF172}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0191FA58-AA72-48C7-B501-8549E86EF172}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8FC48BDA-00A6-4F28-AAD3-651AA54D3BEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8FC48BDA-00A6-4F28-AAD3-651AA54D3BEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8FC48BDA-00A6-4F28-AAD3-651AA54D3BEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8FC48BDA-00A6-4F28-AAD3-651AA54D3BEF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
+								{F1C9C5C3-65AF-4E62-9D5B-9B1E07A56F73}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+								{F1C9C5C3-65AF-4E62-9D5B-9B1E07A56F73}.Debug|Any CPU.Build.0 = Debug|Any CPU
+								{F1C9C5C3-65AF-4E62-9D5B-9B1E07A56F73}.Release|Any CPU.ActiveCfg = Release|Any CPU
+								{F1C9C5C3-65AF-4E62-9D5B-9B1E07A56F73}.Release|Any CPU.Build.0 = Release|Any CPU
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
