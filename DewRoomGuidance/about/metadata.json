@@ -1,0 +1,9 @@
+{
+  "id": "com.chengchulian.DewMod.RoomGuidance",
+  "name": "房间指引 / Room Guidance",
+  "author": "chengchulian",
+  "modVer": "1.0.0",
+  "assemblies": [
+    "obj/Release/*.dll"
+  ]
+}

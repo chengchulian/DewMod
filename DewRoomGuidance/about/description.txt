@@ -1,0 +1,3 @@
+显示屏幕外可用祭坛、未拾取宝石、技能和神器的边缘方向指示。
+
+Shows screen-edge direction markers for available shrines and uncollected gems, skills, and artifacts.
