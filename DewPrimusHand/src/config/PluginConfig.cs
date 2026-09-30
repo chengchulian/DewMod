@@ -97,6 +97,22 @@ public class PluginConfig : ModConfig
     [Description("Description.BossCountAddByZone")]
     public int BossCountAddByZone = 0;
 
+    [LabelText("LabelText.MiniBossCount")]
+    [Description("Description.MiniBossCount")]
+    public int MiniBossCount = 1;
+
+    [LabelText("LabelText.MiniBossCountInRoom")]
+    [Description("Description.MiniBossCountInRoom")]
+    public int MiniBossCountInRoom = 2;
+
+    [LabelText("LabelText.MiniBossCountAddByLoop")]
+    [Description("Description.MiniBossCountAddByLoop")]
+    public int MiniBossCountAddByLoop = 0;
+
+    [LabelText("LabelText.MiniBossCountAddByZone")]
+    [Description("Description.MiniBossCountAddByZone")]
+    public int MiniBossCountAddByZone = 0;
+
     [LabelText("LabelText.BossMirageChance")]
     [Description("Description.BossMirageChance")]
     public float BossMirageChance = 0;

@@ -14,6 +14,7 @@ namespace DewPrimusHand.patch
         private const float InkDarkMoonEclipseDeadSequenceSeconds = 1f;
 
         private static readonly ConditionalWeakTable<SpawnMonsterSettings, object> ExtraSpawnMarker = new();
+        private static readonly ConditionalWeakTable<SpawnMonsterSettings, object> MiniBossSpawnMarker = new();
         // 每个房间独立维护 Boss 预留槽位，避免多个生成请求互相覆盖计数。
         private static readonly ConditionalWeakTable<RoomMonsters, BossRoomCoordinator> RoomCoordinators = new();
         private static readonly Dictionary<Ai_Mon_Ink_BossDarkMoon_Eclipse, float> InkDarkMoonEclipseStartTimes = new();
@@ -21,6 +22,14 @@ namespace DewPrimusHand.patch
         private static readonly List<Ai_Mon_Ink_BossDarkMoon_Eclipse> StaleInkDarkMoonEclipses = new();
         private static readonly List<Ai_Mon_Ink_BossDarkMoon_Eclipse> InkDarkMoonEclipsesToRecover = new();
         private static bool _isWatchingInkDarkMoonEclipse;
+
+        [HarmonyPrefix]
+        [HarmonyPatch(nameof(RoomMonsters.SpawnMiniBoss))]
+        public static void SpawnMiniBoss_Prefix(SpawnMonsterSettings settings)
+        {
+            if (settings != null && !MiniBossSpawnMarker.TryGetValue(settings, out _))
+                MiniBossSpawnMarker.Add(settings, new object());
+        }
 
         [HarmonyPrefix]
         [HarmonyPatch(nameof(RoomMonsters.SpawnMonsters))]
@@ -32,17 +41,19 @@ namespace DewPrimusHand.patch
             if (!NetworkedManagerBase<GameManager>.instance.isServer)
                 return;
 
+            bool isMiniBoss = MiniBossSpawnMarker.TryGetValue(settings, out _);
+
             EnsureInkDarkMoonEclipseFailsafe();
 
             if (ExtraSpawnMarker.TryGetValue(settings, out _))
                 return;
 
-            int extraBossCount = CalculateExtraBossCount();
+            int extraBossCount = CalculateExtraBossCount(isMiniBoss);
             if (extraBossCount <= 0)
                 return;
 
             var coordinator = RoomCoordinators.GetValue(__instance, room => new BossRoomCoordinator(room));
-            var state = coordinator.CreateRequest(settings, extraBossCount);
+            var state = coordinator.CreateRequest(settings, extraBossCount, isMiniBoss);
 
             // 原始 Boss 由游戏原生协程生成，这里只包装回调，不改变原始生成时序。
             settings.afterSpawn = spawnedEntity =>
@@ -64,7 +75,7 @@ namespace DewPrimusHand.patch
         {
             while (state.RemainingExtra > 0)
             {
-                if (!state.Coordinator.TryReserveSlot())
+                if (!state.Coordinator.TryReserveSlot(state.IsMiniBoss))
                 {
                     KeepBossEncounterRunning();
                     yield return new WaitForSeconds(0.25f);
@@ -99,7 +110,7 @@ namespace DewPrimusHand.patch
             catch
             {
                 // 原生入口异常时立即归还预留槽位，避免队列永久卡住。
-                state.Coordinator.ReleaseSlot();
+                state.Coordinator.ReleaseSlot(state.IsMiniBoss);
                 state.PendingExtraRequests = Mathf.Max(0, state.PendingExtraRequests - 1);
                 state.TryFinishEncounter();
                 throw;
@@ -136,7 +147,7 @@ namespace DewPrimusHand.patch
                 if (!reservationReleased)
                 {
                     reservationReleased = true;
-                    state.Coordinator.ReleaseSlot();
+                    state.Coordinator.ReleaseSlot(state.IsMiniBoss);
                 }
 
                 state.ActiveExtraBosses++;
@@ -153,7 +164,7 @@ namespace DewPrimusHand.patch
                 if (!reservationReleased)
                 {
                     reservationReleased = true;
-                    state.Coordinator.ReleaseSlot();
+                    state.Coordinator.ReleaseSlot(state.IsMiniBoss);
                 }
 
                 state.PendingExtraRequests = Mathf.Max(0, state.PendingExtraRequests - 1);
@@ -176,7 +187,7 @@ namespace DewPrimusHand.patch
                 gameManager.isGameTimePausedByGame = false;
         }
 
-        private static int CountAliveBosses()
+        private static int CountAliveBosses(bool isMiniBoss)
         {
             var actorManager = NetworkedManagerBase<ActorManager>.instance;
             if (actorManager == null)
@@ -185,7 +196,7 @@ namespace DewPrimusHand.patch
             int count = 0;
             foreach (var entity in actorManager.allEntities)
             {
-                if (IsCountedBoss(entity))
+                if (IsCountedBoss(entity) && IsMiniBoss(entity) == isMiniBoss)
                 {
                     count++;
                 }
@@ -194,10 +205,17 @@ namespace DewPrimusHand.patch
             return count;
         }
 
-        private static int GetMaxBossCountInRoom()
+        private static int GetMaxBossCountInRoom(bool isMiniBoss)
         {
-            // 配置值本身就是房间内允许同时存活的 Boss 数量，不再额外减一。
-            return Mathf.Max(1, DewPrimusHand.Instance.Config.BossCountInRoom);
+            // 两类 Boss 分别使用各自的房间并发上限。
+            return isMiniBoss
+                ? Mathf.Max(1, DewPrimusHand.Instance.Config.MiniBossCountInRoom)
+                : Mathf.Max(1, DewPrimusHand.Instance.Config.BossCountInRoom);
+        }
+
+        private static bool IsMiniBoss(Entity entity)
+        {
+            return entity is Monster monster && monster.type == Monster.MonsterType.MiniBoss;
         }
 
         private static bool IsCountedBoss(Entity entity)
@@ -243,19 +261,20 @@ namespace DewPrimusHand.patch
             }
         }
 
-        private static int CalculateExtraBossCount()
+        private static int CalculateExtraBossCount(bool isMiniBoss)
         {
-            return Mathf.Max(0, CalculateBossCount() - 1);
+            return Mathf.Max(0, CalculateBossCount(isMiniBoss) - 1);
         }
 
-        private static int CalculateBossCount()
+        private static int CalculateBossCount(bool isMiniBoss)
         {
             var zone = NetworkedManagerBase<ZoneManager>.instance.currentZoneIndex;
             var loop = NetworkedManagerBase<ZoneManager>.instance.loopIndex;
 
-            var baseCount = DewPrimusHand.Instance.Config.BossCount;
-            var zoneAdd = zone * DewPrimusHand.Instance.Config.BossCountAddByZone;
-            var loopAdd = loop * DewPrimusHand.Instance.Config.BossCountAddByLoop;
+            var config = DewPrimusHand.Instance.Config;
+            var baseCount = isMiniBoss ? config.MiniBossCount : config.BossCount;
+            var zoneAdd = zone * (isMiniBoss ? config.MiniBossCountAddByZone : config.BossCountAddByZone);
+            var loopAdd = loop * (isMiniBoss ? config.MiniBossCountAddByLoop : config.BossCountAddByLoop);
 
             return Mathf.Max(1, baseCount + zoneAdd + loopAdd);
         }
@@ -384,7 +403,8 @@ namespace DewPrimusHand.patch
         private sealed class BossRoomCoordinator
         {
             public readonly RoomMonsters Room;
-            private int _reservedBosses;
+            private int _reservedLordBosses;
+            private int _reservedMiniBosses;
 
             public BossRoomCoordinator(RoomMonsters room)
             {
@@ -392,29 +412,36 @@ namespace DewPrimusHand.patch
             }
 
             // 原始请求永远由游戏触发，先登记一个预留槽位用于和额外请求统一计数。
-            public BossSpawnRequest CreateRequest(SpawnMonsterSettings origin, int extraBossCount)
+            public BossSpawnRequest CreateRequest(SpawnMonsterSettings origin, int extraBossCount, bool isMiniBoss)
             {
-                ReserveSlot();
-                return new BossSpawnRequest(this, origin, extraBossCount);
+                ReserveSlot(isMiniBoss);
+                return new BossSpawnRequest(this, origin, extraBossCount, isMiniBoss);
             }
 
-            public bool TryReserveSlot()
+            public bool TryReserveSlot(bool isMiniBoss)
             {
-                if (CountAliveBosses() + _reservedBosses >= GetMaxBossCountInRoom())
+                int reservedCount = isMiniBoss ? _reservedMiniBosses : _reservedLordBosses;
+                if (CountAliveBosses(isMiniBoss) + reservedCount >= GetMaxBossCountInRoom(isMiniBoss))
                     return false;
 
-                ReserveSlot();
+                ReserveSlot(isMiniBoss);
                 return true;
             }
 
-            public void ReserveSlot()
+            public void ReserveSlot(bool isMiniBoss)
             {
-                _reservedBosses++;
+                if (isMiniBoss)
+                    _reservedMiniBosses++;
+                else
+                    _reservedLordBosses++;
             }
 
-            public void ReleaseSlot()
+            public void ReleaseSlot(bool isMiniBoss)
             {
-                _reservedBosses = Mathf.Max(0, _reservedBosses - 1);
+                if (isMiniBoss)
+                    _reservedMiniBosses = Mathf.Max(0, _reservedMiniBosses - 1);
+                else
+                    _reservedLordBosses = Mathf.Max(0, _reservedLordBosses - 1);
             }
         }
 
@@ -424,6 +451,7 @@ namespace DewPrimusHand.patch
             public readonly RoomMonsters Room;
             public readonly SpawnMonsterSettings Origin;
             public readonly Action<Entity> OriginalAfterSpawn;
+            public readonly bool IsMiniBoss;
             private readonly Action _originalOnFinish;
 
             public int RemainingExtra;
@@ -433,13 +461,14 @@ namespace DewPrimusHand.patch
             private bool _originalGenerationFinished;
             private bool _encounterFinished;
 
-            public BossSpawnRequest(BossRoomCoordinator coordinator, SpawnMonsterSettings origin, int extraBossCount)
+            public BossSpawnRequest(BossRoomCoordinator coordinator, SpawnMonsterSettings origin, int extraBossCount, bool isMiniBoss)
             {
                 Coordinator = coordinator;
                 Room = coordinator.Room;
                 Origin = origin;
                 OriginalAfterSpawn = origin.afterSpawn;
                 _originalOnFinish = origin.onFinish;
+                IsMiniBoss = isMiniBoss;
                 RemainingExtra = extraBossCount;
             }
 
@@ -480,7 +509,7 @@ namespace DewPrimusHand.patch
                     return;
 
                 _originalReservationReleased = true;
-                Coordinator.ReleaseSlot();
+                Coordinator.ReleaseSlot(IsMiniBoss);
             }
         }
     }

@@ -59,16 +59,25 @@
   "LabelText.MiniBossDamageMultiplier": "迷你Boss伤害倍数",
   "Description.MiniBossDamageMultiplier": "调整迷你Boss的伤害。",
 
-  "LabelText.BossCount": "Boss数量",
-  "Description.BossCount": "设置Boss的数量。",
-  "LabelText.BossCountInRoom": "房间内Boss上限",
-  "Description.BossCountInRoom": "房间内可同时存活的Boss最大数量。剩余Boss会在队列中等待。",
+  "LabelText.BossCount": "领主Boss数量",
+  "Description.BossCount": "设置每次领主Boss生成请求中的领主Boss总数。",
+  "LabelText.BossCountInRoom": "房间内领主Boss上限",
+  "Description.BossCountInRoom": "房间内可同时存活的领主Boss最大数量。剩余领主Boss会在队列中等待。",
 
-  "LabelText.BossCountAddByLoop": "每周目增加的Boss数量",
-  "Description.BossCountAddByLoop": "每周目增加的Boss数量。",
+  "LabelText.BossCountAddByLoop": "每周目增加的领主Boss数量",
+  "Description.BossCountAddByLoop": "每个周目为领主Boss生成数量增加的数量。",
 
-  "LabelText.BossCountAddByZone": "每区域增加的Boss数量",
-  "Description.BossCountAddByZone": "每个区域增加的Boss数量。",
+  "LabelText.BossCountAddByZone": "每区域增加的领主Boss数量",
+  "Description.BossCountAddByZone": "每个区域为领主Boss生成数量增加的数量。",
+
+  "LabelText.MiniBossCount": "迷你Boss数量",
+  "Description.MiniBossCount": "设置每次迷你Boss生成请求中的迷你Boss总数。",
+  "LabelText.MiniBossCountInRoom": "房间内迷你Boss上限",
+  "Description.MiniBossCountInRoom": "房间内可同时存活的迷你Boss最大数量。超出的迷你Boss会排队生成。",
+  "LabelText.MiniBossCountAddByLoop": "每周目增加的迷你Boss数量",
+  "Description.MiniBossCountAddByLoop": "每个周目为迷你Boss生成数量增加的数量。",
+  "LabelText.MiniBossCountAddByZone": "每区域增加的迷你Boss数量",
+  "Description.MiniBossCountAddByZone": "每个区域为迷你Boss生成数量增加的数量。",
 
   "LabelText.BossMirageChance": "Boss幻影外皮几率",
   "Description.BossMirageChance": "设置Boss的幻影外皮出现几率。设置为1时为最大值,大于等于1时100%概率",
