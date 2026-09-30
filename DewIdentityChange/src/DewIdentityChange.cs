@@ -14,7 +14,7 @@ public class DewIdentityChange : ModBehaviour
     public bool IsIdentityEnabled => _sync?.IsIdentityEnabled ?? config.enable;
 
     public bool IsCharacterSkillLootEnabled =>
-        IsIdentityEnabled && (_sync?.IsCharacterSkillLootEnabled ?? config.addCharacterSkillsToLoot);
+        _sync?.IsCharacterSkillLootEnabled ?? config.addCharacterSkillsToLoot;
 
     private void Awake()
     {
