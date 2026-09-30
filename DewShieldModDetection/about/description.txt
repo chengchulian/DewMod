@@ -1,4 +1,4 @@
-[h1]DewShieldModDetection[/h1]
+[h1]ShieldModDetection[/h1]
 
 Allows cross-platform multiplayer to remain enabled while local mods are installed.
 

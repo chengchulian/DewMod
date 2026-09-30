@@ -1,6 +1,6 @@
 {
   "id": "com.chengchulian.DewMod.DewShieldModDetection",
-  "name": "DewShieldModDetection",
+  "name": "ShieldModDetection",
   "author": "chengchulian",
   "modVer": "1.0.0",
   "assemblies": [
