@@ -1,7 +1,8 @@
 {
-  "LanMenu.Mode": "Mode de connexion", "LanMenu.Steam": "Mode Steam", "LanMenu.Lan": "Mode réseau local", "LanMenu.Address": "Adresse de l'hôte", "LanMenu.Port": "Port réseau local", "LanMenu.Host": "Créer un salon local", "LanMenu.Join": "Rejoindre la partie locale",
+  "LanMenu.Mode": "Mode de connexion", "LanMenu.Steam": "Mode en ligne officiel", "LanMenu.Lan": "Mode réseau local", "LanMenu.Address": "Adresse de l'hôte", "LanMenu.Port": "Port réseau local", "LanMenu.Host": "Créer un salon local", "LanMenu.Join": "Rejoindre la partie locale",
   "LanMenu.InvalidPort": "Le port doit être un entier compris entre 1024 et 65535.", "LanMenu.InvalidAddress": "Saisissez une adresse IP locale ou un nom d'hôte valide.", "LanMenu.InvalidInput": "La saisie n'est pas valide.",
   "LanMenu.SteamRoom": "Salons Steam", "LanMenu.LanRoom": "Salons locaux", "LanMenu.JoinByIp": "Rejoindre par IP", "LanMenu.LanListHint": "Salons locaux trouvés. Sélectionnez-en un pour le rejoindre.", "LanMenu.RoomSource": "Source des salons",
   "LanMenu.Searching": "Recherche de salons locaux...", "LanMenu.NoLanRooms": "Aucun salon local trouvé. Actualisez ou rejoignez directement par IP.", "LanMenu.JoinByIpTitle": "Rejoindre par IP",
-  "LanMenu.JoinByIpDescription": "Saisissez l'adresse IP locale et le port de l'hôte. L'hôte et tous les clients doivent installer ce mod.", "LanMenu.AddressPlaceholder": "Adresse IP de l'hôte, ex. 192.168.1.100", "LanMenu.PortPlaceholder": "Port (1024-65535)", "LanMenu.Cancel": "Annuler (Échap)"
+  "LanMenu.JoinByIpDescription": "Saisissez l'adresse IP locale et le port de l'hôte. L'hôte et tous les clients doivent installer ce mod.", "LanMenu.AddressPlaceholder": "Adresse IP de l'hôte, ex. 192.168.1.100", "LanMenu.PortPlaceholder": "Port (1024-65535)", "LanMenu.Cancel": "Annuler (Échap)",
+  "LanMenu.ContinueTitle": "Continuer la partie multijoueur", "LanMenu.ContinueConfirm": "Continuer", "LanMenu.ContinueCancel": "Annuler"
 }

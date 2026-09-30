@@ -1,7 +1,8 @@
 {
-  "LanMenu.Mode": "接続モード", "LanMenu.Steam": "Steamモード", "LanMenu.Lan": "LANモード", "LanMenu.Address": "ホストアドレス", "LanMenu.Port": "LANポート", "LanMenu.Host": "LANロビーを作成", "LanMenu.Join": "LANゲームに参加",
+  "LanMenu.Mode": "接続モード", "LanMenu.Steam": "公式オンラインモード", "LanMenu.Lan": "LANモード", "LanMenu.Address": "ホストアドレス", "LanMenu.Port": "LANポート", "LanMenu.Host": "LANロビーを作成", "LanMenu.Join": "LANゲームに参加",
   "LanMenu.InvalidPort": "ポートは1024～65535の整数で指定してください。", "LanMenu.InvalidAddress": "有効なLAN IPアドレスまたはホスト名を入力してください。", "LanMenu.InvalidInput": "入力内容が無効です。",
   "LanMenu.SteamRoom": "Steamロビー", "LanMenu.LanRoom": "LANロビー", "LanMenu.JoinByIp": "IPでLANに参加", "LanMenu.LanListHint": "LANロビーが見つかりました。選択して参加できます。", "LanMenu.RoomSource": "ロビーの種類",
   "LanMenu.Searching": "LANロビーを検索中...", "LanMenu.NoLanRooms": "LANロビーが見つかりません。更新するか、IPで直接参加してください。", "LanMenu.JoinByIpTitle": "IPでLANに参加",
-  "LanMenu.JoinByIpDescription": "ホストのLAN IPアドレスとポートを入力してください。ホストとすべての参加者にこのMODが必要です。", "LanMenu.AddressPlaceholder": "ホストIP（例：192.168.1.100）", "LanMenu.PortPlaceholder": "ポート（1024～65535）", "LanMenu.Cancel": "キャンセル（Esc）"
+  "LanMenu.JoinByIpDescription": "ホストのLAN IPアドレスとポートを入力してください。ホストとすべての参加者にこのMODが必要です。", "LanMenu.AddressPlaceholder": "ホストIP（例：192.168.1.100）", "LanMenu.PortPlaceholder": "ポート（1024～65535）", "LanMenu.Cancel": "キャンセル（Esc）",
+  "LanMenu.ContinueTitle": "マルチプレイを続ける", "LanMenu.ContinueConfirm": "続ける", "LanMenu.ContinueCancel": "キャンセル"
 }

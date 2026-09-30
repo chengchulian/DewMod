@@ -1,9 +1,10 @@
 {
-  "LanMenu.Mode": "Verbindungsmodus", "LanMenu.Steam": "Steam-Modus", "LanMenu.Lan": "LAN-Modus",
+  "LanMenu.Mode": "Verbindungsmodus", "LanMenu.Steam": "Offizieller Online-Modus", "LanMenu.Lan": "LAN-Modus",
   "LanMenu.Address": "Hostadresse", "LanMenu.Port": "LAN-Port", "LanMenu.Host": "LAN-Lobby erstellen", "LanMenu.Join": "LAN-Spiel beitreten",
   "LanMenu.InvalidPort": "Der Port muss eine ganze Zahl zwischen 1024 und 65535 sein.", "LanMenu.InvalidAddress": "Gib eine gültige LAN-IP-Adresse oder einen Hostnamen ein.", "LanMenu.InvalidInput": "Die Eingabe ist ungültig.",
   "LanMenu.SteamRoom": "Steam-Lobbys", "LanMenu.LanRoom": "LAN-Lobbys", "LanMenu.JoinByIp": "LAN per IP beitreten", "LanMenu.LanListHint": "LAN-Lobbys gefunden. Wähle eine aus, um beizutreten.",
   "LanMenu.RoomSource": "Lobbyquelle", "LanMenu.Searching": "LAN-Lobbys werden gesucht ...", "LanMenu.NoLanRooms": "Keine LAN-Lobbys gefunden. Aktualisiere die Liste oder tritt direkt per IP bei.",
   "LanMenu.JoinByIpTitle": "LAN per IP beitreten", "LanMenu.JoinByIpDescription": "Gib die LAN-IP-Adresse und den Port des Hosts ein. Host und alle Clients müssen diese Mod installiert haben.",
-  "LanMenu.AddressPlaceholder": "Host-IP-Adresse, z. B. 192.168.1.100", "LanMenu.PortPlaceholder": "Port (1024–65535)", "LanMenu.Cancel": "Abbrechen (Esc)"
+  "LanMenu.AddressPlaceholder": "Host-IP-Adresse, z. B. 192.168.1.100", "LanMenu.PortPlaceholder": "Port (1024–65535)", "LanMenu.Cancel": "Abbrechen (Esc)",
+  "LanMenu.ContinueTitle": "Mehrspielerpartie fortsetzen", "LanMenu.ContinueConfirm": "Fortsetzen", "LanMenu.ContinueCancel": "Abbrechen"
 }

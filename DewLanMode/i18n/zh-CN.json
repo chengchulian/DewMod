@@ -1,6 +1,6 @@
 {
   "LanMenu.Mode": "联机模式",
-  "LanMenu.Steam": "Steam 模式",
+  "LanMenu.Steam": "官方联机模式",
   "LanMenu.Lan": "局域网模式",
   "LanMenu.Address": "房主地址",
   "LanMenu.Port": "局域网端口",
@@ -20,5 +20,8 @@
   "LanMenu.JoinByIpDescription": "输入房主的局域网 IP 地址和端口。房主与客机都必须安装本 MOD。",
   "LanMenu.AddressPlaceholder": "房主 IP 地址，例如 192.168.1.100",
   "LanMenu.PortPlaceholder": "端口（1024-65535）",
-  "LanMenu.Cancel": "取消（Esc）"
+  "LanMenu.Cancel": "取消（Esc）",
+  "LanMenu.ContinueTitle": "继续多人游戏",
+  "LanMenu.ContinueConfirm": "继续",
+  "LanMenu.ContinueCancel": "取消"
 }

@@ -1,7 +1,8 @@
 {
-  "LanMenu.Mode": "Bağlantı modu", "LanMenu.Steam": "Steam modu", "LanMenu.Lan": "LAN modu", "LanMenu.Address": "Sunucu adresi", "LanMenu.Port": "LAN portu", "LanMenu.Host": "LAN lobisi oluştur", "LanMenu.Join": "LAN oyununa katıl",
+  "LanMenu.Mode": "Bağlantı modu", "LanMenu.Steam": "Resmi çevrimiçi mod", "LanMenu.Lan": "LAN modu", "LanMenu.Address": "Sunucu adresi", "LanMenu.Port": "LAN portu", "LanMenu.Host": "LAN lobisi oluştur", "LanMenu.Join": "LAN oyununa katıl",
   "LanMenu.InvalidPort": "Port, 1024 ile 65535 arasında bir tam sayı olmalıdır.", "LanMenu.InvalidAddress": "Geçerli bir LAN IP adresi veya sunucu adı girin.", "LanMenu.InvalidInput": "Girdi geçersiz.",
   "LanMenu.SteamRoom": "Steam lobileri", "LanMenu.LanRoom": "LAN lobileri", "LanMenu.JoinByIp": "IP ile LAN'a katıl", "LanMenu.LanListHint": "LAN lobileri bulundu. Katılmak için birini seçin.", "LanMenu.RoomSource": "Lobi kaynağı",
   "LanMenu.Searching": "LAN lobileri aranıyor...", "LanMenu.NoLanRooms": "LAN lobisi bulunamadı. Yenileyin veya IP ile doğrudan katılın.", "LanMenu.JoinByIpTitle": "IP ile LAN'a katıl",
-  "LanMenu.JoinByIpDescription": "Sunucunun LAN IP adresini ve portunu girin. Sunucu ve tüm istemciler bu modu yüklemelidir.", "LanMenu.AddressPlaceholder": "Sunucu IP adresi, örn. 192.168.1.100", "LanMenu.PortPlaceholder": "Port (1024-65535)", "LanMenu.Cancel": "İptal (Esc)"
+  "LanMenu.JoinByIpDescription": "Sunucunun LAN IP adresini ve portunu girin. Sunucu ve tüm istemciler bu modu yüklemelidir.", "LanMenu.AddressPlaceholder": "Sunucu IP adresi, örn. 192.168.1.100", "LanMenu.PortPlaceholder": "Port (1024-65535)", "LanMenu.Cancel": "İptal (Esc)",
+  "LanMenu.ContinueTitle": "Çok oyunculu oyuna devam et", "LanMenu.ContinueConfirm": "Devam et", "LanMenu.ContinueCancel": "İptal"
 }

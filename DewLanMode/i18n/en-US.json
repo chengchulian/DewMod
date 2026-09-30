@@ -1,6 +1,6 @@
 {
   "LanMenu.Mode": "Network mode",
-  "LanMenu.Steam": "Steam mode",
+  "LanMenu.Steam": "Official online mode",
   "LanMenu.Lan": "LAN mode",
   "LanMenu.Address": "Host address",
   "LanMenu.Port": "LAN port",
@@ -20,5 +20,8 @@
   "LanMenu.JoinByIpDescription": "Enter the host's LAN IP address and port. The host and every client must install this mod.",
   "LanMenu.AddressPlaceholder": "Host IP address, for example 192.168.1.100",
   "LanMenu.PortPlaceholder": "Port (1024-65535)",
-  "LanMenu.Cancel": "Cancel (Esc)"
+  "LanMenu.Cancel": "Cancel (Esc)",
+  "LanMenu.ContinueTitle": "Continue multiplayer game",
+  "LanMenu.ContinueConfirm": "Continue",
+  "LanMenu.ContinueCancel": "Cancel"
 }

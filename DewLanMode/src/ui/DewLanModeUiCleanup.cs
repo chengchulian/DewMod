@@ -25,6 +25,7 @@ internal static class DewLanModeUiCleanup
 
     public static void CleanupAll()
     {
+        ContinueModeDialog.Close();
         LanJoinDialog.Close();
         LanDiscoveryService.Instance?.CancelSearch();
 

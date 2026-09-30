@@ -79,12 +79,14 @@
     </ItemGroup>
     <ItemGroup>
         <Compile Include="src\DewLanMode.cs" />
+        <Compile Include="src\ui\ContinueModeDialog.cs" />
         <Compile Include="src\ui\DewLanModeUiCleanup.cs" />
         <Compile Include="src\controller\FindLobbyController.cs" />
         <Compile Include="src\network\LanDiscoveryService.cs" />
         <Compile Include="src\ui\LanJoinDialog.cs" />
         <Compile Include="src\network\LanAuthenticationSceneSync.cs" />
         <Compile Include="src\controller\LanModeRuntime.cs" />
+        <Compile Include="src\controller\ContinueModeDialogController.cs" />
         <Compile Include="src\config\LocalizationSource.cs" />
         <Compile Include="src\controller\LanLobbyController.cs" />
         <Compile Include="src\patch\DewNetworkAuthenticatorPatch.cs" />
@@ -95,6 +97,7 @@
         <Compile Include="src\patch\LanSceneReadyPatch.cs" />
         <Compile Include="src\patch\LobbyViewLifecyclePatch.cs" />
         <Compile Include="src\patch\TransitionManagerPatch.cs" />
+        <Compile Include="src\patch\ContinueModePatch.cs" />
         <Compile Include="src\Properties\AssemblyInfo.cs"/>
     </ItemGroup>
     <ItemGroup>
@@ -102,6 +105,7 @@
         <Content Include="about\icon.png" />
         <Content Include="about\metadata.json" />
         <Content Include="about\preview.png" />
+        <Content Include="about\publishedfileid.txt" />
         <Content Include="i18n\en-US.json" />
         <Content Include="i18n\de-DE.json" />
         <Content Include="i18n\es-MX.json" />

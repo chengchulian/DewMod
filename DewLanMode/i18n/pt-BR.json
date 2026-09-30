@@ -1,7 +1,8 @@
 {
-  "LanMenu.Mode": "Modo de conexão", "LanMenu.Steam": "Modo Steam", "LanMenu.Lan": "Modo LAN", "LanMenu.Address": "Endereço do host", "LanMenu.Port": "Porta LAN", "LanMenu.Host": "Criar lobby LAN", "LanMenu.Join": "Entrar no jogo LAN",
+  "LanMenu.Mode": "Modo de conexão", "LanMenu.Steam": "Modo online oficial", "LanMenu.Lan": "Modo LAN", "LanMenu.Address": "Endereço do host", "LanMenu.Port": "Porta LAN", "LanMenu.Host": "Criar lobby LAN", "LanMenu.Join": "Entrar no jogo LAN",
   "LanMenu.InvalidPort": "A porta deve ser um número inteiro entre 1024 e 65535.", "LanMenu.InvalidAddress": "Digite um endereço IP LAN ou nome de host válido.", "LanMenu.InvalidInput": "A entrada é inválida.",
   "LanMenu.SteamRoom": "Lobbies Steam", "LanMenu.LanRoom": "Lobbies LAN", "LanMenu.JoinByIp": "Entrar por IP", "LanMenu.LanListHint": "Lobbies LAN encontrados. Selecione um para entrar.", "LanMenu.RoomSource": "Origem dos lobbies",
   "LanMenu.Searching": "Procurando lobbies LAN...", "LanMenu.NoLanRooms": "Nenhum lobby LAN encontrado. Atualize ou entre diretamente por IP.", "LanMenu.JoinByIpTitle": "Entrar por IP",
-  "LanMenu.JoinByIpDescription": "Digite o endereço IP LAN e a porta do host. O host e todos os clientes devem instalar este mod.", "LanMenu.AddressPlaceholder": "IP do host, por exemplo 192.168.1.100", "LanMenu.PortPlaceholder": "Porta (1024-65535)", "LanMenu.Cancel": "Cancelar (Esc)"
+  "LanMenu.JoinByIpDescription": "Digite o endereço IP LAN e a porta do host. O host e todos os clientes devem instalar este mod.", "LanMenu.AddressPlaceholder": "IP do host, por exemplo 192.168.1.100", "LanMenu.PortPlaceholder": "Porta (1024-65535)", "LanMenu.Cancel": "Cancelar (Esc)",
+  "LanMenu.ContinueTitle": "Continuar jogo multijogador", "LanMenu.ContinueConfirm": "Continuar", "LanMenu.ContinueCancel": "Cancelar"
 }
