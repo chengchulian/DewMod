@@ -1,0 +1,7 @@
+{
+  "id": "com.chengchulian.DewMod.DewLobbyListEnhance",
+  "name": "大厅列表增强",
+  "author": "chengchulian",
+  "modVer": "1.0",
+  "assemblies": ["obj/Release/*.dll"]
+}
