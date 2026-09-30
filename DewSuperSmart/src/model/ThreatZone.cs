@@ -39,6 +39,7 @@ internal enum ThreatActivity
 internal readonly struct ThreatZone
 {
     private const float NearMissFalloff = 1.75f;
+    private const float EscapeBoundaryEpsilon = 0.001f;
 
     private static Component _lightFogSamplerTarget;
     private static Func<Vector3, float> _lightFogSampler;
@@ -66,6 +67,8 @@ internal readonly struct ThreatZone
     public readonly float GroundHazardThreshold;
 
     public bool IsProjectile => SourceKind == ThreatSourceKind.Projectile;
+    // 飞行轨迹用相对运动预测；飞弹落地圆圈/多边形仍然是需要避开的几何区域。
+    public bool IsMovingProjectile => IsProjectile && Kind == ThreatZoneKind.Line && ProjectileSpeed > 0.01f;
     public bool IsActive => Activity != ThreatActivity.Preview;
 
     private ThreatZone(
@@ -377,6 +380,225 @@ internal readonly struct ThreatZone
         }
     }
 
+    // 在真实威胁边缘外保留角色半径和补偿，返回当前威胁自身验证通过的最近候选点。
+    public bool TryGetEscapePoint(Vector3 point, float extraRadius, float clearance, out Vector3 escapePoint)
+    {
+        escapePoint = point;
+        if (Kind == ThreatZoneKind.GroundHazard)
+        {
+            // 地表危险只能采样，不能把未知边界当作已确认的安全边缘。
+            return false;
+        }
+
+        extraRadius = Mathf.Max(extraRadius, 0f);
+        clearance = Mathf.Max(clearance, 0f);
+        float currentDistance = SignedDistance(point, extraRadius);
+        if (!float.IsInfinity(currentDistance) && currentDistance >= clearance)
+        {
+            return true;
+        }
+
+        float offset = extraRadius + clearance + EscapeBoundaryEpsilon;
+        float bestDistance = float.PositiveInfinity;
+        switch (Kind)
+        {
+            case ThreatZoneKind.Circle:
+                ConsiderEscapePoint(point, Center + NormalizeFlat(point - Center) * (Radius + offset),
+                    extraRadius, clearance, ref escapePoint, ref bestDistance);
+                break;
+            case ThreatZoneKind.Line:
+                Vector3 axisPoint = ClosestPointOnSegment(point, Origin, Origin + Direction * Length);
+                Vector3 outward = point - axisPoint;
+                outward.y = 0f;
+                if (outward.sqrMagnitude <= 0.0001f)
+                {
+                    outward = new Vector3(Direction.z, 0f, -Direction.x);
+                }
+
+                ConsiderEscapePoint(point, axisPoint + outward.normalized * (Width * 0.5f + offset),
+                    extraRadius, clearance, ref escapePoint, ref bestDistance);
+                break;
+            case ThreatZoneKind.Cone:
+                FindConeEscapePoint(point, extraRadius, clearance, offset, ref escapePoint, ref bestDistance);
+                break;
+            case ThreatZoneKind.Polygon:
+                FindPolygonEscapePoint(point, extraRadius, clearance, offset, ref escapePoint, ref bestDistance);
+                break;
+            case ThreatZoneKind.OutsideCircles:
+                float safeRadius = Radius - offset;
+                if (Points == null || safeRadius < 0f)
+                {
+                    break;
+                }
+
+                for (int i = 0; i < Points.Length; i++)
+                {
+                    Vector3 delta = point - Points[i];
+                    delta.y = 0f;
+                    Vector3 candidate = Points[i] + Vector3.ClampMagnitude(delta, safeRadius);
+                    ConsiderEscapePoint(point, candidate, extraRadius, clearance, ref escapePoint, ref bestDistance);
+                }
+
+                break;
+        }
+
+        return !float.IsPositiveInfinity(bestDistance);
+    }
+
+    // 复核外扩后的候选，避免凹多边形或宽扇形的另一条边仍然覆盖角色。
+    private void ConsiderEscapePoint(
+        Vector3 point,
+        Vector3 candidate,
+        float extraRadius,
+        float clearance,
+        ref Vector3 bestPoint,
+        ref float bestDistance)
+    {
+        candidate.y = point.y;
+        if (SignedDistance(candidate, extraRadius) < clearance)
+        {
+            return;
+        }
+
+        float distance = Vector2.SqrMagnitude(candidate.ToXY() - point.ToXY());
+        if (distance < bestDistance)
+        {
+            bestPoint = candidate;
+            bestDistance = distance;
+        }
+    }
+
+    // 扇形的圆弧、两条边及端点分别外扩，保留有效候选中移动最短的一项。
+    private void FindConeEscapePoint(
+        Vector3 point,
+        float extraRadius,
+        float clearance,
+        float offset,
+        ref Vector3 bestPoint,
+        ref float bestDistance)
+    {
+        Vector3 delta = point - Origin;
+        delta.y = 0f;
+        Vector3 radial = delta.sqrMagnitude > 0.0001f ? delta.normalized : Direction;
+        if (Angle >= 359.99f)
+        {
+            ConsiderEscapePoint(point, Origin + radial * (Radius + offset),
+                extraRadius, clearance, ref bestPoint, ref bestDistance);
+            return;
+        }
+
+        float halfAngle = Angle * 0.5f;
+        Vector3 left = Quaternion.Euler(0f, -halfAngle, 0f) * Direction;
+        Vector3 right = Quaternion.Euler(0f, halfAngle, 0f) * Direction;
+        if (Vector3.Angle(Direction, radial) > halfAngle)
+        {
+            radial = Vector3.Dot(radial, left) >= Vector3.Dot(radial, right) ? left : right;
+        }
+
+        ConsiderEscapePoint(point, Origin + radial * (Radius + offset),
+            extraRadius, clearance, ref bestPoint, ref bestDistance);
+        for (int side = 0; side < 2; side++)
+        {
+            Vector3 edge = side == 0 ? left : right;
+            Vector3 normal = side == 0
+                ? new Vector3(-edge.z, 0f, edge.x)
+                : new Vector3(edge.z, 0f, -edge.x);
+            Vector3 edgePoint = ClosestPointOnSegment(point, Origin, Origin + edge * Radius);
+            ConsiderEscapePoint(point, edgePoint + normal * offset,
+                extraRadius, clearance, ref bestPoint, ref bestDistance);
+            Vector3 tip = Origin + edge * Radius;
+            Vector3 tipDirection = point - tip;
+            tipDirection.y = 0f;
+            if (tipDirection.sqrMagnitude <= 0.0001f)
+            {
+                tipDirection = edge + normal;
+            }
+
+            ConsiderEscapePoint(point, tip + tipDirection.normalized * offset,
+                extraRadius, clearance, ref bestPoint, ref bestDistance);
+        }
+
+        Vector3 apexDirection = delta.sqrMagnitude > 0.0001f ? delta.normalized : -Direction;
+        ConsiderEscapePoint(point, Origin + apexDirection * offset,
+            extraRadius, clearance, ref bestPoint, ref bestDistance);
+        // 大于半圆的扇形在顶点形成凹角，需走到两条外扩边的交点才能完整容纳角色。
+        if (halfAngle > 90f)
+        {
+            float sine = Mathf.Sin(halfAngle * Mathf.Deg2Rad);
+            if (sine > 0.0001f)
+            {
+                ConsiderEscapePoint(point, Origin - Direction * (offset / sine),
+                    extraRadius, clearance, ref bestPoint, ref bestDistance);
+            }
+        }
+    }
+
+    // 按多边形绕序确定外法线；凸角使用圆角，凹角额外验证外扩边的交点。
+    private void FindPolygonEscapePoint(
+        Vector3 point,
+        float extraRadius,
+        float clearance,
+        float offset,
+        ref Vector3 bestPoint,
+        ref float bestDistance)
+    {
+        if (Points == null || Points.Length < 3)
+        {
+            return;
+        }
+
+        float area = 0f;
+        for (int i = 0; i < Points.Length; i++)
+        {
+            Vector3 a = Points[i];
+            Vector3 b = Points[(i + 1) % Points.Length];
+            area += a.x * b.z - b.x * a.z;
+        }
+
+        float winding = area >= 0f ? 1f : -1f;
+        for (int i = 0; i < Points.Length; i++)
+        {
+            Vector3 vertex = Points[i];
+            Vector3 next = Points[(i + 1) % Points.Length];
+            Vector3 previous = Points[(i + Points.Length - 1) % Points.Length];
+            Vector3 normal = GetPolygonOutwardNormal(vertex, next, winding);
+            if (normal.sqrMagnitude <= 0.0001f)
+            {
+                continue;
+            }
+
+            Vector3 edgePoint = ClosestPointOnSegment(point, vertex, next);
+            ConsiderEscapePoint(point, edgePoint + normal * offset,
+                extraRadius, clearance, ref bestPoint, ref bestDistance);
+
+            Vector3 previousNormal = GetPolygonOutwardNormal(previous, vertex, winding);
+            Vector3 bisector = (previousNormal + normal).normalized;
+            Vector3 vertexDirection = point - vertex;
+            vertexDirection.y = 0f;
+            if (vertexDirection.sqrMagnitude <= 0.0001f)
+            {
+                vertexDirection = bisector;
+            }
+
+            ConsiderEscapePoint(point, vertex + vertexDirection.normalized * offset,
+                extraRadius, clearance, ref bestPoint, ref bestDistance);
+            float projection = Vector3.Dot(bisector, normal);
+            if (projection > 0.0001f)
+            {
+                ConsiderEscapePoint(point, vertex + bisector * (offset / projection),
+                    extraRadius, clearance, ref bestPoint, ref bestDistance);
+            }
+        }
+    }
+
+    // 平面坐标采用世界 X/Z；逆时针边的右侧为外侧。
+    private static Vector3 GetPolygonOutwardNormal(Vector3 start, Vector3 end, float winding)
+    {
+        Vector3 edge = end - start;
+        edge.y = 0f;
+        return new Vector3(edge.z, 0f, -edge.x).normalized * winding;
+    }
+
     private bool IsGroundHazardAt(Vector3 point, float extraRadius)
     {
         if (IsGroundHazardAtSingle(point))
@@ -476,24 +698,26 @@ internal readonly struct ThreatZone
         Vector3 delta = point - Origin;
         delta.y = 0f;
         float distance = delta.magnitude;
-        if (distance <= 0.001f)
+        if (Angle >= 359.99f)
         {
-            return -extraRadius;
+            return distance - Radius - extraRadius;
         }
 
-        float halfAngle = Mathf.Max(Angle * 0.5f, 0.01f);
-        float angleDelta = Vector3.Angle(Direction, delta / distance);
-        float radialDistance = distance - Radius - extraRadius;
-        float angularDistance = Mathf.Sin(Mathf.Max(angleDelta - halfAngle, 0f) * Mathf.Deg2Rad) * distance - extraRadius;
-
-        if (angleDelta <= halfAngle && radialDistance <= 0f)
-        {
-            float radialInside = Radius + extraRadius - distance;
-            float angularInside = (halfAngle - angleDelta) * Mathf.Deg2Rad * distance + extraRadius;
-            return -Mathf.Min(radialInside, angularInside);
-        }
-
-        return Mathf.Max(radialDistance, angularDistance);
+        float halfAngle = Angle * 0.5f;
+        float angleDelta = distance > 0.0001f ? Vector3.Angle(Direction, delta / distance) : 0f;
+        Vector3 leftTip = Origin + Quaternion.Euler(0f, -halfAngle, 0f) * Direction * Radius;
+        Vector3 rightTip = Origin + Quaternion.Euler(0f, halfAngle, 0f) * Direction * Radius;
+        float edgeDistance = Mathf.Min(
+            DistancePointToSegment(point, Origin, leftTip),
+            DistancePointToSegment(point, Origin, rightTip));
+        float arcDistance = angleDelta <= halfAngle
+            ? Mathf.Abs(distance - Radius)
+            : Mathf.Min(Vector2.Distance(point.ToXY(), leftTip.ToXY()),
+                Vector2.Distance(point.ToXY(), rightTip.ToXY()));
+        // 先求有限扇形的真实边界距离，再扩张角色圆盘；角度正弦近似会误判背面及端点。
+        float boundaryDistance = Mathf.Min(edgeDistance, arcDistance);
+        bool inside = distance <= Radius && angleDelta <= halfAngle;
+        return (inside ? -boundaryDistance : boundaryDistance) - extraRadius;
     }
 
     private float SignedDistanceToPolygon(Vector3 point, float extraRadius)

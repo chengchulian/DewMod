@@ -1,14 +1,17 @@
-DewSuperSmart adds combat awareness tools for the local hero.
+SuperSmart adds combat awareness tools for the local hero.
 
 Features:
 - Draw basic attack and hero skill ranges.
 - Draw enemy casts, basic attacks, live damage/control colliders, projectiles, meteor rain impacts, status-effect auras, traps, fireplaces, and damaging terrain.
 - Render exact circle, cone, rotated box, line, and polygon boundaries with impact-aware threat colors.
 - Avoid spatial threats with normal movement; time dodge invulnerability against locked damage only when movement cannot avoid the impact.
+- Keep a safe dodge destination instead of repeatedly issuing movement commands. Choose the nearest safe threat edge plus the hero collision radius and padding, allowing for the game's stopping distance.
+- Validate the destination, direct navigation path, and projectile timing against all collected threats; reject unsafe fallback points.
+- Automatic movement skills must accept an explicit destination so the validated landing point can be used.
 - Optionally reserve one movement-skill charge instead of consuming the last dodge.
 - JSON localization is available in the i18n folder.
 
-DewSuperSmart 为本地英雄添加战斗辅助显示。
+SuperSmart 为本地英雄添加战斗辅助显示。
 
 功能：
 - 绘制普攻和英雄技能范围。
@@ -17,6 +20,10 @@ DewSuperSmart 为本地英雄添加战斗辅助显示。
 - 感知威胁时优先向主要怪物的左右侧移动；普通移动无法安全规避时，才让闪避无碰撞阶段精确覆盖命中时刻。
 - 侧向策略使用软评分，复杂地形仍会保留其他可达安全点；命中迫近时会自动扩大搜索半径。
 - 导航优先调用线性扫掠 API，通用闪避优先读取 `Ai_GenericDodge` 参数，自定义位移技能再使用兼容回退。
+- 已选躲避目标仍安全时保持原目标，到达安全位置后不反复换点、发送移动指令；目标失效或移动中断时再重新规划。
+- 优先选择威胁边缘加角色实际碰撞半径和少量补偿的最近安全点，同时补偿游戏提前停止移动的距离。
+- 对所有已采集威胁检查落点、直线路径及飞弹到达时序，拒绝穿过邻近威胁、绕墙路径和未通过安全检查的应急落点。
+- 自动位移只使用能指定落点的技能，避免只传方向却无法保证实际落点距离的技能把角色带回威胁。
 - 长按自动躲避键且没有威胁时，角色会持续朝鼠标指针方向移动。
 - 可选择保留一层位移技能充能，避免自动躲避消耗最后一层闪避。
 - i18n 文件夹内提供 JSON 本地化文本。
