@@ -38,7 +38,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DewSafeShare", "DewSafeShar
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DewVascularThief", "DewVascularThief\DewVascularThief.csproj", "{2F1306DF-7788-4336-93C9-7D99AD8ADE40}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoldenBurstAutoTarget", "GoldenBurstAutoTarget\GoldenBurstAutoTarget.csproj", "{E99B7E63-63D9-4004-AE96-B27DA5FE534C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DewGoldenBurstAutoTarget", "DewGoldenBurstAutoTarget\DewGoldenBurstAutoTarget.csproj", "{E99B7E63-63D9-4004-AE96-B27DA5FE534C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DewSuperSmart", "DewSuperSmart\DewSuperSmart.csproj", "{F6B375E7-9CE0-4B52-ACC2-46BBEAB0C1D1}"
 EndProject
@@ -49,6 +49,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DewUnLock", "DewUnLock\DewUnLock.csproj", "{0191FA58-AA72-48C7-B501-8549E86EF172}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DewLobbyListEnhance", "DewLobbyListEnhance\DewLobbyListEnhance.csproj", "{8FC48BDA-00A6-4F28-AAD3-651AA54D3BEF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DewRoomGuidance", "DewRoomGuidance\DewRoomGuidance.csproj", "{AAEB276C-CCBC-4F60-9B51-20EFFBB54972}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -140,6 +142,10 @@ Global
 		{8FC48BDA-00A6-4F28-AAD3-651AA54D3BEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8FC48BDA-00A6-4F28-AAD3-651AA54D3BEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8FC48BDA-00A6-4F28-AAD3-651AA54D3BEF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AAEB276C-CCBC-4F60-9B51-20EFFBB54972}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AAEB276C-CCBC-4F60-9B51-20EFFBB54972}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AAEB276C-CCBC-4F60-9B51-20EFFBB54972}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AAEB276C-CCBC-4F60-9B51-20EFFBB54972}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 								{F1C9C5C3-65AF-4E62-9D5B-9B1E07A56F73}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 								{F1C9C5C3-65AF-4E62-9D5B-9B1E07A56F73}.Debug|Any CPU.Build.0 = Debug|Any CPU

@@ -5,7 +5,7 @@ using System.IO;
 using TMPro;
 using UnityEngine;
 
-namespace GoldenBurstAutoTarget.config;
+namespace DewGoldenBurstAutoTarget.config;
 
 public static class LocalizationSource
 {
@@ -16,7 +16,7 @@ public static class LocalizationSource
         string i18nPath = Path.Combine(modBehaviour.mod.path, "i18n");
         if (!Directory.Exists(i18nPath))
         {
-            Debug.LogWarning($"[GoldenBurstAutoTarget.Localization] i18n folder does not exist: {i18nPath}");
+            Debug.LogWarning($"[DewGoldenBurstAutoTarget.Localization] i18n folder does not exist: {i18nPath}");
             return;
         }
 
@@ -33,7 +33,7 @@ public static class LocalizationSource
             }
             catch (Exception exception)
             {
-                Debug.LogError($"[GoldenBurstAutoTarget.Localization] Failed to load {file}\n{exception}");
+                Debug.LogError($"[DewGoldenBurstAutoTarget.Localization] Failed to load {file}\n{exception}");
             }
         }
     }

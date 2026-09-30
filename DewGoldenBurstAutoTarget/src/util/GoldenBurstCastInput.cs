@@ -1,7 +1,7 @@
-using GoldenBurstAutoTarget.config;
+using DewGoldenBurstAutoTarget.config;
 using UnityEngine;
 
-namespace GoldenBurstAutoTarget;
+namespace DewGoldenBurstAutoTarget;
 
 internal sealed class GoldenBurstCastInput
 {

@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace GoldenBurstAutoTarget;
+namespace DewGoldenBurstAutoTarget;
 
 internal sealed class GoldenBurstAutoTargetController
 {

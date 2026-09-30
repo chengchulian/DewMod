@@ -1,16 +1,16 @@
 # GameSource Map
 
-`GameSource` is a large, versioned evidence set. Search only the smallest relevant area first.
+`GameSource` is a large, versioned evidence set. Search only the smallest relevant area first. Versioned decompiled source paths below use `<latest-code-root>`, resolved as the highest `Dewr.<major>.<minor>.<patch>.<build>_s` directory under `GameSource/code`.
 
 ## Route By Question
 
 | Question | Start path | Notes |
 | --- | --- | --- |
-| Runtime type, field, method, or lifecycle | `GameSource/code/Dewr.1.3.1.3_s/` | Decompiled C# for game version 1.3.1.3. Read declarations, base types, and call sites. |
-| Core gameplay and mod APIs | `GameSource/code/Dewr.1.3.1.3_s/Dew.Core/` | Includes `ModBehaviour`, `ModConfig`, actors, managers, networking helpers, combat, and shared systems. |
-| Skills, gems, heroes, monsters, zones, and other content types | `GameSource/code/Dewr.1.3.1.3_s/Dew.Contents/` | Search concrete content class names and their base classes. |
-| Menus, HUD, widgets, and UI behavior | `GameSource/code/Dewr.1.3.1.3_s/Dew.UI/` | Pair with exported prefabs and UI assets when hierarchy matters. |
-| External or integration code | `GameSource/code/Dewr.1.3.1.3_s/Dew.External/` | Inspect only when the target crosses an external-system boundary. |
+| Runtime type, field, method, or lifecycle | `<latest-code-root>/` | Decompiled C# for the highest available game version. Read declarations, base types, and call sites. |
+| Core gameplay and mod APIs | `<latest-code-root>/Dew.Core/` | Includes `ModBehaviour`, `ModConfig`, actors, managers, networking helpers, combat, and shared systems. |
+| Skills, gems, heroes, monsters, zones, and other content types | `<latest-code-root>/Dew.Contents/` | Search concrete content class names and their base classes. |
+| Menus, HUD, widgets, and UI behavior | `<latest-code-root>/Dew.UI/` | Pair with exported prefabs and UI assets when hierarchy matters. |
+| External or integration code | `<latest-code-root>/Dew.External/` | Inspect only when the target crosses an external-system boundary. |
 | API overview or cross-reference | `GameSource/doc/api/`, `GameSource/doc/md/`, `GameSource/doc/xrefmap.yml` | Generated DocFX material. Use source for implementation details. |
 | Prefab, ScriptableObject, material, sprite, scene, or serialized value | `GameSource/asset/ExportedProject/Assets/` | Unity export with `.meta` pairs. Begin under `Assets/Dew/` for game content. |
 | Unity project/package settings | `GameSource/asset/ExportedProject/Packages/`, `GameSource/asset/ExportedProject/ProjectSettings/` | Useful for Unity/package/version assumptions, not mod packaging. |
@@ -23,8 +23,8 @@
 Search source declarations and usages:
 
 ```powershell
-rg -n --glob '*.cs' 'class LootManager|OnStartServer' GameSource/code/Dewr.1.3.1.3_s
-rg -n --glob '*.cs' 'CallOnNetworkedManager|customData' GameSource/code/Dewr.1.3.1.3_s . -g '!GameSource/**'
+pwsh -File .agents/skills/develop-dew-mods/scripts/search-game-source.ps1 -Query 'class LootManager|OnStartServer' -Scope Code
+pwsh -File .agents/skills/develop-dew-mods/scripts/search-game-source.ps1 -Query 'CallOnNetworkedManager|customData' -Scope Code
 ```
 
 Find a content or resource by filename before opening serialized files:
@@ -44,7 +44,7 @@ rg -n 'ModBehaviour|ModConfig' GameSource/doc/api GameSource/doc/md GameSource/d
 ## Evidence Rules
 
 - Prefer method bodies in decompiled source for control flow and DocFX pages for quick navigation.
-- Prefer the installed game's managed assemblies when validating compatibility with a build newer than 1.3.1.3.
+- Prefer the installed game's managed assemblies when validating compatibility with a build newer than the selected decompiled source.
 - Distinguish a type existing from it being initialized at the patch point.
 - For serialized assets, distinguish the asset definition from the runtime instance created from it.
 - Record the exact source path supporting fragile Harmony signatures or field access.

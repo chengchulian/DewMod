@@ -24,8 +24,23 @@ if (-not (Test-Path -LiteralPath $gameSource -PathType Container)) {
     throw "GameSource directory not found at: $gameSource"
 }
 
+$versionedCodeRoots = @(Get-ChildItem -LiteralPath (Join-Path $gameSource 'code') -Directory -ErrorAction SilentlyContinue |
+    Where-Object { $_.Name -match '^Dewr\.(\d+)\.(\d+)\.(\d+)\.(\d+)_s$' } |
+    Sort-Object {
+        $parts = [regex]::Match($_.Name, '^Dewr\.(\d+)\.(\d+)\.(\d+)\.(\d+)_s$').Groups |
+            Select-Object -Skip 1 | ForEach-Object { [int]$_.Value }
+        '{0:D6}.{1:D6}.{2:D6}.{3:D6}' -f $parts[0], $parts[1], $parts[2], $parts[3]
+    } -Descending)
+
+if ($versionedCodeRoots.Count -eq 0) {
+    throw "No versioned decompiled source directory found under: $(Join-Path $gameSource 'code')"
+}
+
+# 自动选择版本号最高的游戏源码，避免 skill 随游戏更新继续固定旧目录。
+$latestCodeRoot = $versionedCodeRoots[0].FullName
+
 $scopePaths = @{
-    Code       = @((Join-Path $gameSource 'code\Dewr.1.3.1.3_s'))
+    Code       = @($latestCodeRoot)
     Docs       = @((Join-Path $gameSource 'doc\api'), (Join-Path $gameSource 'doc\md'), (Join-Path $gameSource 'doc\xrefmap.yml'))
     Assets     = @((Join-Path $gameSource 'asset\ExportedProject\Assets'))
     Assemblies = @((Join-Path $gameSource 'asset\AuxiliaryFiles\GameAssemblies'))

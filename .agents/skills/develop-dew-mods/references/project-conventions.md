@@ -9,6 +9,13 @@
 - These are the required target conventions for new mods and migrations. Legacy projects may still differ; do not copy their old layout as a competing convention.
 - Existing old-style project files explicitly list `Compile` and `Content` items and reference game DLLs through `$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\`.
 
+## Project And Display Names
+
+- Use the `Dew` prefix for every mod's project directory, `.csproj` filename, solution project name, `AssemblyName`, `RootNamespace`, and `ModBehaviour` entry class/file. Keep these names aligned, for example `DewRoomGuidance/DewRoomGuidance.csproj` and `src/DewRoomGuidance.cs`.
+- Omit the project prefix from player-facing names: `about/metadata.json` `name`, Steam Workshop titles, and display titles in `about/description.txt` use `Room Guidance`, `SafeShare`, or localized equivalents instead of `DewRoomGuidance` or `DewSafeShare`. Apply this to each language in a bilingual title. Keep technical paths and identifiers accurate when mentioned in descriptions.
+- Preserve established identities during a naming-only change: metadata `id`, Workshop `publishedfileid.txt`, existing configuration file paths, and serialized configuration keys must not change. Inspect how the game derives config filenames before renaming an entry class; where its name affects the default path, override `GetModConfigFilePath` to keep the established filename. Check serializer behavior before assuming a namespace or type rename changes stored data.
+- When renaming an existing project, update source references, solution/project paths, entry classes, assembly information, packaging paths, build scripts, and documentation together. Do not bump `modVer` solely for naming unless the requested release policy requires it.
+
 ## Implementation Checklist
 
 ### Entry And Lifecycle

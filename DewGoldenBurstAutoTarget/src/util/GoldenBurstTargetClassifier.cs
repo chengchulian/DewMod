@@ -1,7 +1,7 @@
 using System;
-using GoldenBurstAutoTarget.config;
+using DewGoldenBurstAutoTarget.config;
 
-namespace GoldenBurstAutoTarget;
+namespace DewGoldenBurstAutoTarget;
 
 internal sealed class GoldenBurstTargetClassifier
 {

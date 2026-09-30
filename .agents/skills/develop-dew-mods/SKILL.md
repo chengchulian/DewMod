@@ -14,7 +14,7 @@ Use the repository's game dump as evidence and the existing mods as implementati
 3. Read [references/project-conventions.md](references/project-conventions.md) before creating a mod, migrating source layout, or changing networking, configuration, metadata, localization, or project files.
 4. Inspect the affected mod and the closest working mod before designing a change.
 
-Treat `GameSource` as read-only reference material unless the user explicitly asks to refresh or repair the dump. It is decompiled/exported material for game version `1.3.1.3`, so do not silently assume it matches a newer installed build.
+Treat `GameSource` as read-only reference material unless the user explicitly asks to refresh or repair the dump. When multiple versioned decompiled source directories exist, use the highest version available; the bundled search helper resolves this automatically. Do not silently assume the dump matches a newer installed build when no newer evidence is present.
 
 ## Investigate Before Editing
 
@@ -37,6 +37,7 @@ Use `rg` directly for compound searches, contextual lines, or multiple globs.
 ## Implement Conservatively
 
 - Keep changes inside the target mod unless a shared contract genuinely requires broader edits.
+- Apply the project/display naming rules in the project conventions: internal project and entry names use the `Dew` prefix; metadata and Steam display names omit it. Preserve established Mod IDs, Workshop IDs, and configuration identities when renaming.
 - Apply the standard layout in the project conventions: root `about/`, `i18n/`, and `src/`; all maintained C# under `src/`, with separate `config/`, `patch/`, `ui/`, and `controller/` subdirectories. Use `src/config/LocalizationSource.cs` as the localization entry point. Existing legacy layouts are migration inputs, not alternative conventions.
 - Follow the target project's language style and old-style `.csproj` structure. Add new source and content files to explicit `Compile` or `Content` items when that project requires them.
 - Keep all text files UTF-8. Maintain `about/metadata.json`, `about/description.txt`, and relevant `i18n/*.json` when behavior or user-facing text changes.

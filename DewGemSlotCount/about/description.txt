@@ -1,4 +1,4 @@
-[h1]DewGemSlotCount / SkillGemCount[/h1]
+[h1]GemSlotCount / SkillGemCount[/h1]
 
 [b]功能[/b]
 [list]

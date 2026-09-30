@@ -61,18 +61,18 @@ $(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\*.dll
 ```text
 DewMod.sln                                    # 解决方案
 build.ps1                                     # MSBuild 构建脚本
-<ModName>/<ModName>.csproj                     # 单个 Mod 项目
-<ModName>/about/metadata.json                  # Mod 元数据
-<ModName>/about/description.txt                # Mod 描述
-<ModName>/i18n/*.json                          # 本地化文本
-<ModName>/src/<ModName>.cs                     # ModBehaviour 入口
-<ModName>/src/Properties/AssemblyInfo.cs       # 程序集信息
-<ModName>/src/config/PluginConfig.cs           # Mod 配置
-<ModName>/src/config/LocalizationSource.cs     # 统一本地化入口
-<ModName>/src/patch/*.cs                       # Harmony Patch
-<ModName>/src/ui/*.cs                          # UI 视图与控件
-<ModName>/src/controller/*.cs                  # 控制器与流程协调
-<ModName>/src/util/*.cs                        # 公共工具
+Dew<ModName>/Dew<ModName>.csproj              # 单个 Mod 项目
+Dew<ModName>/about/metadata.json              # Mod 元数据
+Dew<ModName>/about/description.txt            # Mod 描述
+Dew<ModName>/i18n/*.json                      # 本地化文本
+Dew<ModName>/src/Dew<ModName>.cs              # ModBehaviour 入口
+Dew<ModName>/src/Properties/AssemblyInfo.cs   # 程序集信息
+Dew<ModName>/src/config/PluginConfig.cs       # Mod 配置
+Dew<ModName>/src/config/LocalizationSource.cs # 统一本地化入口
+Dew<ModName>/src/patch/*.cs                   # Harmony Patch
+Dew<ModName>/src/ui/*.cs                      # UI 视图与控件
+Dew<ModName>/src/controller/*.cs              # 控制器与流程协调
+Dew<ModName>/src/util/*.cs                    # 公共工具
 ```
 
 `DewTestCode` 是开发/测试项目，不作为正式发布 Mod 列入下表。
@@ -84,19 +84,24 @@ build.ps1                                     # MSBuild 构建脚本
 | `DewAnyWhereOpenModManager` | 快捷键打开Mod管理器 | 1.0 | 可在任意界面通过快捷键打开 Mod 管理器。 |
 | `DewAttackSpeedConvertDamage` | 攻速上限转增伤 / AttackSpeedConvertDamage | 1.1.0 | 房主侧限制攻速上限，并将溢出攻速转换为伤害加成。 |
 | `DewBootcamp` | 训练营 | 1.1.0 | 生成测试单位，方便测试 DPS 与 build。 |
-| `DewGemSlotCount` | 精华槽数量 / SkillGemCount | 1.3.0 | 调整技能基础精华槽数量，以及堕落混沌可增加到的上限。 |
+| `DewGemSlotCount` | 精华槽数量 / SkillGemCount | 1.4.0 | 调整技能基础精华槽数量，以及堕落混沌可增加到的上限。 |
+| `DewGoldenBurstAutoTarget` | Golden Burst Auto Target（金色爆发自动瞄准） | 1.0.0 | 自动选择目标并从 Q 技能位释放 Golden Burst。 |
 | `DewHeroSkillJonas` | 出售英雄技能的乔纳斯 | 1.0.0 | 在礼物房间加入额外商人，用于出售英雄技能。 |
 | `DewIdentityChange` | 转职 / IdentityChange | 1.3.0 | 允许英雄装备其他角色技能、使用跨角色天赋，并可将角色技能加入全局掉落池。 |
 | `DewJonasEnhance` | 商人乔纳斯增强 / JonasEnhance | 1.1.2 | 增强乔纳斯商店，支持商品刷新、列数和初始白金币等配置。 |
+| `DewLanMode` | LanMode / 局域网模式 | 1.4.5 | 提供局域网联机、房间发现和 IP 直连，保留官方联机模式。 |
+| `DewLobbyListEnhance` | 大厅列表增强 | 1.0 | 为大厅列表增加难度筛选和状态信息。 |
 | `DewModConfigListSupport` | Mod配置界面列表支持 / ModConfigListSupport | 1.0.0 | 为 Mod 配置界面增加 `List` 类型支持。 |
 | `DewMorePlayers` | 更多的玩家人数 / MorePlayers | 1.0.1 | 房主侧自定义玩家数量。 |
 | `DewMoreVision` | 无限视距 / MoreVision | 1.1.0 | 客户端扩展摄像机视野范围，并支持调整缩放步长。 |
-| `DewPrimusHand` | 普里穆斯之手 / PrimusHand | 1.1.0 | 调整怪物、Boss 与战斗强度相关参数。 |
-| `DewSafeShare` | DewSafeShare / 安全共享 | 1.0.0 | 掉落物在玩家主动标记前仅所有者可见。 |
+| `DewPrimusHand` | 普里穆斯之手 / PrimusHand | 1.2.0 | 调整怪物、Boss 与战斗强度相关参数。 |
+| `DewRoomGuidance` | 房间指引 / Room Guidance | 1.0.0 | 显示屏幕外可用祭坛及未拾取宝石、技能和神器的方向。 |
+| `DewSafeShare` | SafeShare / 安全共享 | 1.0.0 | 掉落物在玩家主动标记前仅所有者可见。 |
+| `DewShieldModDetection` | ShieldModDetection | 1.0.0 | 安装本地 Mod 时允许跨平台联机，保留原有玩法 Mod 标识。 |
 | `DewSuperSmart` | SuperSmart 超级智能 | 1.0.0 | 显示攻击/技能范围和怪物/飞弹威胁区域，支持按住闪避键自动规避。 |
+| `DewUnLock` | 一键解锁 / UnLock | 1.0.1 | 通过 F11 工具窗口解锁本地存档内容与进度。 |
 | `DewVascularThief` | 血管小偷 / Vascular Thief | 1.0.0 | 新增可窃取 Boss 能力的专属技能。 |
 | `DewZoneTwistedPath` | 区域重排 / ZoneTwistedPath | 1.0.0 | 房主侧重排区域顺序。 |
-| `GoldenBurstAutoTarget` | Golden Burst Auto Target（金色爆发自动瞄准） | 1.0.0 | 自动选择目标并从 Q 技能位释放 Golden Burst。 |
 
 ## DewSuperSmart / SuperSmart 超级智能
 
@@ -167,7 +172,16 @@ build.ps1                                     # MSBuild 构建脚本
 
 ## Mod 开发规范
 
-仓库现有 18 个 Mod 和 `DewTestCode` 测试项目已统一源码目录结构，后续新增代码同样遵循以下规范。`DewTestCode` 没有 `ModBehaviour` 入口，其元数据中的 `assemblies` 保持为空，仅用于开发测试。
+仓库现有 21 个 Mod 和 `DewTestCode` 测试项目（共 22 个项目），所有项目及后续新增代码统一遵循以下规范。`DewTestCode` 没有 `ModBehaviour` 入口，其元数据中的 `assemblies` 保持为空，仅用于开发测试。
+
+### 命名规范
+
+- **项目名称统一以 `Dew` 开头**：项目目录、`.csproj` 文件名、解决方案项目名、`AssemblyName`、`RootNamespace`、`ModBehaviour` 入口类及文件名保持一致，例如 `DewRoomGuidance/DewRoomGuidance.csproj` 和 `src/DewRoomGuidance.cs`。原 `RoomGuidance`、`GoldenBurstAutoTarget` 分别使用 `DewRoomGuidance`、`DewGoldenBurstAutoTarget`。
+- **Steam 展示名称移除 `Dew` 前缀**：`about/metadata.json` 的 `name`、Steam 创意工坊标题和 `about/description.txt` 中的展示标题使用无前缀名称，例如 `Room Guidance`、`SafeShare` 或对应中文名称。双语标题的各语言名称均遵循此规则；描述中引用的实际项目路径和技术标识保持准确。
+- **重命名保留已有身份**：不得因纯命名调整修改 metadata `id`、创意工坊 `publishedfileid.txt`、既有配置文件路径或序列化配置键。入口类改名之前检查游戏如何生成配置文件名；默认路径受入口名影响时，通过重写 `GetModConfigFilePath` 保留旧文件名，继续读取已有设置。命名空间或类型改名对存档的影响以实际序列化方式为准。
+- **引用同步更新**：重命名时同步更新源码引用、解决方案和项目路径、入口类、程序集信息、打包路径、构建脚本与文档。除非发布要求另有规定，纯命名调整不单独增加版本号。
+
+### 源码目录规范
 
 1. **根目录齐全**：每个 Mod 根目录必须包含 `about/`、`i18n/`、`src/`。`about/` 至少包含 `metadata.json` 和 `description.txt`；预览图与图标分别放在 `about/preview.png`、`about/icon.png`。暂时没有翻译文本时也保留 `i18n/`，可用 `.gitkeep` 跟踪空目录。
 2. **源码集中**：全部维护的 C# 源码迁入 `src/`，包括 Mod 入口、辅助类与 `Properties/AssemblyInfo.cs`；`bin/`、`obj/` 中的构建产物不纳入迁移。项目文件保留在 Mod 根目录，运行时资源仍放在根目录的 `about/`、`i18n/` 等资源目录。

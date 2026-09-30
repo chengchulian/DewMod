@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace GoldenBurstAutoTarget.config;
+namespace DewGoldenBurstAutoTarget.config;
 
 public class PluginConfig : ModConfig
 {

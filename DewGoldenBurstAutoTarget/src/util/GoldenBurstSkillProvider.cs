@@ -1,4 +1,4 @@
-namespace GoldenBurstAutoTarget;
+namespace DewGoldenBurstAutoTarget;
 
 internal sealed class GoldenBurstSkillProvider
 {

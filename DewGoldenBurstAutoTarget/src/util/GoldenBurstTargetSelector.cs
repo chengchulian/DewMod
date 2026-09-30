@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace GoldenBurstAutoTarget;
+namespace DewGoldenBurstAutoTarget;
 
 internal sealed class GoldenBurstTargetSelector
 {

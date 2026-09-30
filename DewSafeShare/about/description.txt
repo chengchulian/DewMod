@@ -1,4 +1,4 @@
-[h1]DewSafeShare | 安全共享[/h1]
+[h1]SafeShare | 安全共享[/h1]
 
 Keep valuable drops private until you choose to share them.
 
