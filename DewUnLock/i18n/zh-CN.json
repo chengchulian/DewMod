@@ -1,10 +1,10 @@
 {
-  "Window.Title": "Dew 解锁工具",
+  "Window.Title": "解锁工具",
   "Button.CompleteAchievements": "解锁所有成就",
   "Button.DiscoverAll": "发现所有物品",
   "Button.UnlockItems": "解锁所有饰品",
   "Button.SetMastery": "设置所有英雄熟练度为50",
-  "Button.UnlockDejaVu": "解锁 Deja Vu",
+  "Button.UnlockDejaVu": "解锁既视感",
   "Button.AddStardust": "星辰加1万",
   "Button.UnlockLimboMax": "解锁所有英雄迷失域最高级"
 }

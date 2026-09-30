@@ -71,7 +71,7 @@ public static class UnlockController
         DewSave.profileStats.UpdateTotalData(0L);
         DewSave.SaveProfileAll(false);
         DewSave.SaveProfileMain(false);
-        Debug.Log("已解锁 Deja Vu");
+        Debug.Log("已解锁既视感");
     }
 
     public static void AddTenThousandStardust()

@@ -1,3 +1,27 @@
-DewUnLock 提供存档解锁工具。
+UnLock（一键解锁）提供便捷的存档解锁工具。
 
-按 F11 打开工具窗口，可解锁成就、发现物品、解锁饰品、设置英雄熟练度、解锁 Deja Vu、增加星辰，以及将所有英雄的迷失域进度设置到最高级。
+按 F11 打开工具窗口，可执行以下操作：
+- 完成所有成就并领取对应星辰
+- 发现所有技能、宝石和神器
+- 解锁所有表情、饰品和名牌
+- 将所有英雄熟练度设置为 50
+- 解锁既视感（Déjà-vu）
+- 增加 10,000 星辰
+- 将所有英雄的迷失域进度设置到当前版本最高级
+
+本模组只修改本地存档，请在使用前备份存档。
+
+---
+
+UnLock (One-click Unlock) provides convenient save-data unlock tools.
+
+Press F11 to open the tool window. Available actions:
+- Complete all achievements and grant their stardust
+- Discover all skills, gems, and artifacts
+- Unlock all emotes, accessories, and nametags
+- Set every hero's mastery level to 50
+- Unlock déjà vu
+- Add 10,000 stardust
+- Set every hero's Limbo progress to the current maximum depth
+
+This mod only changes the local save data. Back up your save before use.
