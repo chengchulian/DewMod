@@ -1,0 +1,10 @@
+{
+  "LabelText.AllowObliteration": "Zezwól na anihilację",
+  "Description.AllowObliteration": "Pozwala używać anihilacji w lobby Otchłani i zachowuje wybór.",
+  "LabelText.AllowDejavu": "Zezwól na déjà vu",
+  "Description.AllowDejavu": "Pozwala włączyć déjà vu w Otchłani.",
+  "LabelText.AllowAllLucidDreams": "Zezwól na wszystkie świadome sny",
+  "Description.AllowAllLucidDreams": "Pozwala wybierać wszystkie świadome sny dostępne w bieżącej zawartości gry, niezależnie od osobistego odblokowania.",
+  "LabelText.AllowMidGameJoin": "Zezwól na dołączanie w trakcie gry",
+  "Description.AllowMidGameJoin": "Pozwala nowym graczom dołączać do rozgrywki w Otchłani po jej rozpoczęciu."
+}

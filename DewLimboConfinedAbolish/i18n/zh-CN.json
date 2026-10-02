@@ -1,0 +1,10 @@
+{
+  "LabelText.AllowObliteration": "允许湮灭",
+  "Description.AllowObliteration": "允许在迷失域大厅使用湮灭并保留选择。",
+  "LabelText.AllowDejavu": "允许既视感",
+  "Description.AllowDejavu": "允许在迷失域中启用既视感。",
+  "LabelText.AllowAllLucidDreams": "允许所有清醒梦",
+  "Description.AllowAllLucidDreams": "允许选择当前游戏内容包含的所有类型清醒梦，并忽略个人解锁状态。",
+  "LabelText.AllowMidGameJoin": "允许中途加入",
+  "Description.AllowMidGameJoin": "允许新玩家在游戏开始后加入迷失域房间。"
+}

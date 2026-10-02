@@ -1,0 +1,10 @@
+{
+  "LabelText.AllowObliteration": "Obliteration erlauben",
+  "Description.AllowObliteration": "Erlaubt Obliteration in der Limbo-Lobby und behält die Auswahl bei.",
+  "LabelText.AllowDejavu": "Déjà-vu erlauben",
+  "Description.AllowDejavu": "Erlaubt Déjà-vu in Limbo.",
+  "LabelText.AllowAllLucidDreams": "Alle Klarträume erlauben",
+  "Description.AllowAllLucidDreams": "Erlaubt alle Klarträume der aktuellen Spielinhalte unabhängig vom persönlichen Freischaltstatus.",
+  "LabelText.AllowMidGameJoin": "Beitritt während des Spiels erlauben",
+  "Description.AllowMidGameJoin": "Erlaubt neuen Spielern, einer Limbo-Partie nach Spielbeginn beizutreten."
+}

@@ -1,0 +1,10 @@
+{
+  "LabelText.AllowObliteration": "Allow obliteration",
+  "Description.AllowObliteration": "Allow obliteration in the Limbo lobby and keep the selected items.",
+  "LabelText.AllowDejavu": "Allow deja vu",
+  "Description.AllowDejavu": "Allow deja vu to be enabled in Limbo.",
+  "LabelText.AllowAllLucidDreams": "Allow all lucid dreams",
+  "Description.AllowAllLucidDreams": "Allow every lucid dream included in the current game content, regardless of personal unlock status.",
+  "LabelText.AllowMidGameJoin": "Allow mid-game joining",
+  "Description.AllowMidGameJoin": "Allow new players to join a Limbo room after the game has started."
+}

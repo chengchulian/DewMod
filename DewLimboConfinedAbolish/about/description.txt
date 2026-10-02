@@ -1,0 +1,3 @@
+解除迷失域对湮灭、既视感、清醒梦类型和中途加入的限制。可在 Mod 配置界面分别开关这些选项。迷失域中可选择当前游戏内容包含的全部清醒梦，并开放湮灭窗口。仍保留迷失域深度进度要求。
+
+Removes Limbo restrictions on obliteration, déjà vu, lucid dream types, and mid-game joining. Each option can be toggled separately in the mod configuration. All lucid dreams included in the current game content can be selected, and the obliteration view is available. Limbo depth progression requirements remain in effect.

@@ -1,0 +1,10 @@
+{
+  "LabelText.AllowObliteration": "망각 허용",
+  "Description.AllowObliteration": "림보 로비에서 망각을 사용할 수 있으며 선택 항목을 유지합니다.",
+  "LabelText.AllowDejavu": "데자뷔 허용",
+  "Description.AllowDejavu": "림보에서 데자뷔를 활성화할 수 있습니다.",
+  "LabelText.AllowAllLucidDreams": "모든 자각몽 허용",
+  "Description.AllowAllLucidDreams": "개인 해금 여부와 관계없이 현재 게임 콘텐츠에 포함된 모든 자각몽을 선택할 수 있습니다.",
+  "LabelText.AllowMidGameJoin": "게임 도중 참가 허용",
+  "Description.AllowMidGameJoin": "게임이 시작된 뒤에도 새 플레이어가 림보 방에 참가할 수 있습니다."
+}

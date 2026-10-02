@@ -1,0 +1,10 @@
+{
+  "LabelText.AllowObliteration": "Yok etmeye izin ver",
+  "Description.AllowObliteration": "Limbo lobisinde yok etmeyi kullanmaya ve seçimi korumaya izin verir.",
+  "LabelText.AllowDejavu": "Deja vu'ya izin ver",
+  "Description.AllowDejavu": "Limbo'da deja vu'nun etkinleştirilmesine izin verir.",
+  "LabelText.AllowAllLucidDreams": "Tüm berrak rüyalara izin ver",
+  "Description.AllowAllLucidDreams": "Kişisel kilit açma durumundan bağımsız olarak mevcut oyun içeriğindeki tüm berrak rüyaların seçilmesine izin verir.",
+  "LabelText.AllowMidGameJoin": "Oyun sırasında katılıma izin ver",
+  "Description.AllowMidGameJoin": "Yeni oyuncuların oyun başladıktan sonra Limbo oturumuna katılmasına izin verir."
+}

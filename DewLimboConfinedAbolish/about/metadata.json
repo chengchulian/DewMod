@@ -1,0 +1,9 @@
+{
+  "id": "com.chengchulian.DewMod.DewLimboConfinedAbolish",
+  "name": "解除迷失域限制/Limbo Rule Abolisher",
+  "author": "chengchulian",
+  "modVer": "1.0.0",
+  "assemblies": [
+    "obj/Release/*.dll"
+  ]
+}

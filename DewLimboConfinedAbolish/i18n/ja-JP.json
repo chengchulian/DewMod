@@ -1,0 +1,10 @@
+{
+  "LabelText.AllowObliteration": "湮滅を許可",
+  "Description.AllowObliteration": "迷失域のロビーで湮滅を使用でき、選択内容を保持します。",
+  "LabelText.AllowDejavu": "既視感を許可",
+  "Description.AllowDejavu": "迷失域で既視感を有効にできます。",
+  "LabelText.AllowAllLucidDreams": "すべての明晰夢を許可",
+  "Description.AllowAllLucidDreams": "個人の解放状況にかかわらず、現在のゲーム内容に含まれるすべての明晰夢を選べます。",
+  "LabelText.AllowMidGameJoin": "ゲーム中の参加を許可",
+  "Description.AllowMidGameJoin": "ゲーム開始後に新しいプレイヤーが迷失域の部屋へ参加できます。"
+}

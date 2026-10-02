@@ -1,0 +1,10 @@
+{
+  "LabelText.AllowObliteration": "Consenti l'obliterazione",
+  "Description.AllowObliteration": "Consente l'obliterazione nella lobby del Limbo e mantiene la selezione.",
+  "LabelText.AllowDejavu": "Consenti il déjà-vu",
+  "Description.AllowDejavu": "Consente di attivare il déjà-vu nel Limbo.",
+  "LabelText.AllowAllLucidDreams": "Consenti tutti i sogni lucidi",
+  "Description.AllowAllLucidDreams": "Consente di scegliere tutti i sogni lucidi inclusi nei contenuti della partita, indipendentemente dagli sblocchi personali.",
+  "LabelText.AllowMidGameJoin": "Consenti l'ingresso a partita iniziata",
+  "Description.AllowMidGameJoin": "Consente ai nuovi giocatori di unirsi a una partita del Limbo dopo il suo inizio."
+}

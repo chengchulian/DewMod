@@ -1,0 +1,10 @@
+{
+  "LabelText.AllowObliteration": "Разрешить аннигиляцию",
+  "Description.AllowObliteration": "Разрешает аннигиляцию в лобби Лимбо и сохраняет выбранные предметы.",
+  "LabelText.AllowDejavu": "Разрешить дежавю",
+  "Description.AllowDejavu": "Разрешает включать дежавю в Лимбо.",
+  "LabelText.AllowAllLucidDreams": "Разрешить все осознанные сны",
+  "Description.AllowAllLucidDreams": "Позволяет выбирать все осознанные сны из текущего содержимого игры независимо от личных разблокировок.",
+  "LabelText.AllowMidGameJoin": "Разрешить вход во время игры",
+  "Description.AllowMidGameJoin": "Позволяет новым игрокам присоединяться к игре в Лимбо после её начала."
+}

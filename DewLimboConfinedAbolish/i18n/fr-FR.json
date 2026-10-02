@@ -1,0 +1,10 @@
+{
+  "LabelText.AllowObliteration": "Autoriser l'Oblitération",
+  "Description.AllowObliteration": "Autorise l'Oblitération dans le salon des Limbes et conserve la sélection.",
+  "LabelText.AllowDejavu": "Autoriser le déjà-vu",
+  "Description.AllowDejavu": "Permet d'activer le déjà-vu dans les Limbes.",
+  "LabelText.AllowAllLucidDreams": "Autoriser tous les rêves lucides",
+  "Description.AllowAllLucidDreams": "Permet de choisir tous les rêves lucides inclus dans le contenu actuel, même s'ils ne sont pas débloqués personnellement.",
+  "LabelText.AllowMidGameJoin": "Autoriser les arrivées en cours de partie",
+  "Description.AllowMidGameJoin": "Permet aux nouveaux joueurs de rejoindre une partie des Limbes après son début."
+}

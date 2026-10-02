@@ -1,0 +1,10 @@
+{
+  "LabelText.AllowObliteration": "Permitir la obliteración",
+  "Description.AllowObliteration": "Permite usar la obliteración en la sala del Limbo y conserva la selección.",
+  "LabelText.AllowDejavu": "Permitir el déjà vu",
+  "Description.AllowDejavu": "Permite activar el déjà vu en el Limbo.",
+  "LabelText.AllowAllLucidDreams": "Permitir todos los sueños lúcidos",
+  "Description.AllowAllLucidDreams": "Permite elegir todos los sueños lúcidos incluidos en el contenido actual, sin importar el desbloqueo personal.",
+  "LabelText.AllowMidGameJoin": "Permitir unirse durante la partida",
+  "Description.AllowMidGameJoin": "Permite que nuevos jugadores se unan a una partida del Limbo después de que empiece."
+}
