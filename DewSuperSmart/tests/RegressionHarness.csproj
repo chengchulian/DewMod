@@ -25,8 +25,12 @@
     <Compile Include="Program.cs" />
     <Compile Include="ControllerStubs.cs" />
     <Compile Include="ControllerTests.cs" />
+    <Compile Include="TreantPowerBombPreviewTests.cs" />
+    <Compile Include="MonsterRushProjectionTests.cs" />
+    <Compile Include="..\src\util\MonsterRushProjection.cs" Link="Production\MonsterRushProjection.cs" />
     <Compile Include="..\src\model\ThreatZone.cs" Link="Production\ThreatZone.cs" />
     <Compile Include="..\src\util\ThreatPathSafety.cs" Link="Production\ThreatPathSafety.cs" />
+    <Compile Include="..\src\util\TreantPowerBombPreview.cs" Link="Production\TreantPowerBombPreview.cs" />
     <Compile Include="..\src\controller\AutoDodgeController.cs" Link="Production\AutoDodgeController.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

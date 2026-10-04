@@ -53,6 +53,7 @@ namespace DewSuperSmart.config
         public bool AutoDodgeMoveFallback => true;
         public float AutoDodgeRiskThreshold => 0.9f;
         public float AutoDodgeSearchRadius => 7f;
+        public float ThreatScanRange => 24f;
         public float ThreatPadding => 0.35f;
     }
 }
@@ -104,6 +105,7 @@ namespace DewSuperSmart
         public int StopCommands;
         public int CastCommands;
         public Vector3 LastDestination;
+        public Vector3 LastCastPoint;
 
         public void CmdMoveToDestination(Vector3 point, bool immediately, float speedMult)
         {
@@ -113,18 +115,38 @@ namespace DewSuperSmart
         }
 
         public void CmdStop() { StopCommands++; _desiredAgentDestination = null; }
-        public void CmdCast(SkillTrigger skill, int index, CastInfo info, bool allowMoveToCast, bool skipRangeCheck) => CastCommands++;
+        public void CmdCast(SkillTrigger skill, int index, CastInfo info, bool allowMoveToCast, bool skipRangeCheck)
+        {
+            CastCommands++;
+            LastCastPoint = info.point;
+        }
         public void CmdAttack(object target, bool doChase) { }
         public void InterruptMove() => _desiredAgentDestination = null;
         public Vector3? DesiredDestination => _desiredAgentDestination;
     }
 
-    public class AbilityInstance : Actor { public CastInfo info; }
+    public class AbilityInstance : Actor
+    {
+        public CastInfo info;
+        public DewCollider[] Colliders = Array.Empty<DewCollider>();
+        public T[] GetComponentsInChildren<T>(bool includeInactive) where T : Component =>
+            typeof(T) == typeof(DewCollider) ? (T[])(object)Colliders : Array.Empty<T>();
+    }
+    public class InstantDamageInstance : AbilityInstance { public float damageDelay; }
+    public class Ai_Mon_Forest_Treant_PowerBomb : InstantDamageInstance { }
+    public class Ai_Mon_Forest_Hound_Charge : AbilityInstance { }
+    public class DewCollider : MonoBehaviour
+    {
+        public enum ColliderShape { Circle, Box, Polygon }
+        public ColliderShape shape;
+        public float radius;
+    }
     public class Ai_GenericDodge { public float speed; public float minDistance; public float uncollidableRatio; }
     public enum HeroSkillLocation { Movement }
     public class HeroSkills
     {
-        public bool TryGetSkill(HeroSkillLocation location, out SkillTrigger trigger) { trigger = null; return false; }
+        public SkillTrigger Movement;
+        public bool TryGetSkill(HeroSkillLocation location, out SkillTrigger trigger) { trigger = Movement; return trigger != null; }
     }
 
     public class SkillTrigger : AbilityTrigger
@@ -132,9 +154,13 @@ namespace DewSuperSmart
         public TriggerConfig currentConfig;
         public int currentConfigIndex;
         public int currentConfigCurrentCharge;
-        public bool CanBeCast() => false;
+        public bool Ready;
+        public bool CanBeCast() => Ready;
         public float GetChannelDurationMultiplier() => 1f;
     }
+
+    public class St_M_ParryMaster : SkillTrigger { }
+    public class Ai_D_ParryMaster_Parry { public float duration = 1f; }
 
     public class TriggerConfig
     {
@@ -151,9 +177,10 @@ namespace DewSuperSmart
     public struct CastInfo
     {
         public Actor caster;
-        public CastInfo(Actor caster) => this.caster = caster;
-        public CastInfo(Actor caster, Vector3 point) => this.caster = caster;
-        public CastInfo(Actor caster, float angle) => this.caster = caster;
+        public Vector3 point;
+        public CastInfo(Actor caster) : this() => this.caster = caster;
+        public CastInfo(Actor caster, Vector3 point) { this.caster = caster; this.point = point; }
+        public CastInfo(Actor caster, float angle) : this() => this.caster = caster;
         public static float GetAngle(Vector3 point) => 0f;
     }
 

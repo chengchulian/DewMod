@@ -27,7 +27,7 @@
   "LabelText.AutoDodgeReserveOneCharge": "Conserva una carica di schivata",
   "Description.AutoDodgeReserveOneCharge": "Impedisce alla schivata automatica di consumare l'ultima carica dell'abilità di movimento.",
   "LabelText.AutoDodgeLevel": "Livello di schivata",
-  "Description.AutoDodgeLevel": "Verde reagisce entro 1,5 unità o secondi, Giallo entro 1,0 e Rosso entro 0,5.",
+  "Description.AutoDodgeLevel": "Distanza: Verde 1,5, Giallo 1,0, Rosso 0,5 unità. Tempo all'impatto: Verde 1, Giallo 0,5, Rosso 0,2 secondi.",
   "LabelText.AutoDodgeCommandInterval": "Intervallo di schivata",
   "Description.AutoDodgeCommandInterval": "Intervallo minimo in secondi per inviare comandi verso una nuova destinazione dopo il ricalcolo. I comandi di movimento non vengono ripetuti se la posizione attuale è sicura o la stessa destinazione è ancora valida.",
   "LabelText.AutoDodgeKey": "Tasto schivata",

@@ -27,7 +27,7 @@
   "LabelText.AutoDodgeReserveOneCharge": "Bir kaçınma yükü ayır",
   "Description.AutoDodgeReserveOneCharge": "Otomatik kaçınmanın hareket yeteneğinin son yükünü tüketmesini önler.",
   "LabelText.AutoDodgeLevel": "Kaçınma seviyesi",
-  "Description.AutoDodgeLevel": "Yeşil 1,5 birim veya saniye, Sarı 1,0 ve Kırmızı 0,5 içindeki tehditlere tepki verir.",
+  "Description.AutoDodgeLevel": "Mesafe: Yeşil 1,5, Sarı 1,0, Kırmızı 0,5 birim. Darbeye kalan süre: Yeşil 1, Sarı 0,5, Kırmızı 0,2 saniye.",
   "LabelText.AutoDodgeCommandInterval": "Kaçınma aralığı",
   "Description.AutoDodgeCommandInterval": "Yeniden planlamanın ardından yeni bir hedefe komut göndermek için gereken en kısa süre (saniye). Mevcut konum güvenliyken veya aynı hedef hâlâ geçerliyken hareket komutları tekrarlanmaz.",
   "LabelText.AutoDodgeKey": "Kaçınma tuşu",

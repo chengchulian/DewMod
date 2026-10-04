@@ -38,6 +38,7 @@ internal enum ThreatActivity
 
 internal readonly struct ThreatZone
 {
+    public const float ProjectileSlidingWindowSeconds = 0.45f;
     private const float NearMissFalloff = 1.75f;
     private const float EscapeBoundaryEpsilon = 0.001f;
 
@@ -63,12 +64,14 @@ internal readonly struct ThreatZone
     public readonly float ProjectileSpeed;
     public readonly bool IsDodgeable;
     public readonly bool RequiresDodgeSkill;
+    public readonly bool IsProjectileWindow;
     public readonly GroundHazardKind GroundHazard;
     public readonly float GroundHazardThreshold;
 
     public bool IsProjectile => SourceKind == ThreatSourceKind.Projectile;
     // 飞行轨迹用相对运动预测；飞弹落地圆圈/多边形仍然是需要避开的几何区域。
-    public bool IsMovingProjectile => IsProjectile && Kind == ThreatZoneKind.Line && ProjectileSpeed > 0.01f;
+    public bool IsMovingProjectile => IsProjectile && !IsProjectileWindow &&
+                                      Kind == ThreatZoneKind.Line && ProjectileSpeed > 0.01f;
     public bool IsActive => Activity != ThreatActivity.Preview;
 
     private ThreatZone(
@@ -92,7 +95,8 @@ internal readonly struct ThreatZone
         bool isDodgeable,
         bool requiresDodgeSkill = false,
         GroundHazardKind groundHazard = GroundHazardKind.None,
-        float groundHazardThreshold = 0f)
+        float groundHazardThreshold = 0f,
+        bool isProjectileWindow = false)
     {
         Kind = kind;
         SourceKind = sourceKind;
@@ -113,6 +117,7 @@ internal readonly struct ThreatZone
         ProjectileSpeed = projectileSpeed;
         IsDodgeable = isDodgeable;
         RequiresDodgeSkill = requiresDodgeSkill;
+        IsProjectileWindow = isProjectileWindow;
         GroundHazard = groundHazard;
         GroundHazardThreshold = groundHazardThreshold;
     }
@@ -197,7 +202,8 @@ internal readonly struct ThreatZone
         float weight,
         float timeToImpact,
         bool isDodgeable,
-        float projectileSpeed = 0f)
+        float projectileSpeed = 0f,
+        bool isProjectileWindow = false)
     {
         return new ThreatZone(
             ThreatZoneKind.Line,
@@ -217,7 +223,16 @@ internal readonly struct ThreatZone
             weight,
             timeToImpact,
             Mathf.Max(projectileSpeed, 0f),
-            isDodgeable);
+            isDodgeable,
+            isProjectileWindow: isProjectileWindow);
+    }
+
+    public static ThreatZone ProjectileWindow(ThreatZone path, Vector3 position, float remainingLength)
+    {
+        return Line(path.Source, path.Trigger, path.Projectile, position, path.Direction,
+            Mathf.Min(Mathf.Max(remainingLength, 0f), path.ProjectileSpeed * ProjectileSlidingWindowSeconds),
+            path.Width, path.SourceKind, ThreatActivity.Active, path.Weight,
+            float.PositiveInfinity, true, path.ProjectileSpeed, isProjectileWindow: true);
     }
 
     public static ThreatZone Polygon(

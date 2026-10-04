@@ -19,9 +19,17 @@ namespace UnityEngine
     {
         public Vector3 position;
         public Vector3 forward = Vector3.forward;
+        public Quaternion rotation;
+        public Vector3 Scale = Vector3.one;
 
         public bool IsChildOf(Transform other) => false;
-        public Vector3 lossyScale => new Vector3(1f, 1f, 1f);
+        public Vector3 lossyScale => Scale;
+        public Vector3 TransformPoint(Vector3 point) => position + rotation * Vector3.Scale(point, Scale);
+        public Vector3 InverseTransformPoint(Vector3 point)
+        {
+            Vector3 local = Quaternion.Inverse(rotation) * (point - position);
+            return new Vector3(local.x / Scale.x, local.y / Scale.y, local.z / Scale.z);
+        }
     }
 
     public struct Vector2
@@ -98,6 +106,7 @@ namespace UnityEngine
         }
 
         public static Vector3 Lerp(Vector3 a, Vector3 b, float t) => a + (b - a) * t;
+        public static Vector3 Scale(Vector3 a, Vector3 b) => new Vector3(a.x * b.x, a.y * b.y, a.z * b.z);
 
         private static Vector3 Normalize(Vector3 value)
         {
@@ -116,6 +125,7 @@ namespace UnityEngine
         private Quaternion(float radians) => this.radians = radians;
 
         public static Quaternion Euler(float x, float y, float z) => new Quaternion(y * Mathf.Deg2Rad);
+        public static Quaternion Inverse(Quaternion value) => new Quaternion(-value.radians);
 
         public static Vector3 operator *(Quaternion rotation, Vector3 value)
         {

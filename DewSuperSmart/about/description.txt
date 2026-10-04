@@ -2,12 +2,19 @@ SuperSmart adds combat awareness tools for the local hero.
 
 Features:
 - Draw basic attack and hero skill ranges.
+- Manual movement, attacks, casting, and interaction remain available while holding the dodge key.
+- Keep the forest Hound charge warning anchored to its damage collider without applying its movement twice.
 - Draw enemy casts, basic attacks, live damage/control colliders, projectiles, meteor rain impacts, status-effect auras, traps, fireplaces, and damaging terrain.
+- Match the forest Treant's Power Bomb warning to its actual damage radius and post-channel delay.
 - Render exact circle, cone, rotated box, line, and polygon boundaries with impact-aware threat colors.
-- Avoid spatial threats with normal movement; time dodge invulnerability against locked damage only when movement cannot avoid the impact.
-- Keep a safe dodge destination instead of repeatedly issuing movement commands. Choose the nearest safe threat edge plus the hero collision radius and padding, allowing for the game's stopping distance.
+- Avoid spatial threats with normal movement; use a directed dodge or replacement parry against imminent damage only when movement cannot avoid the impact.
+- Move away from a monster's imminent basic attack range when a safe route exists; reserve the emergency dodge for the final 0.05-second impact window.
+- Keep a safe dodge destination instead of repeatedly issuing movement commands. Prefer a safe point toward the cursor while accounting for the hero collision radius and the game's stopping distance.
 - Validate the destination, direct navigation path, and projectile timing against all collected threats; reject unsafe fallback points.
+- Leave delayed damage warning areas as soon as they become actionable. Keep their footprints forbidden to movement and dodge destinations until the threat disappears.
+- When overlapping red threats leave no fully safe point in range, take short navigable steps that reduce danger instead of standing still.
 - Automatic movement skills must accept an explicit destination so the validated landing point can be used.
+- When Parry Master replaces dodge, automatically parry an imminent hit that normal movement cannot avoid.
 - Optionally reserve one movement-skill charge instead of consuming the last dodge.
 - JSON localization is available in the i18n folder.
 
@@ -15,15 +22,22 @@ SuperSmart 为本地英雄添加战斗辅助显示。
 
 功能：
 - 绘制普攻和英雄技能范围。
+- 长按躲避键生效后，仍可手动移动、攻击、施法和交互。
+- 叶犬冲撞预警以实际伤害碰撞体为坐标基准，避免重复叠加位移造成乱飞。
 - 绘制敌方施法、普通攻击、实时伤害/控制碰撞区、飞弹、流星雨落点、状态光环、陷阱、火堆和伤害地形。
+- 森林树灵爆破预警按实际伤害碰撞圈半径和引导结束后的伤害延迟计算。
 - 精确绘制圆形、扇形、旋转方框、直线和多边形边界，并按命中风险动态变色。
-- 感知威胁时优先向主要怪物的左右侧移动；普通移动无法安全规避时，才让闪避无碰撞阶段精确覆盖命中时刻。
+- 怪物普攻即将命中时优先沿安全路线远离攻击者；其他威胁仍可侧移规避，普通移动无法安全规避时才在最后 0.05 秒窗口使用闪避或格挡。
 - 侧向策略使用软评分，复杂地形仍会保留其他可达安全点；命中迫近时会自动扩大搜索半径。
 - 导航优先调用线性扫掠 API，通用闪避优先读取 `Ai_GenericDodge` 参数，自定义位移技能再使用兼容回退。
 - 已选躲避目标仍安全时保持原目标，到达安全位置后不反复换点、发送移动指令；目标失效或移动中断时再重新规划。
-- 优先选择威胁边缘加角色实际碰撞半径和少量补偿的最近安全点，同时补偿游戏提前停止移动的距离。
+- 在可达安全点中优先选择鼠标所指方向，不执行原地闪避。
+- 沿鼠标方向优先选择威胁边缘外的安全点，计入角色实际碰撞半径和游戏提前停止移动的距离。
 - 对所有已采集威胁检查落点、直线路径及飞弹到达时序，拒绝穿过邻近威胁、绕墙路径和未通过安全检查的应急落点。
+- 延迟范围伤害进入威胁后提前走出预警圈；威胁消失前禁止移动或闪避落入圈内，大范围预警圈会扩大安全点搜索距离。
+- 被重叠红色威胁包围且范围内无完全安全点时，沿危险程度下降的可导航短路径持续脱困。
 - 自动位移只使用能指定落点的技能，避免只传方向却无法保证实际落点距离的技能把角色带回威胁。
+- 闪避被格挡大师替换后，普通移动无法避开即将到来的伤害时自动格挡。
 - 长按自动躲避键且没有威胁时，角色会持续朝鼠标指针方向移动。
 - 可选择保留一层位移技能充能，避免自动躲避消耗最后一层闪避。
 - i18n 文件夹内提供 JSON 本地化文本。

@@ -136,6 +136,13 @@ internal sealed class MonsterThreatRangeDisplay : MonoBehaviour
         for (int i = 0; i < _threats.Count && drawCount < maxDrawCount; i++)
         {
             ThreatZone threat = _threats[i];
+            if (threat.IsMovingProjectile)
+            {
+                AddMovingProjectileThreat(threat, renderY);
+                drawCount++;
+                continue;
+            }
+
             ThreatLevel level = GetThreatLevel(threat, heroPosition, heroRadius);
             float width = threat.IsProjectile ? ProjectileLineWidth : LineWidth;
             _layers[(int)level].AddThreat(threat, renderY, width);
@@ -146,6 +153,30 @@ internal sealed class MonsterThreatRangeDisplay : MonoBehaviour
         {
             _layers[i].Apply();
         }
+    }
+
+    private void AddMovingProjectileThreat(ThreatZone threat, float renderY)
+    {
+        Vector3 position = threat.Projectile != null ? threat.Projectile.position : threat.Origin;
+        Vector3 travelled = position - threat.Origin;
+        travelled.y = 0f;
+        float remainingLength = Mathf.Max(threat.Length -
+            Mathf.Max(Vector3.Dot(travelled, threat.Direction), 0f), 0f);
+        if (remainingLength > 0.01f)
+        {
+            ThreatZone remainingPath = ThreatZone.Line(
+                threat.Source, threat.Trigger, threat.Projectile, position, threat.Direction,
+                remainingLength, threat.Width, threat.SourceKind, threat.Activity,
+                threat.Weight, threat.TimeToImpact, threat.IsDodgeable, threat.ProjectileSpeed);
+            _layers[(int)ThreatLevel.Green].AddThreat(remainingPath, renderY, ProjectileLineWidth);
+            _layers[(int)ThreatLevel.Red].AddThreat(
+                ThreatZone.ProjectileWindow(threat, position, remainingLength), renderY, ProjectileLineWidth);
+        }
+
+        ThreatZone body = ThreatZone.Circle(
+            threat.Source, threat.Trigger, position, threat.Width * 0.5f,
+            threat.SourceKind, ThreatActivity.Active, threat.Weight, 0f, threat.IsDodgeable);
+        _layers[(int)ThreatLevel.Red].AddThreat(body, renderY, ProjectileLineWidth);
     }
 
     private static ThreatLevel GetThreatLevel(ThreatZone threat, Vector3 heroPosition, float heroRadius)
@@ -198,6 +229,11 @@ internal sealed class MonsterThreatRangeDisplay : MonoBehaviour
 
     private static bool ShouldDisplayThreat(ThreatZone threat, PluginConfig config)
     {
+        if (threat.IsProjectileWindow)
+        {
+            return false;
+        }
+
         return threat.SourceKind == ThreatSourceKind.Projectile
             ? config.ShowProjectileThreatRanges
             : config.ShowMonsterThreatRanges;

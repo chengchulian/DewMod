@@ -27,7 +27,7 @@
   "LabelText.AutoDodgeReserveOneCharge": "回避チャージを1つ温存",
   "Description.AutoDodgeReserveOneCharge": "自動回避が移動スキルの最後のチャージを消費しないようにします。",
   "LabelText.AutoDodgeLevel": "回避レベル",
-  "Description.AutoDodgeLevel": "距離または命中までの時間が、緑は 1.5、黄は 1.0、赤は 0.5 以内の脅威に反応します。",
+  "Description.AutoDodgeLevel": "距離の閾値は緑 1.5、黄 1.0、赤 0.5。命中までの時間は緑 1 秒、黄 0.5 秒、赤 0.2 秒です。",
   "LabelText.AutoDodgeCommandInterval": "回避間隔",
   "Description.AutoDodgeCommandInterval": "再計画後、新しい目的地への移動コマンドを送る最小間隔（秒）です。現在位置が安全な場合や同じ目的地が引き続き有効な場合は、移動コマンドを繰り返し送りません。",
   "LabelText.AutoDodgeKey": "自動回避キー",

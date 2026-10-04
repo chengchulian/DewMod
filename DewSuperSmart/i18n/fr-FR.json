@@ -27,7 +27,7 @@
   "LabelText.AutoDodgeReserveOneCharge": "Conserver une charge d'esquive",
   "Description.AutoDodgeReserveOneCharge": "Empêche l'esquive automatique de consommer la dernière charge de la compétence de déplacement.",
   "LabelText.AutoDodgeLevel": "Niveau d'esquive",
-  "Description.AutoDodgeLevel": "Vert réagit à moins de 1,5 unité ou seconde, Jaune à moins de 1,0 et Rouge à moins de 0,5.",
+  "Description.AutoDodgeLevel": "Distance : Vert 1,5, Jaune 1,0, Rouge 0,5 unité. Temps avant impact : Vert 1, Jaune 0,5, Rouge 0,2 seconde.",
   "LabelText.AutoDodgeCommandInterval": "Intervalle d'esquive",
   "Description.AutoDodgeCommandInterval": "Intervalle minimal en secondes pour envoyer des ordres vers une nouvelle destination après recalcul. Les ordres de déplacement ne sont pas répétés tant que la position actuelle est sûre ou que la même destination reste valide.",
   "LabelText.AutoDodgeKey": "Touche d'esquive",

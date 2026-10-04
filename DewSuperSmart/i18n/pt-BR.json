@@ -27,7 +27,7 @@
   "LabelText.AutoDodgeReserveOneCharge": "Reservar uma carga de esquiva",
   "Description.AutoDodgeReserveOneCharge": "Impede que a esquiva automática consuma a última carga da habilidade de movimento.",
   "LabelText.AutoDodgeLevel": "Nível de esquiva",
-  "Description.AutoDodgeLevel": "Verde reage dentro de 1,5 unidade ou segundo, Amarelo dentro de 1,0 e Vermelho dentro de 0,5.",
+  "Description.AutoDodgeLevel": "Distância: Verde 1,5, Amarelo 1,0, Vermelho 0,5 unidade. Tempo até o impacto: Verde 1, Amarelo 0,5, Vermelho 0,2 segundo.",
   "LabelText.AutoDodgeCommandInterval": "Intervalo de esquiva",
   "Description.AutoDodgeCommandInterval": "Intervalo mínimo em segundos para enviar comandos a um novo destino após recalcular o trajeto. Os comandos de movimento não se repetem enquanto a posição atual estiver segura ou o mesmo destino continuar válido.",
   "LabelText.AutoDodgeKey": "Tecla de esquiva",

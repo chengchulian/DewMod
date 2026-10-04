@@ -16,6 +16,10 @@ internal sealed class AutoDodgeController : MonoBehaviour
     private const float RedThreatThreshold = 0.5f;
     private const float YellowThreatThreshold = 1f;
     private const float GreenThreatThreshold = 1.5f;
+    private const float RedThreatTimeThreshold = 0.2f;
+    private const float YellowThreatTimeThreshold = 0.5f;
+    private const float GreenThreatTimeThreshold = 1f;
+    private const float LongLineThreatTimeThreshold = 0.75f;
     private const float MinimumCandidateDistance = 0.25f;
     private const float MinimumSafeThreatDistance = 0.1f;
     // 游戏会在距目标 sqrt(0.1) 内停止；额外补偿确保停下时碰撞圆仍在边界外。
@@ -27,15 +31,18 @@ internal sealed class AutoDodgeController : MonoBehaviour
     private const float MovementResponseDelay = 0.04f;
     private const float MovementSkillCommandLeadTime = 0.04f;
     private const float FallbackDodgeSkillUncollidableRatio = 0.7f;
-    private const float EmergencyDodgeMaxTimeToImpact = 0.1f;
+    private const float EmergencyDodgeMaxTimeToImpact = 0.05f;
     private const float MovementSkillCommandLockoutPadding = 0.1f;
     private const float MovementSkillLandingClearance = 0.35f;
     private const float PostDodgeRecoveryDuration = 0.2f;
     private const float ProjectilePredictionStep = 0.025f;
-    private const float ProjectileArrivalSafetyWindow = 0.45f;
+    private const float ProjectileArrivalSafetyWindow = ThreatZone.ProjectileSlidingWindowSeconds;
     private const float DenseBarrageArrivalSafetyWindow = 1.15f;
     private const float SideDodgePreferenceWeight = 5f;
+    private const float CursorDirectionPreferenceWeight = 2f;
     private const float EmergencySearchRadiusBonus = 1.5f;
+    private const float EmergencyProgressDistance = 3f;
+    private const float EmergencyDangerImprovement = 0.1f;
     private const string PrimusMeteorProjectileTypeName =
         "Ai_Mon_Primus_BossPrimusAeron_Adapt_Doom_Meteor_SubFireball";
 
@@ -45,6 +52,7 @@ internal sealed class AutoDodgeController : MonoBehaviour
     private static readonly FieldInfo DesiredDestinationField = typeof(EntityControl).GetField(
         "_desiredAgentDestination", BindingFlags.Instance | BindingFlags.NonPublic);
     private Hero _hero;
+    private KeyCode _activationKey;
     private Vector3 _lastProgressPosition;
     private float _lastProgressTime;
 
@@ -59,6 +67,8 @@ internal sealed class AutoDodgeController : MonoBehaviour
     private AutoDodgeThreatLevel _lastAutoDodgeLevel;
     private bool _hasThreatSnapshot;
     private bool _hasActiveSafeDestination;
+    private bool _hasEmergencyDestination;
+    private bool _continueCursorAfterDodge;
     private bool _hasLastCommandDestination;
 
     // 保持安全目标；只有当前位置或已发路径失效时才重新规划。
@@ -96,6 +106,11 @@ internal sealed class AutoDodgeController : MonoBehaviour
         if (IsCurrentPositionSafe(hero.agentPosition, heroRadius, config))
         {
             StopUnsafeOwnedMovement(hero, config, heroRadius);
+            if (_threats.Count == 0)
+            {
+                _continueCursorAfterDodge = false;
+            }
+
             if (Time.unscaledTime >= _safeRecoveryUntil)
             {
                 TryMoveTowardCursorWhileHeld(hero, config);
@@ -107,7 +122,8 @@ internal sealed class AutoDodgeController : MonoBehaviour
         bool hasIncomingImpact = TryGetEarliestIncomingImpact(hero.agentPosition, heroRadius, out float earliestImpact);
         bool hasMonsterThreat = TryGetSideDodgeAxis(hero.agentPosition, heroRadius, out Vector3 sideDodgeAxis);
         bool hasMovementPoint = TryFindSafePoint(
-            hero, config, heroRadius, GetMovementSearchRadius(config, earliestImpact),
+            hero, config, heroRadius, GetMovementSearchRadius(config, earliestImpact,
+                hero.agentPosition, heroRadius),
             EstimateMovementSpeed(hero), MovementResponseDelay, minimumTravelDistance: 0f,
             uncollidableRatio: 0f, isMovementSkill: false, hasMonsterThreat, sideDodgeAxis,
             out Vector3 movementPoint);
@@ -122,21 +138,35 @@ internal sealed class AutoDodgeController : MonoBehaviour
             return;
         }
 
+        // 找不到一步到位的安全点时，先沿可达路径降低危险；只有走位无法及时脱险才使用闪避技能。
+        if (!hasMovementPoint && config.AutoDodgeMoveFallback)
+        {
+            if (TryContinueEmergencyDestination(hero, heroRadius, config) ||
+                canIssueMovementCommand &&
+                TryFindEmergencyPoint(hero, config, heroRadius, out Vector3 emergencyPoint) &&
+                TryMoveToSafePoint(hero, emergencyPoint, config,
+                    rememberAsSafeDestination: false, rememberAsEmergencyDestination: true))
+            {
+                return;
+            }
+        }
+
         if (!hasMovementPoint && hasIncomingImpact &&
             TryGetAutoDodgeMovementSkill(hero, config, out SkillTrigger movementSkill) &&
-            TryGetDodgeSkillProfile(movementSkill, config, out DodgeSkillProfile skillProfile) &&
-            earliestImpact <= EmergencyDodgeMaxTimeToImpact + skillProfile.ActivationDelay &&
-            TryFindSafePoint(
-                hero, config, heroRadius, skillProfile.SearchRadius, skillProfile.TravelSpeed,
-                skillProfile.ActivationDelay, skillProfile.MinimumDistance, skillProfile.UncollidableRatio,
-                isMovementSkill: true, hasMonsterThreat, sideDodgeAxis, out Vector3 skillPoint) &&
-            TryCastMovementSkill(hero, skillPoint, config, skillProfile))
+            (TryCastIncomingBlock(hero, movementSkill, config, heroRadius, earliestImpact) ||
+             TryGetDodgeSkillProfile(movementSkill, config, out DodgeSkillProfile skillProfile) &&
+             earliestImpact <= EmergencyDodgeMaxTimeToImpact + skillProfile.ActivationDelay &&
+             TryFindSafePoint(
+                 hero, config, heroRadius, skillProfile.SearchRadius, skillProfile.TravelSpeed,
+                 skillProfile.ActivationDelay, skillProfile.MinimumDistance, skillProfile.UncollidableRatio,
+                 isMovementSkill: true, hasMonsterThreat, sideDodgeAxis, out Vector3 skillPoint) &&
+             TryCastMovementSkill(hero, skillPoint, config, skillProfile)))
         {
             _lastCommandTime = Time.unscaledTime;
             return;
         }
 
-        // 没有完整安全方案时取消本 mod 的旧危险路径，不把“风险较低”误当成安全。
+        // 无法沿可达路径降低危险时才停止本 mod 的旧危险路径。
         StopUnsafeOwnedMovement(hero, config, heroRadius);
     }
 
@@ -166,6 +196,11 @@ internal sealed class AutoDodgeController : MonoBehaviour
     private bool IsAutoDodgeActive(PluginConfig config)
     {
         KeyCode key = config.AutoDodgeKey;
+        if (_activationKey != key)
+        {
+            _activationKey = key;
+            _keyDownTime = float.NegativeInfinity;
+        }
         if (key == KeyCode.None)
         {
             _keyDownTime = float.NegativeInfinity;
@@ -189,6 +224,12 @@ internal sealed class AutoDodgeController : MonoBehaviour
         }
 
         return Time.unscaledTime - _keyDownTime >= Mathf.Max(config.AutoDodgeHoldDelay, 0f);
+    }
+
+    private void OnDisable()
+    {
+        _keyDownTime = float.NegativeInfinity;
+        InvalidateThreatSnapshot();
     }
 
     private void FilterThreatsByDodgeLevel(AutoDodgeThreatLevel level, Vector3 heroPosition, float heroRadius)
@@ -252,6 +293,7 @@ internal sealed class AutoDodgeController : MonoBehaviour
         _threatSnapshotTime = float.NegativeInfinity;
         _movementSkillLockUntil = float.NegativeInfinity;
         _safeRecoveryUntil = float.NegativeInfinity;
+        _continueCursorAfterDodge = false;
     }
 
     // 到达后保持安全站位，行进中复核已有路径；鼠标移动不会使已安全目标换边。
@@ -262,12 +304,8 @@ internal sealed class AutoDodgeController : MonoBehaviour
         if (distance <= DestinationArrivalDistance &&
             IsCurrentPositionSafe(position, heroRadius, config))
         {
-            if (_navigationThreats.Count > 0)
-            {
-                return true;
-            }
-
-            _safeRecoveryUntil = Time.unscaledTime + PostDodgeRecoveryDuration;
+            // 到达安全点后立即沿可通过校验的指针路径继续移动。
+            _safeRecoveryUntil = Time.unscaledTime;
             return false;
         }
 
@@ -286,6 +324,7 @@ internal sealed class AutoDodgeController : MonoBehaviour
     private void ClearActiveSafeDestination(bool resetLastCommand)
     {
         _hasActiveSafeDestination = false;
+        _hasEmergencyDestination = false;
         if (resetLastCommand)
         {
             _hasLastCommandDestination = false;
@@ -335,7 +374,7 @@ internal sealed class AutoDodgeController : MonoBehaviour
         }
 
         float threshold = GetThreatLevelThreshold(level);
-        return IsThreatUrgent(threat, heroPosition, heroRadius, threshold, threshold);
+        return IsThreatUrgent(threat, heroPosition, heroRadius, threshold, GetThreatLevelTimeThreshold(level));
     }
 
     private static float GetThreatLevelThreshold(AutoDodgeThreatLevel level)
@@ -359,6 +398,13 @@ internal sealed class AutoDodgeController : MonoBehaviour
         float timeThreshold)
     {
         if (IsDenseBarrageProjectile(threat))
+        {
+            return true;
+        }
+
+        if (!threat.IsProjectile && threat.Kind == ThreatZoneKind.Line && threat.Length >= 4f &&
+            threat.Activity == ThreatActivity.Imminent && IsWithinThreatLevel(
+                threat.TimeToImpact, Mathf.Max(timeThreshold, LongLineThreatTimeThreshold)))
         {
             return true;
         }
@@ -505,11 +551,12 @@ internal sealed class AutoDodgeController : MonoBehaviour
                 return;
             }
 
-            // 安全是硬条件；评分主要取最短路程，鼠标意图与侧向偏好仅用于接近的候选。
+            // 所有威胁都在通过安全校验后，优先选择朝指针的可达位置。
             Vector3 direction = candidate - heroPosition;
             direction.y = 0f;
             float intentPenalty = desiredDirection.sqrMagnitude > 0.0001f
-                ? (1f - Vector3.Dot(desiredDirection, direction.normalized)) * 0.05f
+                ? (1f - Vector3.Dot(desiredDirection, direction.normalized)) *
+                  searchRadius * CursorDirectionPreferenceWeight
                 : 0f;
             float sidePenalty = hasMonsterThreat
                 ? GetSideDodgePenalty(candidate, heroPosition, sideDodgeAxis) * 0.05f
@@ -545,6 +592,172 @@ internal sealed class AutoDodgeController : MonoBehaviour
 
         safePoint = best;
         return !float.IsPositiveInfinity(bestScore);
+    }
+
+    private static float GetThreatLevelTimeThreshold(AutoDodgeThreatLevel level)
+    {
+        switch (level)
+        {
+            case AutoDodgeThreatLevel.Red:
+                return RedThreatTimeThreshold;
+            case AutoDodgeThreatLevel.Yellow:
+                return YellowThreatTimeThreshold;
+            default:
+                return GreenThreatTimeThreshold;
+        }
+    }
+
+    // 被大范围红色区域覆盖时，分段朝危险程度下降的方向脱困，不把中途危险的点标为安全点。
+    private bool TryFindEmergencyPoint(Hero hero, PluginConfig config, float heroRadius, out Vector3 point)
+    {
+        Vector3 origin = hero.agentPosition;
+        point = origin;
+        float currentDanger = CalculateEmergencyDanger(origin, heroRadius);
+        float standingRisk = CalculateTimedImpactRisk(origin, origin, heroRadius,
+            EstimateMovementSpeed(hero), MovementResponseDelay, 0f, false);
+        if (float.IsInfinity(currentDanger) ||
+            currentDanger <= EmergencyDangerImprovement &&
+            standingRisk <= Mathf.Max(config.AutoDodgeRiskThreshold, 0.01f))
+        {
+            return false;
+        }
+
+        Vector3 desiredDirection = GetDesiredDirection(origin);
+        float bestScore = float.PositiveInfinity;
+        float maxDistance = Mathf.Min(EmergencyProgressDistance, Mathf.Max(config.AutoDodgeSearchRadius, 1f));
+        for (int ring = 1; ring <= 3; ring++)
+        {
+            float distance = maxDistance * ring / 3f;
+            for (int i = 0; i < 24; i++)
+            {
+                Vector3 direction = Quaternion.Euler(0f, i * 360f / 24f, 0f) * Vector3.forward;
+                Vector3 candidate = GetValidDodgeDestination(origin, origin + direction * distance);
+                if (!IsEmergencyRouteImproving(hero, origin, candidate, heroRadius, config,
+                        currentDanger, out float movingRisk))
+                {
+                    continue;
+                }
+
+                float danger = CalculateEmergencyDanger(candidate, heroRadius);
+                float intentPenalty = desiredDirection.sqrMagnitude > 0.0001f
+                    ? (1f - Vector3.Dot(desiredDirection, direction)) * 0.2f
+                    : 0f;
+                float score = danger + movingRisk * 2f + intentPenalty + distance * 0.01f;
+                if (score < bestScore)
+                {
+                    bestScore = score;
+                    point = candidate;
+                }
+            }
+        }
+
+        return !float.IsPositiveInfinity(bestScore);
+    }
+
+    private bool TryContinueEmergencyDestination(Hero hero, float heroRadius, PluginConfig config)
+    {
+        if (!_hasEmergencyDestination || !IsFollowingOwnedMovement(hero) ||
+            Vector2.Distance(hero.agentPosition.ToXY(), _lastCommandDestination.ToXY()) <= DestinationArrivalDistance ||
+            Time.unscaledTime - _lastProgressTime >= MovementStallTimeout)
+        {
+            _hasEmergencyDestination = false;
+            return false;
+        }
+
+        float currentDanger = CalculateEmergencyDanger(hero.agentPosition, heroRadius);
+        if (!IsEmergencyRouteImproving(hero, hero.agentPosition, _lastCommandDestination,
+                heroRadius, config, currentDanger, out _))
+        {
+            _hasEmergencyDestination = false;
+            return false;
+        }
+
+        return true;
+    }
+
+    private float CalculateEmergencyDanger(Vector3 position, float heroRadius)
+    {
+        float danger = 0f;
+        for (int i = 0; i < _navigationThreats.Count; i++)
+        {
+            ThreatZone threat = _navigationThreats[i];
+            if (threat.IsMovingProjectile)
+            {
+                continue;
+            }
+
+            float depth = threat.SignedDistance(position, heroRadius);
+            if (float.IsNaN(depth) || float.IsNegativeInfinity(depth))
+            {
+                return float.PositiveInfinity;
+            }
+
+            if (depth < 0f)
+            {
+                danger += -depth * Mathf.Max(threat.Weight, 0.25f);
+            }
+        }
+
+        return danger;
+    }
+
+    private bool IsEmergencyRouteImproving(
+        Hero hero, Vector3 origin, Vector3 destination, float heroRadius, PluginConfig config,
+        float currentDanger, out float movingRisk)
+    {
+        movingRisk = float.PositiveInfinity;
+        if (!Dew.IsOkay(destination) || float.IsInfinity(currentDanger) ||
+            Vector2.Distance(origin.ToXY(), destination.ToXY()) <= MinimumCandidateDistance ||
+            IsInsideDelayedArea(destination, heroRadius) ||
+            NavMesh.Raycast(origin, destination, out _, NavMesh.AllAreas) ||
+            Dew.GetNavMeshPath(origin, destination).status != NavMeshPathStatus.PathComplete)
+        {
+            return false;
+        }
+
+        float destinationDanger = CalculateEmergencyDanger(destination, heroRadius);
+        if (float.IsInfinity(destinationDanger))
+        {
+            return false;
+        }
+
+        int samples = Mathf.Max(1, Mathf.CeilToInt(
+            Vector2.Distance(origin.ToXY(), destination.ToXY()) / 0.25f));
+        for (int sample = 1; sample <= samples; sample++)
+        {
+            if (CalculateEmergencyDanger(Vector3.Lerp(origin, destination, sample / (float)samples), heroRadius) >
+                currentDanger + 0.05f)
+            {
+                return false;
+            }
+        }
+
+        float speed = EstimateMovementSpeed(hero);
+        float standingRisk = CalculateTimedImpactRisk(origin, origin, heroRadius,
+            speed, MovementResponseDelay, 0f, false);
+        movingRisk = CalculateTimedImpactRisk(destination, origin, heroRadius,
+            speed, MovementResponseDelay, 0f, false);
+        bool geometricImprovement = destinationDanger <= currentDanger - EmergencyDangerImprovement;
+        bool impactImprovement = standingRisk - movingRisk >= EmergencyDangerImprovement;
+        return (geometricImprovement || impactImprovement) &&
+               movingRisk <= Mathf.Max(standingRisk + 0.01f, config.AutoDodgeRiskThreshold);
+    }
+
+    // 预警伤害圈在快照中存在期间始终禁止作为应急移动的落点。
+    private bool IsInsideDelayedArea(Vector3 point, float heroRadius)
+    {
+        for (int i = 0; i < _navigationThreats.Count; i++)
+        {
+            ThreatZone threat = _navigationThreats[i];
+            if (threat.Activity == ThreatActivity.Imminent && !threat.IsMovingProjectile &&
+                !threat.RequiresDodgeSkill &&
+                threat.SignedDistance(point, heroRadius) <= MinimumSafeThreatDistance + DestinationArrivalDistance)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     // 只在起点仍有几何威胁时收短移动；投射物躲避需要保留原有的时序搜索空间。
@@ -831,17 +1044,34 @@ internal sealed class AutoDodgeController : MonoBehaviour
     }
 
     // 根据尚未发生的命中时间调整候选搜索范围。
-    private static float GetMovementSearchRadius(PluginConfig config, float earliestImpact)
+    private float GetMovementSearchRadius(
+        PluginConfig config, float earliestImpact, Vector3 heroPosition, float heroRadius)
     {
         float baseRadius = Mathf.Max(config.AutoDodgeSearchRadius, 1f);
-        if (float.IsNaN(earliestImpact) || float.IsInfinity(earliestImpact))
+        float searchRadius = baseRadius;
+        if (!float.IsNaN(earliestImpact) && !float.IsInfinity(earliestImpact))
         {
-            return baseRadius;
+            // 命中越近，扩大搜索空间以优先寻找真正脱离威胁的点。
+            float urgency = Mathf.Clamp01(1f - Mathf.Max(earliestImpact, 0f) / 1.5f);
+            searchRadius += EmergencySearchRadiusBonus * urgency;
         }
 
-        // 命中越近，扩大搜索空间以优先寻找真正脱离威胁的点。
-        float urgency = Mathf.Clamp01(1f - Mathf.Max(earliestImpact, 0f) / 1.5f);
-        return baseRadius + EmergencySearchRadiusBonus * urgency;
+        float clearance = MinimumSafeThreatDistance + DestinationArrivalDistance;
+        for (int i = 0; i < _navigationThreats.Count; i++)
+        {
+            ThreatZone threat = _navigationThreats[i];
+            if (threat.Activity != ThreatActivity.Imminent || threat.IsMovingProjectile ||
+                threat.RequiresDodgeSkill || threat.SignedDistance(heroPosition, heroRadius) > 0f ||
+                !threat.TryGetEscapePoint(heroPosition, heroRadius, clearance, out Vector3 edgePoint))
+            {
+                continue;
+            }
+
+            float requiredDistance = Vector2.Distance(heroPosition.ToXY(), edgePoint.ToXY()) + 0.01f;
+            searchRadius = Mathf.Max(searchRadius, Mathf.Min(requiredDistance, config.ThreatScanRange));
+        }
+
+        return searchRadius;
     }
 
     // 使用公开导航 API 获取可达点；不同版本 API 行为变化时回退到最近合法点。
@@ -865,6 +1095,41 @@ internal sealed class AutoDodgeController : MonoBehaviour
 
         float alignment = Mathf.Abs(Vector3.Dot(travel.normalized, sideDodgeAxis.normalized));
         return (1f - alignment) * SideDodgePreferenceWeight;
+    }
+
+    // 替换闪避的格挡不产生位移；只在当前位置确有即将命中的伤害时施放。
+    private bool TryCastIncomingBlock(
+        Hero hero, SkillTrigger movementSkill, PluginConfig config, float heroRadius, float earliestImpact)
+    {
+        TriggerConfig triggerConfig = movementSkill.currentConfig;
+        if (movementSkill.GetType().Name != "St_M_ParryMaster" ||
+            triggerConfig == null || triggerConfig.castMethod.type != CastMethodType.None ||
+            triggerConfig.spawnedInstance?.GetType().Name != "Ai_D_ParryMaster_Parry" ||
+            hero.Control == null || hero.Control.isDisplacing)
+        {
+            return false;
+        }
+
+        float duration = ReadSkillFloat(triggerConfig.spawnedInstance, "duration", 0f);
+        if (duration <= 0f || earliestImpact > EmergencyDodgeMaxTimeToImpact + MovementSkillCommandLeadTime ||
+            earliestImpact > duration + MovementSkillCommandLeadTime ||
+            CalculateTimedImpactRisk(hero.agentPosition, hero.agentPosition, heroRadius,
+                EstimateMovementSpeed(hero), MovementSkillCommandLeadTime, 0f, false) <=
+            Mathf.Max(config.AutoDodgeRiskThreshold, 0.01f))
+        {
+            return false;
+        }
+
+        hero.Control.CmdCast(movementSkill, movementSkill.currentConfigIndex,
+            new CastInfo(hero), allowMoveToCast: false, skipRangeCheck: false);
+        if (!triggerConfig.postponeBasicCommand)
+        {
+            hero.Control.CmdAttack(null, doChase: false);
+        }
+
+        _movementSkillLockUntil = Time.unscaledTime + duration + MovementSkillCommandLockoutPadding;
+        _hasActiveSafeDestination = false;
+        return true;
     }
 
     private static bool TryGetDodgeSkillProfile(
@@ -1020,7 +1285,9 @@ internal sealed class AutoDodgeController : MonoBehaviour
     }
 
     // 相同且仍在执行的目标只发送一次；中断或卡住后允许重新发送。
-    private bool TryMoveToSafePoint(Hero hero, Vector3 destination, PluginConfig config, bool rememberAsSafeDestination = true)
+    private bool TryMoveToSafePoint(
+        Hero hero, Vector3 destination, PluginConfig config, bool rememberAsSafeDestination = true,
+        bool rememberAsEmergencyDestination = false)
     {
         if (!config.AutoDodgeMoveFallback || hero.Control == null || hero.Control.isDisplacing)
         {
@@ -1041,20 +1308,23 @@ internal sealed class AutoDodgeController : MonoBehaviour
         _lastProgressPosition = hero.agentPosition;
         _lastProgressTime = Time.unscaledTime;
         _hasActiveSafeDestination = rememberAsSafeDestination;
+        _hasEmergencyDestination = rememberAsEmergencyDestination;
         if (rememberAsSafeDestination)
         {
+            _continueCursorAfterDodge = true;
             _activeSafeDestination = destination;
         }
 
         return true;
     }
 
-    // 长按仍可向安全鼠标位置移动，危险鼠标位置不触发另一次无必要的自动选点。
+    // 躲避期间沿安全指针路径继续移动；危险鼠标位置不会触发新的路线。
     private void TryMoveTowardCursorWhileHeld(Hero hero, PluginConfig config)
     {
         KeyCode key = config.AutoDodgeKey;
         float commandInterval = Mathf.Max(config.AutoDodgeCommandInterval, MinimumCommandInterval);
-        if (key == KeyCode.None || !Input.GetKey(key) ||
+        bool continueAfterDodge = _continueCursorAfterDodge && _threats.Count > 0;
+        if ((!continueAfterDodge && (key == KeyCode.None || !Input.GetKey(key))) ||
             Time.unscaledTime - _lastCommandTime < commandInterval)
         {
             return;

@@ -27,7 +27,7 @@
   "LabelText.AutoDodgeReserveOneCharge": "Zachowaj jeden ładunek uniku",
   "Description.AutoDodgeReserveOneCharge": "Zapobiega zużyciu ostatniego ładunku umiejętności ruchu przez automatyczny unik.",
   "LabelText.AutoDodgeLevel": "Poziom uniku",
-  "Description.AutoDodgeLevel": "Zielony reaguje w zasięgu 1,5 jednostki lub sekundy, Żółty 1,0, a Czerwony 0,5.",
+  "Description.AutoDodgeLevel": "Odległość: Zielony 1,5, Żółty 1,0, Czerwony 0,5 jednostki. Czas do trafienia: Zielony 1, Żółty 0,5, Czerwony 0,2 sekundy.",
   "LabelText.AutoDodgeCommandInterval": "Odstęp uniku",
   "Description.AutoDodgeCommandInterval": "Minimalny odstęp w sekundach między poleceniami ruchu do nowego celu po ponownym zaplanowaniu trasy. Polecenia nie są powtarzane, gdy obecna pozycja jest bezpieczna lub ten sam cel pozostaje prawidłowy.",
   "LabelText.AutoDodgeKey": "Klawisz uniku",

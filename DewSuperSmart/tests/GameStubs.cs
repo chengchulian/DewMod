@@ -18,6 +18,8 @@ namespace DewSuperSmart
         public Actor owner;
     }
 
+    public class AttackTrigger : AbilityTrigger { }
+
     public class Projectile : Actor
     {
     }

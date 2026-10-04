@@ -38,7 +38,10 @@ namespace DewSuperSmart
             Run("path safety permits escaping two overlapping circles", TestTwoOverlappingCirclesCanLeave);
             Run("path safety rejects moving deeper from an overlap", TestOverlapCannotMoveDeeper);
             Run("path safety rejects re-entry into a concave polygon", TestConcaveReentry);
+            Run("projectile red window slides along the full trajectory", TestProjectileSlidingWindow);
             ControllerTests.Register(Run);
+            TreantPowerBombPreviewTests.Register(Run);
+            MonsterRushProjectionTests.Register(Run);
 
             Console.WriteLine("Regression tests passed: " + _passed);
         }
@@ -63,6 +66,29 @@ namespace DewSuperSmart
             Assert(threat.TryGetEscapePoint(point, 0.4f, 0.15f, out Vector3 escape), "line should produce an escape point");
             Assert(threat.SignedDistance(escape, 0.4f) >= 0.15f, "line escape must clear the expanded edge");
             Assert(Math.Abs(Math.Abs(escape.x) - 1.55f) < 0.002f, "line escape must stop at half-width 1 + hero 0.4 + clearance 0.15");
+        }
+
+        private static void TestProjectileSlidingWindow()
+        {
+            ThreatZone path = ThreatZone.Line(null, null, null, Vector3.zero, new Vector3(1f, 0f, 0f),
+                12f, 0.5f, ThreatSourceKind.Projectile, Active, 1.8f, float.PositiveInfinity, true, 10f);
+            ThreatZone initialWindow = ThreatZone.ProjectileWindow(path, Vector3.zero, 12f);
+            ThreatZone advancedWindow = ThreatZone.ProjectileWindow(path, new Vector3(3f, 0f, 0f), 9f);
+
+            Assert(path.IsMovingProjectile && !initialWindow.IsMovingProjectile && initialWindow.IsProjectileWindow,
+                "the full path must remain temporal while the red window is a geometric obstacle");
+            Assert(Math.Abs(initialWindow.Length - 4.5f) < 0.001f &&
+                   Math.Abs(advancedWindow.Length - 4.5f) < 0.001f,
+                "a 10-unit-per-second projectile must have a 4.5-unit red window");
+            Assert(advancedWindow.SignedDistance(new Vector3(1f, 0f, 0f), 0f) > 0f &&
+                   advancedWindow.SignedDistance(new Vector3(4f, 0f, 0f), 0f) < 0f,
+                "the red window must move with the projectile rather than stay at its launch point");
+            Assert(!ThreatPathSafety.IsSafe(new[] { path, initialWindow },
+                    new Vector3(2f, 0f, 2f), new Vector3(2f, 0f, -2f), 0.4f),
+                "movement across the red window must be rejected");
+            Assert(ThreatPathSafety.IsSafe(new[] { path, initialWindow },
+                    new Vector3(8f, 0f, 2f), new Vector3(8f, 0f, -2f), 0.4f),
+                "the remaining trajectory outside the red window must not become a static obstacle");
         }
 
         private static void TestConeGeometry()

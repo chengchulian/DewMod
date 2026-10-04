@@ -147,9 +147,17 @@ internal sealed class ThreatAnalyzer
                 continue;
             }
 
+            AbilityTrigger activeAttack = monster.Ability.attackAbility;
+            bool activeAttackIncluded = false;
             foreach (KeyValuePair<int, AbilityTrigger> pair in monster.Ability.abilities)
             {
                 AddCastPreview(hero, monster, pair.Value, config, results, scanRange);
+                activeAttackIncluded |= pair.Value == activeAttack;
+            }
+
+            if (!activeAttackIncluded && activeAttack is AttackTrigger)
+            {
+                AddCastPreview(hero, monster, activeAttack, config, results, scanRange);
             }
         }
     }
@@ -190,6 +198,15 @@ internal sealed class ThreatAnalyzer
         float timeToImpact = isCasting
             ? GetRemainingChannelTime(monster, trigger, triggerConfig, _castStartTimes[triggerId])
             : float.PositiveInfinity;
+        float treantDamageRadius = 0f;
+        float treantDamageDelay = 0f;
+        bool isTreantPowerBomb = trigger.GetType().Name == "At_Mon_Forest_Treant_PowerBomb" &&
+                                 TreantPowerBombPreview.TryGet(
+                                     triggerConfig.spawnedInstance, out treantDamageRadius, out treantDamageDelay);
+        if (isCasting && isTreantPowerBomb)
+        {
+            timeToImpact += treantDamageDelay;
+        }
         float weight = (trigger is AttackTrigger ? 1f : 1.35f) + (isCasting ? 0.65f : 0f);
         CastInfo castInfo = GetThreatCastInfo(trigger, hero, config.ThreatPredictionStrength);
         CastMethodData method = triggerConfig.castMethod;
@@ -208,7 +225,9 @@ internal sealed class ThreatAnalyzer
                     monster,
                     trigger,
                     origin,
-                    Positive(method.noneData.radius, triggerConfig.effectiveRange, config.DefaultThreatAreaRadius),
+                    isTreantPowerBomb
+                        ? treantDamageRadius
+                        : Positive(method.noneData.radius, triggerConfig.effectiveRange, config.DefaultThreatAreaRadius),
                     ThreatSourceKind.EnemyCast,
                     activity,
                     weight,
@@ -391,7 +410,48 @@ internal sealed class ThreatAnalyzer
 
         for (int i = 0; i < _colliderBuffer.Count; i++)
         {
-            if (instance is StatusEffect statusEffect && statusEffect.victim != null)
+            if (TryGetDeferredTargetRotation(instance, _colliderBuffer[i], out Quaternion targetRotation))
+            {
+                if (instance.GetType().Name == "Ai_Mon_SnowMountain_BossSkoll_AuraSlice")
+                {
+                    // 雪山王横扫的预警角度会随机偏转；碰撞框要到伤害前才移到目标点。
+                    for (int angle = -45; angle <= 45; angle += 15)
+                    {
+                        AddProjectedColliderThreat(
+                            instance,
+                            _colliderBuffer[i],
+                            _colliderBuffer[i].transform,
+                            instance.info.point,
+                            targetRotation * Quaternion.Euler(0f, angle, 0f),
+                            sourceKind,
+                            activity,
+                            weight,
+                            timeToImpact,
+                            isDodgeable,
+                            hero,
+                            scanRange,
+                            results);
+                    }
+                }
+                else
+                {
+                    AddProjectedColliderThreat(
+                        instance,
+                        _colliderBuffer[i],
+                        _colliderBuffer[i].transform,
+                        instance.info.point,
+                        targetRotation,
+                        sourceKind,
+                        activity,
+                        weight,
+                        timeToImpact,
+                        isDodgeable,
+                        hero,
+                        scanRange,
+                        results);
+                }
+            }
+            else if (instance is StatusEffect statusEffect && statusEffect.victim != null)
             {
                 AddProjectedColliderThreat(
                     instance,
@@ -408,12 +468,13 @@ internal sealed class ThreatAnalyzer
                     scanRange,
                     results);
             }
-            else if (isMonsterRush && !IsLongRangeSweepRush(instance))
+            else if (caster != null && (MonsterRushProjection.UsesIndependentCollider(instance) ||
+                     isMonsterRush && !IsLongRangeSweepRush(instance)))
             {
                 AddProjectedColliderThreat(
                     instance,
                     _colliderBuffer[i],
-                    instance.transform,
+                    MonsterRushProjection.GetRoot(instance, _colliderBuffer[i]),
                     caster.agentPosition,
                     caster.rotation,
                     sourceKind,
@@ -440,6 +501,31 @@ internal sealed class ThreatAnalyzer
                     results);
             }
         }
+    }
+
+    // 这些技能的碰撞框在预警期间还停留在资源默认位置，伤害触发时才移动到施法点。
+    private static bool TryGetDeferredTargetRotation(
+        AbilityInstance instance, DewCollider collider, out Quaternion rotation)
+    {
+        string name = instance.GetType().Name;
+        if (name == "Ai_Mon_Special_BossErebos_AtkInstance" ||
+            name == "Ai_Mon_SnowMountain_BossSkoll_AuraSlice")
+        {
+            FieldInfo rangeField = GetTypedField(
+                instance.GetType(), "range", typeof(DewCollider),
+                BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+            if (!ReferenceEquals(rangeField?.GetValue(instance), collider))
+            {
+                rotation = Quaternion.identity;
+                return false;
+            }
+
+            rotation = instance.rotation;
+            return Dew.IsOkay(instance.info.point) && instance.info.point != Vector3.zero;
+        }
+
+        rotation = Quaternion.identity;
+        return false;
     }
 
     private static bool IsMonsterRush(AbilityInstance instance, Entity caster)
@@ -501,15 +587,6 @@ internal sealed class ThreatAnalyzer
 
         direction = delta / length;
         Vector3 perpendicular = new Vector3(-direction.z, 0f, direction.x);
-        Transform sourceRoot = instance.transform;
-        Vector3 rootPosition = origin;
-        Vector3 Project(Vector3 worldPoint)
-        {
-            Vector3 localPoint = sourceRoot.InverseTransformPoint(worldPoint);
-            Vector3 scaledPoint = Vector3.Scale(localPoint, sourceRoot.lossyScale);
-            return rootPosition + caster.rotation * scaledPoint;
-        }
-
         float halfWidth = 0f;
         for (int i = 0; i < colliders.Count; i++)
         {
@@ -520,6 +597,10 @@ internal sealed class ThreatAnalyzer
             }
 
             Transform colliderTransform = collider.transform;
+            Transform sourceRoot = MonsterRushProjection.GetRoot(instance, collider);
+            Vector3 rootPosition = origin;
+            Vector3 Project(Vector3 point) =>
+                MonsterRushProjection.Project(sourceRoot, point, rootPosition, caster.rotation);
             switch (collider.shape)
             {
                 case DewCollider.ColliderShape.Circle:
@@ -1428,6 +1509,11 @@ internal sealed class ThreatAnalyzer
 
         float extendedScanRange = Mathf.Max(scanRange, config.ProjectileLookAheadDistance + 12f);
         float projectileSpeed = EstimateProjectileSpeed(projectile);
+        float projectileWidth = projectile.collisionRadius > 0.001f &&
+                                !float.IsNaN(projectile.collisionRadius) &&
+                                !float.IsInfinity(projectile.collisionRadius)
+            ? projectile.collisionRadius * 2f
+            : config.DefaultThreatLineWidth * 0.65f;
         ThreatZone path = ThreatZone.Line(
             projectile,
             null,
@@ -1435,7 +1521,7 @@ internal sealed class ThreatAnalyzer
             origin,
             direction,
             length,
-            Mathf.Max(projectile.collisionRadius * 2f, config.DefaultThreatLineWidth * 0.65f),
+            projectileWidth,
             ThreatSourceKind.Projectile,
             ThreatActivity.Active,
             weight: 1.8f,
@@ -1446,6 +1532,7 @@ internal sealed class ThreatAnalyzer
         if (path.SignedDistance(hero.agentPosition, 0f) <= extendedScanRange)
         {
             results.Add(path);
+            results.Add(ThreatZone.ProjectileWindow(path, origin, length));
         }
 
         float arrivalTime = EstimateProjectileArrivalTime(projectile, end);
@@ -1713,9 +1800,7 @@ internal sealed class ThreatAnalyzer
     {
         Vector3 Project(Vector3 worldPoint)
         {
-            Vector3 localPoint = sourceRoot.InverseTransformPoint(worldPoint);
-            Vector3 scaledPoint = Vector3.Scale(localPoint, sourceRoot.lossyScale);
-            return rootPosition + rootRotation * scaledPoint;
+            return MonsterRushProjection.Project(sourceRoot, worldPoint, rootPosition, rootRotation);
         }
 
         ThreatZone threat = BuildColliderThreat(

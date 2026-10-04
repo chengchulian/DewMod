@@ -27,7 +27,7 @@
   "LabelText.AutoDodgeReserveOneCharge": "Eine Ausweichladung behalten",
   "Description.AutoDodgeReserveOneCharge": "Verhindert, dass automatisches Ausweichen die letzte Ladung der Bewegungsfähigkeit verbraucht.",
   "LabelText.AutoDodgeLevel": "Ausweichstufe",
-  "Description.AutoDodgeLevel": "Grün reagiert innerhalb von 1,5 Einheiten oder Sekunden, Gelb innerhalb von 1,0 und Rot innerhalb von 0,5.",
+  "Description.AutoDodgeLevel": "Abstand: Grün 1,5, Gelb 1,0, Rot 0,5 Einheiten. Zeit bis zum Treffer: Grün 1, Gelb 0,5, Rot 0,2 Sekunden.",
   "LabelText.AutoDodgeCommandInterval": "Ausweichintervall",
   "Description.AutoDodgeCommandInterval": "Mindestintervall in Sekunden für Befehle zu einem neuen Ziel nach einer Neuplanung. Bewegungsbefehle werden nicht wiederholt, solange die aktuelle Position sicher ist oder dasselbe Ziel weiterhin gültig ist.",
   "LabelText.AutoDodgeKey": "Ausweichtaste",

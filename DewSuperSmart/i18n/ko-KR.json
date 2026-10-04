@@ -27,7 +27,7 @@
   "LabelText.AutoDodgeReserveOneCharge": "회피 충전 1회 보존",
   "Description.AutoDodgeReserveOneCharge": "자동 회피가 이동 스킬의 마지막 충전을 소모하지 않게 합니다.",
   "LabelText.AutoDodgeLevel": "회피 등급",
-  "Description.AutoDodgeLevel": "거리 또는 명중 시간이 초록은 1.5, 노랑은 1.0, 빨강은 0.5 이내인 위협에 반응합니다.",
+  "Description.AutoDodgeLevel": "거리 기준: 초록 1.5, 노랑 1.0, 빨강 0.5. 명중까지 남은 시간: 초록 1초, 노랑 0.5초, 빨강 0.2초.",
   "LabelText.AutoDodgeCommandInterval": "회피 간격",
   "Description.AutoDodgeCommandInterval": "경로를 다시 계획한 후 새 목적지로 이동 명령을 보내는 최소 간격(초)입니다. 현재 위치가 안전하거나 같은 목적지가 여전히 유효하면 이동 명령을 반복해서 보내지 않습니다.",
   "LabelText.AutoDodgeKey": "자동 회피 키",

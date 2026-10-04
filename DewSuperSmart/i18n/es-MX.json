@@ -27,7 +27,7 @@
   "LabelText.AutoDodgeReserveOneCharge": "Conservar una carga de evasión",
   "Description.AutoDodgeReserveOneCharge": "Evita que la evasión automática consuma la última carga de la habilidad de movimiento.",
   "LabelText.AutoDodgeLevel": "Nivel de evasión",
-  "Description.AutoDodgeLevel": "Verde reacciona dentro de 1.5 unidades o segundos, Amarillo dentro de 1.0 y Rojo dentro de 0.5.",
+  "Description.AutoDodgeLevel": "Distancia: Verde 1.5, Amarillo 1.0, Rojo 0.5 unidades. Tiempo hasta el impacto: Verde 1, Amarillo 0.5, Rojo 0.2 segundos.",
   "LabelText.AutoDodgeCommandInterval": "Intervalo de evasión",
   "Description.AutoDodgeCommandInterval": "Intervalo mínimo en segundos para enviar órdenes hacia un destino nuevo tras recalcular la ruta. No repite órdenes de movimiento mientras la posición actual sea segura o el mismo destino siga siendo válido.",
   "LabelText.AutoDodgeKey": "Tecla de evasión",
