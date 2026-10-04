@@ -5,5 +5,12 @@
   "Target.Skill": "Навык",
   "Target.Artifact": "Артефакт",
   "Target.Stone": "Камень",
-  "Target.GoldenLizard": "Золотая ящерица"
+  "Target.GoldenLizard": "Золотая ящерица",
+  "Config.Header.Shrines": "Святилища",
+  "Config.Header.Targets": "Другие цели",
+  "Config.Target.Essence": "Эссенции",
+  "Config.Target.Skill": "Навыки",
+  "Config.Target.Artifact": "Артефакты",
+  "Config.Target.Stone": "Камни",
+  "Config.Target.GoldenLizard": "Золотые ящерицы"
 }

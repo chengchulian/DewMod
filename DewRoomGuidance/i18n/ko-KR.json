@@ -5,5 +5,12 @@
   "Target.Skill": "스킬",
   "Target.Artifact": "유물",
   "Target.Stone": "바위",
-  "Target.GoldenLizard": "황금 도마뱀"
+  "Target.GoldenLizard": "황금 도마뱀",
+  "Config.Header.Shrines": "제단",
+  "Config.Header.Targets": "기타 대상",
+  "Config.Target.Essence": "정수",
+  "Config.Target.Skill": "스킬",
+  "Config.Target.Artifact": "유물",
+  "Config.Target.Stone": "바위",
+  "Config.Target.GoldenLizard": "황금 도마뱀"
 }

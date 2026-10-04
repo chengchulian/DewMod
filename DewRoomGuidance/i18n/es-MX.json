@@ -5,5 +5,12 @@
   "Target.Skill": "Habilidad",
   "Target.Artifact": "Artefacto",
   "Target.Stone": "Piedra",
-  "Target.GoldenLizard": "Lagarto dorado"
+  "Target.GoldenLizard": "Lagarto dorado",
+  "Config.Header.Shrines": "Santuarios",
+  "Config.Header.Targets": "Otros objetivos",
+  "Config.Target.Essence": "Esencias",
+  "Config.Target.Skill": "Habilidades",
+  "Config.Target.Artifact": "Artefactos",
+  "Config.Target.Stone": "Piedras",
+  "Config.Target.GoldenLizard": "Lagartos dorados"
 }

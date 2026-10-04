@@ -5,5 +5,12 @@
   "Target.Skill": "Compétence",
   "Target.Artifact": "Artefact",
   "Target.Stone": "Pierre",
-  "Target.GoldenLizard": "Lézard doré"
+  "Target.GoldenLizard": "Lézard doré",
+  "Config.Header.Shrines": "Sanctuaires",
+  "Config.Header.Targets": "Autres cibles",
+  "Config.Target.Essence": "Essences",
+  "Config.Target.Skill": "Compétences",
+  "Config.Target.Artifact": "Artefacts",
+  "Config.Target.Stone": "Pierres",
+  "Config.Target.GoldenLizard": "Lézards dorés"
 }

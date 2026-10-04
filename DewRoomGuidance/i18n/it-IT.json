@@ -5,5 +5,12 @@
   "Target.Skill": "Abilità",
   "Target.Artifact": "Artefatto",
   "Target.Stone": "Pietra",
-  "Target.GoldenLizard": "Lucertola dorata"
+  "Target.GoldenLizard": "Lucertola dorata",
+  "Config.Header.Shrines": "Altari",
+  "Config.Header.Targets": "Altri obiettivi",
+  "Config.Target.Essence": "Essenze",
+  "Config.Target.Skill": "Abilità",
+  "Config.Target.Artifact": "Artefatti",
+  "Config.Target.Stone": "Pietre",
+  "Config.Target.GoldenLizard": "Lucertole dorate"
 }

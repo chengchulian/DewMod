@@ -5,5 +5,12 @@
   "Target.Skill": "Fertigkeit",
   "Target.Artifact": "Artefakt",
   "Target.Stone": "Stein",
-  "Target.GoldenLizard": "Goldene Echse"
+  "Target.GoldenLizard": "Goldene Echse",
+  "Config.Header.Shrines": "Schreine",
+  "Config.Header.Targets": "Weitere Ziele",
+  "Config.Target.Essence": "Essenzen",
+  "Config.Target.Skill": "Fertigkeiten",
+  "Config.Target.Artifact": "Artefakte",
+  "Config.Target.Stone": "Steine",
+  "Config.Target.GoldenLizard": "Goldene Echsen"
 }

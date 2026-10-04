@@ -5,5 +5,12 @@
   "Target.Skill": "Yetenek",
   "Target.Artifact": "Eser",
   "Target.Stone": "Taş",
-  "Target.GoldenLizard": "Altın Kertenkele"
+  "Target.GoldenLizard": "Altın Kertenkele",
+  "Config.Header.Shrines": "Sunaklar",
+  "Config.Header.Targets": "Diğer hedefler",
+  "Config.Target.Essence": "Özler",
+  "Config.Target.Skill": "Yetenekler",
+  "Config.Target.Artifact": "Eserler",
+  "Config.Target.Stone": "Taşlar",
+  "Config.Target.GoldenLizard": "Altın kertenkeleler"
 }

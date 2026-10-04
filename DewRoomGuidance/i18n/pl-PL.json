@@ -5,5 +5,12 @@
   "Target.Skill": "Umiejętność",
   "Target.Artifact": "Artefakt",
   "Target.Stone": "Kamień",
-  "Target.GoldenLizard": "Złota jaszczurka"
+  "Target.GoldenLizard": "Złota jaszczurka",
+  "Config.Header.Shrines": "Kapliczki",
+  "Config.Header.Targets": "Pozostałe cele",
+  "Config.Target.Essence": "Esencje",
+  "Config.Target.Skill": "Umiejętności",
+  "Config.Target.Artifact": "Artefakty",
+  "Config.Target.Stone": "Kamienie",
+  "Config.Target.GoldenLizard": "Złote jaszczurki"
 }

@@ -5,5 +5,12 @@
   "Target.Skill": "技能",
   "Target.Artifact": "神器",
   "Target.Stone": "石块",
-  "Target.GoldenLizard": "金蜥蜴"
+  "Target.GoldenLizard": "金蜥蜴",
+  "Config.Header.Shrines": "祭坛",
+  "Config.Header.Targets": "其他目标",
+  "Config.Target.Essence": "精粹",
+  "Config.Target.Skill": "技能",
+  "Config.Target.Artifact": "神器",
+  "Config.Target.Stone": "石块",
+  "Config.Target.GoldenLizard": "金蜥蜴"
 }

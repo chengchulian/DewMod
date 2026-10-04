@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using TMPro;
 using UnityEngine;
 
 namespace DewRoomGuidance.config;
@@ -43,6 +44,12 @@ public static class LocalizationSource
 
     public static string GetLocalizationText(string key, params object[] args)
     {
+        const string dewUiPrefix = "DewUI:";
+        if (key.StartsWith(dewUiPrefix, StringComparison.Ordinal))
+        {
+            return DewLocalization.GetUIValue(key.Substring(dewUiPrefix.Length));
+        }
+
         string language = DewSave.profileMain != null ? DewSave.profileMain.language : null;
         if (string.IsNullOrEmpty(language))
         {
@@ -60,5 +67,13 @@ public static class LocalizationSource
         }
 
         return args == null || args.Length == 0 ? value : string.Format(value, args);
+    }
+
+    public static void LocalizeUI(Transform root)
+    {
+        foreach (TMP_Text text in root.GetComponentsInChildren<TMP_Text>(true))
+        {
+            text.text = GetLocalizationText(text.text);
+        }
     }
 }

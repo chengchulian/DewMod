@@ -5,5 +5,12 @@
   "Target.Skill": "スキル",
   "Target.Artifact": "アーティファクト",
   "Target.Stone": "石",
-  "Target.GoldenLizard": "黄金トカゲ"
+  "Target.GoldenLizard": "黄金トカゲ",
+  "Config.Header.Shrines": "祭壇",
+  "Config.Header.Targets": "その他の対象",
+  "Config.Target.Essence": "精髄",
+  "Config.Target.Skill": "スキル",
+  "Config.Target.Artifact": "アーティファクト",
+  "Config.Target.Stone": "石",
+  "Config.Target.GoldenLizard": "黄金トカゲ"
 }

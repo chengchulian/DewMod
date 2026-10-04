@@ -39,9 +39,11 @@
     <Reference Include="UnityEngine.CoreModule"><HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\UnityEngine.CoreModule.dll</HintPath></Reference>
     <Reference Include="UnityEngine.IMGUIModule"><HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\UnityEngine.IMGUIModule.dll</HintPath></Reference>
     <Reference Include="UnityEngine.TextRenderingModule"><HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\UnityEngine.TextRenderingModule.dll</HintPath></Reference>
+    <Reference Include="Unity.TextMeshPro"><HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\Unity.TextMeshPro.dll</HintPath></Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="src\DewRoomGuidance.cs" />
+    <Compile Include="src\config\PluginConfig.cs" />
     <Compile Include="src\config\LocalizationSource.cs" />
     <Compile Include="src\ui\RoomGuidanceOverlay.cs" />
     <Compile Include="src\Properties\AssemblyInfo.cs" />

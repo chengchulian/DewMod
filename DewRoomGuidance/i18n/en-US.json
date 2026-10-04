@@ -5,5 +5,12 @@
   "Target.Skill": "Skill",
   "Target.Artifact": "Artifact",
   "Target.Stone": "Stone",
-  "Target.GoldenLizard": "Golden Lizard"
+  "Target.GoldenLizard": "Golden Lizard",
+  "Config.Header.Shrines": "Shrines",
+  "Config.Header.Targets": "Other Targets",
+  "Config.Target.Essence": "Essences",
+  "Config.Target.Skill": "Skills",
+  "Config.Target.Artifact": "Artifacts",
+  "Config.Target.Stone": "Stones",
+  "Config.Target.GoldenLizard": "Golden Lizards"
 }
