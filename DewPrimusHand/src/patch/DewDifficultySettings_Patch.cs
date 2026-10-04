@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Linq;
 using System.Reflection;
 using HarmonyLib;
+using UnityEngine;
 
 namespace DewPrimusHand.patch;
 
@@ -44,42 +46,53 @@ public class DewDifficultySettings_Patch
                         data.ApplyRawMultiplier(DewPrimusHand.Instance.Config.HeroHealMultiplier);
                     }, 100);
 
-                DateTime shieldTimeStamp = DateTime.Now;
+                float shieldTimeStamp = float.NegativeInfinity;
                 entity.takenShieldProcessor.Add(delegate(ref HealData data, Actor from, Entity to)
                 {
-                    if (from is Hero hero2)
+                    bool cooldownTrackedSource = from is Hero shieldSource &&
+                                                 (!DewPrimusHand.Instance.Config.HeroIgnoreShieldCoolDownFromOthers ||
+                                                  hero.owner == shieldSource.owner);
+                    float coolDown = DewPrimusHand.Instance.Config.HeroShieldCoolDownSeconds;
+                    if (cooldownTrackedSource && coolDown > 0f &&
+                        Time.time - shieldTimeStamp < coolDown && data.currentAmount > 0f)
                     {
-                        DewPlayer dewPlayer = hero.owner;
-                        DewPlayer dewPlayer2 = hero2.owner;
-                        if (DewPrimusHand.Instance.Config.HeroShieldCoolDownSeconds > 0.0 &&
-                            (DateTime.Now - shieldTimeStamp).Seconds <
-                            DewPrimusHand.Instance.Config.HeroShieldCoolDownSeconds)
-                        {
-                            if ((!DewPrimusHand.Instance.Config.HeroIgnoreShieldCoolDownFromOthers ||
-                                 dewPlayer == dewPlayer2) &&
-                                data.currentAmount > 0.0)
-                            {
-                                data.ApplyReduction(1f);
-                            }
-                        }
-                        else
-                        {
-                            if (DewPrimusHand.Instance.Config.HeroMaxShieldMultiplier > 0.0)
-                            {
-                                float num = hero.Status.maxHealth *
-                                            DewPrimusHand.Instance.Config.HeroMaxShieldMultiplier -
-                                            hero.Status.currentShield;
-                                if (data.currentAmount > num)
-                                {
-                                    data.ApplyReduction((data.currentAmount - num) / data.currentAmount);
-                                }
-                            }
+                        data.ApplyReduction(1f);
+                        return;
+                    }
 
-                            if (data.currentAmount > 0.0)
-                            {
-                                shieldTimeStamp = DateTime.Now;
-                            }
+                    // 超对称精粹降低英雄最大生命后，其他护盾也沿用精粹按原生命计算的上限。
+                    Gem_L_Supersymmetry supersymmetry = hero.Skill.gems.Values
+                        .OfType<Gem_L_Supersymmetry>()
+                        .FirstOrDefault(gem => gem != null);
+                    bool hasShieldLimit = false;
+                    float maxShield = 0f;
+                    if (supersymmetry != null)
+                    {
+                        maxShield = supersymmetry.maxHealthBeforeReduction *
+                                    supersymmetry.GetValue(supersymmetry.shieldHpRatio);
+                        hasShieldLimit = true;
+                    }
+                    else if (DewPrimusHand.Instance.Config.HeroMaxShieldMultiplier > 0f)
+                    {
+                        maxShield = hero.Status.maxHealth *
+                                    DewPrimusHand.Instance.Config.HeroMaxShieldMultiplier;
+                        hasShieldLimit = true;
+                    }
+
+                    // 精粹自身通过 ProcessShieldAmount 计算此上限，避免把自己的值重复裁剪。
+                    if (from is not Gem_L_Supersymmetry && hasShieldLimit)
+                    {
+                        float remainingShield = maxShield - hero.Status.currentShield;
+                        if (data.currentAmount > remainingShield)
+                        {
+                            data.ApplyReduction((data.currentAmount - Mathf.Max(0f, remainingShield)) /
+                                                data.currentAmount);
                         }
+                    }
+
+                    if (cooldownTrackedSource && coolDown > 0f && data.currentAmount > 0f)
+                    {
+                        shieldTimeStamp = Time.time;
                     }
                 }, 100);
                 break;
