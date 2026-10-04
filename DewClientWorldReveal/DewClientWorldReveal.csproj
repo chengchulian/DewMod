@@ -63,6 +63,7 @@
   <ItemGroup>
     <Content Include="about\description.txt" />
     <Content Include="about\metadata.json" />
+    <Content Include="about\publishedfileid.txt" />
     <Content Include="i18n\en-US.json" />
     <Content Include="i18n\zh-CN.json" />
   </ItemGroup>
