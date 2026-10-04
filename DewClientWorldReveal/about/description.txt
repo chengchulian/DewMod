@@ -1,0 +1,7 @@
+[h1]客机千里眼 / Client World Reveal[/h1]
+
+在自己的地图界面显示所有节点及完整地图标记。只修改本地 UI，不改变房间状态，也不影响其他玩家；客机单独安装即可。
+
+[h2]English[/h2]
+
+Reveal all nodes and full map markers in your local map UI. This only changes local visuals and does not affect the host or other players. Clients can install it independently.

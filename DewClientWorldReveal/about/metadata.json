@@ -1,0 +1,9 @@
+{
+  "id": "com.chengchulian.DewMod.DewClientWorldReveal",
+  "name": "客机千里眼 / Client World Reveal",
+  "author": "chengchulian",
+  "modVer": "1.0.0",
+  "assemblies": [
+    "obj/Release/*.dll"
+  ]
+}
