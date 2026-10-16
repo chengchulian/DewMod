@@ -1,5 +1,0 @@
-[h1]ShieldModDetection[/h1]
-
-Allows cross-platform multiplayer to remain enabled while local mods are installed.
-
-The game's normal gameplay-mod indicator is left unchanged; only the cross-platform mod gate is bypassed.

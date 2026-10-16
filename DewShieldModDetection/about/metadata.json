@@ -1,9 +1,0 @@
-{
-  "id": "com.chengchulian.DewMod.DewShieldModDetection",
-  "name": "ShieldModDetection",
-  "author": "chengchulian",
-  "modVer": "1.0.0",
-  "assemblies": [
-    "obj/Release/*.dll"
-  ]
-}
