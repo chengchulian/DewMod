@@ -19,7 +19,8 @@ public class GameManager_Patch
 
         if (__result > 1)
         {
-            __result = DewPrimusHand.Instance.Config.MaxAndSpawnedPopulationMultiplier;
+            __result = DifficultyMath.SanitizeMultiplier(
+                DewPrimusHand.Instance.Config.MaxAndSpawnedPopulationMultiplier);
         }
     }
     
@@ -30,15 +31,8 @@ public class GameManager_Patch
         GameManager __instance,
         ref float __result)
     {
-        float zi =
-            __instance.difficulty.GetScaledZoneIndexForHealth(customZoneIndex);
-
-        __result *= DewPrimusHand.Instance.Config.LittleMonsterHealthMultiplier;
-
-        __result = DifficultyMath.ExponentialGrowth(
-            zi,
-            __result,
-            DewPrimusHand.Instance.Config.EnemyExtraHealthGrowthMultiplier);
+        ApplyHealthScaling(ref __result, customZoneIndex, __instance,
+            DewPrimusHand.Instance.Config.LittleMonsterHealthMultiplier);
     }
 
 
@@ -49,15 +43,8 @@ public class GameManager_Patch
         GameManager __instance,
         ref float __result)
     {
-        float zi =
-            __instance.difficulty.GetScaledZoneIndexForDamage(customZoneIndex);
-
-        __result *= DewPrimusHand.Instance.Config.LittleMonsterDamageMultiplier;
-
-        __result = DifficultyMath.ExponentialGrowth(
-            zi,
-            __result,
-            DewPrimusHand.Instance.Config.EnemyExtraDamageGrowthMultiplier);
+        ApplyDamageScaling(ref __result, customZoneIndex, __instance,
+            DewPrimusHand.Instance.Config.LittleMonsterDamageMultiplier);
     }
 
     [HarmonyPostfix]
@@ -67,15 +54,8 @@ public class GameManager_Patch
         GameManager __instance,
         ref float __result)
     {
-        float zi =
-            __instance.difficulty.GetScaledZoneIndexForHealth(customZoneIndex);
-
-        __result *= DewPrimusHand.Instance.Config.MiniBossHealthMultiplier;
-
-        __result = DifficultyMath.ExponentialGrowth(
-            zi,
-            __result,
-            DewPrimusHand.Instance.Config.EnemyExtraHealthGrowthMultiplier);
+        ApplyHealthScaling(ref __result, customZoneIndex, __instance,
+            DewPrimusHand.Instance.Config.MiniBossHealthMultiplier);
     }
 
     [HarmonyPostfix]
@@ -85,15 +65,8 @@ public class GameManager_Patch
         GameManager __instance,
         ref float __result)
     {
-        float zi =
-            __instance.difficulty.GetScaledZoneIndexForDamage(customZoneIndex);
-
-        __result *= DewPrimusHand.Instance.Config.MiniBossDamageMultiplier;
-
-        __result = DifficultyMath.ExponentialGrowth(
-            zi,
-            __result,
-            DewPrimusHand.Instance.Config.EnemyExtraDamageGrowthMultiplier);
+        ApplyDamageScaling(ref __result, customZoneIndex, __instance,
+            DewPrimusHand.Instance.Config.MiniBossDamageMultiplier);
     }
 
     [HarmonyPostfix]
@@ -103,15 +76,8 @@ public class GameManager_Patch
         GameManager __instance,
         ref float __result)
     {
-        float zi =
-            __instance.difficulty.GetScaledZoneIndexForHealth(customZoneIndex);
-
-        __result *= DewPrimusHand.Instance.Config.BossHealthMultiplier;
-
-        __result = DifficultyMath.ExponentialGrowth(
-            zi,
-            __result,
-            DewPrimusHand.Instance.Config.EnemyExtraHealthGrowthMultiplier);
+        ApplyHealthScaling(ref __result, customZoneIndex, __instance,
+            DewPrimusHand.Instance.Config.BossHealthMultiplier);
     }
 
     [HarmonyPostfix]
@@ -121,14 +87,29 @@ public class GameManager_Patch
         GameManager __instance,
         ref float __result)
     {
-        float zi =
-            __instance.difficulty.GetScaledZoneIndexForDamage(customZoneIndex);
+        ApplyDamageScaling(ref __result, customZoneIndex, __instance,
+            DewPrimusHand.Instance.Config.BossDamageMultiplier);
+    }
 
-        __result *= DewPrimusHand.Instance.Config.BossDamageMultiplier;
+    private static void ApplyHealthScaling(ref float result, float customZoneIndex,
+        GameManager gameManager, float categoryMultiplier)
+    {
+        float zoneIndex = gameManager.difficulty.GetScaledZoneIndexForHealth(customZoneIndex);
+        result = DifficultyMath.ScaleMultiplier(result, categoryMultiplier);
+        result = DifficultyMath.ExponentialGrowth(
+            zoneIndex,
+            result,
+            DewPrimusHand.Instance.Config.EnemyExtraHealthGrowthMultiplier);
+    }
 
-        __result = DifficultyMath.ExponentialGrowth(
-            zi,
-            __result,
+    private static void ApplyDamageScaling(ref float result, float customZoneIndex,
+        GameManager gameManager, float categoryMultiplier)
+    {
+        float zoneIndex = gameManager.difficulty.GetScaledZoneIndexForDamage(customZoneIndex);
+        result = DifficultyMath.ScaleMultiplier(result, categoryMultiplier);
+        result = DifficultyMath.ExponentialGrowth(
+            zoneIndex,
+            result,
             DewPrimusHand.Instance.Config.EnemyExtraDamageGrowthMultiplier);
     }
 }

@@ -60,6 +60,7 @@ namespace DewPrimusHand.patch
             {
                 state.OriginalAfterSpawn?.Invoke(spawnedEntity);
                 state.OnOriginalSpawned(spawnedEntity);
+                ApplyAfterSpawn(spawnedEntity);
             };
             settings.onFinish = () =>
             {
@@ -82,6 +83,8 @@ namespace DewPrimusHand.patch
                     continue;
                 }
 
+                // 原始 Boss 提前死亡时，游戏会先暂停时间；队列重新占到槽位后要恢复战斗。
+                KeepBossEncounterRunning();
                 state.RemainingExtra--;
                 SpawnExtraBoss(state);
 
@@ -234,7 +237,7 @@ namespace DewPrimusHand.patch
 
         private static void ApplyAfterSpawn(Entity spawnedEntity)
         {
-            if (spawnedEntity == null)
+            if (!IsCountedBoss(spawnedEntity))
                 return;
 
             if (DewPrimusHand.Instance.Config.BossHunterChance > 0)
@@ -254,8 +257,16 @@ namespace DewPrimusHand.patch
                 {
                     if (!spawnedEntity.Status.HasStatusEffect<MirageSkinEffect>())
                     {
-                        var currentZonePool = GameMod_MirageSkin.instance.currentZonePool;
-                        spawnedEntity.CreateStatusEffect(currentZonePool[UnityEngine.Random.Range(0, currentZonePool.Count)].asset, spawnedEntity, new CastInfo(spawnedEntity));
+                        var mirageSkin = GameMod_MirageSkin.instance;
+                        var currentZonePool = mirageSkin?.currentZonePool;
+                        if (currentZonePool != null && currentZonePool.Count > 0)
+                        {
+                            var skin = currentZonePool[UnityEngine.Random.Range(0, currentZonePool.Count)].asset;
+                            if (skin != null)
+                            {
+                                spawnedEntity.CreateStatusEffect(skin, spawnedEntity, new CastInfo(spawnedEntity));
+                            }
+                        }
                     }
                 }
             }
@@ -307,6 +318,9 @@ namespace DewPrimusHand.patch
 
         private static void RecoverStuckInkDarkMoonEclipses()
         {
+            if (NetworkedManagerBase<ActorManager>.instance == null)
+                return;
+
             CleanupInkDarkMoonEclipseTracking();
             InkDarkMoonEclipsesToRecover.Clear();
 
@@ -398,6 +412,15 @@ namespace DewPrimusHand.patch
             InkDarkMoonEclipseStartTimes.Remove(eclipse);
             InkDarkMoonEclipseDeadSequenceStartTimes.Remove(eclipse);
             eclipse.DestroyIfActive();
+        }
+
+        public static void ResetRuntimeState()
+        {
+            _isWatchingInkDarkMoonEclipse = false;
+            InkDarkMoonEclipseStartTimes.Clear();
+            InkDarkMoonEclipseDeadSequenceStartTimes.Clear();
+            StaleInkDarkMoonEclipses.Clear();
+            InkDarkMoonEclipsesToRecover.Clear();
         }
 
         private sealed class BossRoomCoordinator

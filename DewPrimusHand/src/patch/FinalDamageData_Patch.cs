@@ -1,4 +1,5 @@
 ﻿using HarmonyLib;
+using DewPrimusHand.util;
 using UnityEngine;
 
 namespace DewPrimusHand.patch;
@@ -17,7 +18,12 @@ public class FinalDamageData_Patch
             float multiplier = DewPrimusHand.Instance.Config.BossSingleInjuryHealthMultiplier;
             if (multiplier < 0.999f)
             {
-                __instance.amount = Mathf.Min(__instance.amount, victim.Status.maxHealth * multiplier);
+                float cap = victim.Status.maxHealth * DifficultyMath.SanitizeMultiplier(multiplier);
+                if (__instance.amount > cap)
+                {
+                    __instance.discardedAmount += __instance.amount - cap;
+                    __instance.amount = cap;
+                }
             }
         }
     }

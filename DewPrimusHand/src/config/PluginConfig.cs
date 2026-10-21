@@ -132,7 +132,7 @@ public class PluginConfig : ModConfig
     [Header("Header.HeroConfiguration")]
     [LabelText("LabelText.HeroHealMultiplier")]
     [Description("Description.HeroHealMultiplier")]
-    public int HeroHealMultiplier = 1;
+    public float HeroHealMultiplier = 1;
 
     [LabelText("LabelText.HeroMaxShieldMultiplier")]
     [Description("Description.HeroMaxShieldMultiplier")]

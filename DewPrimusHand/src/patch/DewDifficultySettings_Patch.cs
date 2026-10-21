@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
+using DewPrimusHand.util;
 using HarmonyLib;
 using UnityEngine;
 
@@ -13,6 +14,10 @@ public class DewDifficultySettings_Patch
     [HarmonyPatch("ApplyDifficultyModifiers")]
     public static void ApplyDifficultyModifiers_Postfix(DewDifficultySettings __instance, Entity entity)
     {
+        if (entity is IMonsterNoScaling)
+            return;
+
+        var config = DewPrimusHand.Instance.Config;
         switch (entity)
         {
             case Monster monster:
@@ -20,18 +25,18 @@ public class DewDifficultySettings_Patch
                 // 基础数值
                 monster.Status.AddStatBonus(new StatBonus
                 {
-                    movementSpeedPercentage = __instance.enemyMovementSpeedPercentage *
-                                              (DewPrimusHand.Instance.Config.EnemyMovementSpeedMultiplier - 1),
-                    attackSpeedPercentage = __instance.enemyAttackSpeedPercentage *
-                                            (DewPrimusHand.Instance.Config.EnemyAttackSpeedMultiplier - 1),
-                    abilityHasteFlat = __instance.enemyAbilityHasteFlat *
-                                       (DewPrimusHand.Instance.Config.EnemyAbilityHasteFlatMultiplier - 1),
-                    maxHealthPercentage = __instance.enemyHealthPercentage *
-                                          (DewPrimusHand.Instance.Config.EnemyHealthMultiplier - 1),
-                    attackDamagePercentage = __instance.enemyPowerPercentage *
-                                             (DewPrimusHand.Instance.Config.EnemyAttackDamageMultiplier - 1),
-                    abilityPowerPercentage = __instance.enemyPowerPercentage *
-                                             (DewPrimusHand.Instance.Config.EnemyAbilityPowerMultiplier - 1)
+                    movementSpeedPercentage = DifficultyMath.ScaleDifficultyPercentage(
+                        __instance.enemyMovementSpeedPercentage, config.EnemyMovementSpeedMultiplier),
+                    attackSpeedPercentage = DifficultyMath.ScaleDifficultyPercentage(
+                        __instance.enemyAttackSpeedPercentage, config.EnemyAttackSpeedMultiplier),
+                    abilityHasteFlat = DifficultyMath.ScaleDifficultyPercentage(
+                        __instance.enemyAbilityHasteFlat, config.EnemyAbilityHasteFlatMultiplier),
+                    maxHealthPercentage = DifficultyMath.ScaleDifficultyPercentage(
+                        __instance.enemyHealthPercentage, config.EnemyHealthMultiplier),
+                    attackDamagePercentage = DifficultyMath.ScaleDifficultyPercentage(
+                        __instance.enemyPowerPercentage, config.EnemyAttackDamageMultiplier),
+                    abilityPowerPercentage = DifficultyMath.ScaleDifficultyPercentage(
+                        __instance.enemyPowerPercentage, config.EnemyAbilityPowerMultiplier)
                 });
                 // 护甲
                 var zoneIndex = GameManager.instance.difficulty.GetScaledZoneIndexForHealth();
@@ -43,7 +48,8 @@ public class DewDifficultySettings_Patch
                 entity.takenHealProcessor.Add(
                     delegate(ref HealData data, Actor actor, Entity target)
                     {
-                        data.ApplyRawMultiplier(DewPrimusHand.Instance.Config.HeroHealMultiplier);
+                        data.ApplyRawMultiplier(DifficultyMath.SanitizeMultiplier(
+                            DewPrimusHand.Instance.Config.HeroHealMultiplier));
                     }, 100);
 
                 float shieldTimeStamp = float.NegativeInfinity;
@@ -72,10 +78,10 @@ public class DewDifficultySettings_Patch
                                     supersymmetry.GetValue(supersymmetry.shieldHpRatio);
                         hasShieldLimit = true;
                     }
-                    else if (DewPrimusHand.Instance.Config.HeroMaxShieldMultiplier > 0f)
+                    else if (DewPrimusHand.Instance.Config.HeroMaxShieldMultiplier >= 0f)
                     {
-                        maxShield = hero.Status.maxHealth *
-                                    DewPrimusHand.Instance.Config.HeroMaxShieldMultiplier;
+                        maxShield = hero.Status.maxHealth * DifficultyMath.SanitizeMultiplier(
+                            DewPrimusHand.Instance.Config.HeroMaxShieldMultiplier);
                         hasShieldLimit = true;
                     }
 

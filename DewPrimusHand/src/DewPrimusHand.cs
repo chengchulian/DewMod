@@ -1,4 +1,5 @@
 using DewPrimusHand.config;
+using DewPrimusHand.patch;
 using DewPrimusHand.util;
 using UnityEngine;
 
@@ -26,6 +27,11 @@ public class DewPrimusHand : ModBehaviour
     private void OnDestroy()
     {
         harmony.UnpatchAll(harmony.Id);
+        RoomMonsters_Patch.ResetRuntimeState();
+        if (Instance == this)
+        {
+            Instance = null;
+        }
     }
 
     public override void OnConfigChanged()
