@@ -2,7 +2,7 @@
   "Header.Input": "\u8F93\u5165",
   "Header.Targets": "\u76EE\u6807",
   "LabelText.CastKey": "\u5FEB\u6377\u952E",
-  "Description.CastKey": "\u81EA\u52A8\u7784\u51C6\u5E76\u91CA\u653E Q \u4F4D Golden Burst \u7684\u6309\u952E\u3002",
+  "Description.CastKey": "自动识别 Golden Burst 当前技能位并索敌释放的按键，支持位移技能位。",
   "LabelText.HoldToCast": "\u957F\u6309\u91CA\u653E",
   "Description.HoldToCast": "\u5F00\u542F\u540E\u6309\u4F4F\u5FEB\u6377\u952E\u4F1A\u6301\u7EED\u81EA\u52A8\u91CA\u653E\uFF1B\u5173\u95ED\u540E\u6BCF\u6B21\u6309\u4E0B\u53EA\u91CA\u653E\u4E00\u6B21\u3002",
   "LabelText.TargetAllies": "\u5BF9\u961F\u53CB\u91CA\u653E",

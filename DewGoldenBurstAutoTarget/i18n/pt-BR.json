@@ -2,7 +2,7 @@
   "Header.Input": "Entrada",
   "Header.Targets": "Alvos",
   "LabelText.CastKey": "Tecla de atalho",
-  "Description.CastKey": "Tecla usada para mirar automaticamente e lancar Golden Burst no espaco Q.",
+  "Description.CastKey": "Tecla usada para mirar automaticamente e lancar Golden Burst no espaco atual, incluindo o de movimento.",
   "LabelText.HoldToCast": "Segurar para lancar",
   "Description.HoldToCast": "Quando ativado, segurar a tecla continua lancando automaticamente. Quando desativado, cada pressionamento lanca uma vez.",
   "LabelText.TargetAllies": "Lancar em aliados",

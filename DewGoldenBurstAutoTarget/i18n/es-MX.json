@@ -2,7 +2,7 @@
   "Header.Input": "Entrada",
   "Header.Targets": "Objetivos",
   "LabelText.CastKey": "Tecla rapida",
-  "Description.CastKey": "Tecla usada para apuntar automaticamente y lanzar Golden Burst desde la ranura Q.",
+  "Description.CastKey": "Tecla usada para apuntar automaticamente y lanzar Golden Burst desde su ranura actual, incluida la de movimiento.",
   "LabelText.HoldToCast": "Mantener para lanzar",
   "Description.HoldToCast": "Si esta activado, mantener la tecla seguira lanzando automaticamente. Si esta desactivado, cada pulsacion lanza una vez.",
   "LabelText.TargetAllies": "Lanzar en aliados",

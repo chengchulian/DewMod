@@ -2,7 +2,7 @@
   "Header.Input": "\uC785\uB825",
   "Header.Targets": "\uB300\uC0C1",
   "LabelText.CastKey": "\uB2E8\uCD95\uD0A4",
-  "Description.CastKey": "Q \uC2AC\uB86F\uC758 Golden Burst\uB97C \uC790\uB3D9\uC73C\uB85C \uB300\uC0C1 \uC9C0\uC815\uD574 \uC0AC\uC6A9\uD558\uB294 \uD0A4\uC785\uB2C8\uB2E4.",
+  "Description.CastKey": "이동 스킬 슬롯을 포함한 현재 스킬 슬롯에서 Golden Burst를 찾아 자동으로 대상을 지정하고 사용하는 키입니다.",
   "LabelText.HoldToCast": "\uAE38\uAC8C \uB20C\uB7EC \uC0AC\uC6A9",
   "Description.HoldToCast": "\uCF1C\uBA74 \uB2E8\uCD95\uD0A4\uB97C \uB204\uB974\uACE0 \uC788\uB294 \uB3D9\uC548 \uC790\uB3D9 \uC0AC\uC6A9\uC744 \uACC4\uC18D\uD569\uB2C8\uB2E4. \uB044\uBA74 \uB204\uB97C \uB54C\uB9C8\uB2E4 \uD55C \uBC88\uB9CC \uC0AC\uC6A9\uD569\uB2C8\uB2E4.",
   "LabelText.TargetAllies": "\uC544\uAD70\uC5D0\uAC8C \uC0AC\uC6A9",

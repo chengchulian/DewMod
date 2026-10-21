@@ -2,7 +2,7 @@
   "Header.Input": "Input",
   "Header.Targets": "Bersagli",
   "LabelText.CastKey": "Tasto rapido",
-  "Description.CastKey": "Tasto usato per mirare automaticamente e lanciare Golden Burst dallo slot Q.",
+  "Description.CastKey": "Tasto usato per mirare automaticamente e lanciare Golden Burst dal suo slot attuale, incluso quello di movimento.",
   "LabelText.HoldToCast": "Tieni premuto per lanciare",
   "Description.HoldToCast": "Se attivo, tenere premuto il tasto continua a lanciare automaticamente. Se disattivo, ogni pressione lancia una volta.",
   "LabelText.TargetAllies": "Lancia sugli alleati",

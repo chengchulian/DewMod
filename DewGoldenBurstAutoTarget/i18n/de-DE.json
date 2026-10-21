@@ -2,7 +2,7 @@
   "Header.Input": "Eingabe",
   "Header.Targets": "Ziele",
   "LabelText.CastKey": "Hotkey",
-  "Description.CastKey": "Taste zum automatischen Anvisieren und Wirken von Golden Burst im Q-Slot.",
+  "Description.CastKey": "Taste zum automatischen Anvisieren und Wirken von Golden Burst aus dem aktuellen Skill-Slot, einschliesslich des Bewegungsslots.",
   "LabelText.HoldToCast": "Zum Wirken Halten",
   "Description.HoldToCast": "Wenn aktiviert, wirkt das Halten des Hotkeys automatisch weiter. Wenn deaktiviert, wirkt jeder Tastendruck einmal.",
   "LabelText.TargetAllies": "Auf Verbuendete Wirken",

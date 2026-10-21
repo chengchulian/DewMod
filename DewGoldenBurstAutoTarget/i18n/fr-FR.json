@@ -2,7 +2,7 @@
   "Header.Input": "Entree",
   "Header.Targets": "Cibles",
   "LabelText.CastKey": "Raccourci",
-  "Description.CastKey": "Touche utilisee pour cibler automatiquement et lancer Golden Burst depuis l emplacement Q.",
+  "Description.CastKey": "Touche utilisee pour cibler automatiquement et lancer Golden Burst depuis son emplacement actuel, y compris celui de deplacement.",
   "LabelText.HoldToCast": "Maintenir pour lancer",
   "Description.HoldToCast": "Si active, maintenir le raccourci lance automatiquement en continu. Sinon, chaque pression lance une fois.",
   "LabelText.TargetAllies": "Lancer sur les allies",

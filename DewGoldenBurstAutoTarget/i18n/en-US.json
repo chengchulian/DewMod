@@ -2,7 +2,7 @@
   "Header.Input": "Input",
   "Header.Targets": "Targets",
   "LabelText.CastKey": "Hotkey",
-  "Description.CastKey": "Key used to auto-target and cast Golden Burst from the Q slot.",
+  "Description.CastKey": "Key used to auto-target and cast Golden Burst from its current skill slot, including the movement slot.",
   "LabelText.HoldToCast": "Hold to Cast",
   "Description.HoldToCast": "When enabled, holding the hotkey keeps casting automatically. When disabled, each key press casts once.",
   "LabelText.TargetAllies": "Cast on Allies",

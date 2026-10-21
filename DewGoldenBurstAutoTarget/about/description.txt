@@ -1,8 +1,9 @@
 金色爆发自动瞄准
 
-自动寻找最近的已启用目标，并从 Q 技能位释放 Golden Burst（金色爆发）。
+自动寻找最近的已启用目标，识别 Golden Burst（金色爆发）当前所在技能位并释放。
 
 功能：
+- 自动识别全部技能位，包括特性与位移技能位
 - 可配置快捷键
 - 支持长按连续释放
 - 可选择目标类型：队友、小怪、BOSS、石头
@@ -14,9 +15,10 @@
 
 Golden Burst Auto Target
 
-Automatically finds the nearest configured target and casts Golden Burst from the Q slot.
+Automatically finds the nearest configured target and casts Golden Burst from its current skill slot.
 
 Features:
+- Detects Golden Burst in any skill slot, including identity and movement slots
 - Configurable hotkey
 - Hold-to-cast mode
 - Optional target categories: allies, monsters, bosses, and stones
