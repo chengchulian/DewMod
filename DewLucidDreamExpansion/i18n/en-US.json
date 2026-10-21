@@ -1,0 +1,20 @@
+{
+  "LucidDream_AstronomyMaster_Name": "Astronomy Master",
+  "LucidDream_AstronomyMaster_Description": "After defeating each lord, choose one of three constellations you do not carry at an Enlightenment shrine. Only your selected hero's constellations and universal constellations are offered. Each traveler chooses independently. The constellation is granted at maximum level for the rest of this run.",
+  "LucidDream_Telescope_Name": "Telescope",
+  "LucidDream_Telescope_Description": "Fully reveal map nodes within two steps of your current location.",
+  "LucidDream_ResourceInversion_Name": "Resource Inversion",
+  "LucidDream_ResourceInversion_Description": "Gold gained becomes an equal amount of Dream Dust, and Dream Dust gained becomes Gold.",
+  "LucidDream_PrimordialCurse_Name": "The Primordial Curse",
+  "LucidDream_PrimordialCurse_Description": "Memories obtained this run start at level 1 and essences at 40% quality, including drops, rewards, and shop purchases. Normal upgrades and merges are unaffected.",
+  "LucidDream_FallenStarGod_Name": "Fall of the Star God",
+  "LucidDream_FallenStarGod_Description": "All constellations carried by travelers are weakened to at most 50% strength.",
+  "LucidDream_HeavyFootsteps_Name": "Heavy Footsteps",
+  "LucidDream_HeavyFootsteps_Description": "Dodge skill cooldown is increased by 50%.",
+  "Shrine_Astronomy_Name": "Constellation Enlightenment Shrine",
+  "InGame_ChoiceShrine_Shrine_Astronomy": "Choose a constellation",
+  "Astronomy_NoStars": "All applicable constellations are already carried",
+  "Limbo_Penalty_Depth7": "Requires 7 evil lucid dreams.",
+  "Limbo_Penalty_Depth8": "Requires 8 evil lucid dreams.",
+  "Limbo_Penalty_Depth9": "Requires 9 evil lucid dreams."
+}

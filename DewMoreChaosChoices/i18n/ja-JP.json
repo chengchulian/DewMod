@@ -1,0 +1,13 @@
+{
+  "Header.Choices": "混沌の追加選択肢（ホストのみ導入）",
+  "LabelText.ExtraCommonChaosChoices": "コモン品質の混沌の追加選択肢数",
+  "Description.ExtraCommonChaosChoices": "コモン品質の混沌で、元の選択肢数とタレントのボーナスに加算する数です。初期値：3、最小値：0。0では追加しません。この品質の報酬候補数が上限で、獲得できる報酬は1つです。新しく生成される祭壇に適用されます。",
+  "LabelText.ExtraRareChaosChoices": "レア品質の混沌の追加選択肢数",
+  "Description.ExtraRareChaosChoices": "レア品質の混沌に追加する選択肢数を個別に設定します。初期値：3、最小値：0。元の数とタレントのボーナスに加算され、この品質の報酬候補数が上限です。獲得できる報酬は1つです。",
+  "LabelText.ExtraEpicChaosChoices": "エピック品質の混沌の追加選択肢数",
+  "Description.ExtraEpicChaosChoices": "エピック品質の混沌に追加する選択肢数を個別に設定します。初期値：3、最小値：0。元の数とタレントのボーナスに加算され、この品質の報酬候補数が上限です。獲得できる報酬は1つです。",
+  "LabelText.ExtraLegendaryChaosChoices": "レジェンダリー品質の混沌の追加選択肢数",
+  "Description.ExtraLegendaryChaosChoices": "レジェンダリー品質の混沌に追加する選択肢数を個別に設定します。初期値：3、最小値：0。元の数とタレントのボーナスに加算され、この品質の報酬候補数が上限です。獲得できる報酬は1つです。",
+  "LabelText.ExtraCorruptedChaosChoices": "堕落した混沌の追加選択肢数",
+  "Description.ExtraCorruptedChaosChoices": "堕落した混沌に追加する選択肢数を個別に設定します。初期値：3、最小値：0。元の数とタレントのボーナスに加算され、利用可能な報酬候補数が上限です。獲得できる報酬は1つです。ホストの設定のみ適用されます。"
+}

@@ -1,0 +1,13 @@
+{
+  "Header.Choices": "Choix de chaos supplémentaires (hôte uniquement)",
+  "LabelText.ExtraCommonChaosChoices": "Choix supplémentaires de chaos commun",
+  "Description.ExtraCommonChaosChoices": "Choix supplémentaires de chaos commun, ajoutés au nombre d'origine et aux bonus de talents. Par défaut : 3. Minimum : 0. La valeur 0 n'ajoute aucun choix. Le total est limité aux récompenses de cette rareté ; une seule récompense à choisir. S'applique aux nouveaux sanctuaires.",
+  "LabelText.ExtraRareChaosChoices": "Choix supplémentaires de chaos rare",
+  "Description.ExtraRareChaosChoices": "Choix supplémentaires de chaos rare, réglables séparément. Par défaut : 3. Minimum : 0. S'ajoutent au nombre d'origine et aux bonus de talents, dans la limite des récompenses de cette rareté. Une seule récompense à choisir.",
+  "LabelText.ExtraEpicChaosChoices": "Choix supplémentaires de chaos épique",
+  "Description.ExtraEpicChaosChoices": "Choix supplémentaires de chaos épique, réglables séparément. Par défaut : 3. Minimum : 0. S'ajoutent au nombre d'origine et aux bonus de talents, dans la limite des récompenses de cette rareté. Une seule récompense à choisir.",
+  "LabelText.ExtraLegendaryChaosChoices": "Choix supplémentaires de chaos légendaire",
+  "Description.ExtraLegendaryChaosChoices": "Choix supplémentaires de chaos légendaire, réglables séparément. Par défaut : 3. Minimum : 0. S'ajoutent au nombre d'origine et aux bonus de talents, dans la limite des récompenses de cette rareté. Une seule récompense à choisir.",
+  "LabelText.ExtraCorruptedChaosChoices": "Choix supplémentaires de chaos corrompu",
+  "Description.ExtraCorruptedChaosChoices": "Choix supplémentaires de chaos corrompu, réglables séparément. Par défaut : 3. Minimum : 0. S'ajoutent au nombre d'origine et aux bonus de talents, dans la limite des récompenses disponibles. Une seule récompense à choisir. Seuls les réglages de l'hôte s'appliquent."
+}

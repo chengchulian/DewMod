@@ -1,0 +1,7 @@
+{
+  "id": "com.chengchulian.DewMod.DewLucidDreamExpansion",
+  "name": "清醒梦拓展/Lucid Dream Expansion",
+  "author": "chengchulian",
+  "modVer": "1.0.0",
+  "assemblies": ["obj/Release/*.dll"]
+}

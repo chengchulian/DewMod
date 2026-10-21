@@ -1,0 +1,13 @@
+商店共享 / Shop Share
+
+只需房主安装，客机无需安装。任何玩家用游戏原有标记功能标记商店中的在售商品后，同款商品会追加到其他玩家在该商人的商品列表中，原有商品保持原样。
+
+每人独立库存，复制标记时的剩余数量、等级/品质、基础价格和商品附加数据，购买仍按原版规则扣款及计算个人折扣。重复标记原商品或共享副本均不会追加副本。
+
+共享条目在当前商人存续期间保留。刷新只更新自己的原有商品，共享条目及已消耗数量保留；后加入玩家也会获得当前商人的共享商品。更换商人后重新标记。
+
+共享来源记录保存在房主本次运行的内存中；退出后读档时，已保存商品由游戏恢复，但共享来源记录重新开始。
+
+Host installation only; clients need no mod. Ping an in-stock shop item using the game's normal ping action to add a copy to every other player's inventory at that merchant. Each player has independent stock and pays using the original purchase rules and personal discounts. Repeated pings of an original or shared copy do not add duplicates.
+
+Shared offers and each player's remaining stock survive personal shop refreshes while the merchant exists. Late joiners receive the shared offers too. Share provenance lasts for the current host session; saved merchandise follows the game's normal save system.

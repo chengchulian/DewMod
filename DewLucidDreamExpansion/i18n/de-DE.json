@@ -1,0 +1,20 @@
+{
+  "LucidDream_AstronomyMaster_Name": "Meister der Astronomie",
+  "LucidDream_AstronomyMaster_Description": "Wähle nach jedem besiegten Fürsten an einem Schrein der Erleuchtung eines von drei Sternbildern, die du noch nicht trägst. Angeboten werden nur Sternbilder deines gewählten Helden und universelle Sternbilder. Jeder Reisende wählt unabhängig. Das Sternbild wird für den Rest dieses Durchlaufs auf der Höchststufe gewährt.",
+  "LucidDream_Telescope_Name": "Teleskop",
+  "LucidDream_Telescope_Description": "Deckt alle Kartenknoten im Umkreis von zwei Schritten um deinen aktuellen Standort vollständig auf.",
+  "LucidDream_ResourceInversion_Name": "Ressourcenumkehr",
+  "LucidDream_ResourceInversion_Description": "Erhaltenes Gold wird in die gleiche Menge Traumstaub umgewandelt und erhaltener Traumstaub in Gold.",
+  "LucidDream_PrimordialCurse_Name": "Der ursprüngliche Fluch",
+  "LucidDream_PrimordialCurse_Description": "In diesem Durchlauf erhaltene Erinnerungen beginnen auf Stufe 1 und Essenzen mit 40% Qualität. Dies gilt für Beute, Belohnungen und Käufe im Laden. Normale Verbesserungen und Verschmelzungen bleiben unverändert.",
+  "LucidDream_FallenStarGod_Name": "Fall des Sternengottes",
+  "LucidDream_FallenStarGod_Description": "Alle von Reisenden getragenen Sternbilder werden auf höchstens 50% ihrer Stärke geschwächt.",
+  "LucidDream_HeavyFootsteps_Name": "Schwere Schritte",
+  "LucidDream_HeavyFootsteps_Description": "Die Abklingzeit der Ausweichfähigkeit wird um 50% erhöht.",
+  "Shrine_Astronomy_Name": "Schrein der Sternbilder-Erleuchtung",
+  "InGame_ChoiceShrine_Shrine_Astronomy": "Wähle ein Sternbild",
+  "Astronomy_NoStars": "Alle geeigneten Sternbilder werden bereits getragen",
+  "Limbo_Penalty_Depth7": "Erfordert 7 böse Klarträume.",
+  "Limbo_Penalty_Depth8": "Erfordert 8 böse Klarträume.",
+  "Limbo_Penalty_Depth9": "Erfordert 9 böse Klarträume."
+}

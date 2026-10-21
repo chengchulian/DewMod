@@ -1,0 +1,13 @@
+{
+  "Header.Choices": "混沌額外選項（僅房主安裝）",
+  "LabelText.ExtraCommonChaosChoices": "普通品質混沌額外選項數量",
+  "Description.ExtraCommonChaosChoices": "普通品質混沌在原版數量和天賦加成之上額外增加的選項，預設 3，最小 0。設為 0 時不額外增加，以該品質獎勵池為上限，每次仍選 1 項。僅影響新生成的混沌。",
+  "LabelText.ExtraRareChaosChoices": "稀有品質混沌額外選項數量",
+  "Description.ExtraRareChaosChoices": "稀有品質混沌獨立設定的額外選項，預設 3，最小 0。疊加原版數量和天賦加成，以該品質獎勵池為上限，每次仍選 1 項。",
+  "LabelText.ExtraEpicChaosChoices": "史詩品質混沌額外選項數量",
+  "Description.ExtraEpicChaosChoices": "史詩品質混沌獨立設定的額外選項，預設 3，最小 0。疊加原版數量和天賦加成，以該品質獎勵池為上限，每次仍選 1 項。",
+  "LabelText.ExtraLegendaryChaosChoices": "傳說品質混沌額外選項數量",
+  "Description.ExtraLegendaryChaosChoices": "傳說品質混沌獨立設定的額外選項，預設 3，最小 0。疊加原版數量和天賦加成，以該品質獎勵池為上限，每次仍選 1 項。",
+  "LabelText.ExtraCorruptedChaosChoices": "墮落混沌額外選項數量",
+  "Description.ExtraCorruptedChaosChoices": "墮落混沌獨立設定的額外展示數量，預設 3，最小 0。疊加原版數量和天賦加成，以該英雄可用獎勵池為上限，每次仍選 1 項。僅房主設定生效。"
+}

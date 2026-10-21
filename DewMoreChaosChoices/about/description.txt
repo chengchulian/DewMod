@@ -1,0 +1,25 @@
+更多混沌选择 / More Chaos Choices
+
+仅房主安装。按普通、稀有、史诗、传说四种品质分别设置混沌额外选项，堕落混沌独立设置。五项默认各增加 3 项，每次仍领取 1 个奖励。
+
+配置：
+- 普通品质混沌额外选项数量：默认 3，最小 0，保留原来的 ExtraChaosChoices 配置键。
+- 稀有品质混沌额外选项数量：独立设置，默认 3，最小 0。
+- 史诗品质混沌额外选项数量：独立设置，默认 3，最小 0。
+- 传说品质混沌额外选项数量：独立设置，默认 3，最小 0。
+- 堕落混沌额外选项数量：独立设置，默认 3，最小 0。
+- 设为 0 时不额外增加。例如原版 3 项、配置额外 2 项、天赋加成 1 项，最终展示 6 项。
+
+天赋提供的额外选项继续叠加。实际数量以当前奖励池为上限，按原版规则无放回抽取，保留堕落混沌权重和近战英雄筛选。
+原版普通混沌通常有 6 项（普通/稀有）或 8 项（史诗/传说）；堕落混沌通常有 12 项，近战英雄通常为 11 项。
+
+联机时使用房主配置，通过原版奖励同步分发给玩家，客户端无需安装。所有玩家使用原版选项界面，较大数量的布局表现以原版界面和屏幕空间为准。
+配置修改仅影响后续新生成的混沌，已生成与存档恢复的奖励保持原样。
+配置界面支持仓库全部 13 种语言：简体中文、繁体中文、英文、德语、西班牙语、法语、意大利语、日语、韩语、波兰语、巴西葡萄牙语、俄语和土耳其语。
+
+Host installation only. Configure extra choices separately for common, rare, epic and legendary chaos, plus corrupted chaos. All five default to +3; zero adds no choices. Choose one reward per shrine.
+Talent bonuses still add choices. Counts are capped at each player's eligible reward pool, preserving vanilla randomness, corrupted weights and melee filtering.
+Total choices = vanilla base + talent bonuses + configured extras, capped at the eligible pool.
+The host synchronizes rewards through the original game protocol. Clients need no mod. All players use the vanilla choice window and its layout limits.
+Changes apply to newly generated shrines. Existing and restored reward lists are preserved.
+Configuration text is available in all 13 repository languages: Simplified Chinese, Traditional Chinese, English, German, Spanish, French, Italian, Japanese, Korean, Polish, Brazilian Portuguese, Russian and Turkish.

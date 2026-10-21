@@ -1,0 +1,13 @@
+{
+  "Header.Choices": "혼돈 추가 선택지 (호스트만 설치)",
+  "LabelText.ExtraCommonChaosChoices": "일반 등급 혼돈 추가 선택지 수",
+  "Description.ExtraCommonChaosChoices": "일반 등급 혼돈의 기존 선택지 수와 특성 보너스에 더할 선택지 수입니다. 기본값: 3. 최솟값: 0. 0이면 추가하지 않습니다. 해당 등급의 보상 후보 수가 상한이며, 보상은 하나만 선택합니다. 새로 생성되는 제단에 적용됩니다.",
+  "LabelText.ExtraRareChaosChoices": "희귀 등급 혼돈 추가 선택지 수",
+  "Description.ExtraRareChaosChoices": "희귀 등급 혼돈의 추가 선택지 수를 별도로 설정합니다. 기본값: 3. 최솟값: 0. 기존 수와 특성 보너스에 더하며, 해당 등급의 보상 후보 수가 상한입니다. 보상은 하나만 선택합니다.",
+  "LabelText.ExtraEpicChaosChoices": "영웅 등급 혼돈 추가 선택지 수",
+  "Description.ExtraEpicChaosChoices": "영웅 등급 혼돈의 추가 선택지 수를 별도로 설정합니다. 기본값: 3. 최솟값: 0. 기존 수와 특성 보너스에 더하며, 해당 등급의 보상 후보 수가 상한입니다. 보상은 하나만 선택합니다.",
+  "LabelText.ExtraLegendaryChaosChoices": "전설 등급 혼돈 추가 선택지 수",
+  "Description.ExtraLegendaryChaosChoices": "전설 등급 혼돈의 추가 선택지 수를 별도로 설정합니다. 기본값: 3. 최솟값: 0. 기존 수와 특성 보너스에 더하며, 해당 등급의 보상 후보 수가 상한입니다. 보상은 하나만 선택합니다.",
+  "LabelText.ExtraCorruptedChaosChoices": "타락한 혼돈 추가 선택지 수",
+  "Description.ExtraCorruptedChaosChoices": "타락한 혼돈의 추가 선택지 수를 별도로 설정합니다. 기본값: 3. 최솟값: 0. 기존 수와 특성 보너스에 더하며, 사용 가능한 보상 후보 수가 상한입니다. 보상은 하나만 선택합니다. 호스트의 설정만 적용됩니다."
+}

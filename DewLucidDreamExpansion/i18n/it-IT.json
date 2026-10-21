@@ -1,0 +1,20 @@
+{
+  "LucidDream_AstronomyMaster_Name": "Maestro di astronomia",
+  "LucidDream_AstronomyMaster_Description": "Dopo aver sconfitto ogni signore, scegli presso un santuario dell'illuminazione una fra tre costellazioni che non possiedi ancora. Vengono offerte solo le costellazioni del tuo eroe selezionato e quelle universali. Ogni viaggiatore sceglie indipendentemente. La costellazione viene concessa al livello massimo per il resto della partita.",
+  "LucidDream_Telescope_Name": "Telescopio",
+  "LucidDream_Telescope_Description": "Rivela completamente i nodi della mappa entro due passi dalla tua posizione attuale.",
+  "LucidDream_ResourceInversion_Name": "Inversione delle risorse",
+  "LucidDream_ResourceInversion_Description": "L'oro ottenuto diventa una quantità equivalente di polvere onirica e la polvere onirica ottenuta diventa oro.",
+  "LucidDream_PrimordialCurse_Name": "La maledizione primordiale",
+  "LucidDream_PrimordialCurse_Description": "I ricordi ottenuti in questa partita iniziano al livello 1 e le essenze con il 40% di qualità, inclusi bottino, ricompense e acquisti nei negozi. I normali potenziamenti e le fusioni restano invariati.",
+  "LucidDream_FallenStarGod_Name": "Caduta del dio delle stelle",
+  "LucidDream_FallenStarGod_Description": "Tutte le costellazioni possedute dai viaggiatori vengono indebolite fino a un massimo del 50% della loro potenza.",
+  "LucidDream_HeavyFootsteps_Name": "Passi pesanti",
+  "LucidDream_HeavyFootsteps_Description": "Il tempo di ricarica dell'abilità di schivata aumenta del 50%.",
+  "Shrine_Astronomy_Name": "Santuario dell'illuminazione delle costellazioni",
+  "InGame_ChoiceShrine_Shrine_Astronomy": "Scegli una costellazione",
+  "Astronomy_NoStars": "Possiedi già tutte le costellazioni compatibili",
+  "Limbo_Penalty_Depth7": "Richiede 7 sogni lucidi malvagi.",
+  "Limbo_Penalty_Depth8": "Richiede 8 sogni lucidi malvagi.",
+  "Limbo_Penalty_Depth9": "Richiede 9 sogni lucidi malvagi."
+}

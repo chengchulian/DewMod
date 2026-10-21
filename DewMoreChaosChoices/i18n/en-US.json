@@ -1,0 +1,13 @@
+{
+  "Header.Choices": "Extra Chaos Choices (Host Only)",
+  "LabelText.ExtraCommonChaosChoices": "Extra common chaos choices",
+  "Description.ExtraCommonChaosChoices": "Extra choices for common chaos, added to the vanilla count and talent bonuses. Default: 3. Minimum: 0. Zero adds no choices. Capped at this rarity's pool; choose one reward. Applies to newly generated shrines.",
+  "LabelText.ExtraRareChaosChoices": "Extra rare chaos choices",
+  "Description.ExtraRareChaosChoices": "Independent extra choices for rare chaos. Default: 3. Minimum: 0. Added to the vanilla count and talent bonuses, capped at this rarity's pool. Choose one reward.",
+  "LabelText.ExtraEpicChaosChoices": "Extra epic chaos choices",
+  "Description.ExtraEpicChaosChoices": "Independent extra choices for epic chaos. Default: 3. Minimum: 0. Added to the vanilla count and talent bonuses, capped at this rarity's pool. Choose one reward.",
+  "LabelText.ExtraLegendaryChaosChoices": "Extra legendary chaos choices",
+  "Description.ExtraLegendaryChaosChoices": "Independent extra choices for legendary chaos. Default: 3. Minimum: 0. Added to the vanilla count and talent bonuses, capped at this rarity's pool. Choose one reward.",
+  "LabelText.ExtraCorruptedChaosChoices": "Extra corrupted chaos choices",
+  "Description.ExtraCorruptedChaosChoices": "Independent extra choices for corrupted chaos. Default: 3. Minimum: 0. Added to the vanilla count and talent bonuses, capped at eligible rewards. Choose one reward. Only the host's settings apply."
+}

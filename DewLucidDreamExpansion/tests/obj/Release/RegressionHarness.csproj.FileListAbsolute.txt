@@ -1,0 +1,6 @@
+D:\dev\RiderProjects\DewMod\DewLucidDreamExpansion\tests\bin\Release\LucidDreamExpansion.RegressionTests.exe
+D:\dev\RiderProjects\DewMod\DewLucidDreamExpansion\tests\obj\Release\RegressionHarness.csproj.AssemblyReference.cache
+D:\dev\RiderProjects\DewMod\DewLucidDreamExpansion\tests\obj\Release\RegressionHarness.csproj.CoreCompileInputs.cache
+D:\dev\RiderProjects\DewMod\DewLucidDreamExpansion\tests\obj\Release\LucidDreamExpansion.RegressionTests.exe
+D:\dev\RiderProjects\DewMod\DewLucidDreamExpansion\tests\bin\Release\0Harmony.dll
+D:\dev\RiderProjects\DewMod\DewLucidDreamExpansion\tests\obj\Release\Regressi.C7D45EC2.Up2Date

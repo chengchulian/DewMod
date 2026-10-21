@@ -1,0 +1,13 @@
+{
+  "Header.Choices": "Opções extras de caos (somente anfitrião)",
+  "LabelText.ExtraCommonChaosChoices": "Opções extras de caos comum",
+  "Description.ExtraCommonChaosChoices": "Opções extras de caos comum, somadas à quantidade original e aos bônus de talentos. Padrão: 3. Mínimo: 0. O valor 0 não adiciona opções. O limite é o conjunto de recompensas desta raridade; escolha apenas uma recompensa. Aplica-se aos novos santuários.",
+  "LabelText.ExtraRareChaosChoices": "Opções extras de caos raro",
+  "Description.ExtraRareChaosChoices": "Opções extras de caos raro, configuráveis separadamente. Padrão: 3. Mínimo: 0. Somadas à quantidade original e aos bônus de talentos, limitadas às recompensas desta raridade. Escolha apenas uma recompensa.",
+  "LabelText.ExtraEpicChaosChoices": "Opções extras de caos épico",
+  "Description.ExtraEpicChaosChoices": "Opções extras de caos épico, configuráveis separadamente. Padrão: 3. Mínimo: 0. Somadas à quantidade original e aos bônus de talentos, limitadas às recompensas desta raridade. Escolha apenas uma recompensa.",
+  "LabelText.ExtraLegendaryChaosChoices": "Opções extras de caos lendário",
+  "Description.ExtraLegendaryChaosChoices": "Opções extras de caos lendário, configuráveis separadamente. Padrão: 3. Mínimo: 0. Somadas à quantidade original e aos bônus de talentos, limitadas às recompensas desta raridade. Escolha apenas uma recompensa.",
+  "LabelText.ExtraCorruptedChaosChoices": "Opções extras de caos corrompido",
+  "Description.ExtraCorruptedChaosChoices": "Opções extras de caos corrompido, configuráveis separadamente. Padrão: 3. Mínimo: 0. Somadas à quantidade original e aos bônus de talentos, limitadas às recompensas disponíveis. Escolha apenas uma recompensa. Apenas as configurações do anfitrião são aplicadas."
+}

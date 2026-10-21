@@ -1,0 +1,20 @@
+{
+  "LucidDream_AstronomyMaster_Name": "Mistrz astronomii",
+  "LucidDream_AstronomyMaster_Description": "Po pokonaniu każdego władcy wybierz w sanktuarium oświecenia jedną z trzech konstelacji, których jeszcze nie posiadasz. Dostępne są tylko konstelacje wybranego bohatera i konstelacje uniwersalne. Każdy podróżnik wybiera niezależnie. Konstelacja zostaje przyznana na maksymalnym poziomie do końca tej rozgrywki.",
+  "LucidDream_Telescope_Name": "Teleskop",
+  "LucidDream_Telescope_Description": "Całkowicie odkrywa węzły mapy oddalone o najwyżej dwa kroki od bieżącej pozycji.",
+  "LucidDream_ResourceInversion_Name": "Odwrócenie zasobów",
+  "LucidDream_ResourceInversion_Description": "Zdobyte złoto zamienia się w taką samą ilość pyłu snów, a zdobyty pył snów zamienia się w złoto.",
+  "LucidDream_PrimordialCurse_Name": "Pierwotna klątwa",
+  "LucidDream_PrimordialCurse_Description": "Wspomnienia zdobyte w tej rozgrywce zaczynają na poziomie 1, a esencje mają początkową jakość 40%. Dotyczy to łupów, nagród i zakupów w sklepie. Zwykłe ulepszanie i łączenie pozostają bez zmian.",
+  "LucidDream_FallenStarGod_Name": "Upadek boga gwiazd",
+  "LucidDream_FallenStarGod_Description": "Wszystkie konstelacje posiadane przez podróżników zostają osłabione do najwyżej 50% mocy.",
+  "LucidDream_HeavyFootsteps_Name": "Ciężkie kroki",
+  "LucidDream_HeavyFootsteps_Description": "Czas odnowienia umiejętności uniku wydłuża się o 50%.",
+  "Shrine_Astronomy_Name": "Sanktuarium oświecenia konstelacji",
+  "InGame_ChoiceShrine_Shrine_Astronomy": "Wybierz konstelację",
+  "Astronomy_NoStars": "Posiadasz już wszystkie pasujące konstelacje",
+  "Limbo_Penalty_Depth7": "Wymaga 7 złych świadomych snów.",
+  "Limbo_Penalty_Depth8": "Wymaga 8 złych świadomych snów.",
+  "Limbo_Penalty_Depth9": "Wymaga 9 złych świadomych snów."
+}

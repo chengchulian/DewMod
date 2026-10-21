@@ -85,7 +85,7 @@ Dew<ModName>/src/util/*.cs                    # 公共工具
 | `DewAttackSpeedConvertDamage` | 攻速上限转增伤 / AttackSpeedConvertDamage | 1.1.0 | 房主侧限制攻速上限，并将溢出攻速转换为伤害加成。 |
 | `DewBootcamp` | 训练营 | 1.1.0 | 生成测试单位，方便测试 DPS 与 build。 |
 | `DewGemSlotCount` | 精华槽数量 / SkillGemCount | 1.4.0 | 调整技能基础精华槽数量，以及堕落混沌可增加到的上限。 |
-| `DewGoldenBurstAutoTarget` | Golden Burst Auto Target（金色爆发自动瞄准） | 1.0.0 | 自动选择目标并从 Q 技能位释放 Golden Burst。 |
+| `DewGoldenBurstAutoTarget` | Golden Burst Auto Target（金色爆发自动瞄准） | 1.0.0 | 自动选择目标，识别 Golden Burst 当前所在技能位（含位移位）并释放。 |
 | `DewHeroSkillJonas` | 出售英雄技能的乔纳斯 | 1.0.0 | 在礼物房间加入额外商人，用于出售英雄技能。 |
 | `DewIdentityChange` | 转职 / IdentityChange | 1.3.0 | 允许英雄装备其他角色技能、使用跨角色天赋，并可将角色技能加入全局掉落池。 |
 | `DewJonasEnhance` | 商人乔纳斯增强 / JonasEnhance | 1.1.2 | 增强乔纳斯商店，支持商品刷新、列数和初始白金币等配置。 |
@@ -93,9 +93,11 @@ Dew<ModName>/src/util/*.cs                    # 公共工具
 | `DewLobbyListEnhance` | 大厅列表增强 | 1.0 | 为大厅列表增加难度筛选和状态信息。 |
 | `DewModConfigListSupport` | Mod配置界面列表支持 / ModConfigListSupport | 1.0.0 | 为 Mod 配置界面增加 `List` 类型支持。 |
 | `DewMorePlayers` | 更多的玩家人数 / MorePlayers | 1.0.1 | 房主侧自定义玩家数量。 |
+| `DewMoreChaosChoices` | 更多混沌选择 / More Chaos Choices | 1.0.0 | 仅房主安装，按普通、稀有、史诗、传说品质独立配置额外选项，堕落混沌单独设置，每次仍选 1 项。 |
 | `DewMoreVision` | 无限视距 / MoreVision | 1.1.0 | 客户端扩展摄像机视野范围，并支持调整缩放步长。 |
 | `DewPrimusHand` | 普里穆斯之手 / PrimusHand | 1.2.0 | 调整怪物、Boss 与战斗强度相关参数。 |
 | `DewRoomGuidance` | 房间指引 / Room Guidance | 1.0.0 | 显示屏幕外可用祭坛及未拾取宝石、技能和神器的方向。 |
+| `DewShopShare` | 商店共享 / Shop Share | 1.0.0 | 仅房主安装，将玩家标记的商品追加到所有人的当前商店，每人独立库存。 |
 | `DewSafeShare` | SafeShare / 安全共享 | 1.0.0 | 掉落物在玩家主动标记前仅所有者可见。 |
 | `DewShieldModDetection` | ShieldModDetection | 1.0.0 | 安装本地 Mod 时允许跨平台联机，保留原有玩法 Mod 标识。 |
 | `DewSuperSmart` | SuperSmart 超级智能 | 1.0.0 | 显示攻击/技能范围和怪物/飞弹威胁区域，支持按住闪避键自动规避。 |

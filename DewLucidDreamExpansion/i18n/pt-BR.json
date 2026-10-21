@@ -1,0 +1,20 @@
+{
+  "LucidDream_AstronomyMaster_Name": "Mestre da astronomia",
+  "LucidDream_AstronomyMaster_Description": "Após derrotar cada senhor, escolha em um santuário da iluminação uma entre três constelações que você ainda não possui. Apenas constelações do herói selecionado e constelações universais são oferecidas. Cada viajante escolhe de forma independente. A constelação é concedida no nível máximo pelo restante da partida.",
+  "LucidDream_Telescope_Name": "Telescópio",
+  "LucidDream_Telescope_Description": "Revela completamente os pontos do mapa a até dois passos da sua posição atual.",
+  "LucidDream_ResourceInversion_Name": "Inversão de recursos",
+  "LucidDream_ResourceInversion_Description": "O ouro obtido se transforma na mesma quantidade de pó dos sonhos, e o pó dos sonhos obtido se transforma em ouro.",
+  "LucidDream_PrimordialCurse_Name": "A maldição primordial",
+  "LucidDream_PrimordialCurse_Description": "As memórias obtidas nesta partida começam no nível 1 e as essências com 40% de qualidade, incluindo saques, recompensas e compras em lojas. Melhorias e fusões normais permanecem inalteradas.",
+  "LucidDream_FallenStarGod_Name": "Queda do deus estelar",
+  "LucidDream_FallenStarGod_Description": "Todas as constelações dos viajantes são enfraquecidas para, no máximo, 50% de sua potência.",
+  "LucidDream_HeavyFootsteps_Name": "Passos pesados",
+  "LucidDream_HeavyFootsteps_Description": "O tempo de recarga da habilidade de esquiva aumenta em 50%.",
+  "Shrine_Astronomy_Name": "Santuário da iluminação das constelações",
+  "InGame_ChoiceShrine_Shrine_Astronomy": "Escolha uma constelação",
+  "Astronomy_NoStars": "Você já possui todas as constelações compatíveis",
+  "Limbo_Penalty_Depth7": "Requer 7 sonhos lúcidos malignos.",
+  "Limbo_Penalty_Depth8": "Requer 8 sonhos lúcidos malignos.",
+  "Limbo_Penalty_Depth9": "Requer 9 sonhos lúcidos malignos."
+}

@@ -1,0 +1,20 @@
+{
+  "LucidDream_AstronomyMaster_Name": "天文学の達人",
+  "LucidDream_AstronomyMaster_Description": "領主を倒すたびに、啓蒙の祭壇で未所持の星座3つから1つを選んで獲得する。候補は選択中のヒーロー専用星座と共通星座のみ。各旅人が個別に選択でき、獲得した星座は今回のプレイ終了まで最大レベルになる。",
+  "LucidDream_Telescope_Name": "望遠鏡",
+  "LucidDream_Telescope_Description": "現在地から2マス以内のマップノードを完全に明らかにする。",
+  "LucidDream_ResourceInversion_Name": "資源反転",
+  "LucidDream_ResourceInversion_Description": "獲得するゴールドが同量の夢の塵に変わり、獲得する夢の塵が同量のゴールドに変わる。",
+  "LucidDream_PrimordialCurse_Name": "原初の呪い",
+  "LucidDream_PrimordialCurse_Description": "今回のプレイで獲得する記憶の初期レベルが1に、精髄の初期品質が40%になる。ドロップ、報酬、ショップ購入が対象。通常の強化や合成には影響しない。",
+  "LucidDream_FallenStarGod_Name": "星神の堕落",
+  "LucidDream_FallenStarGod_Description": "旅人が所持するすべての星座が弱体化し、効果の強さが最大50%になる。",
+  "LucidDream_HeavyFootsteps_Name": "重い足取り",
+  "LucidDream_HeavyFootsteps_Description": "回避スキルのクールダウンが50%増加する。",
+  "Shrine_Astronomy_Name": "星座啓蒙の祭壇",
+  "InGame_ChoiceShrine_Shrine_Astronomy": "星座を1つ選択",
+  "Astronomy_NoStars": "適用可能な星座をすべて所持している",
+  "Limbo_Penalty_Depth7": "悪の明晰夢を7個携帯する必要がある。",
+  "Limbo_Penalty_Depth8": "悪の明晰夢を8個携帯する必要がある。",
+  "Limbo_Penalty_Depth9": "悪の明晰夢を9個携帯する必要がある。"
+}

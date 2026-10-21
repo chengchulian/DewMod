@@ -1,0 +1,20 @@
+{
+  "LucidDream_AstronomyMaster_Name": "Astronomi ustası",
+  "LucidDream_AstronomyMaster_Description": "Her hükümdarı yendikten sonra aydınlanma tapınağında henüz taşımadığın üç takımyıldızdan birini seç. Yalnızca seçili kahramanına özel ve evrensel takımyıldızlar sunulur. Her gezgin bağımsız seçim yapar. Takımyıldız bu koşunun sonuna kadar en yüksek seviyede verilir.",
+  "LucidDream_Telescope_Name": "Teleskop",
+  "LucidDream_Telescope_Description": "Mevcut konumunun iki adım yakınındaki harita noktalarını tamamen açığa çıkarır.",
+  "LucidDream_ResourceInversion_Name": "Kaynak tersinmesi",
+  "LucidDream_ResourceInversion_Description": "Kazanılan altın aynı miktarda rüya tozuna, kazanılan rüya tozu ise altına dönüşür.",
+  "LucidDream_PrimordialCurse_Name": "İlksel lanet",
+  "LucidDream_PrimordialCurse_Description": "Bu koşuda elde edilen anılar 1. seviyede, özler ise %40 kalitede başlar. Ganimetleri, ödülleri ve mağaza alışverişlerini kapsar. Normal geliştirmeler ve birleştirmeler etkilenmez.",
+  "LucidDream_FallenStarGod_Name": "Yıldız tanrısının düşüşü",
+  "LucidDream_FallenStarGod_Description": "Gezginlerin taşıdığı tüm takımyıldızlar zayıflar ve etkileri en fazla %50 gücünde olur.",
+  "LucidDream_HeavyFootsteps_Name": "Ağır adımlar",
+  "LucidDream_HeavyFootsteps_Description": "Kaçınma becerisinin bekleme süresi %50 artar.",
+  "Shrine_Astronomy_Name": "Takımyıldız aydınlanma tapınağı",
+  "InGame_ChoiceShrine_Shrine_Astronomy": "Bir takımyıldız seç",
+  "Astronomy_NoStars": "Uygun tüm takımyıldızlar zaten taşınıyor",
+  "Limbo_Penalty_Depth7": "7 kötü berrak rüya gerektirir.",
+  "Limbo_Penalty_Depth8": "8 kötü berrak rüya gerektirir.",
+  "Limbo_Penalty_Depth9": "9 kötü berrak rüya gerektirir."
+}

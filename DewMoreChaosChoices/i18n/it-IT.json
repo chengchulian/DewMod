@@ -1,0 +1,13 @@
+{
+  "Header.Choices": "Opzioni aggiuntive del caos (solo host)",
+  "LabelText.ExtraCommonChaosChoices": "Opzioni aggiuntive del caos comune",
+  "Description.ExtraCommonChaosChoices": "Opzioni aggiuntive per il caos comune, sommate al numero originale e ai bonus dei talenti. Predefinito: 3. Minimo: 0. Il valore 0 non aggiunge opzioni. Il totale è limitato alle ricompense di questa rarità; si sceglie una sola ricompensa. Si applica ai nuovi santuari.",
+  "LabelText.ExtraRareChaosChoices": "Opzioni aggiuntive del caos raro",
+  "Description.ExtraRareChaosChoices": "Opzioni aggiuntive per il caos raro, configurabili separatamente. Predefinito: 3. Minimo: 0. Si sommano al numero originale e ai bonus dei talenti, fino al limite delle ricompense di questa rarità. Si sceglie una sola ricompensa.",
+  "LabelText.ExtraEpicChaosChoices": "Opzioni aggiuntive del caos epico",
+  "Description.ExtraEpicChaosChoices": "Opzioni aggiuntive per il caos epico, configurabili separatamente. Predefinito: 3. Minimo: 0. Si sommano al numero originale e ai bonus dei talenti, fino al limite delle ricompense di questa rarità. Si sceglie una sola ricompensa.",
+  "LabelText.ExtraLegendaryChaosChoices": "Opzioni aggiuntive del caos leggendario",
+  "Description.ExtraLegendaryChaosChoices": "Opzioni aggiuntive per il caos leggendario, configurabili separatamente. Predefinito: 3. Minimo: 0. Si sommano al numero originale e ai bonus dei talenti, fino al limite delle ricompense di questa rarità. Si sceglie una sola ricompensa.",
+  "LabelText.ExtraCorruptedChaosChoices": "Opzioni aggiuntive del caos corrotto",
+  "Description.ExtraCorruptedChaosChoices": "Opzioni aggiuntive per il caos corrotto, configurabili separatamente. Predefinito: 3. Minimo: 0. Si sommano al numero originale e ai bonus dei talenti, fino al limite delle ricompense disponibili. Si sceglie una sola ricompensa. Si applicano solo le impostazioni dell'host."
+}

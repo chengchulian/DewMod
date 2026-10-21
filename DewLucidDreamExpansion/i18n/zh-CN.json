@@ -1,0 +1,20 @@
+{
+  "LucidDream_AstronomyMaster_Name": "天文大师",
+  "LucidDream_AstronomyMaster_Description": "每击败一个领主，在启蒙祭坛中三选一获得一个未携带的星座。候选仅包含当前所选英雄的专属星座和通用星座。每位旅行者独立选择，获得的星座为满级，持续至本局结束。",
+  "LucidDream_Telescope_Name": "望远镜",
+  "LucidDream_Telescope_Description": "完整揭示当前位置两格以内的地图节点。",
+  "LucidDream_ResourceInversion_Name": "资源反转",
+  "LucidDream_ResourceInversion_Description": "获得的金币变为等量梦尘，获得的梦尘变为等量金币。",
+  "LucidDream_PrimordialCurse_Name": "最原始的诅咒",
+  "LucidDream_PrimordialCurse_Description": "本局获得的记忆初始为1级，精粹初始品质为40%，包括掉落、奖励和商店购买。正常升级与合成不受影响。",
+  "LucidDream_FallenStarGod_Name": "星神的堕落",
+  "LucidDream_FallenStarGod_Description": "旅行者携带的所有星座受到效果减弱影响，效果强度至多为50%。",
+  "LucidDream_HeavyFootsteps_Name": "沉足",
+  "LucidDream_HeavyFootsteps_Description": "闪避技能冷却时间增加50%。",
+  "Shrine_Astronomy_Name": "星座启蒙祭坛",
+  "InGame_ChoiceShrine_Shrine_Astronomy": "选择一个星座",
+  "Astronomy_NoStars": "已携带所有适用星座",
+  "Limbo_Penalty_Depth7": "需携带7个恶清醒梦。",
+  "Limbo_Penalty_Depth8": "需携带8个恶清醒梦。",
+  "Limbo_Penalty_Depth9": "需携带9个恶清醒梦。"
+}

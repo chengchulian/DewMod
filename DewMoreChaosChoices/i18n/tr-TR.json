@@ -1,0 +1,13 @@
+{
+  "Header.Choices": "Ek kaos seçenekleri (yalnızca ev sahibi)",
+  "LabelText.ExtraCommonChaosChoices": "Yaygın kaos için ek seçenek sayısı",
+  "Description.ExtraCommonChaosChoices": "Yaygın kaosun temel seçenek sayısına ve yetenek bonuslarına eklenecek seçenekler. Varsayılan: 3. En az: 0. Sıfır ek seçenek eklemez. Bu nadirliğin ödül havuzuyla sınırlıdır; yalnızca bir ödül seçilir. Yeni oluşturulan sunaklara uygulanır.",
+  "LabelText.ExtraRareChaosChoices": "Nadir kaos için ek seçenek sayısı",
+  "Description.ExtraRareChaosChoices": "Nadir kaos için bağımsız olarak ayarlanan ek seçenekler. Varsayılan: 3. En az: 0. Temel sayıya ve yetenek bonuslarına eklenir; bu nadirliğin ödül havuzuyla sınırlıdır. Yalnızca bir ödül seçilir.",
+  "LabelText.ExtraEpicChaosChoices": "Destansı kaos için ek seçenek sayısı",
+  "Description.ExtraEpicChaosChoices": "Destansı kaos için bağımsız olarak ayarlanan ek seçenekler. Varsayılan: 3. En az: 0. Temel sayıya ve yetenek bonuslarına eklenir; bu nadirliğin ödül havuzuyla sınırlıdır. Yalnızca bir ödül seçilir.",
+  "LabelText.ExtraLegendaryChaosChoices": "Efsanevi kaos için ek seçenek sayısı",
+  "Description.ExtraLegendaryChaosChoices": "Efsanevi kaos için bağımsız olarak ayarlanan ek seçenekler. Varsayılan: 3. En az: 0. Temel sayıya ve yetenek bonuslarına eklenir; bu nadirliğin ödül havuzuyla sınırlıdır. Yalnızca bir ödül seçilir.",
+  "LabelText.ExtraCorruptedChaosChoices": "Yozlaşmış kaos için ek seçenek sayısı",
+  "Description.ExtraCorruptedChaosChoices": "Yozlaşmış kaos için bağımsız olarak ayarlanan ek seçenekler. Varsayılan: 3. En az: 0. Temel sayıya ve yetenek bonuslarına eklenir; mevcut ödüllerle sınırlıdır. Yalnızca bir ödül seçilir. Sadece ev sahibinin ayarları uygulanır."
+}

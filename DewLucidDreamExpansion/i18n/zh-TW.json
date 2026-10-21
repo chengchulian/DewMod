@@ -1,0 +1,20 @@
+{
+  "LucidDream_AstronomyMaster_Name": "天文大師",
+  "LucidDream_AstronomyMaster_Description": "每擊敗一個領主，在啟蒙祭壇中三選一獲得一個未攜帶的星座。候選僅包含目前所選英雄的專屬星座和通用星座。每位旅行者獨立選擇，獲得的星座為滿級，持續至本局結束。",
+  "LucidDream_Telescope_Name": "望遠鏡",
+  "LucidDream_Telescope_Description": "完整揭示目前位置兩格以內的地圖節點。",
+  "LucidDream_ResourceInversion_Name": "資源反轉",
+  "LucidDream_ResourceInversion_Description": "獲得的金幣變為等量夢塵，獲得的夢塵變為等量金幣。",
+  "LucidDream_PrimordialCurse_Name": "最原始的詛咒",
+  "LucidDream_PrimordialCurse_Description": "本局獲得的記憶初始為1級，精粹初始品質為40%，包括掉落、獎勵和商店購買。正常升級與合成不受影響。",
+  "LucidDream_FallenStarGod_Name": "星神的墮落",
+  "LucidDream_FallenStarGod_Description": "旅行者攜帶的所有星座受到效果減弱影響，效果強度至多為50%。",
+  "LucidDream_HeavyFootsteps_Name": "沉足",
+  "LucidDream_HeavyFootsteps_Description": "閃避技能冷卻時間增加50%。",
+  "Shrine_Astronomy_Name": "星座啟蒙祭壇",
+  "InGame_ChoiceShrine_Shrine_Astronomy": "選擇一個星座",
+  "Astronomy_NoStars": "已攜帶所有適用星座",
+  "Limbo_Penalty_Depth7": "需攜帶7個惡清醒夢。",
+  "Limbo_Penalty_Depth8": "需攜帶8個惡清醒夢。",
+  "Limbo_Penalty_Depth9": "需攜帶9個惡清醒夢。"
+}

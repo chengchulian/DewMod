@@ -1,0 +1,20 @@
+{
+  "LucidDream_AstronomyMaster_Name": "Maître astronome",
+  "LucidDream_AstronomyMaster_Description": "Après chaque seigneur vaincu, choisissez dans un sanctuaire de l'illumination une constellation parmi trois que vous ne portez pas encore. Seules les constellations de votre héros sélectionné et les constellations universelles sont proposées. Chaque voyageur choisit indépendamment. La constellation est accordée au niveau maximal pour le reste de la partie.",
+  "LucidDream_Telescope_Name": "Télescope",
+  "LucidDream_Telescope_Description": "Révèle entièrement les nœuds de la carte situés à deux étapes ou moins de votre position actuelle.",
+  "LucidDream_ResourceInversion_Name": "Inversion des ressources",
+  "LucidDream_ResourceInversion_Description": "L'or obtenu devient une quantité équivalente de poussière onirique, et la poussière onirique obtenue devient de l'or.",
+  "LucidDream_PrimordialCurse_Name": "La malédiction primordiale",
+  "LucidDream_PrimordialCurse_Description": "Les souvenirs obtenus durant cette partie commencent au niveau 1 et les essences à 40% de qualité, y compris le butin, les récompenses et les achats en boutique. Les améliorations et fusions normales restent inchangées.",
+  "LucidDream_FallenStarGod_Name": "Chute du dieu des étoiles",
+  "LucidDream_FallenStarGod_Description": "Toutes les constellations portées par les voyageurs sont affaiblies à un maximum de 50% de leur puissance.",
+  "LucidDream_HeavyFootsteps_Name": "Pas pesants",
+  "LucidDream_HeavyFootsteps_Description": "Le temps de recharge de la compétence d'esquive augmente de 50%.",
+  "Shrine_Astronomy_Name": "Sanctuaire d'illumination des constellations",
+  "InGame_ChoiceShrine_Shrine_Astronomy": "Choisissez une constellation",
+  "Astronomy_NoStars": "Toutes les constellations compatibles sont déjà portées",
+  "Limbo_Penalty_Depth7": "Nécessite 7 rêves lucides maléfiques.",
+  "Limbo_Penalty_Depth8": "Nécessite 8 rêves lucides maléfiques.",
+  "Limbo_Penalty_Depth9": "Nécessite 9 rêves lucides maléfiques."
+}

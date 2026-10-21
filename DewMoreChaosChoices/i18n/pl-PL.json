@@ -1,0 +1,13 @@
+{
+  "Header.Choices": "Dodatkowe opcje chaosu (tylko gospodarz)",
+  "LabelText.ExtraCommonChaosChoices": "Dodatkowe opcje zwykłego chaosu",
+  "Description.ExtraCommonChaosChoices": "Dodatkowe opcje zwykłego chaosu, dodawane do pierwotnej liczby i premii z talentów. Domyślnie: 3. Minimum: 0. Wartość 0 nie dodaje opcji. Limit stanowi pula nagród tej rzadkości; wybierasz jedną nagrodę. Dotyczy nowo tworzonych kapliczek.",
+  "LabelText.ExtraRareChaosChoices": "Dodatkowe opcje rzadkiego chaosu",
+  "Description.ExtraRareChaosChoices": "Osobno ustawiane dodatkowe opcje rzadkiego chaosu. Domyślnie: 3. Minimum: 0. Dodawane do pierwotnej liczby i premii z talentów, z limitem równym puli nagród tej rzadkości. Wybierasz jedną nagrodę.",
+  "LabelText.ExtraEpicChaosChoices": "Dodatkowe opcje epickiego chaosu",
+  "Description.ExtraEpicChaosChoices": "Osobno ustawiane dodatkowe opcje epickiego chaosu. Domyślnie: 3. Minimum: 0. Dodawane do pierwotnej liczby i premii z talentów, z limitem równym puli nagród tej rzadkości. Wybierasz jedną nagrodę.",
+  "LabelText.ExtraLegendaryChaosChoices": "Dodatkowe opcje legendarnego chaosu",
+  "Description.ExtraLegendaryChaosChoices": "Osobno ustawiane dodatkowe opcje legendarnego chaosu. Domyślnie: 3. Minimum: 0. Dodawane do pierwotnej liczby i premii z talentów, z limitem równym puli nagród tej rzadkości. Wybierasz jedną nagrodę.",
+  "LabelText.ExtraCorruptedChaosChoices": "Dodatkowe opcje skażonego chaosu",
+  "Description.ExtraCorruptedChaosChoices": "Osobno ustawiane dodatkowe opcje skażonego chaosu. Domyślnie: 3. Minimum: 0. Dodawane do pierwotnej liczby i premii z talentów, z limitem równym puli dostępnych nagród. Wybierasz jedną nagrodę. Obowiązują tylko ustawienia gospodarza."
+}

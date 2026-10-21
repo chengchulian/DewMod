@@ -1,0 +1,13 @@
+{
+  "Header.Choices": "Opciones adicionales de caos (solo anfitrión)",
+  "LabelText.ExtraCommonChaosChoices": "Opciones adicionales de caos común",
+  "Description.ExtraCommonChaosChoices": "Opciones adicionales de caos común que se suman a la cantidad original y a las bonificaciones de talentos. Predeterminado: 3. Mínimo: 0. El valor 0 no agrega opciones. El límite es el conjunto de recompensas de esta rareza; se elige una recompensa. Se aplica a los santuarios nuevos.",
+  "LabelText.ExtraRareChaosChoices": "Opciones adicionales de caos raro",
+  "Description.ExtraRareChaosChoices": "Opciones adicionales de caos raro, configurables por separado. Predeterminado: 3. Mínimo: 0. Se suman a la cantidad original y a las bonificaciones de talentos, con el conjunto de recompensas de esta rareza como límite. Se elige una recompensa.",
+  "LabelText.ExtraEpicChaosChoices": "Opciones adicionales de caos épico",
+  "Description.ExtraEpicChaosChoices": "Opciones adicionales de caos épico, configurables por separado. Predeterminado: 3. Mínimo: 0. Se suman a la cantidad original y a las bonificaciones de talentos, con el conjunto de recompensas de esta rareza como límite. Se elige una recompensa.",
+  "LabelText.ExtraLegendaryChaosChoices": "Opciones adicionales de caos legendario",
+  "Description.ExtraLegendaryChaosChoices": "Opciones adicionales de caos legendario, configurables por separado. Predeterminado: 3. Mínimo: 0. Se suman a la cantidad original y a las bonificaciones de talentos, con el conjunto de recompensas de esta rareza como límite. Se elige una recompensa.",
+  "LabelText.ExtraCorruptedChaosChoices": "Opciones adicionales de caos corrupto",
+  "Description.ExtraCorruptedChaosChoices": "Opciones adicionales de caos corrupto, configurables por separado. Predeterminado: 3. Mínimo: 0. Se suman a la cantidad original y a las bonificaciones de talentos, con las recompensas disponibles como límite. Se elige una recompensa. Solo se aplica la configuración del anfitrión."
+}

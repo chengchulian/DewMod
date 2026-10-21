@@ -1,0 +1,20 @@
+{
+  "LucidDream_AstronomyMaster_Name": "천문학의 대가",
+  "LucidDream_AstronomyMaster_Description": "군주를 처치할 때마다 깨달음의 제단에서 보유하지 않은 별자리 3개 중 하나를 선택합니다. 선택한 영웅의 전용 별자리와 공용 별자리만 등장합니다. 각 여행자가 독립적으로 선택하며, 획득한 별자리는 이번 플레이가 끝날 때까지 최대 레벨로 적용됩니다.",
+  "LucidDream_Telescope_Name": "망원경",
+  "LucidDream_Telescope_Description": "현재 위치에서 두 칸 이내의 지도 지점을 완전히 공개합니다.",
+  "LucidDream_ResourceInversion_Name": "자원 반전",
+  "LucidDream_ResourceInversion_Description": "획득하는 골드는 같은 양의 꿈가루로, 획득하는 꿈가루는 같은 양의 골드로 바뀝니다.",
+  "LucidDream_PrimordialCurse_Name": "태초의 저주",
+  "LucidDream_PrimordialCurse_Description": "이번 플레이에서 획득하는 기억은 1레벨, 정수는 품질 40%로 시작합니다. 전리품, 보상, 상점 구매에 적용됩니다. 일반 강화와 합성에는 영향을 주지 않습니다.",
+  "LucidDream_FallenStarGod_Name": "별의 신의 타락",
+  "LucidDream_FallenStarGod_Description": "여행자가 보유한 모든 별자리가 약화되어 효과 강도가 최대 50%가 됩니다.",
+  "LucidDream_HeavyFootsteps_Name": "무거운 발걸음",
+  "LucidDream_HeavyFootsteps_Description": "회피 스킬의 재사용 대기시간이 50% 증가합니다.",
+  "Shrine_Astronomy_Name": "별자리 깨달음의 제단",
+  "InGame_ChoiceShrine_Shrine_Astronomy": "별자리 선택",
+  "Astronomy_NoStars": "적용 가능한 별자리를 모두 보유 중입니다",
+  "Limbo_Penalty_Depth7": "악한 자각몽 7개가 필요합니다.",
+  "Limbo_Penalty_Depth8": "악한 자각몽 8개가 필요합니다.",
+  "Limbo_Penalty_Depth9": "악한 자각몽 9개가 필요합니다."
+}

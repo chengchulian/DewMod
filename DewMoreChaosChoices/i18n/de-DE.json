@@ -1,0 +1,13 @@
+{
+  "Header.Choices": "Zusätzliche Chaos-Optionen (nur Host)",
+  "LabelText.ExtraCommonChaosChoices": "Zusätzliche Optionen für gewöhnliches Chaos",
+  "Description.ExtraCommonChaosChoices": "Zusätzliche Optionen für gewöhnliches Chaos, zusätzlich zur ursprünglichen Anzahl und zu Talentboni. Standard: 3. Minimum: 0. Bei 0 werden keine Optionen hinzugefügt. Begrenzt auf den Belohnungspool dieser Seltenheit; eine Belohnung auswählen. Gilt für neu erzeugte Schreine.",
+  "LabelText.ExtraRareChaosChoices": "Zusätzliche Optionen für seltenes Chaos",
+  "Description.ExtraRareChaosChoices": "Separat einstellbare zusätzliche Optionen für seltenes Chaos. Standard: 3. Minimum: 0. Werden zur ursprünglichen Anzahl und zu Talentboni addiert, begrenzt auf den Belohnungspool dieser Seltenheit. Eine Belohnung auswählen.",
+  "LabelText.ExtraEpicChaosChoices": "Zusätzliche Optionen für episches Chaos",
+  "Description.ExtraEpicChaosChoices": "Separat einstellbare zusätzliche Optionen für episches Chaos. Standard: 3. Minimum: 0. Werden zur ursprünglichen Anzahl und zu Talentboni addiert, begrenzt auf den Belohnungspool dieser Seltenheit. Eine Belohnung auswählen.",
+  "LabelText.ExtraLegendaryChaosChoices": "Zusätzliche Optionen für legendäres Chaos",
+  "Description.ExtraLegendaryChaosChoices": "Separat einstellbare zusätzliche Optionen für legendäres Chaos. Standard: 3. Minimum: 0. Werden zur ursprünglichen Anzahl und zu Talentboni addiert, begrenzt auf den Belohnungspool dieser Seltenheit. Eine Belohnung auswählen.",
+  "LabelText.ExtraCorruptedChaosChoices": "Zusätzliche Optionen für verderbtes Chaos",
+  "Description.ExtraCorruptedChaosChoices": "Separat einstellbare zusätzliche Optionen für verderbtes Chaos. Standard: 3. Minimum: 0. Werden zur ursprünglichen Anzahl und zu Talentboni addiert, begrenzt auf die verfügbaren Belohnungen. Eine Belohnung auswählen. Nur die Einstellungen des Hosts gelten."
+}

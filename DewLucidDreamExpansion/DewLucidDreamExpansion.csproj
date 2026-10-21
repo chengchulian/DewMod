@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props"
+            Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')"/>
+    <PropertyGroup>
+        <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+        <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+        <ProjectGuid>{5E3CD328-080C-4BA8-B066-72E1888F36F8}</ProjectGuid>
+        <OutputType>Library</OutputType>
+        <AppDesignerFolder>src\Properties</AppDesignerFolder>
+        <RootNamespace>DewLucidDreamExpansion</RootNamespace>
+        <AssemblyName>DewLucidDreamExpansion</AssemblyName>
+        <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
+        <FileAlignment>512</FileAlignment>
+        <LangVersion>12</LangVersion>
+        <CodePage>65001</CodePage>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+        <PlatformTarget>AnyCPU</PlatformTarget>
+        <DebugSymbols>true</DebugSymbols>
+        <DebugType>full</DebugType>
+        <Optimize>false</Optimize>
+        <OutputPath>bin\Debug\</OutputPath>
+        <DefineConstants>DEBUG;TRACE</DefineConstants>
+        <ErrorReport>prompt</ErrorReport>
+        <WarningLevel>4</WarningLevel>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+        <PlatformTarget>AnyCPU</PlatformTarget>
+        <DebugType>pdbonly</DebugType>
+        <Optimize>true</Optimize>
+        <OutputPath>bin\Release\</OutputPath>
+        <DefineConstants>TRACE</DefineConstants>
+        <ErrorReport>prompt</ErrorReport>
+        <WarningLevel>4</WarningLevel>
+    </PropertyGroup>
+    <ItemGroup>
+        <Reference Include="0Harmony"><HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\0Harmony.dll</HintPath><Private>False</Private></Reference>
+        <Reference Include="Dew.Core"><HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\Dew.Core.dll</HintPath><Private>False</Private></Reference>
+        <Reference Include="Dew.Contents"><HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\Dew.Contents.dll</HintPath><Private>False</Private></Reference>
+        <Reference Include="Dew.UI"><HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\Dew.UI.dll</HintPath><Private>False</Private></Reference>
+        <Reference Include="Mirror"><HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\Mirror.dll</HintPath><Private>False</Private></Reference>
+        <Reference Include="UnityEngine"><HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\UnityEngine.dll</HintPath><Private>False</Private></Reference>
+        <Reference Include="UnityEngine.CoreModule"><HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\UnityEngine.CoreModule.dll</HintPath><Private>False</Private></Reference>
+        <Reference Include="UnityEngine.UI"><HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\UnityEngine.UI.dll</HintPath><Private>False</Private></Reference>
+        <Reference Include="Unity.TextMeshPro"><HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\Unity.TextMeshPro.dll</HintPath><Private>False</Private></Reference>
+        <Reference Include="Newtonsoft.Json"><HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\Newtonsoft.Json.dll</HintPath><Private>False</Private></Reference>
+        <Reference Include="Sirenix.Serialization"><HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\Sirenix.Serialization.dll</HintPath><Private>False</Private></Reference>
+        <Reference Include="Sirenix.OdinInspector.Attributes"><HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\Sirenix.OdinInspector.Attributes.dll</HintPath><Private>False</Private></Reference>
+    </ItemGroup>
+    <ItemGroup>
+        <Reference Include="System"/>
+        <Reference Include="System.Core"/>
+        <Reference Include="System.Data"/>
+        <Reference Include="System.Xml"/>
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="src\DewLucidDreamExpansion.cs"/>
+        <Compile Include="src\config\LocalizationSource.cs"/>
+        <Compile Include="src\controller\DreamRegistry.cs"/>
+        <Compile Include="src\controller\AstronomyController.cs"/>
+        <Compile Include="src\controller\ShrinePresentation.cs"/>
+        <Compile Include="src\controller\ResourceInversionController.cs"/>
+        <Compile Include="src\content\LucidDreams.cs"/>
+        <Compile Include="src\content\Shrine_Astronomy.cs"/>
+        <Compile Include="src\patch\DreamPatches.cs"/>
+        <Compile Include="src\patch\CurseAcquisitionPatches.cs"/>
+        <Compile Include="src\patch\AstronomyPatches.cs"/>
+        <Compile Include="src\patch\BossRewardPatch.cs"/>
+        <Compile Include="src\patch\LobbyDreamPatches.cs"/>
+        <Compile Include="src\patch\LimboUiPatches.cs"/>
+        <Compile Include="src\ui\DreamIcons.cs"/>
+        <Compile Include="src\ui\LimboDepthSelector.cs"/>
+        <Compile Include="src\Properties\AssemblyInfo.cs"/>
+    </ItemGroup>
+    <ItemGroup>
+        <EmbeddedResource Include="assets\icons\LucidDream_AstronomyMaster.png"><LogicalName>DewLucidDreamExpansion.Icons.LucidDream_AstronomyMaster.png</LogicalName></EmbeddedResource>
+        <EmbeddedResource Include="assets\icons\LucidDream_Telescope.png"><LogicalName>DewLucidDreamExpansion.Icons.LucidDream_Telescope.png</LogicalName></EmbeddedResource>
+        <EmbeddedResource Include="assets\icons\LucidDream_ResourceInversion.png"><LogicalName>DewLucidDreamExpansion.Icons.LucidDream_ResourceInversion.png</LogicalName></EmbeddedResource>
+        <EmbeddedResource Include="assets\icons\LucidDream_PrimordialCurse.png"><LogicalName>DewLucidDreamExpansion.Icons.LucidDream_PrimordialCurse.png</LogicalName></EmbeddedResource>
+        <EmbeddedResource Include="assets\icons\LucidDream_FallenStarGod.png"><LogicalName>DewLucidDreamExpansion.Icons.LucidDream_FallenStarGod.png</LogicalName></EmbeddedResource>
+        <EmbeddedResource Include="assets\icons\LucidDream_HeavyFootsteps.png"><LogicalName>DewLucidDreamExpansion.Icons.LucidDream_HeavyFootsteps.png</LogicalName></EmbeddedResource>
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="about\metadata.json"/>
+        <Content Include="about\description.txt"/>
+        <Content Include="i18n\zh-CN.json"/>
+        <Content Include="i18n\en-US.json"/>
+        <Content Include="i18n\de-DE.json"/>
+        <Content Include="i18n\es-MX.json"/>
+        <Content Include="i18n\fr-FR.json"/>
+        <Content Include="i18n\it-IT.json"/>
+        <Content Include="i18n\ja-JP.json"/>
+        <Content Include="i18n\ko-KR.json"/>
+        <Content Include="i18n\pl-PL.json"/>
+        <Content Include="i18n\pt-BR.json"/>
+        <Content Include="i18n\ru-RU.json"/>
+        <Content Include="i18n\tr-TR.json"/>
+        <Content Include="i18n\zh-TW.json"/>
+        <Content Include="about\preview.png"/>
+        <Content Include="about\icon.png"/>
+        <Content Include="about\main.png"/>
+        <Content Include="about\artwork.md"/>
+    </ItemGroup>
+    <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
+    <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+         Other similar extension points exist, see Microsoft.Common.targets.
+    <Target Name="BeforeBuild">
+    </Target>
+    <Target Name="AfterBuild">
+    </Target>
+    -->
+
+</Project>
