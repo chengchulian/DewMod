@@ -70,6 +70,7 @@ namespace DewGemSlotCount
             config.EditMovementSkill = EditMovementSkill;
             config.AllowMovementCorruptedChaos = AllowMovementCorruptedChaos;
             config.GemNoMerge = GemNoMerge;
+            config.ClampCounts();
         }
     }
 

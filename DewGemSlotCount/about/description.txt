@@ -9,13 +9,20 @@
 [*]可单独开启或关闭“堕落混沌给位移技能增加精华槽”。
 [*]可允许更换身份技能和位移技能。
 [*]可阻止精华合并，让同类精华可以同时作用于多个技能。
+[*]所有技能基础槽及堕落混沌加槽上限均限制为 0–8 槽。
+[*]优化界面使用官方布局上下镜像：5 槽上 2 下 3，6 槽上 3 下 3，7 槽上 3 下 4，8 槽上 4 下 4，支持 HUD、TAB 面板和结算页。
+[*]编辑位移技能、位移已有精华槽或允许堕落混沌为位移加槽时，按历史布局将位移原容器上移，保留原本横向位置和缩放，并支持手柄选择。
+[*]修正位移四槽的左右高度；展开动画中实时更新镜像槽，保持上下槽贴合技能。
+[*]支持游戏内重载：清理旧补丁并重建已有界面，保留奖励槽并直接恢复房主槽数快照。
 [/list]
 
 [b]注意事项[/b]
 [list]
 [*]所有玩法配置以服务器 / 房主为准。
 [*]客户端安装本 MOD 后会自动同步服务器 / 房主的配置。
-[*]未安装本 MOD 的客户端无法使用本 MOD 提供的功能。
+[*]沿用游戏原生 customData 单向同步完整槽数，不需要客机握手、能力上报或确认回执；房主修改 4→8 后已安装客机直接读取新值。
+[*]原版网络字段最多为 4 槽：未安装本 MOD 的客机显示、编辑与堕落混沌界面仍最多 4 槽；安装本 MOD 的客机读取完整槽数，最多 8 槽。
+[*]超过 4 槽的显示、位移技能编辑界面及其他扩展交互需要客机安装本 MOD。
 [*]在客户端本地修改配置不会对联机房间生效，并可能造成显示异常。
 [*]“允许移动技能堕落混沌加槽”默认关闭，需要房主在配置中手动开启。
 [/list]
@@ -31,13 +38,20 @@
 [*]Toggle whether Corrupted Chaos is allowed to add essence slots to Movement skills.
 [*]Allow replacing Identity and Movement skills.
 [*]Prevent essence merging, allowing the same essence type to affect multiple skills.
+[*]Base slot counts and Corrupted Chaos limits are clamped to 0–8.
+[*]Optimized HUD, TAB scoreboard and result layouts mirror the official slots above and below the skill: 5 = 2+3, 6 = 3+3, 7 = 3+4, 8 = 4+4 (top+bottom).
+[*]Movement shifts upward from its original position while editing when replacement is enabled, it has essence slots, or Corrupted Chaos can add its first slot. Its original horizontal position and scale are preserved, with gamepad navigation support.
+[*]Movement's four slots use a symmetric arc. Mirrored slots follow the current skill center throughout expansion animations.
+[*]In-game mod reload clears stale patches, rebuilds existing UI, preserves bonus slots and reads the host's current slot snapshot directly.
 [/list]
 
 [b]Notes[/b]
 [list]
 [*]Gameplay configuration is controlled by the server / host.
 [*]Clients with this mod installed will automatically sync the server / host configuration.
-[*]Clients without this mod installed cannot use the features provided by this mod.
+[*]Full slot counts flow one way through the game's existing customData dictionary, without handshakes, capability reports or acknowledgements. Modded clients read changes such as 4→8 directly.
+[*]Native network fields stay at 4 slots or fewer. Vanilla clients retain their four-slot display, editing and Corrupted Chaos UI; modded clients read the full counts, up to 8.
+[*]Clients need this mod for layouts above 4 slots, the Movement editing UI and other extended interactions.
 [*]Changing the configuration locally on a client will not affect a multiplayer room and may cause display issues.
 [*]The Movement skill Corrupted Chaos option is disabled by default and must be enabled by the host.
 [/list]

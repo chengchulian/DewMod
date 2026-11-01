@@ -46,7 +46,25 @@ public class PluginConfig : ModConfig
     public bool GemNoMerge = false;
 
     [LabelText("LabelText.OptimizeUI")]
+    [Description("Description.OptimizeUI")]
     public bool OptimizeUI = true;
+
+    // 历史配置和手动输入均统一收敛到零至八槽。
+    public void ClampCounts()
+    {
+        SkillQGemCount = Mathf.Clamp(SkillQGemCount, 0, Constant.MaxGemCount);
+        SkillWGemCount = Mathf.Clamp(SkillWGemCount, 0, Constant.MaxGemCount);
+        SkillEGemCount = Mathf.Clamp(SkillEGemCount, 0, Constant.MaxGemCount);
+        SkillRGemCount = Mathf.Clamp(SkillRGemCount, 0, Constant.MaxGemCount);
+        SkillIdentityGemCount = Mathf.Clamp(SkillIdentityGemCount, 0, Constant.MaxGemCount);
+        SkillMovementGemCount = Mathf.Clamp(SkillMovementGemCount, 0, Constant.MaxGemCount);
+        SkillQCorruptedChaosMaxGemCount = Mathf.Clamp(SkillQCorruptedChaosMaxGemCount, 0, Constant.MaxGemCount);
+        SkillWCorruptedChaosMaxGemCount = Mathf.Clamp(SkillWCorruptedChaosMaxGemCount, 0, Constant.MaxGemCount);
+        SkillECorruptedChaosMaxGemCount = Mathf.Clamp(SkillECorruptedChaosMaxGemCount, 0, Constant.MaxGemCount);
+        SkillRCorruptedChaosMaxGemCount = Mathf.Clamp(SkillRCorruptedChaosMaxGemCount, 0, Constant.MaxGemCount);
+        SkillIdentityCorruptedChaosMaxGemCount = Mathf.Clamp(SkillIdentityCorruptedChaosMaxGemCount, 0, Constant.MaxGemCount);
+        SkillMovementCorruptedChaosMaxGemCount = Mathf.Clamp(SkillMovementCorruptedChaosMaxGemCount, 0, Constant.MaxGemCount);
+    }
 
     public override void BuildWidgets(Transform parent, out SafeAction onChanged, out SafeAction requestUpdate)
     {

@@ -13,6 +13,7 @@
         <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
         <FileAlignment>512</FileAlignment>
         <LangVersion>12</LangVersion>
+        <CodePage>65001</CodePage>
     </PropertyGroup>
     <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
         <PlatformTarget>AnyCPU</PlatformTarget>
@@ -45,6 +46,16 @@
         <Compile Include="src\config\Constant.cs" />
         <Compile Include="src\DewGemSlotCount.cs" />
         <Compile Include="src\util\GemSyncHelper.cs" />
+        <Compile Include="src\controller\GemSlotController.cs" />
+        <Compile Include="src\controller\GemPatchLifecycle.cs" />
+        <Compile Include="src\controller\GemSlotStateSync.cs" />
+        <Compile Include="src\ui\GemSlotLayout.cs" />
+        <Compile Include="src\ui\GemSlotGeometry.cs" />
+        <Compile Include="src\ui\SkillHudLayout.cs" />
+        <Compile Include="src\ui\MovementEditLayout.cs" />
+        <Compile Include="src\patch\EditSkillManager_Patch.cs" />
+        <Compile Include="src\patch\UI_InGame_Result_HeroSkillItem_Patch.cs" />
+        <Compile Include="src\patch\GameResultManager_Patch.cs" />
         <Compile Include="src\patch\HeroSkill_Patch.cs" />
         <Compile Include="src\patch\Shrine_CorruptedChaos_Patch.cs" />
         <Compile Include="src\patch\SkillTrigger_Patch.cs" />
@@ -737,6 +748,8 @@
     <ItemGroup>
       <Content Include="about\preview.png" />
       <Content Include="about\icon.png" />
+      <Content Include="about\icon-v2.png" />
+      <Content Include="about\preview-v2.png" />
       <Content Include="about\description.txt" />
       <Content Include="about\metadata.json" />
       <Content Include="about\publishedfileid.txt" />

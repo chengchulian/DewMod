@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Release</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <OutputType>Exe</OutputType>
+    <AssemblyName>DewGemSlotCount.RegressionTests</AssemblyName>
+    <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
+    <LangVersion>12</LangVersion>
+    <CodePage>65001</CodePage>
+    <OutputPath>bin\$(Configuration)\</OutputPath>
+    <Optimize>true</Optimize>
+    <PlatformTarget>x64</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="0Harmony">
+      <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\0Harmony.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.CecilX">
+      <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\Mono.CecilX.dll</HintPath>
+    </Reference>
+    <Compile Include="src\GameStubs.cs" />
+    <Compile Include="src\ResultUiStubs.cs" />
+    <Compile Include="src\MovementUiStubs.cs" />
+    <Compile Include="src\Program.cs" />
+    <Compile Include="..\src\controller\GemSlotController.cs" Link="Production\GemSlotController.cs" />
+    <Compile Include="..\src\controller\GemSlotStateSync.cs" Link="Production\GemSlotStateSync.cs" />
+    <Compile Include="..\src\controller\GemPatchLifecycle.cs" Link="Production\GemPatchLifecycle.cs" />
+    <Compile Include="..\src\patch\HeroSkill_Patch.cs" Link="Production\HeroSkill_Patch.cs" />
+    <Compile Include="..\src\patch\GameResultManager_Patch.cs" Link="Production\GameResultManager_Patch.cs" />
+    <Compile Include="..\src\config\Constant.cs" Link="Production\Constant.cs" />
+    <Compile Include="..\src\ui\GemSlotGeometry.cs" Link="Production\GemSlotGeometry.cs" />
+    <Compile Include="..\src\ui\MovementEditLayout.cs" Link="Production\MovementEditLayout.cs" />
+    <Compile Include="..\src\patch\UI_InGame_Result_HeroSkillItem_Patch.cs" Link="Production\UI_InGame_Result_HeroSkillItem_Patch.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

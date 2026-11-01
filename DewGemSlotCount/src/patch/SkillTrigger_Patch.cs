@@ -19,6 +19,7 @@ public class SkillTrigger_Patch
     [HarmonyPatch("IInteractable.OnInteract")]
     public static bool OnInteract_Prefix(SkillTrigger __instance, Entity entity, bool alt)
     {
+        if (DewGemSlotCount.Instance == null) return true;
         if (entity is not Hero hero || __instance.IsLockedFor(entity.owner))
         {
             return false; // 阻止原方法执行

@@ -2,6 +2,7 @@ using HarmonyLib;
 using DewGemSlotCount.config;
 using Mirror;
 using UnityEngine;
+using DewGemSlotCount.controller;
 
 namespace DewGemSlotCount.patch;
 
@@ -13,13 +14,14 @@ public static class Shrine_CorruptedChaos_Patch
     public static bool GetTargetInfo_Prefix(Shrine_CorruptedChaos __instance, DewPlayer player, HeroSkillLocation loc,
         SkillTrigger target, ref EditSkillTargetInfo __result)
     {
+        if (DewGemSlotCount.Instance == null) return true;
         if (!IsAddedEssenceSlotReward(__instance, player))
         {
             return true;
         }
 
         int maxGemCount = player.hero.Skill.GetMaxGemCount(loc);
-        int maxAllowedGemCount = HeroSkill_Patch.GetCorruptedChaosMaxGemCount(loc);
+        int maxAllowedGemCount = HeroSkill_Patch.GetCorruptedChaosMaxGemCount(loc, player);
         string actionType = DewLocalization.GetUIValue("Shrine_CorruptedChaos_AddedEssenceSlot_ActionVerb");
 
         if (IsMovementCorruptedChaosDisabled(loc))
@@ -58,6 +60,7 @@ public static class Shrine_CorruptedChaos_Patch
     public static bool OnActivateEditSkill_Prefix(Shrine_CorruptedChaos __instance, DewPlayer player,
         HeroSkillLocation loc, SkillTrigger target, ref bool __result)
     {
+        if (DewGemSlotCount.Instance == null) return true;
         if (IsAddedEssenceSlotReward(__instance, player))
         {
             if (IsMovementCorruptedChaosDisabled(loc))
@@ -66,7 +69,7 @@ public static class Shrine_CorruptedChaos_Patch
                 return false;
             }
 
-            __instance.addedEssenceSlotMax = HeroSkill_Patch.GetCorruptedChaosMaxGemCount(loc);
+            __instance.addedEssenceSlotMax = HeroSkill_Patch.GetCorruptedChaosMaxGemCount(loc, player);
         }
 
         return true;
@@ -96,33 +99,41 @@ public static class Shrine_CorruptedChaos_Patch
 [HarmonyPatch(typeof(Se_Shrine_Chaos_StatBonus))]
 public static class Se_Shrine_Chaos_StatBonus_Patch
 {
+    // 包括读档恢复和任意混沌奖励触发的重算，均发布完整槽数与原版兼容字段。
+    [HarmonyPostfix]
+    [HarmonyPatch("NotifyUpdate_Corrupted")]
+    public static void NotifyUpdate_Corrupted_Postfix(Se_Shrine_Chaos_StatBonus __instance)
+    {
+        GemSlotController.ApplyChaosBonus(__instance);
+    }
+
     [HarmonyPrefix]
     [HarmonyPatch(nameof(Se_Shrine_Chaos_StatBonus.AddEssenceSlotBonus))]
     public static bool AddEssenceSlotBonus_Prefix(Se_Shrine_Chaos_StatBonus __instance, HeroSkillLocation location)
     {
-        if (location != HeroSkillLocation.Movement || !NetworkServer.active)
+        if (DewGemSlotCount.Instance == null) return true;
+        if (!NetworkServer.active)
         {
             return true;
         }
+
+        // 服务端直接加槽入口也检查房主配置上限；原版客机的四槽 UI 自行限制可选范围。
+        if (__instance.victim is not Hero hero) return false;
+        int maxAllowedGemCount = HeroSkill_Patch.GetCorruptedChaosMaxGemCount(location, hero.owner);
+        if (hero.Skill.GetMaxGemCount(location) >= maxAllowedGemCount) return false;
+        if (location != HeroSkillLocation.Movement) return true;
 
         if (!DewGemSlotCount.Instance.GameplayConfig.AllowMovementCorruptedChaos)
         {
             return false;
         }
 
-        if (__instance.victim is not Hero hero)
-        {
-            return false;
-        }
-
-        int vanillaBaseGemCount = HeroSkill_Patch.GetVanillaBaseGemCount(location);
-        int configuredBaseGemCount = HeroSkill_Patch.GetConfiguredBaseGemCount(location);
-        int maxAllowedGemCount = HeroSkill_Patch.GetCorruptedChaosMaxGemCount(location);
-        int currentDynamicGemCount = Mathf.Max(0, hero.Skill.maxGemCountMovement - vanillaBaseGemCount);
+        int configuredBaseGemCount = HeroSkill_Patch.GetConfiguredBaseGemCount(location, hero.Skill);
+        int currentDynamicGemCount = Mathf.Max(0, hero.Skill.GetMaxGemCount(location) - configuredBaseGemCount);
         int maxDynamicGemCount = Mathf.Max(0, maxAllowedGemCount - configuredBaseGemCount);
         int nextDynamicGemCount = Mathf.Min(currentDynamicGemCount + __instance.addedGemSlot, maxDynamicGemCount);
 
-        hero.Skill.SetMaxGemCount(location, vanillaBaseGemCount + nextDynamicGemCount);
+        hero.Skill.SetMaxGemCount(location, configuredBaseGemCount + nextDynamicGemCount);
         __instance.NotifyUpdate();
         return false;
     }
