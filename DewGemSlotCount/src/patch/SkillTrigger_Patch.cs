@@ -9,17 +9,24 @@ public class SkillTrigger_Patch
     private static readonly MethodInfo cmdDoDismantleTapMethod =
         AccessTools.Method(typeof(SkillTrigger), "CmdDoDismantleTap");
 
-    private static readonly MethodInfo cmdEquipIdentitySkillMethod =
-        AccessTools.Method(typeof(SkillTrigger), "CmdEquipIdentitySkill");
-
     private static readonly MethodInfo rpcInvokeOnSkillPickupMethod =
         AccessTools.Method(typeof(HeroSkill), "RpcInvokeOnSkillPickup");
+
+    // 空槽还必须允许编辑；否则装备会被游戏拒绝，并阻断后续的手持替换流程。
+    private static bool IsAvailableSlot(HeroSkill skill, HeroSkillLocation location)
+    {
+        return skill.GetSkill(location) == null && skill.CanReplaceSkill(location);
+    }
 
     [HarmonyPrefix]
     [HarmonyPatch("IInteractable.OnInteract")]
     public static bool OnInteract_Prefix(SkillTrigger __instance, Entity entity, bool alt)
     {
         if (DewGemSlotCount.Instance == null) return true;
+        // 未开启身份编辑时保留原版拾取流程，兼容旧身份已被毁灭之口吞掉的空槽。
+        // 原版同时负责旅人类型校验、无旧身份的确认提示及服务端装备动画。
+        if (__instance.rarity == Rarity.Identity && !DewGemSlotCount.Instance.GameplayConfig.EditIdentitySkill)
+            return true;
         if (entity is not Hero hero || __instance.IsLockedFor(entity.owner))
         {
             return false; // 阻止原方法执行
@@ -53,63 +60,28 @@ public class SkillTrigger_Patch
             return false;
         }
 
-        // 如果不启用Identity技能编辑，单独处理 Identity 技能
-        if (!DewGemSlotCount.Instance.GameplayConfig.EditIdentitySkill)
-        {
-            if (__instance.rarity == Rarity.Identity)
-            {
-                if (!entity.isOwned)
-                    return false;
-
-                string msg = string.Format(
-                    DewLocalization.GetUIValue("InGame_Message_ConfirmEmbraceNewIdentity"),
-                    hero.Skill.Identity.GetFormattedSkillTitle(),
-                    __instance.GetFormattedSkillTitle());
-
-                ManagerBase<MessageManager>.instance.ShowMessage(new DewMessageSettings
-                {
-                    owner = __instance,
-                    rawContent = msg,
-                    buttons = DewMessageSettings.ButtonType.Yes | DewMessageSettings.ButtonType.No,
-                    defaultButton = DewMessageSettings.ButtonType.No,
-                    destructiveConfirm = true,
-                    onClose = delegate(DewMessageSettings.ButtonType b)
-                    {
-                        if (b == DewMessageSettings.ButtonType.Yes)
-                        {
-                            cmdEquipIdentitySkillMethod?.Invoke(__instance, new object[] { null });
-                        }
-                    },
-                    validator = () => !__instance.IsNullOrInactive() &&
-                                      InGameUIManager.ValidateInGameActionMessage()
-                });
-
-                return false;
-            }
-        }
-
         HeroSkillLocation? emptySkill = null;
 
-        if (__instance.isCharacterSkill && __instance.GetType().Name.StartsWith("St_R_") && hero.Skill.R == null)
+        if (__instance.isCharacterSkill && __instance.GetType().Name.StartsWith("St_R_") && IsAvailableSlot(hero.Skill, HeroSkillLocation.R))
             emptySkill = HeroSkillLocation.R;
 
-        else if (__instance.GetType().Name.StartsWith("St_M_") && hero.Skill.Movement == null)
+        else if (__instance.GetType().Name.StartsWith("St_M_") && IsAvailableSlot(hero.Skill, HeroSkillLocation.Movement))
             emptySkill = HeroSkillLocation.Movement;
 
-        else if (__instance.GetType().Name.StartsWith("St_D_") && hero.Skill.Identity == null)
+        else if (__instance.GetType().Name.StartsWith("St_D_") && IsAvailableSlot(hero.Skill, HeroSkillLocation.Identity))
             emptySkill = HeroSkillLocation.Identity;
 
-        else if (hero.Skill.Q == null)
+        else if (IsAvailableSlot(hero.Skill, HeroSkillLocation.Q))
             emptySkill = HeroSkillLocation.Q;
-        else if (hero.Skill.W == null)
+        else if (IsAvailableSlot(hero.Skill, HeroSkillLocation.W))
             emptySkill = HeroSkillLocation.W;
-        else if (hero.Skill.E == null)
+        else if (IsAvailableSlot(hero.Skill, HeroSkillLocation.E))
             emptySkill = HeroSkillLocation.E;
-        else if (hero.Skill.R == null)
+        else if (IsAvailableSlot(hero.Skill, HeroSkillLocation.R))
             emptySkill = HeroSkillLocation.R;
-        else if (hero.Skill.Movement == null)
+        else if (IsAvailableSlot(hero.Skill, HeroSkillLocation.Movement))
             emptySkill = HeroSkillLocation.Movement;
-        else if (hero.Skill.Identity == null)
+        else if (IsAvailableSlot(hero.Skill, HeroSkillLocation.Identity))
             emptySkill = HeroSkillLocation.Identity;
 
         if (emptySkill.HasValue)

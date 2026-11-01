@@ -23,6 +23,8 @@
       <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\Mono.CecilX.dll</HintPath>
     </Reference>
     <Compile Include="src\GameStubs.cs" />
+    <Compile Include="src\SkillInteractionStubs.cs" />
+    <Compile Include="..\src\patch\SkillTrigger_Patch.cs" Link="Production\SkillTrigger_Patch.cs" />
     <Compile Include="src\ResultUiStubs.cs" />
     <Compile Include="src\MovementUiStubs.cs" />
     <Compile Include="src\Program.cs" />

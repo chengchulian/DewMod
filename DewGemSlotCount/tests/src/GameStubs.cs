@@ -50,7 +50,7 @@ namespace UnityEngine
 
 public enum HeroSkillLocation { Q, W, E, R, Identity, Movement }
 
-public class HeroSkill
+public partial class HeroSkill
 {
     private static uint _nextId;
     public uint netId = ++_nextId;
@@ -78,13 +78,12 @@ public class HeroSkill
 
 public struct GemLocation { public HeroSkillLocation skill; public int index; }
 public class Gem { }
-public class Entity { public Ability Ability = new(); }
+public class Entity { public Ability Ability = new(); public DewPlayer owner; public bool isOwned; }
 public class Ability { public bool IsAbilityEditLocked(int type) => false; }
 
-public class Hero
+public class Hero : Entity
 {
     private HeroSkill _skill;
-    public DewPlayer owner;
     public HeroSkill Skill { get => _skill; set { _skill = value; value.hero = this; } }
     public Hero() { Skill = new HeroSkill(); }
 }
@@ -92,6 +91,7 @@ public class Hero
 public class DewPlayer
 {
     public uint netId;
+    public string guid = "regression-player";
     public static DewPlayer local;
     public static readonly List<DewPlayer> allHumanPlayers = new();
     public bool isHumanPlayer = true;

@@ -53,7 +53,7 @@ public class EditSkillManager
     public ModeType mode;
     public object currentProvider;
 }
-public static class ManagerBase<T> { public static T softInstance; }
+public static class ManagerBase<T> { public static T softInstance; public static T instance => softInstance; }
 
 namespace DewGemSlotCount
 {

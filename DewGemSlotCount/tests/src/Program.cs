@@ -84,6 +84,7 @@ internal static class Program
         VerifyLiveConfigSync();
         VerifyReload();
         VerifyMovementAndGeometry();
+        VerifySkillInteraction();
         VerifyPatchTargets();
         VerifyHarmonyRegistration();
         VerifyOrphanPatches();
@@ -377,12 +378,110 @@ internal static class Program
         }
     }
 
+    // 用真实 Harmony 前缀验证空身份、已有身份及编辑开关的交互路由。
+    private static void VerifySkillInteraction()
+    {
+        var harmony = new Harmony("DewGemSlotCount.RegressionTests.SkillInteraction");
+        var config = DewGemSlotCount.DewGemSlotCount.Instance.Config;
+        bool previousEditIdentity = config.EditIdentitySkill;
+        try
+        {
+            harmony.CreateClassProcessor(typeof(SkillTrigger_Patch)).Patch();
+            harmony.Patch(AccessTools.Method(typeof(HeroSkill), nameof(HeroSkill.CanReplaceSkill)),
+                prefix: new HarmonyMethod(typeof(HeroSkill_Patch), nameof(HeroSkill_Patch.CanReplaceSkill_Prefix)));
+            var hero = new Hero { owner = new DewPlayer(), isOwned = true };
+            config.EditIdentitySkill = false;
+            var identity = new St_D_RegressionIdentity { rarity = Rarity.Identity };
+            ((IInteractable)identity).OnInteract(hero, false);
+            Equal(1, identity.originalCalls, "旧身份被吞掉后交回原版空槽确认流程");
+            Equal(0, hero.Skill.equipCalls, "关闭编辑时不绕过原版身份装备流程");
+            hero.Skill.Identity = new SkillTrigger();
+            ((IInteractable)identity).OnInteract(hero, false);
+            Equal(2, identity.originalCalls, "已有身份仍由原版确认替换");
+            ((IInteractable)identity).OnInteract(hero, true);
+            Equal(3, identity.originalCalls, "身份分解交互交回原版");
+            hero.isOwned = false;
+            ((IInteractable)identity).OnInteract(hero, false);
+            Equal(4, identity.originalCalls, "远端英雄交互交回原版处理");
+            config.EditIdentitySkill = true;
+            hero.Skill.Identity = null;
+            ((IInteractable)identity).OnInteract(hero, false);
+            Equal(4, identity.originalCalls, "开启身份编辑时使用扩展拾取流程");
+            Equal(1, ReferenceEquals(identity, hero.Skill.Identity) ? 1 : 0, "身份优先装入空身份槽");
+            Equal(1, hero.Skill.pickupCalls, "服务端发送一次拾取通知");
+            var regular = new SkillTrigger();
+            config.EditIdentitySkill = false;
+            ((IInteractable)regular).OnInteract(hero, false);
+            Equal(0, regular.originalCalls, "普通技能保留扩展拾取流程");
+            Equal(1, ReferenceEquals(regular, hero.Skill.Q) ? 1 : 0, "普通技能装入空Q槽");
+            VerifyEmptySkillPickup();
+        }
+        finally
+        {
+            config.EditIdentitySkill = previousEditIdentity;
+            harmony.UnpatchAll(harmony.Id);
+        }
+    }
+
+    // 覆盖技能已满时的空特殊槽，防止误选禁用槽后丢失手持替换流程。
+    private static void VerifyEmptySkillPickup()
+    {
+        var config = DewGemSlotCount.DewGemSlotCount.Instance.Config;
+        bool previousEditIdentity = config.EditIdentitySkill;
+        bool previousEditMovement = config.EditMovementSkill;
+        try
+        {
+            foreach (bool editIdentity in new[] { false, true })
+            foreach (bool editMovement in new[] { false, true })
+            foreach (bool emptyMovement in new[] { false, true })
+            {
+                config.EditIdentitySkill = editIdentity;
+                config.EditMovementSkill = editMovement;
+                var hero = new Hero { owner = new DewPlayer() };
+                hero.Skill.Q = new SkillTrigger();
+                hero.Skill.W = new SkillTrigger();
+                hero.Skill.E = new SkillTrigger();
+                hero.Skill.R = new SkillTrigger();
+                hero.Skill.Movement = emptyMovement ? null : new SkillTrigger();
+                var memory = new SkillTrigger();
+                ((IInteractable)memory).OnInteract(hero, false);
+                bool useMovement = emptyMovement && editMovement;
+                bool useIdentity = !useMovement && editIdentity;
+                Equal(useMovement ? 1 : 0, ReferenceEquals(memory, hero.Skill.Movement) ? 1 : 0,
+                    "位移空槽仅在允许编辑时自动装备");
+                Equal(useIdentity ? 1 : 0, ReferenceEquals(memory, hero.Skill.Identity) ? 1 : 0,
+                    "身份空槽仅在允许编辑时自动装备");
+                Equal(useMovement || useIdentity ? 0 : 1, ReferenceEquals(memory, hero.Skill.holdingObject) ? 1 : 0,
+                    "无可编辑空槽时拾取到手中，允许替换普通记忆");
+                Equal(useMovement || useIdentity ? 1 : 0, hero.Skill.equipCalls,
+                    "不尝试向禁用槽装备记忆");
+                Equal(1, hero.Skill.pickupCalls, "装备或手持只通知拾取一次");
+
+                // 同一空身份状态下，普通技能有空位时仍应直接装入普通槽。
+                hero.Skill.Q = null;
+                hero.Skill.Identity = null;
+                var next = new SkillTrigger();
+                ((IInteractable)next).OnInteract(hero, false);
+                Equal(1, ReferenceEquals(next, hero.Skill.Q) ? 1 : 0, "无身份时仍可填充普通技能空槽");
+            }
+        }
+        finally
+        {
+            config.EditIdentitySkill = previousEditIdentity;
+            config.EditMovementSkill = previousEditMovement;
+        }
+    }
+
     // 用元数据读取已安装游戏的 IL，不加载 Unity 原生运行时。
     private static void VerifyPatchTargets()
     {
         string managed = Path.Combine(Environment.GetEnvironmentVariable("ShapeOfDreamsHome"), "Shape of Dreams_Data", "Managed");
         using (var core = ModuleDefinition.ReadModule(Path.Combine(managed, "Dew.Core.dll")))
         {
+            var interact = core.Types.Single(t => t.Name == "SkillTrigger").Methods.Single(m => m.Name == "IInteractable.OnInteract");
+            Equal(1, interact.Body.Instructions.Any(i => i.OpCode == OpCodes.Ldstr &&
+                Equals(i.Operand, "InGame_Message_ConfirmEmbraceNewIdentity_NoDestroy")) ? 1 : 0,
+                "已安装游戏原版交互支持无旧身份的确认提示");
             var edit = core.Types.Single(t => t.Name == "EditSkillManager");
             foreach (string name in new[] { "TryGetNextRelevantSkillLocation", "TryGetNextRelevantGemSlot" })
             {
