@@ -9,7 +9,7 @@ $repositoryRoot = Split-Path $modRoot -Parent
 $cecilPath = Join-Path $repositoryRoot 'GameSource/asset/AuxiliaryFiles/GameAssemblies/Mono.CecilX.dll'
 Add-Type -LiteralPath $cecilPath
 $modules = @{}
-foreach ($name in @('Dew.Core', 'Dew.UI', 'Mirror')) {
+foreach ($name in @('Dew.Core', 'Dew.Contents', 'Dew.UI', 'Mirror')) {
     $path = Join-Path $GameHome "Shape of Dreams_Data/Managed/$name.dll"
     $modules[$name] = [Mono.CecilX.ModuleDefinition]::ReadModule($path)
 }
@@ -80,6 +80,46 @@ try {
     $identity = $modules['Mirror'].Types | Where-Object FullName -EQ 'Mirror.NetworkIdentity'
     Assert-Condition ($identity.Fields.Name -contains '_assetId') 'Mirror asset ID field changed'
     Assert-Condition ($identity.Methods.Name -contains 'InitializeNetworkBehaviours') 'Mirror network initialization changed'
+
+    # 悔恨之镜实际转换在局部协程里，动态补丁必须唯一命中并覆盖两类物品的创建。
+    $mirrorType = $modules['Dew.Contents'].Types | Where-Object Name -EQ 'Shrine_MirrorOfRemorse'
+    $nestedMirrorTypes = [Collections.Generic.List[object]]::new()
+    $pendingMirrorTypes = [Collections.Generic.Queue[object]]::new()
+    $pendingMirrorTypes.Enqueue($mirrorType)
+    while ($pendingMirrorTypes.Count -gt 0) {
+        foreach ($nested in $pendingMirrorTypes.Dequeue().NestedTypes) {
+            $nestedMirrorTypes.Add($nested)
+            $pendingMirrorTypes.Enqueue($nested)
+        }
+    }
+    $mirrorIterators = @($nestedMirrorTypes | Where-Object {
+        $_.Interfaces.InterfaceType.FullName -contains 'System.Collections.IEnumerator'
+    })
+    Assert-Condition ($mirrorIterators.Count -eq 1) 'Mirror transformation iterator is missing or ambiguous'
+    $mirrorMoveNext = @($mirrorIterators[0].Methods | Where-Object Name -EQ 'MoveNext')
+    Assert-Condition ($mirrorMoveNext.Count -eq 1) 'Mirror iterator MoveNext changed'
+    foreach ($creationMethod in @('CreateSkillTrigger', 'CreateGem')) {
+        Assert-Condition (@($mirrorMoveNext[0].Body.Instructions | Where-Object {
+            $_.Operand.Name -eq $creationMethod
+        }).Count -eq 1) "Mirror conversion no longer creates items here: $creationMethod"
+    }
+    $mirrorPatch = $modModule.Types | Where-Object Name -EQ 'MirrorOfRemorsePatch'
+    Assert-Condition ($mirrorPatch.Methods.Name -contains 'Finalizer') 'Mirror scope must be cleared even on exceptions'
+    $actorType = $modules['Dew.Core'].Types | Where-Object Name -EQ 'Actor'
+    $persistentData = $actorType.Fields | Where-Object Name -EQ 'persistentData'
+    Assert-Condition ($persistentData.CustomAttributes.AttributeType.Name -contains 'SaveVarAttribute') 'Hero run data must be saved by native persistence'
+    $starType = $modules['Dew.Core'].Types | Where-Object Name -EQ 'StarEffect'
+    Assert-Condition (@($starType.CustomAttributes | Where-Object {
+        $_.AttributeType.Name -eq 'SaveActorAttribute' -and $_.ConstructorArguments[0].Value
+    }).Count -eq 1) 'Native star-effect persistence changed'
+    $persistence = $modules['Dew.Core'].Types | Where-Object Name -EQ 'DewPersistence'
+    $applyGame = $persistence.Methods | Where-Object Name -EQ 'ApplyGameData'
+    Assert-Condition (@($applyGame.Parameters | Where-Object {
+        $_.Name -eq 'onFinish' -and $_.ParameterType.FullName -eq 'System.Action'
+    }).Count -eq 1) 'Native game restoration completion callback changed'
+    $applyPlayer = $persistence.Methods | Where-Object Name -EQ 'ApplyPlayerData'
+    $batch = $applyPlayer.Parameters | Where-Object Name -EQ 'batchActions'
+    Assert-Condition ($batch.IsOptional -and $null -eq $batch.Constant) 'Standalone reconnect must finish its native batch internally'
 
     $dreams = @($modModule.Types | Where-Object { $_.BaseType.FullName -eq 'LucidDream' })
     Assert-Condition ($dreams.Count -eq 6) 'Expected six new lucid dreams'

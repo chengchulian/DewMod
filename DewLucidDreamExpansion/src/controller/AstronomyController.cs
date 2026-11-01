@@ -85,10 +85,11 @@ internal static class AstronomyController
             return;
         }
         shrine.DoPostUseRoutines(hero);
-        hero.CreateStatusEffect(selected, hero, new CastInfo(hero), effect =>
+        StarEffect awarded = hero.CreateStatusEffect(selected, hero, new CastInfo(hero), effect =>
         {
             effect.skillLevel = selected.maxStarLevel;
             effect.strength = 1f;
         });
+        if (awarded != null && awarded.isActive) RunStateController.RememberStar(hero, awarded);
     }
 }

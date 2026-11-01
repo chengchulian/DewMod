@@ -17,6 +17,10 @@
     <Compile Include="src\AstronomySpawnTests.cs"/>
     <Compile Include="src\HeroAndLimboTests.cs"/>
     <Compile Include="src\CurseAcquisitionTests.cs"/>
+    <Compile Include="src\RunStateTests.cs"/>
+    <Compile Include="..\src\controller\RunStateController.cs" Link="Production\RunStateController.cs"/>
+    <Compile Include="..\src\patch\RunStatePatches.cs" Link="Production\RunStatePatches.cs"/>
+    <Compile Include="..\src\patch\MirrorOfRemorsePatch.cs" Link="Production\MirrorOfRemorsePatch.cs"/>
     <Compile Include="..\src\patch\CurseAcquisitionPatches.cs" Link="Production\CurseAcquisitionPatches.cs"/>
     <Compile Include="..\src\controller\AstronomyController.cs" Link="Production\AstronomyController.cs"/>
     <Compile Include="..\src\controller\ShrinePresentation.cs" Link="Production\ShrinePresentation.cs"/>

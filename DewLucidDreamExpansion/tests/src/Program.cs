@@ -139,6 +139,7 @@ internal static class Program
         AstronomySpawnTests.Run(Check);
         HeroAndLimboTests.Run(Check);
         CurseAcquisitionTests.Run(Check);
+        RunStateTests.Run(Check);
         Console.WriteLine($"PASS: {assertions} regression assertions");
     }
 }

@@ -11,7 +11,7 @@ internal static class CurseNewMemoryPatch
 {
     private static void Postfix(SkillTrigger __instance)
     {
-        if (NetworkServer.active && __instance.isNewInstance && !__instance.isCharacterSkill &&
+        if (NetworkServer.active && !MirrorOfRemorsePatch.IsTransforming && __instance.isNewInstance && !__instance.isCharacterSkill &&
             DreamRules.Active<LucidDream_PrimordialCurse>()) __instance.level = 1;
     }
 }
@@ -21,7 +21,7 @@ internal static class CurseNewEssencePatch
 {
     private static void Postfix(Gem __instance)
     {
-        if (NetworkServer.active && __instance.isNewInstance &&
+        if (NetworkServer.active && !MirrorOfRemorsePatch.IsTransforming && __instance.isNewInstance &&
             DreamRules.Active<LucidDream_PrimordialCurse>()) __instance.quality = 40;
     }
 }

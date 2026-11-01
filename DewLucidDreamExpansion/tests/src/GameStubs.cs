@@ -66,6 +66,7 @@ namespace UnityEngine
     public struct Vector3
     {
         public float x;
+        public static Vector3 zero => default;
         public static float Distance(Vector3 a, Vector3 b) => Math.Abs(a.x - b.x);
     }
     public static class Random
@@ -116,12 +117,13 @@ public class Hero : Entity
 {
     public HeroLoadoutData loadout = new HeroLoadoutData();
     public HeroSkill Skill = new HeroSkill();
-    public void CreateStatusEffect(StarEffect prefab, Hero victim, CastInfo info, Action<StarEffect> configure)
+    public StarEffect CreateStatusEffect(StarEffect prefab, Hero victim, CastInfo info, Action<StarEffect> configure)
     {
         var effect = (StarEffect)Activator.CreateInstance(prefab.GetType());
         effect.victim = victim;
         configure(effect);
         NetworkedManagerBase<ActorManager>.instance.allActors.Add(effect);
+        return effect;
     }
 }
 public sealed class OtherHero : Hero { }
@@ -137,6 +139,7 @@ public sealed class HeroLoadoutData
 }
 public sealed class DewPlayer
 {
+    public static readonly List<DewPlayer> gamePlayers = new List<DewPlayer>();
     public string guid;
     public Hero hero;
     public int gold;
@@ -194,6 +197,12 @@ public sealed class IncompatibleStar : StarEffect
 }
 public sealed class MovementStar : StarEffect { public override bool isMovementSkillType => true; }
 public sealed class ActorManager { public readonly List<Actor> allActors = new List<Actor>(); }
+public class LucidDream : Actor { }
+public sealed class GameManager
+{
+    public readonly List<string> dreams = new List<string>();
+    public IList<string> GetLucidDreams() => dreams;
+}
 public static class NetworkedManagerBase<T> where T : new() { public static T instance = new T(); }
 public static class Dew
 {
@@ -210,6 +219,13 @@ public static class Dew
         createdShrines++;
         var actor = new T { position = position, isActive = spawnFailure != 3 };
         lastCreated = actor;
+        return actor;
+    }
+    public static T CreateActor<T>(T prefab, UnityEngine.Vector3 position, object rotation) where T : Actor
+    {
+        var actor = (T)Activator.CreateInstance(prefab.GetType());
+        actor.position = position;
+        NetworkedManagerBase<ActorManager>.instance.allActors.Add(actor);
         return actor;
     }
 }
@@ -293,8 +309,17 @@ public class UI_Lobby_Limbo_DepthSelect : UnityEngine.Component
 
 namespace DewLucidDreamExpansion.content
 {
-    public sealed class LucidDream_AstronomyMaster { }
-    public sealed class LucidDream_PrimordialCurse { }
+    public sealed class LucidDream_AstronomyMaster : LucidDream { }
+    public sealed class LucidDream_PrimordialCurse : LucidDream { }
+}
+namespace DewLucidDreamExpansion.controller
+{
+    internal static class DreamRegistry
+    {
+        internal static readonly Type[] Dreams = {
+            typeof(content.LucidDream_AstronomyMaster), typeof(content.LucidDream_PrimordialCurse)
+        };
+    }
 }
 namespace DewLucidDreamExpansion.patch
 {

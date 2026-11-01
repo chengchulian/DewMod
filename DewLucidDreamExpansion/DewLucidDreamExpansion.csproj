@@ -59,12 +59,15 @@
         <Compile Include="src\config\LocalizationSource.cs"/>
         <Compile Include="src\controller\DreamRegistry.cs"/>
         <Compile Include="src\controller\AstronomyController.cs"/>
+        <Compile Include="src\controller\RunStateController.cs"/>
         <Compile Include="src\controller\ShrinePresentation.cs"/>
         <Compile Include="src\controller\ResourceInversionController.cs"/>
         <Compile Include="src\content\LucidDreams.cs"/>
         <Compile Include="src\content\Shrine_Astronomy.cs"/>
         <Compile Include="src\patch\DreamPatches.cs"/>
         <Compile Include="src\patch\CurseAcquisitionPatches.cs"/>
+        <Compile Include="src\patch\MirrorOfRemorsePatch.cs"/>
+        <Compile Include="src\patch\RunStatePatches.cs"/>
         <Compile Include="src\patch\AstronomyPatches.cs"/>
         <Compile Include="src\patch\BossRewardPatch.cs"/>
         <Compile Include="src\patch\LobbyDreamPatches.cs"/>

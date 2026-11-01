@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using DewLucidDreamExpansion.patch;
@@ -48,6 +49,22 @@ public class PropEnt_Merchant_Base
     public void PopulatePlayerMerchandises(DewPlayer player) { }
 }
 
+public class Shrine_MirrorOfRemorse
+{
+    // 模拟原生局部迭代器：首次等待动画，下一次同步替换记忆和精粹。
+    public IEnumerator Transform(SkillTrigger memory, Gem essence, bool fail = false)
+    {
+        return Routine();
+        IEnumerator Routine()
+        {
+            yield return null;
+            memory.Prepare();
+            if (fail) throw new InvalidOperationException("Mirror fixture failure");
+            essence.Prepare();
+        }
+    }
+}
+
 internal static class CurseAcquisitionTests
 {
     internal static void Run(Action<bool, string> check)
@@ -56,6 +73,7 @@ internal static class CurseAcquisitionTests
         harmony.CreateClassProcessor(typeof(CurseNewMemoryPatch)).Patch();
         harmony.CreateClassProcessor(typeof(CurseNewEssencePatch)).Patch();
         harmony.CreateClassProcessor(typeof(CurseMerchantDisplayPatch)).Patch();
+        harmony.CreateClassProcessor(typeof(MirrorOfRemorsePatch)).Patch();
         try
         {
             Mirror.NetworkServer.active = true;
@@ -78,6 +96,26 @@ internal static class CurseAcquisitionTests
             var character = new SkillTrigger { level = 7, isCharacterSkill = true };
             character.Prepare();
             check(character.level == 7, "Hero intrinsic skills retain their level");
+
+            var mirrorMemory = new SkillTrigger { level = 11 };
+            var mirrorEssence = new Gem { quality = 320 };
+            IEnumerator routine = new Shrine_MirrorOfRemorse().Transform(mirrorMemory, mirrorEssence);
+            routine.MoveNext();
+            var duringAnimation = new SkillTrigger { level = 8 };
+            duringAnimation.Prepare();
+            check(duringAnimation.level == 1 && !MirrorOfRemorsePatch.IsTransforming,
+                "Mirror animation yield does not exempt unrelated loot");
+            routine.MoveNext();
+            check(mirrorMemory.level == 11 && mirrorEssence.quality == 320 && !MirrorOfRemorsePatch.IsTransforming,
+                "Mirror replacement keeps existing values plus bonuses and closes its scope");
+            var failed = new Shrine_MirrorOfRemorse().Transform(new SkillTrigger { level = 12 }, new Gem(), true);
+            failed.MoveNext();
+            try { failed.MoveNext(); }
+            catch (InvalidOperationException) { }
+            var afterFailure = new Gem { quality = 500 };
+            afterFailure.Prepare();
+            check(afterFailure.quality == 40 && !MirrorOfRemorsePatch.IsTransforming,
+                "Exceptional mirror replacement restores curse behavior for subsequent acquisitions");
 
             var player = new DewPlayer { guid = "shop" };
             var merchant = new PropEnt_Merchant_Base();
