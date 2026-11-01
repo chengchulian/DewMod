@@ -97,7 +97,7 @@ Dew<ModName>/src/util/*.cs                    # 公共工具
 | `DewMoreVision` | 无限视距 / MoreVision | 1.1.0 | 客户端扩展摄像机视野范围，并支持调整缩放步长。 |
 | `DewPrimusHand` | 普里穆斯之手 / PrimusHand | 1.2.0 | 调整怪物、Boss 与战斗强度相关参数。 |
 | `DewRoomGuidance` | 房间指引 / Room Guidance | 1.0.0 | 显示屏幕外可用祭坛及未拾取宝石、技能和神器的方向。 |
-| `DewShopShare` | 商店共享 / Shop Share | 1.0.0 | 仅房主安装，将玩家标记的商品追加到所有人的当前商店，每人独立库存。 |
+| `DewShopShare` | 商店共享 / Shop Share | 1.0.0 | 仅房主安装，将标记商品共享到所有人的当前商店，任意玩家购买后全队库存同步减少。 |
 | `DewSafeShare` | SafeShare / 安全共享 | 1.0.0 | 掉落物在玩家主动标记前仅所有者可见。 |
 | `DewShieldModDetection` | ShieldModDetection | 1.0.0 | 安装本地 Mod 时允许跨平台联机，保留原有玩法 Mod 标识。 |
 | `DewSuperSmart` | SuperSmart 超级智能 | 1.0.0 | 显示攻击/技能范围和怪物/飞弹威胁区域，支持按住闪避键自动规避。 |

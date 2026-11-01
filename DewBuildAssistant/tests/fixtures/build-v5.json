@@ -1,0 +1,23 @@
+{
+  "Format": "BD-Assistant-Build-v1",
+  "Version": 5,
+  "Build": {
+    "HeroKey": "Hero_Test",
+    "Title": "当前结构测试",
+    "Author": "测试作者",
+    "Description": "中文说明",
+    "Items": {
+      "memoryQ": ["St_Q_Second"], "memoryR": ["St_R_First"], "identity": ["St_I_First"],
+      "dejavu": ["Gem_Test"], "destruction": ["Se_Star_Test"], "life": [], "imagination": [], "flexible": []
+    },
+    "ClearDejavu": false,
+    "RequiresIdentityChange": false,
+    "Skills": [
+      { "Slot": "Q", "SkillKey": "St_Q_Second", "IsCore": true, "GemSlots": [{"GemKey": "Gem_Test", "IsCore": false}, null, null, {"GemKey": "Gem_Other", "IsCore": true}] },
+      { "Slot": "W", "SkillKey": null, "IsCore": false, "GemSlots": [null, null, null, null] },
+      { "Slot": "E", "SkillKey": null, "IsCore": false, "GemSlots": [null, null, null, null] },
+      { "Slot": "R", "SkillKey": "St_R_First", "IsCore": false, "GemSlots": [{"GemKey": "Gem_R", "IsCore": true}, null, null, null] },
+      { "Slot": "D", "SkillKey": null, "IsCore": false, "GemSlots": [null, null, null, null] }
+    ]
+  }
+}

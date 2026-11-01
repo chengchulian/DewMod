@@ -1,0 +1,9 @@
+{
+  "id": "com.chengchulian.DewMod.DewBuildAssistant",
+  "name": "BD 助手 / BD Assistant",
+  "author": "chengchulian",
+  "modVer": "1.4.0",
+  "assemblies": [
+    "obj/Release/*.dll"
+  ]
+}

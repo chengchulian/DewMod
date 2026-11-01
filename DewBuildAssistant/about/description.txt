@@ -1,0 +1,29 @@
+BD 助手 / BD Assistant
+
+在大厅浏览、分享和应用 Build。
+
+• 点击可拖动图标打开助手，支持「我的／公开／全部」筛选，本人作品显示关联栏位。
+• 一键应用旅行者记忆、星座与既视感到自己当前选择的栏位。应用前请取消准备，并解锁所需内容。
+• QWERD 每个位置最多四个精粹；技能可留空，同种精粹仅保留一份。单击标记核心，右键清空。
+• 拖动技能或精粹互换位置，保留各自核心标记。身份记忆固定，其下方精粹照常编辑。
+• 候选按稀有度分类，英雄记忆再按角色排列，支持搜索与拖放。
+• 上传当前配装并编辑技能构筑，分享至 Steam 创意工坊。同一英雄、模式和栏位再次上传可更新原作品。
+
+首次上传为私密，可在自动打开的 Steam 页面公开。应用成功后自动喊话：[英雄名]一键星座 Build名称 已应用。 --Bd助手mod
+更新时若 Steam 明确返回原作品不存在，会备份旧作品 ID，并自动尝试新建一次私密作品。
+
+可选联动「转职」和「构筑需求消息」。普通模式禁用转职 Build；需求联动只更新当前英雄当前栏位。
+
+支持游戏全部 13 种语言，切换语言时同步刷新界面。Esc 逐层关闭弹窗。使用时请保持 Steam 在线；技能和精粹仍需在局内正常获取。
+
+Browse, share and apply builds from the lobby.
+
+• Open the assistant with its draggable icon. Filter Mine/Public/All; your own builds show their linked upload page.
+• Apply traveler memories, constellations and deja vu to your currently selected page. Cancel ready status first; required items must be unlocked.
+• Plan QWERD skills with up to four gems each. A skill may stay empty, and each gem appears only once. Click to mark Core; right-click to clear.
+• Drag skills or gems to swap positions while preserving Core markers. Identity memories stay fixed; their gems remain editable.
+• Browse candidates by rarity and hero, search, and drag them into your build.
+• Upload your loadout and skill plan to Steam Workshop. Uploading the same hero/mode/page again updates its item. New items are private; change visibility on the Steam page that opens after upload.
+• If Steam reports that the original item no longer exists, its saved ID is backed up and one replacement private item is attempted.
+
+Optional Identity Change and Build Need Messages integration. Identity builds require Identity Change mode. Supports all 13 game languages. Esc closes one popup layer. Steam must be online; skills and gems are still obtained through normal play.
