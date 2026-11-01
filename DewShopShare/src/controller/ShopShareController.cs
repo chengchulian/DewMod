@@ -38,7 +38,7 @@ internal static class ShopShareController
         }
     }
 
-    // 仅在已有共享记录时截取刷新前库存，普通商店初始化无需额外分配状态。
+    // 仅在已有共享记录时保存刷新前数组引用，普通商店初始化无需额外分配状态。
     public static MerchandiseData[] BeforePopulate(PropEnt_Merchant_Base merchant, DewPlayer player)
     {
         if (!NetworkServer.active || !merchant.isServer || player == null ||
@@ -60,6 +60,29 @@ internal static class ShopShareController
         }
 
         shop.OnInventoryPopulated(merchant.merchandises, player.guid, previous);
+    }
+
+    // 只在房主端为共享商品建立购买记录，未共享商品继续执行原版逻辑。
+    public static bool BeforePurchase(PropEnt_Merchant_Base merchant, DewPlayer player, int index,
+        out SharedShopState.PurchaseAttempt attempt)
+    {
+        attempt = null;
+        if (!NetworkServer.active || !merchant.isServer || player == null ||
+            !Shops.TryGetValue(merchant, out SharedShopState shop))
+        {
+            return true;
+        }
+
+        return shop.BeginPurchase(merchant.merchandises, player.guid, index, out attempt);
+    }
+
+    // 无论购买成功还是异常都释放记录；只传播原生实际扣除的数量。
+    public static void AfterPurchase(PropEnt_Merchant_Base merchant, SharedShopState.PurchaseAttempt attempt)
+    {
+        if (attempt != null && Shops.TryGetValue(merchant, out SharedShopState shop))
+        {
+            shop.FinishPurchase(merchant.merchandises, attempt);
+        }
     }
 
     // 商人销毁后释放记录，不把上一间商店的商品带到下一间。

@@ -7,10 +7,21 @@ namespace DewShopShare.controller;
 /// <summary>单个商人的共享记录；商品数组仍由游戏原有的 SyncDictionary 保存和同步。</summary>
 internal sealed class SharedShopState
 {
-    private sealed class Offer
+    internal sealed class Offer
     {
         public MerchandiseData Item;
-        public readonly Dictionary<string, int> Remaining = new Dictionary<string, int>();
+        public int Remaining;
+        public PurchaseAttempt Pending;
+    }
+
+    internal sealed class PurchaseAttempt
+    {
+        internal Offer Offer;
+        internal string Player;
+        internal int Index;
+        internal int BeforeCount;
+        internal bool ConsumptionCaptured;
+        internal bool Completed;
     }
 
     private readonly List<Offer> _offers = new List<Offer>();
@@ -38,8 +49,7 @@ internal sealed class SharedShopState
             return false;
         }
 
-        Offer offer = new Offer { Item = item };
-        offer.Remaining[sender] = item.count;
+        Offer offer = new Offer { Item = item, Remaining = item.count };
         _offers.Add(offer);
         slots[index] = offer;
 
@@ -52,7 +62,7 @@ internal sealed class SharedShopState
         return true;
     }
 
-    // 刷新前保存每个人实际剩余的库存，包含标记者原始槽位的购买结果。
+    // 购买事件可能立即刷新商店，覆盖原数组前先结算该次扣库存，再保存引用识别刷新结果。
     public MerchandiseData[] CaptureInventory(IDictionary<string, MerchandiseData[]> inventories, string player)
     {
         if (!inventories.TryGetValue(player, out MerchandiseData[] items) || items == null)
@@ -60,21 +70,19 @@ internal sealed class SharedShopState
             return null;
         }
 
-        if (_slots.TryGetValue(player, out Dictionary<int, Offer> slots))
+        foreach (Offer offer in _offers)
         {
-            foreach (KeyValuePair<int, Offer> slot in slots)
+            if (offer.Pending != null && offer.Pending.Player == player)
             {
-                if (slot.Key < items.Length && SameItem(slot.Value.Item, items[slot.Key]))
-                {
-                    slot.Value.Remaining[player] = Math.Max(0, items[slot.Key].count);
-                }
+                CaptureConsumption(inventories, offer.Pending);
+                SynchronizeOffer(inventories, offer);
             }
         }
 
         return items;
     }
 
-    // 刷新只更换个人原生商品；共享商品保留，售罄数量也保留。新加入者获得初始共享库存。
+    // 刷新只更换个人原生商品；共享商品保留。晚加入者读取当前全队剩余库存，售罄不补货。
     public void OnInventoryPopulated(IDictionary<string, MerchandiseData[]> inventories, string player,
         MerchandiseData[] previous)
     {
@@ -88,7 +96,115 @@ internal sealed class SharedShopState
         AppendMissingOffers(inventories, player);
     }
 
-    // 每位玩家使用独立的数组和数量，扣款、折扣、生成物品仍全部交给原生购买流程。
+    // 进入原生购买前使用房主库存，并锁住同一来源，防止购买事件重入和售罄后的过期请求。
+    public bool BeginPurchase(IDictionary<string, MerchandiseData[]> inventories, string player, int index,
+        out PurchaseAttempt attempt)
+    {
+        attempt = null;
+        if (string.IsNullOrEmpty(player) || !_slots.TryGetValue(player, out Dictionary<int, Offer> slots) ||
+            !slots.TryGetValue(index, out Offer offer) ||
+            !inventories.TryGetValue(player, out MerchandiseData[] items) || items == null ||
+            index < 0 || index >= items.Length || !SameItem(offer.Item, items[index]))
+        {
+            return true;
+        }
+
+        if (offer.Pending != null)
+        {
+            return false;
+        }
+
+        if (offer.Remaining <= 0)
+        {
+            SynchronizeOffer(inventories, offer);
+            return false;
+        }
+
+        attempt = new PurchaseAttempt
+        {
+            Offer = offer, Player = player, Index = index, BeforeCount = offer.Remaining
+        };
+        offer.Pending = attempt;
+        try
+        {
+            SynchronizeOffer(inventories, offer);
+            return true;
+        }
+        catch
+        {
+            offer.Pending = null;
+            throw;
+        }
+    }
+
+    // 原生扣库存才算成功；余额不足、购买条件失败或扣库存前抛异常均不消耗全队库存。
+    public void FinishPurchase(IDictionary<string, MerchandiseData[]> inventories, PurchaseAttempt attempt)
+    {
+        if (attempt == null || attempt.Completed)
+        {
+            return;
+        }
+
+        attempt.Completed = true;
+        Offer offer = attempt.Offer;
+        try
+        {
+            CaptureConsumption(inventories, attempt);
+            SynchronizeOffer(inventories, offer);
+        }
+        finally
+        {
+            offer.Pending = null;
+        }
+    }
+
+    // 一次原生购买只结算一次，避免购买事件刷新数组后遗漏扣库存或重复扣库存。
+    private static void CaptureConsumption(IDictionary<string, MerchandiseData[]> inventories,
+        PurchaseAttempt attempt)
+    {
+        if (attempt.ConsumptionCaptured ||
+            !inventories.TryGetValue(attempt.Player, out MerchandiseData[] items) || items == null ||
+            attempt.Index >= items.Length || !SameItem(attempt.Offer.Item, items[attempt.Index]))
+        {
+            return;
+        }
+
+        int consumed = Math.Max(0, attempt.BeforeCount - Math.Max(0, items[attempt.Index].count));
+        if (consumed > 0)
+        {
+            attempt.Offer.Remaining = Math.Max(0, attempt.Offer.Remaining - consumed);
+            attempt.ConsumptionCaptured = true;
+        }
+    }
+
+    // 原商品与所有共享槽位写回同一个数量，保留下标，用原生同步通知未安装 Mod 的客机。
+    private void SynchronizeOffer(IDictionary<string, MerchandiseData[]> inventories, Offer offer)
+    {
+        foreach (KeyValuePair<string, Dictionary<int, Offer>> player in _slots.ToArray())
+        {
+            if (!inventories.TryGetValue(player.Key, out MerchandiseData[] items) || items == null)
+            {
+                continue;
+            }
+
+            MerchandiseData[] updated = null;
+            foreach (KeyValuePair<int, Offer> slot in player.Value)
+            {
+                if (slot.Value != offer || slot.Key >= items.Length ||
+                    !SameItem(offer.Item, items[slot.Key]) || items[slot.Key].count == offer.Remaining)
+                {
+                    continue;
+                }
+
+                if (updated == null) updated = (MerchandiseData[])items.Clone();
+                updated[slot.Key].count = offer.Remaining;
+            }
+
+            if (updated != null) inventories[player.Key] = updated;
+        }
+    }
+
+    // 各玩家使用独立数组显示同一份库存，扣款、折扣、生成物品仍全部交给原生购买流程。
     private void AppendMissingOffers(IDictionary<string, MerchandiseData[]> inventories, string player)
     {
         if (!inventories.TryGetValue(player, out MerchandiseData[] items) || items == null)
@@ -111,13 +227,7 @@ internal sealed class SharedShopState
         {
             Offer offer = missing[i];
             MerchandiseData item = offer.Item;
-            if (!offer.Remaining.TryGetValue(player, out int count))
-            {
-                count = item.count;
-                offer.Remaining[player] = count;
-            }
-
-            item.count = count;
+            item.count = offer.Remaining;
             int index = items.Length + i;
             updated[index] = item;
             slots[index] = offer;

@@ -2,12 +2,12 @@
 
 只需房主安装，客机无需安装。任何玩家用游戏原有标记功能标记商店中的在售商品后，同款商品会追加到其他玩家在该商人的商品列表中，原有商品保持原样。
 
-每人独立库存，复制标记时的剩余数量、等级/品质、基础价格和商品附加数据，购买仍按原版规则扣款及计算个人折扣。重复标记原商品或共享副本均不会追加副本。
+全队共用同一份库存，保留标记时的剩余数量、等级/品质、基础价格和商品附加数据。任意玩家购买原商品或共享商品后，所有人的数量一起减少；库存为 1 时全队合计只能购买 1 份。购买仍按原版规则扣款及计算个人折扣，购买失败不扣库存。重复标记原商品或共享条目均不会增加库存。
 
-共享条目在当前商人存续期间保留。刷新只更新自己的原有商品，共享条目及已消耗数量保留；后加入玩家也会获得当前商人的共享商品。更换商人后重新标记。
+共享条目在当前商人存续期间保留。刷新只更新自己的原有商品，共享条目及全队剩余数量保留；后加入玩家读取当前剩余数量，售罄商品不补货。更换商人后重新标记。
 
 共享来源记录保存在房主本次运行的内存中；退出后读档时，已保存商品由游戏恢复，但共享来源记录重新开始。
 
-Host installation only; clients need no mod. Ping an in-stock shop item using the game's normal ping action to add a copy to every other player's inventory at that merchant. Each player has independent stock and pays using the original purchase rules and personal discounts. Repeated pings of an original or shared copy do not add duplicates.
+Host installation only; clients need no mod. Ping an in-stock shop item using the game's normal ping action to show it in every player's inventory at that merchant. The original offer and all shared entries use one stock pool: any successful purchase reduces the quantity for everyone. One remaining unit allows only one purchase across the team. Failed purchases do not consume stock. Payment rules and personal discounts follow the original game. Repeated pings never add stock.
 
-Shared offers and each player's remaining stock survive personal shop refreshes while the merchant exists. Late joiners receive the shared offers too. Share provenance lasts for the current host session; saved merchandise follows the game's normal save system.
+Shared offers and their remaining team stock survive personal shop refreshes while the merchant exists. Late joiners see the current remaining stock, including sold-out offers. Share provenance lasts for the current host session; saved merchandise follows the game's normal save system.

@@ -15,10 +15,15 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="0Harmony">
+      <HintPath>$(ShapeOfDreamsHome)\Shape of Dreams_Data\Managed\0Harmony.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Compile Include="src\GameStubs.cs" />
     <Compile Include="src\Program.cs" />
     <Compile Include="..\src\controller\SharedShopState.cs" Link="Production\SharedShopState.cs" />
     <Compile Include="..\src\controller\ShopShareController.cs" Link="Production\ShopShareController.cs" />
+    <Compile Include="..\src\patch\MerchantPatch.cs" Link="Production\MerchantPatch.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
